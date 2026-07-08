@@ -12,7 +12,10 @@ This document provides a reader-focused summary of changes and additions for eac
 * [Chapter 2: Linux Architecture & Distributions](../volumes/volume-01-linux-fundamentals/chapters/V1-C02-linux-architecture-and-distributions.md)
 * [Chapter 3: Provisioning Linux](../volumes/volume-01-linux-fundamentals/chapters/V1-C03-provisioning-linux.md)
 * [Chapter 4: Linux Boot Process](../volumes/volume-01-linux-fundamentals/chapters/V1-C04-linux-boot-process.md)
-* Practice guides for Chapters 1 through 4 (`practice-files/` directory).
+* [Chapter 5: Linux Filesystem](../volumes/volume-01-linux-fundamentals/chapters/V1-C05-linux-filesystem.md)
+* [Chapter 6: Working with Files & Directories](../volumes/volume-01-linux-fundamentals/chapters/V1-C06-working-with-files-and-directories.md)
+* [Chapter 7: Text Editors (nano & vim)](../volumes/volume-01-linux-fundamentals/chapters/V1-C07-text-editors.md)
+* Practice guides for Chapters 1 through 7 (`practice-files/` directory).
 * `BOOK_STYLE_GUIDE.md` to enforce quality standards, including mandatory `mermaid` architectural diagrams.
 * Dedicated `references/` tracker for external technical documentation.
 
