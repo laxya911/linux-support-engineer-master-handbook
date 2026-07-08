@@ -22,11 +22,11 @@
 * [Chapter 15: Virtual Private Networks (OpenVPN/WireGuard)](chapters/V3-C15-vpns.md)
 
 ## Part 4: Infrastructure Services
-* [Chapter 16: Advanced File Sharing (Samba) *[Planned]*](#)
-* [Chapter 17: Centralized Logging (ELK Intro) *[Planned]*](#)
-* [Chapter 18: Application Performance Monitoring (Prometheus) *[Planned]*](#)
-* [Chapter 19: Data Visualization (Grafana) *[Planned]*](#)
-* [Chapter 20: Caching Services (Redis) *[Planned]*](#)
+* [Chapter 16: Advanced File Sharing (Samba)](chapters/V3-C16-samba-filesharing.md)
+* [Chapter 17: Centralized Logging (ELK Intro)](chapters/V3-C17-centralized-logging.md)
+* [Chapter 18: Application Performance Monitoring (Prometheus)](chapters/V3-C18-monitoring-prometheus.md)
+* [Chapter 19: Data Visualization (Grafana)](chapters/V3-C19-visualization-grafana.md)
+* [Chapter 20: Caching Services (Redis)](chapters/V3-C20-caching-redis.md)
 
 ## Part 5: Modern App Deployment (Containers)
 * [Chapter 21: The Container Revolution *[Planned]*](#)
