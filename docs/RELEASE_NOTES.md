@@ -21,7 +21,13 @@ This document provides a reader-focused summary of changes and additions for eac
 * [Chapter 11: Process Management](../volumes/volume-01-linux-fundamentals/chapters/V1-C11-process-management.md)
 * [Chapter 12: Services & systemd](../volumes/volume-01-linux-fundamentals/chapters/V1-C12-services-and-systemd.md)
 * [Chapter 13: Software Logs & Journals](../volumes/volume-01-linux-fundamentals/chapters/V1-C13-software-logs-and-journals.md)
-* Practice guides for Chapters 1 through 13 (`practice-files/` directory).
+* [Chapter 14: Networking Fundamentals](../volumes/volume-01-linux-fundamentals/chapters/V1-C14-networking-fundamentals.md)
+* [Chapter 15: SSH Administration](../volumes/volume-01-linux-fundamentals/chapters/V1-C15-ssh-administration.md)
+* [Chapter 16: Archiving and Compression](../volumes/volume-01-linux-fundamentals/chapters/V1-C16-archiving-and-compression.md)
+* [Chapter 17: Storage & Disk Management](../volumes/volume-01-linux-fundamentals/chapters/V1-C17-storage-and-disk-management.md)
+* [Chapter 18: Advanced Grep & Awk](../volumes/volume-01-linux-fundamentals/chapters/V1-C18-advanced-grep-and-awk.md)
+* [Chapter 19: Output Redirection (Piping)](../volumes/volume-01-linux-fundamentals/chapters/V1-C19-output-redirection.md)
+* Practice guides for Chapters 1 through 19 (`practice-files/` directory).
 * `BOOK_STYLE_GUIDE.md` to enforce quality standards, including mandatory `mermaid` architectural diagrams.
 * Dedicated `references/` tracker for external technical documentation.
 
