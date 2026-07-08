@@ -8,11 +8,11 @@
 * [Chapter 5: TLS/SSL Cryptography & Certbot](chapters/V3-C05-tls-ssl-cryptography.md)
 
 ## Part 2: Database Services
-* [Chapter 6: Relational Database Concepts *[Planned]*](#)
-* [Chapter 7: Deploying MariaDB / MySQL *[Planned]*](#)
-* [Chapter 8: Deploying PostgreSQL *[Planned]*](#)
-* [Chapter 9: Database Security & User Management *[Planned]*](#)
-* [Chapter 10: Database Backup & Restoration *[Planned]*](#)
+* [Chapter 6: Relational Database Concepts](chapters/V3-C06-database-concepts.md)
+* [Chapter 7: Deploying MariaDB / MySQL](chapters/V3-C07-deploying-mariadb.md)
+* [Chapter 8: Deploying PostgreSQL](chapters/V3-C08-deploying-postgresql.md)
+* [Chapter 9: Database Security & User Management](chapters/V3-C09-database-security.md)
+* [Chapter 10: Database Backup & Restoration](chapters/V3-C10-database-backups.md)
 
 ## Part 3: Network Services
 * [Chapter 11: The Domain Name System (BIND9) *[Planned]*](#)
