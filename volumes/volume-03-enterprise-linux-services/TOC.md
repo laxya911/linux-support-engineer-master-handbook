@@ -29,8 +29,8 @@
 * [Chapter 20: Caching Services (Redis)](chapters/V3-C20-caching-redis.md)
 
 ## Part 5: Modern App Deployment (Containers)
-* [Chapter 21: The Container Revolution *[Planned]*](#)
-* [Chapter 22: Deploying Services with Docker *[Planned]*](#)
-* [Chapter 23: Multi-Container Apps with Docker Compose *[Planned]*](#)
-* [Chapter 24: Container Volumes & Persistent Data *[Planned]*](#)
-* [Chapter 25: Capstone Project: The Full Stack *[Planned]*](#)
+* [Chapter 21: The Container Revolution (Docker)](chapters/V3-C21-container-revolution.md)
+* [Chapter 22: Building Container Images (Dockerfiles)](chapters/V3-C22-building-images.md)
+* [Chapter 23: Multi-Container Apps (Docker Compose)](chapters/V3-C23-docker-compose.md)
+* [Chapter 24: Persistent Data & Networking](chapters/V3-C24-persistent-data.md)
+* [Chapter 25: Introduction to Orchestration (K8s Prep)](chapters/V3-C25-orchestration-intro.md)

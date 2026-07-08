@@ -1,0 +1,138 @@
+---
+volume: 3
+chapter: 23
+part: 5
+id: V3-C23
+title: Multi-Container Apps (Docker Compose)
+author: Laxman Aryal
+edition: First Edition
+reviewed_by:
+  - Technical Review Pending
+version: 0.1
+difficulty: Intermediate
+estimated_time: 1.5 Hours
+reading_time: 25 Minutes
+labs: 1
+interview_questions: 3
+prerequisites: V3-C22
+last_updated: 2026-07
+status: In Progress
+---
+
+# Chapter 23 — Multi-Container Apps (Docker Compose)
+
+* **Difficulty:** Intermediate
+* **Estimated Time:** 1.5 Hours
+* **Hands-on Labs:** 1
+* **Interview Questions:** 3
+
+## Learning Objectives
+
+By the end of this chapter, you will be able to:
+* Explain the Microservices architecture philosophy.
+* Understand Docker's internal networking and DNS resolution.
+* Explain why `localhost` inside a container does not reach other containers.
+* Write a `docker-compose.yml` file to orchestrate multiple containers.
+
+## Visual Architecture: Microservices
+
+When you used a Virtual Machine, you installed Apache, PHP, and MySQL all on the same operating system. This is a "Monolith". 
+In the container world, we use "Microservices". A container should do *one* thing. If you want a database and a web server, you do not cram them into one container. You run a Web Container and a Database Container, and you connect them via a virtual network.
+
+```mermaid
+flowchart TD
+    A["User (Port 80)"] --> B{"Web Container \n (NGINX/PHP)"}
+    
+    subgraph Docker Internal Network
+        B -->|Database Query \n (Cannot use localhost!)| C[("Database Container \n (MySQL)")]
+    end
+    
+    style B fill:#0984e3,stroke:#74b9ff,color:#fff
+    style C fill:#f39c12,stroke:#f1c40f,color:#000
+```
+
+## Theory & Concepts
+
+### 1. Docker Compose
+Running one container with `docker run -d -p 80:80 my-image` is easy. But what if you have an application that requires a Web container, a Redis cache container, and a Postgres container? 
+Typing 3 massive `docker run` commands manually is terrible. 
+**Docker Compose** allows you to define all 3 containers in a single YAML file (`docker-compose.yml`). You simply type `docker compose up -d`, and it builds the network and starts all the containers in the correct order.
+
+### 2. The Localhost Trap
+Because containers use Namespaces (from Chapter 21) to isolate their network stack, a container believes it is the only computer on the planet. 
+If a PHP application inside the Web container tries to connect to a database at `localhost:3306`, the connection will fail. `localhost` inside the Web container means the Web container itself! 
+
+### 3. Internal DNS Resolution
+When you use Docker Compose, it automatically creates a virtual network and attaches all your containers to it. Furthermore, it creates a DNS server. 
+If you name your database service `db` in the `docker-compose.yml` file, Docker Compose ensures that if the Web container pings `db`, it magically resolves to the Database container's internal IP address!
+
+## Scenario-Based Troubleshooting
+
+### Scenario A: The Missing Link
+**The Incident:** A junior developer is trying to run a new WordPress environment locally. They run a WordPress container and a MySQL container using two separate `docker run` commands. 
+The WordPress installation screen throws an error: `Error establishing a database connection.` 
+The developer is confused. "I configured WordPress to connect to `localhost:3306`, and the database is definitely running! Why can't they talk?"
+
+**The Investigation & Fix:**
+1. The Support Engineer explains the Localhost Trap. The WordPress container is checking its own internal loopback interface for MySQL, but MySQL is in a totally separate container namespace.
+2. The engineer explains that instead of running manual commands, they should write a `docker-compose.yml` file.
+3. The engineer writes the file:
+   ```yaml
+   version: '3.8'
+   services:
+     wordpress:
+       image: wordpress:latest
+       ports:
+         - "8080:80"
+       environment:
+         WORDPRESS_DB_HOST: mysql_db
+         WORDPRESS_DB_PASSWORD: supersecret
+     
+     mysql_db:
+       image: mysql:8.0
+       environment:
+         MYSQL_ROOT_PASSWORD: supersecret
+   ```
+4. Notice that `WORDPRESS_DB_HOST` is set to `mysql_db` (the exact name of the other service), NOT `localhost`!
+5. The engineer runs `docker compose up -d`. 
+6. Docker creates a virtual network, attaches both containers, and configures the internal DNS. When WordPress asks "Where is `mysql_db`?", Docker routes it perfectly to the MySQL container. The site installs successfully.
+
+## Hands-on Lab
+
+> [!TIP]
+> **Practice Assignment Available**
+> Proceed to the [Chapter 23 Practice Guide](../practice-files/V3-C23-practice.md) to use Docker Compose to stand up a WordPress/MariaDB stack in one command!
+
+## Interview Questions
+
+### Question 1: What is the primary purpose of Docker Compose?
+* **Target Answer**: "Docker Compose is an orchestration tool for defining and running multi-container applications. Instead of running multiple complex `docker run` commands manually, you define your services, networks, and volumes in a single `docker-compose.yml` file, allowing you to spin up the entire application stack with a single command."
+
+### Question 2: Why should you never run a Web Server and a Database Server inside the same Docker container?
+* **Target Answer**: "Containers are designed to follow the Microservices philosophy: one process per container. If you run both services in one container, it becomes a 'Monolith'. You cannot scale the web server independently of the database, you cannot easily update one without taking down the other, and if one process crashes, the entire container fails."
+
+### Question 3: A web container is trying to connect to a database container. The web container's configuration file is set to connect to `localhost:5432`. Why will this fail, and how do you fix it using Docker Compose?
+* **Target Answer**: "It will fail because of network isolation (Namespaces). To a container, `localhost` means its own internal loopback interface, not the host machine or other containers. To fix it, you write a `docker-compose.yml` file, defining the database service with a name (e.g., `db`). Docker Compose's internal DNS will automatically resolve that service name. You then change the web container's configuration to connect to `db:5432` instead of `localhost`."
+
+## Chapter Summary
+
+Docker Compose is the absolute standard for local development. By mastering the `docker-compose.yml` file, you can hand any developer a single file that guarantees their application will boot perfectly with all required databases and caches attached.
+
+## Completion Checklist
+
+- [ ] I understand the Microservices philosophy.
+- [ ] I understand why `localhost` fails between containers.
+- [ ] I can explain how Docker internal DNS maps service names to containers.
+
+---
+
+## Navigation
+
+⬅ Previous:
+[Chapter 22 – Building Container Images (Dockerfiles)](V3-C22-building-images.md)
+
+🏠 Volume Contents:
+[Table of Contents](../TOC.md)
+
+➡ Next:
+[Chapter 24 – Persistent Data & Networking](V3-C24-persistent-data.md)
