@@ -15,11 +15,11 @@
 * [Chapter 10: CI/CD Pipelines](chapters/V4-C10-cicd-pipelines.md)
 
 ## Part 3: Advanced Network & Security Architecture
-* [Chapter 11: Enterprise DNS & Global Traffic Management *[Planned]*](#)
-* [Chapter 12: Zero Trust Architecture & Identity Providers *[Planned]*](#)
-* [Chapter 13: Secrets Management & PKI *[Planned]*](#)
-* [Chapter 14: Network Policies & Microsegmentation *[Planned]*](#)
-* [Chapter 15: Incident Response & Security Auditing *[Planned]*](#)
+* [Chapter 11: Enterprise DNS & Global Traffic Management](chapters/V4-C11-global-dns.md)
+* [Chapter 12: Zero Trust Architecture & Identity Providers](chapters/V4-C12-zero-trust.md)
+* [Chapter 13: Secrets Management & PKI](chapters/V4-C13-secrets-management.md)
+* [Chapter 14: Network Policies & Microsegmentation](chapters/V4-C14-microsegmentation.md)
+* [Chapter 15: Incident Response & Security Auditing](chapters/V4-C15-incident-response.md)
 
 ## Part 4: The Art of Troubleshooting (Senior Diagnostics)
 * [Chapter 16: The Scientific Method of Troubleshooting *[Planned]*](#)
