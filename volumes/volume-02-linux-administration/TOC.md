@@ -18,10 +18,10 @@
 * [Chapter 11: Advanced Firewalls](chapters/V2-C11-advanced-firewalls.md)
 
 ## Part 4: Security & Hardening
-* [Chapter 12: SSH Hardening *[Planned]*](#)
-* [Chapter 13: Intrusion Prevention *[Planned]*](#)
-* [Chapter 14: Mandatory Access Control *[Planned]*](#)
-* [Chapter 15: Security Auditing & Compliance *[Planned]*](#)
+* [Chapter 12: SSH Hardening](chapters/V2-C12-ssh-hardening.md)
+* [Chapter 13: Intrusion Prevention](chapters/V2-C13-intrusion-prevention.md)
+* [Chapter 14: Mandatory Access Control (SELinux & AppArmor)](chapters/V2-C14-mandatory-access-control.md)
+* [Chapter 15: Security Auditing & Compliance](chapters/V2-C15-security-auditing.md)
 
 ## Part 5: Enterprise Operations
 * [Chapter 16: Advanced Bash Scripting *[Planned]*](#)
