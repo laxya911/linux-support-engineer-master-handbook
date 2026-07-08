@@ -11,7 +11,7 @@ Write down three scenarios where a GUI (Graphical User Interface) would be activ
    * A local hypervisor (VirtualBox, Hyper-V).
    * A standalone hypervisor (Proxmox).
    * A Cloud VM (AWS, Azure, Oracle Cloud).
-2. Download an ISO for either **Ubuntu Server LTS** (Debian-based) or **Rocky Linux** (RHEL-based) if deploying locally.
+2. Download an ISO for either **Ubuntu Server 26.04 LTS** (Debian-based) or **RHEL 10 / CentOS Stream** (RHEL-based) if deploying locally.
 3. Provision the Virtual Machine with the following specifications:
    * **RAM**: 2048 MB (2 GB)
    * **CPU**: 2 Cores

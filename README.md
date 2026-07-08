@@ -23,7 +23,7 @@ The handbook is divided into five sequential volumes. Currently, we are focused 
 
 | Volume | Title | Difficulty | Target Chapters | Status |
 | :--- | :--- | :--- | :---: | :--- |
-| **Volume 1** | [Linux Fundamentals](volumes/volume-01-linux-fundamentals/README.md) | Beginner → Junior | 30 | 🚧 In Progress (0/30) |
+| **Volume 1** | [Linux Fundamentals](volumes/volume-01-linux-fundamentals/README.md) | Beginner → Junior | 30 | 🚧 In Progress (4/30) |
 | **Volume 2** | Linux Administration | Junior | 25 | 📅 Planned |
 | **Volume 3** | Enterprise Linux Services | Junior → Mid | 25 | 📅 Planned |
 | **Volume 4** | Enterprise Infrastructure & Troubleshooting | Mid | 20 | 📅 Planned |

@@ -251,4 +251,4 @@ When something fails, your first task is not to fix it. Your first task is to id
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 3 – Installing Linux](V1-C03-installing-linux.md)
+[Chapter 3 – Provisioning Linux](V1-C03-provisioning-linux.md)

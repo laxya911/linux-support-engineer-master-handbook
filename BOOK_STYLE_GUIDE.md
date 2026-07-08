@@ -56,6 +56,9 @@ Do not invent new callout types. Restrict usage to the following five official G
 * **Always use relative paths** for internal links. Do not use absolute paths (e.g., `file:///`).
 * Example: `[Chapter 2](../chapters/V1-C02-linux-architecture-and-distributions.md)`
 
+### Visual Architecture (Mermaid)
+Whenever explaining complex workflows (e.g., the boot process, network routing, or storage stacks), you **must** include a `mermaid` flowchart or sequence diagram. This provides readers with a quick, visual architectural view directly within the GitHub or IDE interface.
+
 ### Code Blocks
 Always specify the syntax language.
 * Terminal output or simple text: `text`
@@ -68,13 +71,15 @@ Always specify the syntax language.
 
 ## 5. Dual-Distribution Approach
 
-This handbook is designed to teach both **Debian-based** (e.g., Ubuntu Server) and **RHEL-based** (e.g., RHEL, CentOS, Rocky Linux) distributions simultaneously.
-* **Shared Commands**: When a command applies to both (e.g., `cat`, `grep`, `systemctl`), present it universally without distinction.
+This handbook is designed to teach both **Debian-based** and **RHEL-based** distributions simultaneously.
+* **Target Versions**: We currently standardize around **Ubuntu 26.04 LTS** and **RHEL 10 / CentOS Stream**.
+* **Version Awareness**: Always encourage readers to check the exact build version and code name of their distribution, as package versions and default services evolve over time.
+* **Shared Commands**: When a command applies to both families (e.g., `cat`, `grep`, `systemctl`), present it universally without distinction.
 * **Diverging Commands**: When package managers, file paths, or specific utilities differ, you **must** explicitly split the instruction. Do not assume the reader knows which to use.
   
 Example:
 > **Debian/Ubuntu**: `# apt install nginx`
-> **RHEL/Rocky**: `# dnf install nginx`
+> **RHEL/CentOS**: `# dnf install nginx`
 
 ---
 

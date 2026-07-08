@@ -10,11 +10,14 @@ This document provides a reader-focused summary of changes and additions for eac
 * Volume 1 foundational directory structure.
 * [Chapter 1: Welcome to Linux Support Engineering](../volumes/volume-01-linux-fundamentals/chapters/V1-C01-welcome-to-linux-support-engineering.md)
 * [Chapter 2: Linux Architecture & Distributions](../volumes/volume-01-linux-fundamentals/chapters/V1-C02-linux-architecture-and-distributions.md)
-* Practice guides for Chapter 1 and Chapter 2.
-* `BOOK_STYLE_GUIDE.md` to enforce quality standards.
+* [Chapter 3: Provisioning Linux](../volumes/volume-01-linux-fundamentals/chapters/V1-C03-provisioning-linux.md)
+* [Chapter 4: Linux Boot Process](../volumes/volume-01-linux-fundamentals/chapters/V1-C04-linux-boot-process.md)
+* Practice guides for Chapters 1 through 4 (`practice-files/` directory).
+* `BOOK_STYLE_GUIDE.md` to enforce quality standards, including mandatory `mermaid` architectural diagrams.
 * Dedicated `references/` tracker for external technical documentation.
 
 **Improved**
+* Officially standardized the dual-distribution approach, explicitly validating instructions against **Ubuntu 26.04 LTS** and **RHEL 10 / CentOS Stream**.
 * Completely overhauled the Markdown frontmatter to track reading time, lab counts, and editorial review status.
 * Migrated plain-text drafts into structured GitHub Flavored Markdown (GFM) with standardized callouts.
 

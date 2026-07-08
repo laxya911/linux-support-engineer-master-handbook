@@ -94,7 +94,7 @@ To succeed in this handbook, you must have a safe environment to practice comman
    * *Local*: Install VirtualBox or enable Hyper-V on your Windows machine.
    * *Standalone*: Use a dedicated Proxmox VE server.
    * *Cloud*: Deploy a free-tier VM on AWS, Azure, or Oracle Cloud.
-2. **Select a Distribution**: We recommend **Ubuntu Server** (Debian-based) or **Rocky Linux** (RHEL-based). If running locally, download the ISO from their official websites. 
+2. **Select a Distribution**: We recommend **Ubuntu Server 26.04 LTS** (Debian-based) or **RHEL 10 / CentOS Stream** (RHEL-based). If running locally, download the ISO from their official websites. 
 3. **Provision the Virtual Machine**: 
    * Allocate at least 2 CPU cores and 2048 MB (2 GB) of RAM.
    * Allocate a 20 GB dynamically allocated virtual hard disk (or cloud volume).

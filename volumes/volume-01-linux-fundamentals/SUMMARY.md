@@ -7,7 +7,7 @@
 
 * [Chapter 1: Welcome to Linux Support Engineering](chapters/V1-C01-welcome-to-linux-support-engineering.md)
 * [Chapter 2: Linux Architecture & Distributions](chapters/V1-C02-linux-architecture-and-distributions.md)
-* [Chapter 3: Installing Linux](chapters/V1-C03-installing-linux.md)
+* [Chapter 3: Provisioning Linux](chapters/V1-C03-provisioning-linux.md)
 * [Chapter 4: Linux Boot Process](chapters/V1-C04-linux-boot-process.md)
 * [Chapter 5: Linux Filesystem](chapters/V1-C05-linux-filesystem.md)
 * [Chapter 6: Working with Files & Directories](chapters/V1-C06-working-with-files-and-directories.md)
@@ -22,7 +22,7 @@
 * [Chapter 15: SSH Administration](chapters/V1-C15-ssh-administration.md)
 * [Chapter 16: Storage Fundamentals](chapters/V1-C16-storage-fundamentals.md)
 * [Chapter 17: Disk & Filesystem Management](chapters/V1-C17-disk-and-filesystem-management.md)
-* [Chapter 18: Linux Boot Process](chapters/V1-C18-linux-boot-process.md)
+* [Chapter 18: Advanced System Recovery & Live USBs](chapters/V1-C18-advanced-system-recovery.md)
 * [Chapter 19: Job Scheduling (cron & systemd timers)](chapters/V1-C19-job-scheduling.md)
 * [Chapter 20: Shell Environment](chapters/V1-C20-shell-environment.md)
 * [Chapter 21: Bash Scripting Basics](chapters/V1-C21-bash-scripting-basics.md)
