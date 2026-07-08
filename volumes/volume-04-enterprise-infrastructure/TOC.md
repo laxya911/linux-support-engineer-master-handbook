@@ -22,8 +22,8 @@
 * [Chapter 15: Incident Response & Security Auditing](chapters/V4-C15-incident-response.md)
 
 ## Part 4: The Art of Troubleshooting (Senior Diagnostics)
-* [Chapter 16: The Scientific Method of Troubleshooting *[Planned]*](#)
-* [Chapter 17: Kernel Panics & Crash Analysis *[Planned]*](#)
-* [Chapter 18: Advanced Network Packet Analysis *[Planned]*](#)
-* [Chapter 19: Profiling Application Bottlenecks *[Planned]*](#)
-* [Chapter 20: Disaster Recovery & Chaos Engineering *[Planned]*](#)
+* [Chapter 16: The Scientific Method of Troubleshooting](chapters/V4-C16-scientific-troubleshooting.md)
+* [Chapter 17: Kernel Panics & Crash Analysis](chapters/V4-C17-kernel-panics.md)
+* [Chapter 18: Advanced Network Packet Analysis](chapters/V4-C18-packet-analysis.md)
+* [Chapter 19: Profiling Application Bottlenecks](chapters/V4-C19-profiling-bottlenecks.md)
+* [Chapter 20: Disaster Recovery & Chaos Engineering](chapters/V4-C20-chaos-engineering.md)
