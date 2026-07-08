@@ -15,11 +15,11 @@
 * [Chapter 10: Database Backup & Restoration](chapters/V3-C10-database-backups.md)
 
 ## Part 3: Network Services
-* [Chapter 11: The Domain Name System (BIND9) *[Planned]*](#)
-* [Chapter 12: Dynamic Host Configuration (DHCPd) *[Planned]*](#)
-* [Chapter 13: Email Infrastructure (Postfix) *[Planned]*](#)
-* [Chapter 14: Time Synchronization (Chrony/NTP) *[Planned]*](#)
-* [Chapter 15: Virtual Private Networks (OpenVPN/WireGuard) *[Planned]*](#)
+* [Chapter 11: The Domain Name System (BIND9)](chapters/V3-C11-dns-bind.md)
+* [Chapter 12: Dynamic Host Configuration (DHCPd)](chapters/V3-C12-dhcp.md)
+* [Chapter 13: Email Infrastructure (Postfix)](chapters/V3-C13-email-postfix.md)
+* [Chapter 14: Time Synchronization (Chrony/NTP)](chapters/V3-C14-time-synchronization.md)
+* [Chapter 15: Virtual Private Networks (OpenVPN/WireGuard)](chapters/V3-C15-vpns.md)
 
 ## Part 4: Infrastructure Services
 * [Chapter 16: Advanced File Sharing (Samba) *[Planned]*](#)
