@@ -8,11 +8,11 @@
 * [Chapter 5: Helm & Package Management](chapters/V4-C05-helm-package-manager.md)
 
 ## Part 2: Infrastructure as Code (Automation at Scale)
-* [Chapter 6: Introduction to IaC & Terraform *[Planned]*](#)
-* [Chapter 7: Provisioning Cloud Resources *[Planned]*](#)
-* [Chapter 8: Configuration Management at Scale *[Planned]*](#)
-* [Chapter 9: Writing Ansible Playbooks & Roles *[Planned]*](#)
-* [Chapter 10: CI/CD Pipelines *[Planned]*](#)
+* [Chapter 6: Introduction to IaC & Terraform](chapters/V4-C06-iac-terraform.md)
+* [Chapter 7: Provisioning Cloud Resources](chapters/V4-C07-cloud-provisioning.md)
+* [Chapter 8: Configuration Management at Scale](chapters/V4-C08-ansible-intro.md)
+* [Chapter 9: Writing Ansible Playbooks & Roles](chapters/V4-C09-ansible-playbooks.md)
+* [Chapter 10: CI/CD Pipelines](chapters/V4-C10-cicd-pipelines.md)
 
 ## Part 3: Advanced Network & Security Architecture
 * [Chapter 11: Enterprise DNS & Global Traffic Management *[Planned]*](#)
