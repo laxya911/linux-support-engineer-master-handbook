@@ -27,7 +27,13 @@ This document provides a reader-focused summary of changes and additions for eac
 * [Chapter 17: Storage & Disk Management](../volumes/volume-01-linux-fundamentals/chapters/V1-C17-storage-and-disk-management.md)
 * [Chapter 18: Advanced Grep & Awk](../volumes/volume-01-linux-fundamentals/chapters/V1-C18-advanced-grep-and-awk.md)
 * [Chapter 19: Output Redirection (Piping)](../volumes/volume-01-linux-fundamentals/chapters/V1-C19-output-redirection.md)
-* Practice guides for Chapters 1 through 19 (`practice-files/` directory).
+* [Chapter 20: Bash Scripting Basics](../volumes/volume-01-linux-fundamentals/chapters/V1-C20-bash-scripting-basics.md)
+* [Chapter 21: Environment Variables](../volumes/volume-01-linux-fundamentals/chapters/V1-C21-environment-variables.md)
+* [Chapter 22: User Automation (Cron)](../volumes/volume-01-linux-fundamentals/chapters/V1-C22-user-automation-cron.md)
+* [Chapter 23: Basic System Monitoring](../volumes/volume-01-linux-fundamentals/chapters/V1-C23-basic-system-monitoring.md)
+* [Chapter 24: Introduction to Networking (Firewalls)](../volumes/volume-01-linux-fundamentals/chapters/V1-C24-introduction-to-networking-firewalls.md)
+* [Chapter 25: DNS & Name Resolution](../volumes/volume-01-linux-fundamentals/chapters/V1-C25-dns-and-name-resolution.md)
+* Practice guides for Chapters 1 through 25 (`practice-files/` directory).
 * `BOOK_STYLE_GUIDE.md` to enforce quality standards, including mandatory `mermaid` architectural diagrams.
 * Dedicated `references/` tracker for external technical documentation.
 
