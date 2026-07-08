@@ -12,10 +12,10 @@
 * [Chapter 7: Filesystem Tuning and Inodes](chapters/V2-C07-filesystem-tuning-and-inodes.md)
 
 ## Part 3: Advanced Networking
-* [Chapter 8: Static IP Configuration *[Planned]*](#)
-* [Chapter 9: Network Routing & Gateways *[Planned]*](#)
-* [Chapter 10: Packet Capture & Analysis *[Planned]*](#)
-* [Chapter 11: Advanced Firewalls *[Planned]*](#)
+* [Chapter 8: Static IP Configuration](chapters/V2-C08-static-ip-configuration.md)
+* [Chapter 9: Network Routing & Gateways](chapters/V2-C09-network-routing.md)
+* [Chapter 10: Packet Capture & Analysis](chapters/V2-C10-packet-capture.md)
+* [Chapter 11: Advanced Firewalls](chapters/V2-C11-advanced-firewalls.md)
 
 ## Part 4: Security & Hardening
 * [Chapter 12: SSH Hardening *[Planned]*](#)
