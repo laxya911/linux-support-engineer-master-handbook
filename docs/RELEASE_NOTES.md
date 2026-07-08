@@ -33,7 +33,16 @@ This document provides a reader-focused summary of changes and additions for eac
 * [Chapter 23: Basic System Monitoring](../volumes/volume-01-linux-fundamentals/chapters/V1-C23-basic-system-monitoring.md)
 * [Chapter 24: Introduction to Networking (Firewalls)](../volumes/volume-01-linux-fundamentals/chapters/V1-C24-introduction-to-networking-firewalls.md)
 * [Chapter 25: DNS & Name Resolution](../volumes/volume-01-linux-fundamentals/chapters/V1-C25-dns-and-name-resolution.md)
-* Practice guides for Chapters 1 through 25 (`practice-files/` directory).
+* [Chapter 26: System Startup & Troubleshooting](../volumes/volume-01-linux-fundamentals/chapters/V1-C26-system-startup-and-troubleshooting.md)
+* [Chapter 27: Introduction to Web Servers](../volumes/volume-01-linux-fundamentals/chapters/V1-C27-introduction-to-web-servers.md)
+* [Chapter 28: Reverse Proxies & Load Balancing](../volumes/volume-01-linux-fundamentals/chapters/V1-C28-reverse-proxies-and-load-balancing.md)
+* [Chapter 29: Database Fundamentals](../volumes/volume-01-linux-fundamentals/chapters/V1-C29-database-fundamentals.md)
+* [Chapter 30: Conclusion & Career Path](../volumes/volume-01-linux-fundamentals/chapters/V1-C30-conclusion-and-career-path.md)
+* Practice guides for Chapters 1 through 30 (`practice-files/` directory).
+
+### 🎯 Milestone Achieved
+* **Volume 1 (Linux Fundamentals) is officially 100% complete.**
+* Ready to begin Volume 2 (Linux Administration).
 * `BOOK_STYLE_GUIDE.md` to enforce quality standards, including mandatory `mermaid` architectural diagrams.
 * Dedicated `references/` tracker for external technical documentation.
 
