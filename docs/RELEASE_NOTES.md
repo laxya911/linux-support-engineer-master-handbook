@@ -15,7 +15,13 @@ This document provides a reader-focused summary of changes and additions for eac
 * [Chapter 5: Linux Filesystem](../volumes/volume-01-linux-fundamentals/chapters/V1-C05-linux-filesystem.md)
 * [Chapter 6: Working with Files & Directories](../volumes/volume-01-linux-fundamentals/chapters/V1-C06-working-with-files-and-directories.md)
 * [Chapter 7: Text Editors (nano & vim)](../volumes/volume-01-linux-fundamentals/chapters/V1-C07-text-editors.md)
-* Practice guides for Chapters 1 through 7 (`practice-files/` directory).
+* [Chapter 8: Users & Groups](../volumes/volume-01-linux-fundamentals/chapters/V1-C08-users-and-groups.md)
+* [Chapter 9: File Permissions & Ownership](../volumes/volume-01-linux-fundamentals/chapters/V1-C09-file-permissions-and-ownership.md)
+* [Chapter 10: Package Management](../volumes/volume-01-linux-fundamentals/chapters/V1-C10-package-management.md)
+* [Chapter 11: Process Management](../volumes/volume-01-linux-fundamentals/chapters/V1-C11-process-management.md)
+* [Chapter 12: Services & systemd](../volumes/volume-01-linux-fundamentals/chapters/V1-C12-services-and-systemd.md)
+* [Chapter 13: Software Logs & Journals](../volumes/volume-01-linux-fundamentals/chapters/V1-C13-software-logs-and-journals.md)
+* Practice guides for Chapters 1 through 13 (`practice-files/` directory).
 * `BOOK_STYLE_GUIDE.md` to enforce quality standards, including mandatory `mermaid` architectural diagrams.
 * Dedicated `references/` tracker for external technical documentation.
 
