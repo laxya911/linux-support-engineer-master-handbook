@@ -24,8 +24,8 @@
 * [Chapter 15: Security Auditing & Compliance](chapters/V2-C15-security-auditing.md)
 
 ## Part 5: Enterprise Operations
-* [Chapter 16: Advanced Bash Scripting *[Planned]*](#)
-* [Chapter 17: Custom Services *[Planned]*](#)
-* [Chapter 18: Local System Profiling *[Planned]*](#)
-* [Chapter 19: Advanced Log Management *[Planned]*](#)
-* [Chapter 20: Capstone Project *[Planned]*](#)
+* [Chapter 16: Advanced Bash Scripting](chapters/V2-C16-advanced-bash-scripting.md)
+* [Chapter 17: Cron & Task Scheduling](chapters/V2-C17-cron-and-task-scheduling.md)
+* [Chapter 18: System Backup & Restoration](chapters/V2-C18-system-backup.md)
+* [Chapter 19: Incident Response Methodology](chapters/V2-C19-incident-response.md)
+* [Chapter 20: Capstone Project](chapters/V2-C20-capstone-project.md)
