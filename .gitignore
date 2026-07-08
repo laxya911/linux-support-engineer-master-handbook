@@ -1,0 +1,30 @@
+# Build and Output Directories
+build/
+dist/
+out/
+*.pdf
+*.epub
+*.docx
+*.html
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*~
+
+# Operating System Files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Temporary & Log Files
+*.log
+tmp/
+temp/
+node_modules/
