@@ -40,7 +40,7 @@ $InputFiles += "..\docs\INDEX.md"
 # 2. Build the Pandoc Command
 $OutputFile = "Linux_Support_Engineer_Master_Handbook.$Format"
 $MetadataFile = "metadata.yaml"
-$CoverImage = "..\assets\covers\front_cover.jpg" # Assuming we select one
+$CoverImage = "..\assets\covers\front_cover.png" # Assuming we select one
 
 Write-Host "Compiling $OutputFile..."
 
