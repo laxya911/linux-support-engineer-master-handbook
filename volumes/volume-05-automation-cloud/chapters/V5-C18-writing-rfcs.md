@@ -42,10 +42,10 @@ If a Senior Engineer writes a brilliant Python script, and then writes a one-pag
 
 ```mermaid
 flowchart LR
-    A[Junior Engineer] -->|Writes Code| B[Impact: Localized (1x)]
+    A["Junior Engineer"] -->|"Writes Code"| B["Impact: Localized (1x)"]
     
-    C[Senior Engineer] -->|Writes Code| D[Writes Documentation]
-    D -->|Teaches Others| E[Impact: Organizational (50x)]
+    C["Senior Engineer"] -->|"Writes Code"| D["Writes Documentation"]
+    D -->|"Teaches Others"| E["Impact: Organizational (50x)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

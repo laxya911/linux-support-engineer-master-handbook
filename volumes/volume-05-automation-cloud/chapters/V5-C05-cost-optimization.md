@@ -42,14 +42,14 @@ In an on-premise datacenter, a server costs $10,000 upfront. Once it is paid for
 ```mermaid
 flowchart TD
     subgraph The FinOps Cycle
-        A[Inform] --> B[Optimize]
-        B --> C[Operate]
+        A["Inform"] --> B["Optimize"]
+        B --> C["Operate"]
         C --> A
     end
     
-    A -.->|Tagging & Visibility| D[AWS Cost Explorer]
-    B -.->|Right-Sizing & Reserved Instances| E[Cost Reduction]
-    C -.->|Automating Start/Stop Schedules| F[Continuous Savings]
+    A -.->|"Tagging & Visibility"| D["AWS Cost Explorer"]
+    B -.->|"Right-Sizing & Reserved Instances"| E["Cost Reduction"]
+    C -.->|"Automating Start/Stop Schedules"| F["Continuous Savings"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#00b894,stroke:#55efc4,color:#000

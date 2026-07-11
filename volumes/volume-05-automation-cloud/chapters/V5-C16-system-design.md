@@ -42,10 +42,10 @@ The interviewer does not actually expect you to design the entirety of YouTube i
 ```mermaid
 flowchart TD
     subgraph The 45-Minute Interview
-        A[1. Understand Requirements \n (5 mins)] --> B[2. Capacity Estimation \n (5 mins)]
-        B --> C[3. High-Level Design \n (10 mins)]
-        C --> D[4. Deep Dive & Trade-offs \n (20 mins)]
-        D --> E[5. Identify Bottlenecks \n (5 mins)]
+        A["1. Understand Requirements \n (5 mins)"] --> B["2. Capacity Estimation \n (5 mins)"]
+        B --> C["3. High-Level Design \n (10 mins)"]
+        C --> D["4. Deep Dive & Trade-offs \n (20 mins)"]
+        D --> E["5. Identify Bottlenecks \n (5 mins)"]
     end
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff

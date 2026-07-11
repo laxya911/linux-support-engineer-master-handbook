@@ -40,9 +40,9 @@ In Windows, you plug in a hard drive and it becomes the `D:\` drive. In Linux, t
 
 ```mermaid
 flowchart TD
-    A["Physical Block Device (/dev/sda)"] -->|Partitioned| B["Partition (/dev/sda1)"]
-    B -->|Formatted| C["Filesystem (ext4 / xfs)"]
-    C -->|Mounted via /etc/fstab| D["Mount Point (/)"]
+    A["Physical Block Device (/dev/sda)"] -->|"Partitioned"| B["Partition (/dev/sda1)"]
+    B -->|"Formatted"| C["Filesystem (ext4 / xfs)"]
+    C -->|"Mounted via /etc/fstab"| D["Mount Point (/)"]
     
     style A fill:#2d3436,stroke:#b2bec3,color:#fff
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

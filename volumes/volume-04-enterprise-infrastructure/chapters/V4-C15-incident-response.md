@@ -41,11 +41,11 @@ When this happens, the Senior Support Engineer must follow a strict lifecycle. P
 
 ```mermaid
 flowchart LR
-    A[Preparation] --> B[Detection & Analysis]
-    B --> C[Containment]
-    C --> D[Eradication]
-    D --> E[Recovery]
-    E --> F[Post-Incident Activity]
+    A["Preparation"] --> B["Detection & Analysis"]
+    B --> C["Containment"]
+    C --> D["Eradication"]
+    D --> E["Recovery"]
+    E --> F["Post-Incident Activity"]
     
     style C fill:#d63031,stroke:#ff7675,color:#fff
     style D fill:#f39c12,stroke:#f1c40f,color:#000

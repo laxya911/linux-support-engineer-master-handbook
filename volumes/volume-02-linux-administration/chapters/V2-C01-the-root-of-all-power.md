@@ -40,12 +40,12 @@ In enterprise environments, access is strictly audited. You do not hand out the 
 
 ```mermaid
 flowchart TD
-    A["User 'jdoe'"] -->|Types: systemctl restart nginx| B["Permission Denied"]
+    A["User 'jdoe'"] -->|"Types: systemctl restart nginx"| B["Permission Denied"]
     
-    A -->|Types: sudo systemctl restart nginx| C{"Check /etc/sudoers"}
+    A -->|"Types: sudo systemctl restart nginx"| C{"Check /etc/sudoers"}
     
-    C -->|If user is listed| D["Execute as Root"]
-    C -->|If user is NOT listed| E["Deny & Log to /var/log/auth.log"]
+    C -->|"If user is listed"| D["Execute as Root"]
+    C -->|"If user is NOT listed"| E["Deny & Log to /var/log/auth.log"]
     
     D --> F["Log success to /var/log/auth.log"]
     

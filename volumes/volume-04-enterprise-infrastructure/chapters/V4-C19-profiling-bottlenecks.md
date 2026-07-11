@@ -43,18 +43,18 @@ When an application is acting strangely (hanging, failing silently, or running s
 ```mermaid
 flowchart TD
     subgraph User Space
-        A[Python Script]
+        A["Python Script"]
     end
     
     subgraph Kernel Space
-        B[Linux Kernel]
-        C[File System Driver]
+        B["Linux Kernel"]
+        C["File System Driver"]
     end
     
-    A -->|1. openat('/etc/config.json')| B
+    A -->|"1. openat('/etc/config.json')"| B
     B --> C
-    C -.->|2. Return: Permission Denied (EACCES)| B
-    B -.->|3. Return: -1 EACCES| A
+    C -.->|"2. Return: Permission Denied (EACCES)"| B
+    B -.->|"3. Return: -1 EACCES"| A
     
     note1["'strace' intercepts and prints Steps 1 and 3 \n to your screen in real-time!"] -.-> A
     

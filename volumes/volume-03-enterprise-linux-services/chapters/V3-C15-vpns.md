@@ -42,10 +42,10 @@ Instead, we use a **Virtual Private Network (VPN)**. We open a single UDP port f
 
 ```mermaid
 flowchart LR
-    A["HR Director \n (Starbucks Wi-Fi)"] -->|Encrypted Tunnel| B{"WireGuard VPN \n (Corporate Edge)"}
+    A["HR Director \n (Starbucks Wi-Fi)"] -->|"Encrypted Tunnel"| B{"WireGuard VPN \n (Corporate Edge)"}
     
     subgraph Corporate Private Network
-        B -->|Unencrypted Traffic| C["HR Database \n (10.0.5.50)"]
+        B -->|"Unencrypted Traffic"| C["HR Database \n (10.0.5.50)"]
     end
     
     style A fill:#f39c12,stroke:#f1c40f,color:#000

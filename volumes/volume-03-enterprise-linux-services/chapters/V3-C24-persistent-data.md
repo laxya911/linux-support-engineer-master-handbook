@@ -37,20 +37,20 @@ By the end of this chapter, you will be able to:
 ## Visual Architecture: The Ephemeral Box
 
 Containers are **Ephemeral**. This means they are designed to die. 
-If you want to upgrade your NGINX version from 1.20 to 1.21, you do not log into the container and run `apt-get upgrade`. You destroy the container completely, download the new `nginx:1.21` image, and spin up a brand new container in 0.5 seconds. 
+If you want to upgrade your NGINX version from 1.20 to 1.21, you do not log into the container and run `apt upgrade`. You destroy the container completely, download the new `nginx:1.21` image, and spin up a brand new container in 0.5 seconds. 
 However, when a container is destroyed, its entire filesystem is deleted permanently. This is fine for web servers (they are stateless). This is a disaster for databases.
 
 ```mermaid
 flowchart TD
-    subgraph The Host OS (Safe)
-        A[("/var/lib/docker/volumes/my_data/ \n (Named Volume)")]
+    subgraph The Host OS [Safe]
+        A["('/var/lib/docker/volumes/my_data/ \n (Named Volume)')"]
     end
     
-    subgraph The Ephemeral Container (Danger)
+    subgraph The Ephemeral Container [Danger]
         B["MySQL Container \n (V 8.0)"]
     end
     
-    B -->|Mounts Data To| A
+    B -->|"Mounts Data To"| A
     
     note1["If the MySQL Container is destroyed, \n the data in the Named Volume survives!"] -.-> A
     

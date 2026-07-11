@@ -41,11 +41,11 @@ If you have a 100GB database file and you change a single 5MB table, the `cp` co
 
 ```mermaid
 flowchart LR
-    A["Production Server \n (100GB File)"] -->|Calculates Hashes| B{"rsync"}
+    A["Production Server \n (100GB File)"] -->|"Calculates Hashes"| B{"rsync"}
     
-    C["Backup Server \n (100GB File)"] -->|Calculates Hashes| B
+    C["Backup Server \n (100GB File)"] -->|"Calculates Hashes"| B
     
-    B -->|Only 5MB differs!| D["Transmits 5MB Delta over SSH"]
+    B -->|"Only 5MB differs!"| D["Transmits 5MB Delta over SSH"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

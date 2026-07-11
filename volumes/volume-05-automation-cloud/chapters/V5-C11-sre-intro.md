@@ -42,9 +42,9 @@ SREs do not look at CPU graphs; they look at Customer Experience. If a web serve
 ```mermaid
 flowchart TD
     subgraph The SRE Metric Pyramid
-        A[SLA: Service Level Agreement \n 'The Legal Contract (e.g., 99.9%)']
-        B[SLO: Service Level Objective \n 'The Internal Goal (e.g., 99.95%)']
-        C[SLI: Service Level Indicator \n 'The Actual Measurement (e.g., 99.98%)']
+        A["SLA: Service Level Agreement \n 'The Legal Contract (e.g., 99.9%)'"]
+        B["SLO: Service Level Objective \n 'The Internal Goal (e.g., 99.95%)'"]
+        C["SLI: Service Level Indicator \n 'The Actual Measurement (e.g., 99.98%)'"]
     end
     
     A --- B

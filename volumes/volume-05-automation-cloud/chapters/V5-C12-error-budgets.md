@@ -41,13 +41,13 @@ SRE solves this war using an **Error Budget**. The Error Budget is a mathematica
 
 ```mermaid
 flowchart TD
-    A[Internal SLO: 99.9%] -->|Mathematical Inverse| B[Error Budget: 0.1% \n (43 Minutes of allowed downtime)]
+    A["Internal SLO: 99.9%"] -->|"Mathematical Inverse"| B["Error Budget: 0.1% \n (43 Minutes of allowed downtime)"]
     
-    C[Development Team] -->|Ships Code| D{Is the Error \n Budget Exhausted?}
+    C["Development Team"] -->|"Ships Code"| D{"Is the Error \n Budget Exhausted?"}
     
-    D -->|NO \n (30 mins remaining)| E[Ship the Feature! \n Maximize Velocity!]
+    D -->|"NO \n (30 mins remaining)"| E["Ship the Feature! \n Maximize Velocity!"]
     
-    D -->|YES \n (0 mins remaining)| F[Code Freeze! \n All Engineers must work on bug fixes and reliability.]
+    D -->|"YES \n (0 mins remaining)"| F["Code Freeze! \n All Engineers must work on bug fixes and reliability."]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

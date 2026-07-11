@@ -43,19 +43,19 @@ To capture evidence of this death, Linux uses **kdump**. At boot time, Linux res
 ```mermaid
 flowchart TD
     subgraph Primary OS
-        A[Primary Linux Kernel]
-        B[Faulty Hardware Driver]
+        A["Primary Linux Kernel"]
+        B["Faulty Hardware Driver"]
     end
     
-    subgraph Reserved RAM (Kdump)
-        C[Secondary Crash Kernel]
+    subgraph Reserved RAM [Kdump]
+        C["Secondary Crash Kernel"]
     end
     
-    A -->|1. Driver attempts illegal memory access| A
-    A -->|2. KERNEL PANIC! Primary Kernel Dies| C
+    A -->|"1. Driver attempts illegal memory access"| A
+    A -->|"2. KERNEL PANIC! Primary Kernel Dies"| C
     
-    C -->|3. Boots instantly without BIOS| D[Dump RAM to Disk]
-    D -->|4. Saves vmcore file| E[(/var/crash/vmcore)]
+    C -->|"3. Boots instantly without BIOS"| D["Dump RAM to Disk"]
+    D -->|"4. Saves vmcore file"| E["('/var/crash/vmcore')"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff

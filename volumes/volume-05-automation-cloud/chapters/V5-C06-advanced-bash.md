@@ -41,15 +41,15 @@ In Volume 2, you learned basic Bash commands to navigate the filesystem and read
 
 ```mermaid
 flowchart TD
-    A[Cron Job \n (Triggers Script at 3:00 AM)] --> B{Strict Error Handling \n 'set -e'}
+    A["Cron Job \n (Triggers Script at 3:00 AM)"] --> B{"Strict Error Handling \n 'set -e'"}
     
-    B --> C[Step 1: Mount Backup Drive]
-    C -->|Success| D[Step 2: Dump Database]
-    C -.->|Failure (e.g. Drive Offline)| E[Script Exits Immediately]
+    B --> C["Step 1: Mount Backup Drive"]
+    C -->|"Success"| D["Step 2: Dump Database"]
+    C -.->|"Failure (e.g. Drive Offline)"| E["Script Exits Immediately"]
     
-    E --> F[Send Alert to Slack]
+    E --> F["Send Alert to Slack"]
     
-    D --> G[Step 3: Unmount Drive]
+    D --> G["Step 3: Unmount Drive"]
     
     note1["Without 'set -e', the script would fail Step 1, \n but blindly continue to Step 2, dumping the DB \n into the root filesystem and crashing the server!"] -.-> C
     

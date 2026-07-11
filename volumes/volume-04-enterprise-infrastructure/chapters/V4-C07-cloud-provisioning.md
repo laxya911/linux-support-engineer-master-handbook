@@ -42,13 +42,13 @@ To solve this, Enterprise environments use a **Remote Backend**. The state file 
 
 ```mermaid
 flowchart TD
-    A["Engineer A \n (Runs apply)"] -->|Requests Lock| C{AWS DynamoDB \n (State Lock Table)}
-    B["Engineer B \n (Runs apply)"] -->|Requests Lock| C
+    A["Engineer A \n (Runs apply)"] -->|"Requests Lock"| C{"AWS DynamoDB \n (State Lock Table)"}
+    B["Engineer B \n (Runs apply)"] -->|"Requests Lock"| C
     
-    C -->|Lock Granted| A
-    C -->|Lock Denied: Try Again Later| B
+    C -->|"Lock Granted"| A
+    C -->|"Lock Denied: Try Again Later"| B
     
-    A -->|Updates State| D[("AWS S3 Bucket \n (terraform.tfstate)")]
+    A -->|"Updates State"| D["('AWS S3 Bucket \n (terraform.tfstate)')"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff

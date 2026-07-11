@@ -36,20 +36,20 @@ By the end of this chapter, you will be able to:
 
 ## Visual Architecture: The Kubernetes Package Manager
 
-In Linux, if you want to install NGINX, you do not write a massive configuration file from scratch. You run `apt-get install nginx`. 
+In Linux, if you want to install NGINX, you do not write a massive configuration file from scratch. You run `apt install nginx`. 
 In Kubernetes, deploying a production-ready application requires writing a Deployment YAML, a Service YAML, a ConfigMap YAML, a Secret YAML, and a PVC YAML. This can easily total 500 lines of code. 
 
 **Helm** is the package manager for Kubernetes. A "Helm Chart" is a pre-packaged bundle of YAML templates. Instead of writing 500 lines of code to deploy Redis, you simply run `helm install my-redis bitnami/redis`.
 
 ```mermaid
 flowchart LR
-    A["Helm CLI \n ('helm install bitnami/redis')"] -->|Downloads Chart| B{"Helm Repository \n (e.g., Bitnami)"}
+    A["Helm CLI \n ('helm install bitnami/redis')"] -->|"Downloads Chart"| B{"Helm Repository \n (e.g., Bitnami)"}
     
-    B -->|Injects Variables into Templates| C[Kube-API Server]
+    B -->|"Injects Variables into Templates"| C["Kube-API Server"]
     
-    C --> D[Deployment YAML]
-    C --> E[Service YAML]
-    C --> F[Secret YAML]
+    C --> D["Deployment YAML"]
+    C --> E["Service YAML"]
+    C --> F["Secret YAML"]
     
     style A fill:#f39c12,stroke:#f1c40f,color:#000
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

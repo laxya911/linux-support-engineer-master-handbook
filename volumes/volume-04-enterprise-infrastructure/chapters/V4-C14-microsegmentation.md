@@ -42,20 +42,20 @@ This is dangerous. If a hacker compromises Server A, they use that trusted inter
 
 ```mermaid
 flowchart TD
-    subgraph The Internet (North)
-        A[Hacker]
+    subgraph The Internet [North]
+        A["Hacker"]
     end
     
-    subgraph Corporate Network (South)
-        B[Compromised Web Server]
-        C[HR Database]
-        D[Payroll Database]
+    subgraph Corporate Network [South]
+        B["Compromised Web Server"]
+        C["HR Database"]
+        D["Payroll Database"]
     end
     
-    A -->|Hacks via Vulnerability| B
+    A -->|"Hacks via Vulnerability"| B
     
-    B -.-x|Blocked by Microsegmentation| C
-    B -.-x|Blocked by Microsegmentation| D
+    B -.-x|"Blocked by Microsegmentation"| C
+    B -.-x|"Blocked by Microsegmentation"| D
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff

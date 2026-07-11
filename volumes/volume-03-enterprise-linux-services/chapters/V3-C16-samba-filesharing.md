@@ -41,10 +41,10 @@ The vast majority of office employees use Windows or macOS. Windows does not nat
 
 ```mermaid
 flowchart TD
-    A["Windows User \n (Z:\ Drive)"] -->|Speaks SMB| B{"Samba Daemon (smbd) \n (Port 445)"}
-    C["macOS User \n (smb://server)"] -->|Speaks SMB| B
+    A["Windows User \n (Z:\ Drive)"] -->|"Speaks SMB"| B{"Samba Daemon (smbd) \n (Port 445)"}
+    C["macOS User \n (smb://server)"] -->|"Speaks SMB"| B
     
-    B -->|Translates to Ext4| D["/var/shares/public/ \n (Linux Filesystem)"]
+    B -->|"Translates to Ext4"| D["/var/shares/public/ \n (Linux Filesystem)"]
     
     style B fill:#00b894,stroke:#55efc4,color:#000
     style D fill:#0984e3,stroke:#74b9ff,color:#fff

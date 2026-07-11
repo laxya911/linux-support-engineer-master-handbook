@@ -40,13 +40,13 @@ In Windows, users historically downloaded installers from arbitrary websites. Li
 
 ```mermaid
 flowchart TD
-    A["Linux Server (Your VM)"] -->|1. Request 'nginx'| B["Local Package Manager (APT / DNF)"]
-    B -->|2. Check local cache index| C{"Is it cached?"}
-    C -->|No| D["Fetch updated index from Internet"]
-    C -->|Yes| E["Calculate Dependencies"]
+    A["Linux Server (Your VM)"] -->|"1. Request 'nginx'"| B["Local Package Manager (APT / DNF)"]
+    B -->|"2. Check local cache index"| C{"Is it cached?"}
+    C -->|"No"| D["Fetch updated index from Internet"]
+    C -->|"Yes"| E["Calculate Dependencies"]
     D --> E
-    E -->|3. Download packages| F["Upstream OS Repository (Ubuntu/RHEL)"]
-    F -->|4. Install Binaries to /usr/bin| A
+    E -->|"3. Download packages"| F["Upstream OS Repository (Ubuntu/RHEL)"]
+    F -->|"4. Install Binaries to /usr/bin"| A
     
     style A fill:#2d3436,stroke:#b2bec3,color:#fff
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

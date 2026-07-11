@@ -41,12 +41,12 @@ For decades, SysAdmins built infrastructure by logging into a web console (like 
 
 ```mermaid
 flowchart LR
-    A["Developer \n (Writes main.tf)"] -->|terraform apply| B{"Terraform Engine \n (Core + Providers)"}
+    A["Developer \n (Writes main.tf)"] -->|"terraform apply"| B{"Terraform Engine \n (Core + Providers)"}
     
-    B -->|API Calls| C[AWS Cloud]
-    B -->|API Calls| D[Google Cloud]
+    B -->|"API Calls"| C["AWS Cloud"]
+    B -->|"API Calls"| D["Google Cloud"]
     
-    B -.->|Saves Reality to| E[("terraform.tfstate \n (State File)")]
+    B -.->|"Saves Reality to"| E["('terraform.tfstate \n (State File)')"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff

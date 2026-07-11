@@ -45,9 +45,9 @@ flowchart TD
     A["User Traffic"] --> B{"Physical Server 1 \n (Docker Engine)"}
     
     subgraph The Danger Zone
-        B --> C[Web Container 1]
-        B --> D[Web Container 2]
-        B --> E[Database Container]
+        B --> C["Web Container 1"]
+        B --> D["Web Container 2"]
+        B --> E["Database Container"]
     end
     
     note1["If Physical Server 1 loses power, \n ALL containers die simultaneously."] -.-> B

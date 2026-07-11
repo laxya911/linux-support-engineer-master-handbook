@@ -40,15 +40,15 @@ Junior engineers fix the symptom. Senior engineers fix the disease. If you stop 
 
 ```mermaid
 flowchart TD
-    A["Symptom: The Database Crashed"] -->|Why?| B["Because the disk was 100% full"]
+    A["Symptom: The Database Crashed"] -->|"Why?"| B["Because the disk was 100% full"]
     
-    B -->|Why?| C["Because /var/log/messages was 50GB"]
+    B -->|"Why?"| C["Because /var/log/messages was 50GB"]
     
-    C -->|Why?| D["Because logrotate failed to run"]
+    C -->|"Why?"| D["Because logrotate failed to run"]
     
-    D -->|Why?| E["Because the system crond service was stopped"]
+    D -->|"Why?"| E["Because the system crond service was stopped"]
     
-    E -->|Why?| F["Root Cause: An engineer disabled crond during maintenance and forgot to start it!"]
+    E -->|"Why?"| F["Root Cause: An engineer disabled crond during maintenance and forgot to start it!"]
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

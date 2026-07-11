@@ -43,12 +43,12 @@ flowchart TD
     A["User types: ./backup.sh"] --> B["Linux Kernel checks file permissions"]
     
     B --> C{"Is 'x' (Execute) flag set?"}
-    C -->|No| D["Error: Permission Denied"]
+    C -->|"No"| D["Error: Permission Denied"]
     
-    C -->|Yes| E["Kernel reads Line 1 (The Shebang)"]
+    C -->|"Yes"| E["Kernel reads Line 1 (The Shebang)"]
     
-    E -->|#!/bin/bash| F["Kernel launches the Bash Interpreter"]
-    E -.->|#!/usr/bin/python3| G["Kernel launches the Python Interpreter"]
+    E -->|"#!/bin/bash"| F["Kernel launches the Bash Interpreter"]
+    E -.->|"#!/usr/bin/python3"| G["Kernel launches the Python Interpreter"]
     
     F --> H["Bash executes the commands line-by-line"]
     

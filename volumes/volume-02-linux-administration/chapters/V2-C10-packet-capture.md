@@ -40,11 +40,11 @@ When an application breaks, developers often say, "The network is dropping my co
 
 ```mermaid
 flowchart LR
-    A["Developer's Laptop \n (192.168.1.50)"] -->|Sends API Request| B{"The Network"}
+    A["Developer's Laptop \n (192.168.1.50)"] -->|"Sends API Request"| B{"The Network"}
     
-    B -->|Traffic arrives at eth0| C["Linux Server \n (10.0.0.5)"]
+    B -->|"Traffic arrives at eth0"| C["Linux Server \n (10.0.0.5)"]
     
-    C -.->|tcpdump copies the data| D["Terminal Output \n (or .pcap file)"]
+    C -.->|"tcpdump copies the data"| D["Terminal Output \n (or .pcap file)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff

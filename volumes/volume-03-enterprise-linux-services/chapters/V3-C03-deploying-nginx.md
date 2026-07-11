@@ -42,15 +42,15 @@ NGINX was built to solve this. It uses an **Event-Driven** architecture. A singl
 ```mermaid
 flowchart LR
     subgraph Apache
-        A1[User 1] --> B1[Thread 1]
-        A2[User 2] --> B2[Thread 2]
-        A3[User 3] --> B3[Thread 3]
+        A1["User 1"] --> B1["Thread 1"]
+        A2["User 2"] --> B2["Thread 2"]
+        A3["User 3"] --> B3["Thread 3"]
     end
     
     subgraph NGINX
-        N1[User 1] --> X[Single NGINX Worker Process]
-        N2[User 2] --> X
-        N3[User 3] --> X
+        N1["User 1"] --> X["Single NGINX Worker Process"]
+        N2["User 2"] --> X
+        N3["User 3"] --> X
     end
     
     style B1 fill:#d63031,stroke:#ff7675,color:#fff

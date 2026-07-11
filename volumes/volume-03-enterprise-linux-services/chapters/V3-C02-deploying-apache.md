@@ -40,11 +40,11 @@ In the 1990s, one server hosted exactly one website. Today, a single Linux serve
 
 ```mermaid
 flowchart TD
-    A["Client requests \n http://sales.company.com"] -->|Port 80| B{"Apache (httpd)"}
-    C["Client requests \n http://blog.company.com"] -->|Port 80| B
+    A["Client requests \n http://sales.company.com"] -->|"Port 80"| B{"Apache (httpd)"}
+    C["Client requests \n http://blog.company.com"] -->|"Port 80"| B
     
-    B -->|Host: sales| D["/var/www/sales/ \n (Sales HTML)"]
-    B -->|Host: blog| E["/var/www/blog/ \n (Blog HTML)"]
+    B -->|"Host: sales"| D["/var/www/sales/ \n (Sales HTML)"]
+    B -->|"Host: blog"| E["/var/www/blog/ \n (Blog HTML)"]
     
     style B fill:#f39c12,stroke:#f1c40f,color:#000
     style D fill:#0984e3,stroke:#74b9ff,color:#fff

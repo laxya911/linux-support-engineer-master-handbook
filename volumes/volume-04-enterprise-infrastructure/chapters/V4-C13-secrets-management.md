@@ -43,12 +43,12 @@ This is a **Static Secret**. It exists forever until a human manually changes it
 
 ```mermaid
 flowchart TD
-    A["Web Application \n (Needs DB Access)"] -->|1. Authenticates & Requests Secret| B{"HashiCorp Vault \n (Secrets Engine)"}
+    A["Web Application \n (Needs DB Access)"] -->|"1. Authenticates & Requests Secret"| B{"HashiCorp Vault \n (Secrets Engine)"}
     
-    B -->|2. Connects as Root & Generates Temp User| C[(PostgreSQL Database)]
+    B -->|"2. Connects as Root & Generates Temp User"| C["('PostgreSQL Database')"]
     
-    B -.->|3. Returns Temp Username & Password| A
-    A -->|4. Connects directly using Temp Credentials| C
+    B -.->|"3. Returns Temp Username & Password"| A
+    A -->|"4. Connects directly using Temp Credentials"| C
     
     note1["Vault automatically deletes the temporary \n user in Postgres after 60 minutes (TTL)."] -.-> B
     

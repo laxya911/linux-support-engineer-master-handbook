@@ -40,13 +40,13 @@ Historically, every application wrote its own text file into `/var/log`. Today, 
 
 ```mermaid
 flowchart LR
-    A["Nginx Daemon"] -->|stdout / stderr| B["systemd"]
-    C["SSH Daemon"] -->|stdout / stderr| B
-    D["Cron Daemon"] -->|stdout / stderr| B
+    A["Nginx Daemon"] -->|"stdout / stderr"| B["systemd"]
+    C["SSH Daemon"] -->|"stdout / stderr"| B
+    D["Cron Daemon"] -->|"stdout / stderr"| B
     
-    B --> E[("systemd-journald (Binary DB)")]
+    B --> E["('systemd-journald (Binary DB)')"]
     
-    E -.->|Query| F["journalctl -u nginx"]
+    E -.->|"Query"| F["journalctl -u nginx"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#6c5ce7,stroke:#a29bfe,color:#fff

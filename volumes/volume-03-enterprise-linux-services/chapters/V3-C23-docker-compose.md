@@ -44,7 +44,7 @@ flowchart TD
     A["User (Port 80)"] --> B{"Web Container \n (NGINX/PHP)"}
     
     subgraph Docker Internal Network
-        B -->|Database Query \n (Cannot use localhost!)| C[("Database Container \n (MySQL)")]
+        B -->|"Database Query \n (Cannot use localhost!)"| C["('Database Container \n (MySQL)')"]
     end
     
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

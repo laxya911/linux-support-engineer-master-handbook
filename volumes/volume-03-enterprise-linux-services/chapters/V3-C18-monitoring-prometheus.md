@@ -43,11 +43,11 @@ A centralized server running **Prometheus** (a Time-Series Database) reaches out
 ```mermaid
 flowchart LR
     subgraph Database Server
-        A["Hardware \n (CPU, RAM, Disk)"] -->|Read by| B{"node_exporter \n (Port 9100)"}
+        A["Hardware \n (CPU, RAM, Disk)"] -->|"Read by"| B{"node_exporter \n (Port 9100)"}
     end
     
     subgraph Prometheus Server
-        C[("Time-Series \n Database (TSDB)")] <--|Scrapes Port 9100 \n every 15s| B
+        B -->|"Scrapes Port 9100 \n every 15s"| C["Time-Series \n Database (TSDB)"]
     end
     
     style B fill:#f39c12,stroke:#f1c40f,color:#000

@@ -42,13 +42,13 @@ To prevent this, we place a **Caching Service** (like Redis) in front of the dat
 
 ```mermaid
 flowchart TD
-    A["Web Application"] -->|1. Do you have the Top 10 list?| B{"Redis Cache \n (In-Memory)"}
+    A["Web Application"] -->|"1. Do you have the Top 10 list?"| B{"Redis Cache \n (In-Memory)"}
     
-    B -.->|2. Cache Hit! (Instant Return)| A
+    B -.->|"2. Cache Hit! (Instant Return)"| A
     
-    B -->|3. Cache Miss...| C[("MySQL Database \n (Disk)")]
-    C -->|4. Calculate Top 10| A
-    A -->|5. Save to Redis for next time| B
+    B -->|"3. Cache Miss..."| C["('MySQL Database \n (Disk)')"]
+    C -->|"4. Calculate Top 10"| A
+    A -->|"5. Save to Redis for next time"| B
     
     style B fill:#00b894,stroke:#55efc4,color:#000
     style C fill:#0984e3,stroke:#74b9ff,color:#fff

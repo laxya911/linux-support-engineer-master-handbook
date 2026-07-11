@@ -43,19 +43,19 @@ When a Bash script exceeds 100 lines, or when it needs to talk to a REST API, a 
 ```mermaid
 flowchart LR
     subgraph The Bash Zone
-        A[File System Operations]
-        B[Simple Cron Jobs]
-        C[Text Parsing / grep]
+        A["File System Operations"]
+        B["Simple Cron Jobs"]
+        C["Text Parsing / grep"]
     end
     
     subgraph The Python Zone
-        D[REST API Communication]
-        E[Complex JSON Parsing]
-        F[Database Connections]
-        G[AWS/Cloud Automation]
+        D["REST API Communication"]
+        E["Complex JSON Parsing"]
+        F["Database Connections"]
+        G["AWS/Cloud Automation"]
     end
     
-    A -.->|Threshold: >100 Lines| D
+    A -.->|"Threshold: >100 Lines"| D
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

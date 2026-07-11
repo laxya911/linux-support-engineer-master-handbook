@@ -42,12 +42,12 @@ But how do you *prove* your architecture is resilient? If your failover mechanis
 
 ```mermaid
 flowchart TD
-    A[Chaos Agent \n (e.g., Chaos Monkey)] -->|1. Intentionally Kills Pod| B[Primary Web Server Pod]
+    A["Chaos Agent \n (e.g., Chaos Monkey)"] -->|"1. Intentionally Kills Pod"| B["Primary Web Server Pod"]
     
-    B -->|2. Pod Dies (Simulated Disaster)| C{Kubernetes ReplicaSet}
+    B -->|"2. Pod Dies (Simulated Disaster)"| C{"Kubernetes ReplicaSet"}
     
-    C -->|3. Detects Death| D[Spins up new Pod]
-    D -.->|4. Validated!| E[System survives without human intervention]
+    C -->|"3. Detects Death"| D["Spins up new Pod"]
+    D -.->|"4. Validated!"| E["System survives without human intervention"]
     
     note1["If the system breaks, you fix the architecture. \n Never wait for a real disaster to test your limits."] -.-> A
     

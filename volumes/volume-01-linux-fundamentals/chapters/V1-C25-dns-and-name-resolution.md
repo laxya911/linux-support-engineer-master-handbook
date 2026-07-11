@@ -44,9 +44,9 @@ flowchart TD
     
     B --> C{"Match found in /etc/hosts?"}
     
-    C -->|Yes| D["Return IP instantly (Bypasses Internet)"]
+    C -->|"Yes"| D["Return IP instantly (Bypasses Internet)"]
     
-    C -->|No| E["Kernel reads /etc/resolv.conf"]
+    C -->|"No"| E["Kernel reads /etc/resolv.conf"]
     E --> F["Kernel queries upstream DNS (e.g. 8.8.8.8)"]
     F --> G["DNS returns IP address"]
     

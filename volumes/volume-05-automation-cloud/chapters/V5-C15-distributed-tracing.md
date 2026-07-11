@@ -42,12 +42,12 @@ In a modern Kubernetes architecture, a user clicks "Checkout", and the request j
 
 ```mermaid
 flowchart LR
-    A[Customer \n 'Checkout'] -->|Generates Trace: #1234| B(API Gateway \n Span: A)
+    A["Customer \n 'Checkout'"] -->|"Generates Trace: #1234"| B(API Gateway \n Span: A)
     
-    B -->|Passes Trace: #1234| C(Auth Service \n Span: B)
-    B -->|Passes Trace: #1234| D(Billing Service \n Span: C)
+    B -->|"Passes Trace: #1234"| C(Auth Service \n Span: B)
+    B -->|"Passes Trace: #1234"| D(Billing Service \n Span: C)
     
-    D -->|Passes Trace: #1234| E[(Database \n Span: D)]
+    D -->|"Passes Trace: #1234"| E["('Database \n Span: D')"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff

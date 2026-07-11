@@ -41,11 +41,11 @@ A single web server can only handle so much traffic. When a website gets popular
 
 ```mermaid
 flowchart TD
-    A["Customer 1"] -->|Visits shop.com| B{"Nginx Load Balancer"}
-    C["Customer 2"] -->|Visits shop.com| B
+    A["Customer 1"] -->|"Visits shop.com"| B{"Nginx Load Balancer"}
+    C["Customer 2"] -->|"Visits shop.com"| B
     
-    B -->|Routes Customer 1| D["Backend Server A (Node.js)"]
-    B -->|Routes Customer 2| E["Backend Server B (Node.js)"]
+    B -->|"Routes Customer 1"| D["Backend Server A (Node.js)"]
+    B -->|"Routes Customer 2"| E["Backend Server B (Node.js)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style C fill:#f39c12,stroke:#f1c40f,color:#000

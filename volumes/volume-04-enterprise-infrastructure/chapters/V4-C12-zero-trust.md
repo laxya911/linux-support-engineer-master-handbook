@@ -41,16 +41,16 @@ For twenty years, corporate security relied on the "Castle and Moat" model (The 
 
 ```mermaid
 flowchart TD
-    subgraph Traditional VPN (Castle and Moat)
-        A[Hacker on Stolen Laptop] -->|Connects to VPN| B{Corporate Firewall}
-        B -->|Blind Trust| C[Internal HR App]
-        B -->|Blind Trust| D[Internal Database]
+    subgraph Traditional VPN [Castle and Moat]
+        A["Hacker on Stolen Laptop"] -->|"Connects to VPN"| B{"Corporate Firewall"}
+        B -->|"Blind Trust"| C["Internal HR App"]
+        B -->|"Blind Trust"| D["Internal Database"]
     end
     
-    subgraph Zero Trust Architecture (ZTA)
-        E[Hacker on Stolen Laptop] -->|Attempts Access| F[Internal HR App]
-        F -->|Redirects to IdP| G{Identity Provider \n (Okta / Ping)}
-        G -->|Demands MFA & Device Check| H[Access DENIED]
+    subgraph Zero Trust Architecture [ZTA]
+        E["Hacker on Stolen Laptop"] -->|"Attempts Access"| F["Internal HR App"]
+        F -->|"Redirects to IdP"| G{"Identity Provider \n (Okta / Ping)"}
+        G -->|"Demands MFA & Device Check"| H["Access DENIED"]
     end
     
     style B fill:#d63031,stroke:#ff7675,color:#fff

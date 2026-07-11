@@ -41,12 +41,12 @@ Instead, you write an **Ansible Playbook**. A Playbook is a YAML file containing
 
 ```mermaid
 flowchart TD
-    A["ansible-playbook web.yml"] --> B[Task 1: Install NGINX]
-    B --> C[Task 2: Copy index.html]
-    C --> D[Task 3: Ensure NGINX is started]
+    A["ansible-playbook web.yml"] --> B["Task 1: Install NGINX"]
+    B --> C["Task 2: Copy index.html"]
+    C --> D["Task 3: Ensure NGINX is started"]
     
-    D -->|If Task 2 changed a config file...| E[Handler: Restart NGINX]
-    D -->|If nothing changed...| F[Done. Playbook exits.]
+    D -->|"If Task 2 changed a config file..."| E["Handler: Restart NGINX"]
+    D -->|"If nothing changed..."| F["Done. Playbook exits."]
     
     style A fill:#8e44ad,stroke:#9b59b6,color:#fff
     style E fill:#f39c12,stroke:#f1c40f,color:#000

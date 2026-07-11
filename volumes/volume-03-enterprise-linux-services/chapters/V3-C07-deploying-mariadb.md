@@ -41,11 +41,11 @@ Being the `root` Linux user does NOT automatically mean you are the `root` Datab
 
 ```mermaid
 flowchart TD
-    A["Linux 'root' User \n (Can delete /var/lib/mysql/)"] -->|Starts the Daemon| B{"MariaDB Daemon"}
+    A["Linux 'root' User \n (Can delete /var/lib/mysql/)"] -->|"Starts the Daemon"| B{"MariaDB Daemon"}
     
-    C["Database 'root' User \n (Can DROP TABLES)"] -->|Logs into| B
+    C["Database 'root' User \n (Can DROP TABLES)"] -->|"Logs into"| B
     
-    B -->|Authenticates via| D["Internal MySQL User Table"]
+    B -->|"Authenticates via"| D["Internal MySQL User Table"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style C fill:#d63031,stroke:#ff7675,color:#fff

@@ -43,17 +43,17 @@ flowchart TD
     A["User: 'The internet is down!'"] --> B["Step 1: ping Default Gateway"]
     
     B --> C{"Success?"}
-    C -->|No| D["Issue: Local Network/Switch/NIC"]
+    C -->|"No"| D["Issue: Local Network/Switch/NIC"]
     
-    C -->|Yes| E["Step 2: ping 8.8.8.8 (Google DNS)"]
+    C -->|"Yes"| E["Step 2: ping 8.8.8.8 (Google DNS)"]
     E --> F{"Success?"}
-    F -->|No| G["Issue: ISP / External Firewall"]
+    F -->|"No"| G["Issue: ISP / External Firewall"]
     
-    F -->|Yes| H["Step 3: ping google.com"]
+    F -->|"Yes"| H["Step 3: ping google.com"]
     H --> I{"Success?"}
-    I -->|No| J["Issue: DNS Resolution Failure"]
+    I -->|"No"| J["Issue: DNS Resolution Failure"]
     
-    I -->|Yes| K["Network is perfectly fine. The issue is at the application layer."]
+    I -->|"Yes"| K["Network is perfectly fine. The issue is at the application layer."]
     
     style B fill:#0984e3,stroke:#74b9ff,color:#fff
     style E fill:#0984e3,stroke:#74b9ff,color:#fff

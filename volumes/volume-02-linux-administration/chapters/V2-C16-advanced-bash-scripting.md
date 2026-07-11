@@ -42,8 +42,8 @@ A script is just a text file containing a list of commands you would normally ty
 flowchart TD
     A["Start Backup Script"] --> B{"Check: Does /backup exist?"}
     
-    B -->|Yes (Exit Code 0)| C["Execute: tar -czf /backup/data.tar.gz /var/www"]
-    B -->|No (Exit Code 1)| D["Print Error & Exit Immediately"]
+    B -->|"Yes (Exit Code 0)"| C["Execute: tar -czf /backup/data.tar.gz /var/www"]
+    B -->|"No (Exit Code 1)"| D["Print Error & Exit Immediately"]
     
     C --> E["Print Success & Exit"]
     

@@ -41,14 +41,14 @@ In Volume 3, we built an NGINX web server on a Linux VM. That server runs 24/7. 
 
 ```mermaid
 flowchart LR
-    A["Customer \n (Uploads Image)"] -->|Event Trigger| B[(AWS S3 Bucket)]
+    A["Customer \n (Uploads Image)"] -->|"Event Trigger"| B["('AWS S3 Bucket')"]
     
-    B -->|Generates S3 Event| C[AWS SNS Topic]
-    C -->|Fan-out Message| D[AWS SQS Queue]
+    B -->|"Generates S3 Event"| C["AWS SNS Topic"]
+    C -->|"Fan-out Message"| D["AWS SQS Queue"]
     
-    D -->|Triggers Execution| E{"AWS Lambda \n (Python Script)"}
+    D -->|"Triggers Execution"| E{"AWS Lambda \n (Python Script)"}
     
-    E -->|Resizes Image| F[(S3 Destination Bucket)]
+    E -->|"Resizes Image"| F["('S3 Destination Bucket')"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

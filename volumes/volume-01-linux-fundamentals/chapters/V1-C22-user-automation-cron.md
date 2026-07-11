@@ -43,10 +43,10 @@ flowchart TD
     A["System Clock hits 03:00 AM"] --> B["Cron Daemon wakes up"]
     
     B --> C{"Check user 'sarah' crontab"}
-    C -->|Job: '0 3 * * *'| D["Match Found! Execute job"]
+    C -->|"Job: '0 3 * * *'"| D["Match Found! Execute job"]
     
     B --> E{"Check user 'root' crontab"}
-    E -->|Job: '0 5 * * *'| F["No Match. Do nothing."]
+    E -->|"Job: '0 5 * * *'"| F["No Match. Do nothing."]
     
     D --> G["Sleep for 60 seconds..."]
     F --> G

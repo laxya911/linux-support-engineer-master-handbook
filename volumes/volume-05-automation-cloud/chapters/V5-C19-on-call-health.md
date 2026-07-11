@@ -40,15 +40,15 @@ A toxic engineering culture routes every single system hiccup directly to a huma
 
 ```mermaid
 flowchart TD
-    A[Monitoring System \n Generates 1,000 Alerts] --> B{Is a Customer \n Actively Impacted?}
+    A["Monitoring System \n Generates 1,000 Alerts"] --> B{"Is a Customer \n Actively Impacted?"}
     
-    B -->|NO (e.g., Disk at 70%)| C[Route to Slack / Email \n (Review during business hours)]
+    B -->|"NO (e.g., Disk at 70%)"| C["Route to Slack / Email \n (Review during business hours)"]
     
-    B -->|YES (e.g., Website is down)| D{Can a Human \n Fix it Right Now?}
+    B -->|"YES (e.g., Website is down)"| D{"Can a Human \n Fix it Right Now?"}
     
-    D -->|NO (e.g., Global AWS Outage)| E[Automated Tweet to Customers. \n Do NOT wake up the engineer.]
+    D -->|"NO (e.g., Global AWS Outage)"| E["Automated Tweet to Customers. \n Do NOT wake up the engineer."]
     
-    D -->|YES| F[Trigger PagerDuty! \n Wake up the On-Call Engineer!]
+    D -->|"YES"| F["Trigger PagerDuty! \n Wake up the On-Call Engineer!"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style C fill:#00b894,stroke:#55efc4,color:#000

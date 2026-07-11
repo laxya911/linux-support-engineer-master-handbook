@@ -40,15 +40,15 @@ In an enterprise with 500 Linux servers, creating local users via `useradd` on e
 
 ```mermaid
 flowchart LR
-    A["User 'jdoe'"] -->|SSH Login| B["Linux Web Server"]
+    A["User 'jdoe'"] -->|"SSH Login"| B["Linux Web Server"]
     
-    B -->|SSSD Service intercepts| C{"Local Cache Check"}
+    B -->|"SSSD Service intercepts"| C{"Local Cache Check"}
     
-    C -->|Not in cache / Expired| D["Query LDAP over Network"]
+    C -->|"Not in cache / Expired"| D["Query LDAP over Network"]
     
-    D --> E[("Central Authentication Server\n(Active Directory / FreeIPA)")]
+    D --> E["('Central Authentication Server\n(Active Directory / FreeIPA)')"]
     
-    E -->|Returns Group Memberships| B
+    E -->|"Returns Group Memberships"| B
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#00b894,stroke:#55efc4,color:#000

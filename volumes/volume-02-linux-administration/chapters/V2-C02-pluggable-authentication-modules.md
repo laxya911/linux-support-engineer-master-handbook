@@ -43,13 +43,13 @@ PAM solves this. It acts as an interceptor.
 flowchart LR
     A["User types password"] --> B["SSH Service (sshd)"]
     
-    B -->|Asks PAM to verify| C{"PAM Stack (/etc/pam.d/sshd)"}
+    B -->|"Asks PAM to verify"| C{"PAM Stack (/etc/pam.d/sshd)"}
     
-    C -->|Module 1| D["Check /etc/shadow"]
-    C -->|Module 2| E["Check 2FA Token (Google Authenticator)"]
-    C -->|Module 3| F["Check if account is locked (pam_faillock)"]
+    C -->|"Module 1"| D["Check /etc/shadow"]
+    C -->|"Module 2"| E["Check 2FA Token (Google Authenticator)"]
+    C -->|"Module 3"| F["Check if account is locked (pam_faillock)"]
     
-    D & E & F -->|All Pass| G["Access Granted"]
+    D & E & F -->|"All Pass"| G["Access Granted"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#00b894,stroke:#55efc4,color:#000

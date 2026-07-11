@@ -43,9 +43,9 @@ Instead, we install a tiny "forwarder" on all 50 servers. This forwarder watches
 ```mermaid
 flowchart LR
     subgraph 50 Web Servers
-        A[Web 1: Filebeat]
-        B[Web 2: Filebeat]
-        C[Web 3: Filebeat]
+        A["Web 1: Filebeat"]
+        B["Web 2: Filebeat"]
+        C["Web 3: Filebeat"]
     end
     
     subgraph The ELK Stack
@@ -53,7 +53,7 @@ flowchart LR
         B --> D
         C --> D
         
-        D --> E[("Elasticsearch \n (Database)")]
+        D --> E["('Elasticsearch \n (Database)')"]
         
         E --> F["Kibana \n (Web Dashboard)"]
     end

@@ -41,13 +41,13 @@ Ten years ago, when a server crashed, the monitoring system would send an email.
 
 ```mermaid
 flowchart LR
-    A[Python Backup Script \n (Runs on DB Server)] -->|Fails| B{Try/Except Block}
+    A["Python Backup Script \n (Runs on DB Server)"] -->|"Fails"| B{"Try/Except Block"}
     
-    B -->|Generates JSON Payload| C[HTTP POST Request]
+    B -->|"Generates JSON Payload"| C["HTTP POST Request"]
     
-    C -->|Sends Payload over Internet| D[Slack API (Incoming Webhook)]
+    C -->|"Sends Payload over Internet"| D["Slack API (Incoming Webhook)"]
     
-    D -->|Renders Message| E[#database-alerts Channel \n (Engineers are notified instantly!)]
+    D -->|"Renders Message"| E["#database-alerts Channel \n (Engineers are notified instantly!)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

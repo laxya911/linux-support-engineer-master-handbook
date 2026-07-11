@@ -45,11 +45,11 @@ NTP uses a hierarchy of "Stratum" levels.
 
 ```mermaid
 flowchart TD
-    A["Stratum 0 \n (Atomic Clock)"] -->|Hardwired| B{"Stratum 1 \n (Primary Time Server)"}
+    A["Stratum 0 \n (Atomic Clock)"] -->|"Hardwired"| B{"Stratum 1 \n (Primary Time Server)"}
     
-    B -->|NTP Protocol (Internet)| C["Stratum 2 \n (pool.ntp.org)"]
+    B -->|"NTP Protocol (Internet)"| C["Stratum 2 \n (pool.ntp.org)"]
     
-    C -->|NTP Protocol (Port 123)| D["Stratum 3 \n (Your Linux Server)"]
+    C -->|"NTP Protocol (Port 123)"| D["Stratum 3 \n (Your Linux Server)"]
     
     style A fill:#f39c12,stroke:#f1c40f,color:#000
     style D fill:#00b894,stroke:#55efc4,color:#000

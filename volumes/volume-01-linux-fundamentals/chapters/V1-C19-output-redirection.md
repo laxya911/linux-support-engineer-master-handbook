@@ -40,14 +40,14 @@ Every command you run in Linux automatically opens three invisible data streams.
 
 ```mermaid
 flowchart LR
-    A["Keyboard"] -->|stdin (0)| B["Command (e.g. ls)"]
+    A["Keyboard"] -->|"stdin (0)"| B["Command (e.g. ls)"]
     
-    B -->|stdout (1) Normal Output| C{"Terminal Display"}
-    B -->|stderr (2) Errors| C
+    B -->|"stdout (1) Normal Output"| C{"Terminal Display"}
+    B -->|"stderr (2) Errors"| C
     
-    B -.->|'ls > file.txt'| D["file.txt"]
-    B -.->|'ls 2> error.log'| E["error.log"]
-    B -.->|'ls | grep txt'| F["Next Command (grep)"]
+    B -.->|"'ls > file.txt'"| D["file.txt"]
+    B -.->|"'ls 2> error.log'"| E["error.log"]
+    B -.->|"ls | grep txt"| F["Next Command (grep)"]
     
     style B fill:#0984e3,stroke:#74b9ff,color:#fff
     style C fill:#2d3436,stroke:#b2bec3,color:#fff

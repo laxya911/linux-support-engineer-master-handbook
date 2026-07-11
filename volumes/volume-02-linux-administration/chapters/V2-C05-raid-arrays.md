@@ -40,10 +40,10 @@ Hard drives fail. In an enterprise environment, it is not a question of *if* a d
 
 ```mermaid
 flowchart TD
-    A["Linux Operating System"] -->|Writes file 'data.txt'| B{"Software RAID Array (md0)"}
+    A["Linux Operating System"] -->|"Writes file 'data.txt'"| B{"Software RAID Array (md0)"}
     
-    B -->|Exact Copy| C["Hard Drive 1 (sda)"]
-    B -->|Exact Copy| D["Hard Drive 2 (sdb)"]
+    B -->|"Exact Copy"| C["Hard Drive 1 (sda)"]
+    B -->|"Exact Copy"| D["Hard Drive 2 (sdb)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#00b894,stroke:#55efc4,color:#000

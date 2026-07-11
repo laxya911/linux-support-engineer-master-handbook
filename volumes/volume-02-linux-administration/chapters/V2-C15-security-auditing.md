@@ -40,12 +40,12 @@ If `fail2ban` is the security guard at the door, `auditd` is the security camera
 
 ```mermaid
 flowchart TD
-    A["Rogue Administrator \n (UID 1005)"] -->|Types: nano /etc/passwd| B{"Linux Kernel"}
+    A["Rogue Administrator \n (UID 1005)"] -->|"Types: nano /etc/passwd"| B{"Linux Kernel"}
     
-    B -->|Grants Write Access| C["/etc/passwd modified"]
-    B -.->|Triggers 'Watch' Rule| D{"auditd"}
+    B -->|"Grants Write Access"| C["/etc/passwd modified"]
+    B -.->|"Triggers 'Watch' Rule"| D{"auditd"}
     
-    D -->|Writes Forensics| E["/var/log/audit/audit.log \n (UID=1005, CMD=nano)"]
+    D -->|"Writes Forensics"| E["/var/log/audit/audit.log \n (UID=1005, CMD=nano)"]
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

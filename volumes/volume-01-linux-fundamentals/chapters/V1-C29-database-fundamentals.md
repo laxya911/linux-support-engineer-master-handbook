@@ -40,11 +40,11 @@ Databases are the final layer of the modern internet. A user never touches a dat
 
 ```mermaid
 flowchart TD
-    A["User (Browser)"] -->|HTTPS| B["Nginx (Web Tier)"]
+    A["User (Browser)"] -->|"HTTPS"| B["Nginx (Web Tier)"]
     
-    B -->|HTTP| C["Node.js / PHP (App Tier)"]
+    B -->|"HTTP"| C["Node.js / PHP (App Tier)"]
     
-    C -->|MySQL Protocol (Port 3306)| D["MySQL / MariaDB (Database Tier)"]
+    C -->|"MySQL Protocol (Port 3306)"| D["MySQL / MariaDB (Database Tier)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#00b894,stroke:#55efc4,color:#000

@@ -42,21 +42,21 @@ Kubernetes takes this concept further. Because Pods can be scheduled on *any* no
 ```mermaid
 flowchart TD
     subgraph K8s Control Plane
-        A[ConfigMap \n (Non-sensitive Configs)]
-        B[Secret \n (Passwords/Keys)]
+        A["ConfigMap \n (Non-sensitive Configs)"]
+        B["Secret \n (Passwords/Keys)"]
     end
     
     subgraph External Cloud Storage
-        C[AWS EBS Volume \n (PersistentVolume)]
+        C["AWS EBS Volume \n (PersistentVolume)"]
     end
     
     subgraph Ephemeral Pod
-        D[Application Container]
+        D["Application Container"]
     end
     
-    A -->|Mounted as Environment Variables| D
-    B -->|Mounted as Secure File| D
-    C -->|Mounted via PVC to /var/lib/data| D
+    A -->|"Mounted as Environment Variables"| D
+    B -->|"Mounted as Secure File"| D
+    C -->|"Mounted via PVC to /var/lib/data"| D
     
     style A fill:#f39c12,stroke:#f1c40f,color:#000
     style B fill:#d63031,stroke:#ff7675,color:#fff

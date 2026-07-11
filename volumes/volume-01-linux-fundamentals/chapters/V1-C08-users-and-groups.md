@@ -44,7 +44,7 @@ flowchart TD
     A --> C["Secondary Group: developers (GID: 1002)"]
     A --> D["Secondary Group: sudo/wheel (GID: 27/10)"]
     
-    D --> E{{"Grants Administrative (Root) Privileges"}}
+    D --> E{"Grants Administrative (Root) Privileges"}
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#2d3436,stroke:#b2bec3,color:#fff

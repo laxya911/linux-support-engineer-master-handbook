@@ -44,13 +44,13 @@ flowchart TD
     A["Hacker \n (SQL Injection)"] --> B["Vulnerable Web App \n (Using 'root' User)"]
     A --> C["Vulnerable Web App \n (Using 'app_user')"]
     
-    B -->|DROP DATABASE| D[("Financial DB \n (DESTROYED)")]
-    B -->|DROP DATABASE| E[("HR DB \n (DESTROYED)")]
-    B -->|DROP DATABASE| F[("Web DB \n (DESTROYED)")]
+    B -->|"DROP DATABASE"| D["('Financial DB \n (DESTROYED)')"]
+    B -->|"DROP DATABASE"| E["('HR DB \n (DESTROYED)')"]
+    B -->|"DROP DATABASE"| F["('Web DB \n (DESTROYED)')"]
     
-    C -->|DROP DATABASE| G[("Financial DB \n (Access Denied)")]
-    C -->|DROP DATABASE| H[("HR DB \n (Access Denied)")]
-    C -->|DROP DATABASE| I[("Web DB \n (DESTROYED)")]
+    C -->|"DROP DATABASE"| G["('Financial DB \n (Access Denied)')"]
+    C -->|"DROP DATABASE"| H["('HR DB \n (Access Denied)')"]
+    C -->|"DROP DATABASE"| I["('Web DB \n (DESTROYED)')"]
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff

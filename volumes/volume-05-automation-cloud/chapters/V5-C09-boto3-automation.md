@@ -41,13 +41,13 @@ If we want to automate the Cloud reliably, we use **Boto3**. Boto3 is the offici
 
 ```mermaid
 flowchart TD
-    A[Python Script] -->|1. Call: ec2.describe_instances()| B{Boto3 Library}
+    A["Python Script"] -->|"1. Call: ec2.describe_instances()"| B{"Boto3 Library"}
     
-    B -->|2. HTTP GET /?Action=DescribeInstances| C[AWS Cloud (EC2 API)]
+    B -->|"2. HTTP GET /?Action=DescribeInstances"| C["AWS Cloud (EC2 API)"]
     
-    C -.->|3. Returns JSON Payload| B
+    C -.->|"3. Returns JSON Payload"| B
     
-    B -.->|4. Converts JSON to Python Dictionary| A
+    B -.->|"4. Converts JSON to Python Dictionary"| A
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff

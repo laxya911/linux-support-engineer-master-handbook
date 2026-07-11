@@ -43,13 +43,13 @@ flowchart TD
     A["User types: ping google.com"] --> B["Kernel reads $PATH variable"]
     
     B --> C{"Is 'ping' inside /usr/local/bin/?"}
-    C -->|No| D{"Is 'ping' inside /usr/bin/?"}
+    C -->|"No"| D{"Is 'ping' inside /usr/bin/?"}
     
-    D -->|No| E{"Is 'ping' inside /bin/?"}
+    D -->|"No"| E{"Is 'ping' inside /bin/?"}
     
-    E -->|Yes| F["Kernel finds /bin/ping and executes it!"]
+    E -->|"Yes"| F["Kernel finds /bin/ping and executes it!"]
     
-    E -->|No| G["Error: command not found"]
+    E -->|"No"| G["Error: command not found"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style G fill:#d63031,stroke:#ff7675,color:#fff

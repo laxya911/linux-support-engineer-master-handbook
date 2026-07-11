@@ -41,15 +41,15 @@ If you open Port 22 (SSH) in your firewall, anyone in the world can attempt to l
 
 ```mermaid
 flowchart TD
-    A["Malicious Botnet \n (Attempts 5 bad passwords)"] -->|Logs attempt| B{"/var/log/auth.log"}
+    A["Malicious Botnet \n (Attempts 5 bad passwords)"] -->|"Logs attempt"| B{"/var/log/auth.log"}
     
-    C["fail2ban Service"] -->|Continuously reads| B
+    C["fail2ban Service"] -->|"Continuously reads"| B
     
-    C -->|Threshold reached!| D["Command: ufw deny from Botnet_IP"]
+    C -->|"Threshold reached!"| D["Command: ufw deny from Botnet_IP"]
     
-    D -->|Dynamically updates| E["Host Firewall \n (iptables/UFW)"]
+    D -->|"Dynamically updates"| E["Host Firewall \n (iptables/UFW)"]
     
-    E -->|Drops all future traffic| A
+    E -->|"Drops all future traffic"| A
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style C fill:#0984e3,stroke:#74b9ff,color:#fff

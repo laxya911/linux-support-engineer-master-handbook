@@ -41,9 +41,9 @@ To answer this, Senior Engineers look at the raw packets on the wire. TCP (Trans
 
 ```mermaid
 flowchart TD
-    A[Client IP] -->|1. SYN 'Hello, are you there?'| B[Server IP]
-    B -->|2. SYN-ACK 'Yes I am, I acknowledge you.'| A
-    A -->|3. ACK 'Great, I acknowledge your acknowledgment.'| B
+    A["Client IP"] -->|"1. SYN 'Hello, are you there?'"| B["Server IP"]
+    B -->|"2. SYN-ACK 'Yes I am, I acknowledge you.'"| A
+    A -->|"3. ACK 'Great, I acknowledge your acknowledgment.'"| B
     
     note1["If the Firewall blocks Step 1, the connection Times Out. \n If it blocks Step 2, it is Asymmetrical Routing."] -.-> B
     

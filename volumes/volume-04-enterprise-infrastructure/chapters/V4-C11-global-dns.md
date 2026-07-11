@@ -42,13 +42,13 @@ If a hurricane destroys your primary datacenter in Virginia, you cannot wait for
 
 ```mermaid
 flowchart TD
-    A["Customer \n (Requests store.com)"] -->|DNS Query| B{"Global DNS \n (e.g., AWS Route53)"}
+    A["Customer \n (Requests store.com)"] -->|"DNS Query"| B{"Global DNS \n (e.g., AWS Route53)"}
     
-    B -->|Health Check: OK| C[Primary Datacenter \n (us-east-1)]
-    B -.->|Health Check: FAILED \n Reroutes Traffic| D[Backup Datacenter \n (eu-west-1)]
+    B -->|"Health Check: OK"| C["Primary Datacenter \n (us-east-1)"]
+    B -.->|"Health Check: FAILED \n Reroutes Traffic"| D["Backup Datacenter \n (eu-west-1)"]
     
-    E[Route53 Health Check \n (Pings servers every 10 seconds)] -->|Success| C
-    E -->|Timeout/Error| D
+    E["Route53 Health Check \n (Pings servers every 10 seconds)"] -->|"Success"| C
+    E -->|"Timeout/Error"| D
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff

@@ -41,14 +41,14 @@ A Senior Cloud Engineer realizes that **anything with a REST API can be managed 
 
 ```mermaid
 flowchart TD
-    A[main.tf \n 'resource "billing_account"'] -->|1. Runs terraform apply| B(Terraform Core)
+    A["main.tf \n 'resource 'billing_account''"] -->|"1. Runs terraform apply"| B(Terraform Core)
     
-    B -->|2. gRPC Plugin Communication| C{Custom Provider \n (Written in Go)}
+    B -->|"2. gRPC Plugin Communication"| C{"Custom Provider \n (Written in Go)"}
     
-    C -->|3. HTTP POST /accounts| D[Internal Proprietary API]
+    C -->|"3. HTTP POST /accounts"| D["Internal Proprietary API"]
     
-    D -.->|4. Returns 201 Created| C
-    C -.->|5. Saves ID to State File| B
+    D -.->|"4. Returns 201 Created"| C
+    C -.->|"5. Saves ID to State File"| B
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff

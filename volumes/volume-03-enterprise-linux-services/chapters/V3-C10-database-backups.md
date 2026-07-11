@@ -41,13 +41,13 @@ Instead, we use **Logical Backups**. A tool like `mysqldump` talks to the databa
 
 ```mermaid
 flowchart LR
-    A["Database Daemon \n (Running in RAM)"] -->|Translates to SQL text| B{"mysqldump \n pg_dump"}
+    A["Database Daemon \n (Running in RAM)"] -->|"Translates to SQL text"| B{"mysqldump \n pg_dump"}
     
-    B -->|Writes to disk| C["backup_2026.sql \n (Raw Text File)"]
+    B -->|"Writes to disk"| C["backup_2026.sql \n (Raw Text File)"]
     
-    C -.->|If Disaster Strikes| D{"mysql < backup_2026.sql"}
+    C -.->|"If Disaster Strikes"| D{"mysql < backup_2026.sql"}
     
-    D -.->|Restores the Data| A
+    D -.->|"Restores the Data"| A
     
     style A fill:#f39c12,stroke:#f1c40f,color:#000
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

@@ -40,13 +40,13 @@ When you press the power button, Linux does not instantly appear. It hands contr
 
 ```mermaid
 flowchart TD
-    A["1. BIOS / UEFI (Hardware)"] -->|Loads Bootloader| B["2. GRUB (Bootloader)"]
+    A["1. BIOS / UEFI (Hardware)"] -->|"Loads Bootloader"| B["2. GRUB (Bootloader)"]
     
-    B -->|Loads Kernel into RAM| C["3. The Linux Kernel"]
+    B -->|"Loads Kernel into RAM"| C["3. The Linux Kernel"]
     
-    C -->|Starts the first process (PID 1)| D["4. systemd (Init System)"]
+    C -->|"Starts the first process (PID 1)"| D["4. systemd (Init System)"]
     
-    D -->|Mounts drives & starts services| E["Login Prompt"]
+    D -->|"Mounts drives & starts services"| E["Login Prompt"]
     
     style A fill:#2d3436,stroke:#b2bec3,color:#fff
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

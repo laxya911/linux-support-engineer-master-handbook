@@ -39,8 +39,8 @@ A **Symbolic Link** (or symlink) is a special file that acts as a shortcut to an
 
 ```mermaid
 flowchart LR
-    A["Symlink File (e.g., /tmp/shortcut.conf)"] -.->|Points to Path| B["Target File (e.g., /etc/nginx/nginx.conf)"]
-    B --> C[(Hard Drive Inode)]
+    A["Symlink File (e.g., /tmp/shortcut.conf)"] -.->|"Points to Path"| B["Target File (e.g., /etc/nginx/nginx.conf)"]
+    B --> C["('Hard Drive Inode')"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#2d3436,stroke:#b2bec3,color:#fff

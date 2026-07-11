@@ -41,15 +41,15 @@ Senior Engineers do not guess. They use the **OODA Loop**, a cognitive framework
 
 ```mermaid
 flowchart TD
-    A[Alert Fires: 'Server is Slow'] --> B[Observe]
+    A["Alert Fires: 'Server is Slow'"] --> B["Observe"]
     
-    B -->|Gather Data: run 'top', 'dmesg', 'iostat'| C[Orient]
+    B -->|"Gather Data: run 'top', 'dmesg', 'iostat'"| C["Orient"]
     
-    C -->|Form a Hypothesis: 'High I/O Wait indicates disk failure'| D[Decide]
+    C -->|"Form a Hypothesis: 'High I/O Wait indicates disk failure'"| D["Decide"]
     
-    D -->|Formulate a Test: 'Unmount the NFS drive'| E[Act]
+    D -->|"Formulate a Test: 'Unmount the NFS drive'"| E["Act"]
     
-    E -->|Evaluate Result| B
+    E -->|"Evaluate Result"| B
     
     note1["Do not jump from Alert directly to Act!"] -.-> B
     

@@ -40,13 +40,13 @@ In enterprise cloud environments, traffic must pass through two entirely separat
 
 ```mermaid
 flowchart LR
-    A((The Internet)) -->|Port 443| B{"Cloud Firewall \n (AWS Security Group)"}
+    A(("The Internet")) -->|"Port 443"| B{"Cloud Firewall \n (AWS Security Group)"}
     
-    B -->|Allowed| C{"Host Firewall \n (UFW / firewalld)"}
-    B -->|Denied| D["Drop"]
+    B -->|"Allowed"| C{"Host Firewall \n (UFW / firewalld)"}
+    B -->|"Denied"| D["Drop"]
     
-    C -->|Allowed| E["Linux Nginx Server"]
-    C -->|Denied| F["Drop"]
+    C -->|"Allowed"| E["Linux Nginx Server"]
+    C -->|"Denied"| F["Drop"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff

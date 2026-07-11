@@ -44,27 +44,27 @@ Nodes are strictly divided into two roles:
 ```mermaid
 flowchart TD
     subgraph Control Plane
-        A[API Server]
-        B[(etcd Database)]
-        C[Scheduler]
+        A["API Server"]
+        B["('etcd Database')"]
+        C["Scheduler"]
         A <--> B
         A <--> C
     end
     
     subgraph Worker Node 1
-        D[Kubelet]
-        E[Web Container]
+        D["Kubelet"]
+        E["Web Container"]
         D <--> E
     end
 
     subgraph Worker Node 2
-        F[Kubelet]
-        G[Database Container]
+        F["Kubelet"]
+        G["Database Container"]
         F <--> G
     end
     
-    A <-->|Instructions| D
-    A <-->|Instructions| F
+    A <-->|"Instructions"| D
+    A <-->|"Instructions"| F
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

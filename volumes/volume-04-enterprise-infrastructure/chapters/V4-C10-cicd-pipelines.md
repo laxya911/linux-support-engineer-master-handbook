@@ -41,17 +41,17 @@ In Chapter 7, we ran `terraform apply` from our laptop. In Chapter 9, we ran `an
 
 ```mermaid
 flowchart LR
-    A["Engineer \n (git push)"] --> B[GitHub Repository]
+    A["Engineer \n (git push)"] --> B["GitHub Repository"]
     
-    B -->|Triggers Webhook| C{"GitHub Actions \n (CI/CD Runner)"}
+    B -->|"Triggers Webhook"| C{"GitHub Actions \n (CI/CD Runner)"}
     
     subgraph The Pipeline
-        C -->|Step 1| D[Lint / Test Code]
-        C -->|Step 2| E[terraform apply]
-        C -->|Step 3| F[ansible-playbook]
+        C -->|"Step 1"| D["Lint / Test Code"]
+        C -->|"Step 2"| E["terraform apply"]
+        C -->|"Step 3"| F["ansible-playbook"]
     end
     
-    E --> G[(AWS Cloud)]
+    E --> G["('AWS Cloud')"]
     F --> G
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff

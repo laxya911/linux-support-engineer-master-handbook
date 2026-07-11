@@ -41,11 +41,11 @@ Other configuration management tools (like Puppet or Chef) require you to instal
 
 ```mermaid
 flowchart TD
-    A["Ansible Control Node \n (Your Laptop / CI Runner)"] -->|Reads List of Servers| B[("Inventory File \n (inventory.ini)")]
+    A["Ansible Control Node \n (Your Laptop / CI Runner)"] -->|"Reads List of Servers"| B["('Inventory File \n (inventory.ini)')"]
     
-    A -->|SSH Port 22| C[Web Server 1]
-    A -->|SSH Port 22| D[Web Server 2]
-    A -->|SSH Port 22| E[Database Server]
+    A -->|"SSH Port 22"| C["Web Server 1"]
+    A -->|"SSH Port 22"| D["Web Server 2"]
+    A -->|"SSH Port 22"| E["Database Server"]
     
     note1["No agents to install! \n Ansible uses standard SSH keys."] -.-> A
     
@@ -73,7 +73,7 @@ For example, to check the uptime of every web server in your inventory:
 
 ### 3. Ansible Modules
 Ansible doesn't just run raw bash commands. It uses **Modules**. Modules are pre-written Python scripts that abstract away the underlying OS. 
-If you want to install Apache, you don't write `apt-get install apache2` (which would fail on RHEL). You use the `package` module: 
+If you want to install Apache, you don't write `apt install apache2` (which would fail on RHEL). You use the `package` module: 
 `ansible webservers -m package -a "name=apache2 state=present"`
 
 ## Scenario-Based Troubleshooting

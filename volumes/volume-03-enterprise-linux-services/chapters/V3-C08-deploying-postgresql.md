@@ -41,12 +41,12 @@ By default, PostgreSQL uses a security mechanism called **Peer Authentication**.
 
 ```mermaid
 flowchart TD
-    A["Linux User: 'root'"] -->|psql -U postgres| B{"PostgreSQL (pg_hba.conf)"}
+    A["Linux User: 'root'"] -->|"psql -U postgres"| B{"PostgreSQL (pg_hba.conf)"}
     
-    C["Linux User: 'postgres'"] -->|psql -U postgres| B
+    C["Linux User: 'postgres'"] -->|"psql -U postgres"| B
     
-    B -->|Usernames don't match!| D["Connection Rejected"]
-    B -->|Usernames match!| E["Connection Accepted"]
+    B -->|"Usernames don't match!"| D["Connection Rejected"]
+    B -->|"Usernames match!"| E["Connection Accepted"]
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style D fill:#d63031,stroke:#ff7675,color:#fff

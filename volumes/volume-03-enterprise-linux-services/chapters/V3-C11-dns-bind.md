@@ -41,18 +41,18 @@ The Domain Name System (DNS) is a globally distributed database that translates 
 
 ```mermaid
 flowchart TD
-    A["Client Browser \n (Requests company.com)"] -->|1. Query| B{"Local Recursive DNS \n (e.g., 8.8.8.8)"}
+    A["Client Browser \n (Requests company.com)"] -->|"1. Query"| B{"Local Recursive DNS \n (e.g., 8.8.8.8)"}
     
-    B -.->|2. Query| C["Root Name Server (.)"]
-    C -.->|3. Points to .com| B
+    B -.->|"2. Query"| C["Root Name Server (.)"]
+    C -.->|"3. Points to .com"| B
     
-    B -.->|4. Query| D[".com TLD Server"]
-    D -.->|5. Points to company.com| B
+    B -.->|"4. Query"| D[".com TLD Server"]
+    D -.->|"5. Points to company.com"| B
     
-    B -.->|6. Query| E["Authoritative Server \n (BIND9 at company.com)"]
-    E -.->|7. Returns 198.51.100.42| B
+    B -.->|"6. Query"| E["Authoritative Server \n (BIND9 at company.com)"]
+    E -.->|"7. Returns 198.51.100.42"| B
     
-    B -->|8. Returns IP to Client| A
+    B -->|"8. Returns IP to Client"| A
     
     style B fill:#f39c12,stroke:#f1c40f,color:#000
     style E fill:#0984e3,stroke:#74b9ff,color:#fff

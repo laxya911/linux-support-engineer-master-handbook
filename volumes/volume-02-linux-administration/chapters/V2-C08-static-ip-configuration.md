@@ -40,11 +40,11 @@ In modern Ubuntu, you do not edit the network interfaces directly. Instead, you 
 
 ```mermaid
 flowchart TD
-    A["/etc/netplan/01-netcfg.yaml"] -->|netplan apply| B{"Netplan Generator"}
+    A["/etc/netplan/01-netcfg.yaml"] -->|"netplan apply"| B{"Netplan Generator"}
     
-    B -->|Translates YAML to config| C["systemd-networkd \n (Backend Renderer)"]
+    B -->|"Translates YAML to config"| C["systemd-networkd \n (Backend Renderer)"]
     
-    C -->|Applies IP Address| D["Network Interface \n (eth0)"]
+    C -->|"Applies IP Address"| D["Network Interface \n (eth0)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

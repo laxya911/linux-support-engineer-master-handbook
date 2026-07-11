@@ -43,11 +43,11 @@ In Linux, the index card is called an **Inode**.
 flowchart LR
     A["User types: \n cat /var/log/syslog"] --> B{"Kernel asks Filesystem: \n 'Where is syslog?'"}
     
-    B -->|Checks Inode Table| C["Inode #12345 \n Owner: root \n Permissions: 640 \n Block Location: Sector 9"]
+    B -->|"Checks Inode Table"| C["Inode #12345 \n Owner: root \n Permissions: 640 \n Block Location: Sector 9"]
     
-    C -->|Reads physical disk| D[("Hard Drive \n (Sector 9)")]
+    C -->|"Reads physical disk"| D["('Hard Drive \n (Sector 9)')"]
     
-    D -->|Returns text| A
+    D -->|"Returns text"| A
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

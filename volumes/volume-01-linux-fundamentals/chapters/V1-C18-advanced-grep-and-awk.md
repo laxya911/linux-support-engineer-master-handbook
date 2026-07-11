@@ -41,10 +41,10 @@ Think of a log file as a massive spreadsheet. `grep` filters vertically (finding
 flowchart LR
     A["Raw Log File\n192.168.1.5 GET 404\n10.0.0.2 GET 200\n192.168.1.9 GET 404"] --> B
     
-    B["grep '404' (Vertical Filter)"] -->|Keeps only rows with 404| C["Filtered Rows\n192.168.1.5 GET 404\n192.168.1.9 GET 404"]
+    B["grep '404' (Vertical Filter)"] -->|"Keeps only rows with 404"| C["Filtered Rows\n192.168.1.5 GET 404\n192.168.1.9 GET 404"]
     
     C --> D["awk '{print $1}' (Horizontal Filter)"]
-    D -->|Extracts only Column 1| E["Clean Data\n192.168.1.5\n192.168.1.9"]
+    D -->|"Extracts only Column 1"| E["Clean Data\n192.168.1.5\n192.168.1.9"]
     
     style B fill:#d63031,stroke:#ff7675,color:#fff
     style D fill:#0984e3,stroke:#74b9ff,color:#fff

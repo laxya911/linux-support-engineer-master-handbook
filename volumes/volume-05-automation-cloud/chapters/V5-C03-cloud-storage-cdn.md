@@ -41,12 +41,12 @@ Serving large static files (like 4K videos or high-res images) directly from you
 
 ```mermaid
 flowchart TD
-    A[Customer in Sydney] -->|Requests Video| B{CDN Edge Node \n (Sydney, AU)}
+    A["Customer in Sydney"] -->|"Requests Video"| B{"CDN Edge Node \n (Sydney, AU)"}
     
-    B -->|Cache HIT| A
-    B -.->|Cache MISS| C[(S3 Origin Bucket \n Virginia, USA)]
+    B -->|"Cache HIT"| A
+    B -.->|"Cache MISS"| C["('S3 Origin Bucket \n Virginia, USA')"]
     
-    C -.->|Returns Video to Cache| B
+    C -.->|"Returns Video to Cache"| B
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff

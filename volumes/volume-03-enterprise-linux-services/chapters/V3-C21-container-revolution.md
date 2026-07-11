@@ -43,15 +43,15 @@ For a decade, the standard way to deploy applications was using Virtual Machines
 ```mermaid
 flowchart TD
     subgraph Virtual Machines
-        A[Hypervisor]
-        A --> B[VM 1: Ubuntu OS \n App A]
-        A --> C[VM 2: RHEL OS \n App B]
+        A["Hypervisor"]
+        A --> B["VM 1: Ubuntu OS \n App A"]
+        A --> C["VM 2: RHEL OS \n App B"]
     end
     
     subgraph Containers
-        D[Docker Engine]
-        D --> E[Container 1: \n App A + Bins/Libs]
-        D --> F[Container 2: \n App B + Bins/Libs]
+        D["Docker Engine"]
+        D --> E["Container 1: \n App A + Bins/Libs"]
+        D --> F["Container 2: \n App B + Bins/Libs"]
         
         note1["Notice: No Guest OS! \n They share the Host Kernel."] -.-> D
     end
@@ -81,7 +81,7 @@ With containers, the developer does not just hand you the code. They hand you a 
 The engineer logs into the main web server. It is currently hosting the company's critical legacy ERP system, which requires PHP 7.4. 
 
 **The Investigation & Fix:**
-1. The engineer knows that if they run `apt-get upgrade php`, the new marketing app will work, but the legacy ERP system will instantly crash because it is incompatible with PHP 8.1.
+1. The engineer knows that if they run `apt upgrade php`, the new marketing app will work, but the legacy ERP system will instantly crash because it is incompatible with PHP 8.1.
 2. If they don't upgrade PHP, the marketing app cannot be installed. This is a classic Dependency Conflict.
 3. The engineer refuses to touch the host operating system. Instead, they install Docker.
 4. The engineer downloads a container image that contains PHP 8.1 and NGINX. 
@@ -90,7 +90,7 @@ The engineer logs into the main web server. It is currently hosting the company'
 
 > [!IMPORTANT]  
 > **Best Practice: Never Upgrade the Host**  
-> In a modern containerized environment, the Host OS (Ubuntu/RHEL) should be as empty as possible. You should *never* run `apt-get install python3` or `dnf install nginx` on the host. The host's only job is to run the Docker Engine. Everything else must live inside a container.
+> In a modern containerized environment, the Host OS (Ubuntu/RHEL) should be as empty as possible. You should *never* run `apt install python3` or `dnf install nginx` on the host. The host's only job is to run the Docker Engine. Everything else must live inside a container.
 
 ## Hands-on Lab
 

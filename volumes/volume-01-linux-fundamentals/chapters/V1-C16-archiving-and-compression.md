@@ -44,10 +44,10 @@ flowchart LR
     B["file2.txt (10MB)"] --> D
     C["file3.txt (10MB)"] --> D
     
-    D["tar (Archiver)"] -->|Bundles without shrinking| E["archive.tar (30MB)"]
+    D["tar (Archiver)"] -->|"Bundles without shrinking"| E["archive.tar (30MB)"]
     
     E --> F["gzip (Compressor)"]
-    F -->|Mathematically shrinks| G["archive.tar.gz (5MB)"]
+    F -->|"Mathematically shrinks"| G["archive.tar.gz (5MB)"]
     
     style D fill:#2d3436,stroke:#b2bec3,color:#fff
     style E fill:#f39c12,stroke:#f1c40f,color:#000

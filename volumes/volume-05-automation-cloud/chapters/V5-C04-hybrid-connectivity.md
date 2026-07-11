@@ -42,14 +42,14 @@ You cannot send this traffic over the public internet. You must build a secure, 
 ```mermaid
 flowchart LR
     subgraph AWS Cloud
-        A[Web App VPC \n 10.1.0.0/16]
-        B[Database VPC \n 10.2.0.0/16]
-        C{AWS Transit Gateway}
+        A["Web App VPC \n 10.1.0.0/16"]
+        B["Database VPC \n 10.2.0.0/16"]
+        C{"AWS Transit Gateway"}
     end
     
-    subgraph On-Premise Datacenter (Chicago)
-        D{Customer Router}
-        E[Legacy Mainframe \n 192.168.0.0/16]
+    subgraph On-Premise Datacenter [Chicago]
+        D{"Customer Router"}
+        E["Legacy Mainframe \n 192.168.0.0/16"]
     end
     
     A --> C

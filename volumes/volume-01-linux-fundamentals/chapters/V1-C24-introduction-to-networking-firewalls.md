@@ -40,11 +40,11 @@ A modern Linux firewall operates on a "Default Deny" philosophy. Unless you expl
 
 ```mermaid
 flowchart LR
-    A["Hacker on Internet"] -->|Port 3306| B{"Firewall"}
-    C["Customer on Internet"] -->|Port 80| B
+    A["Hacker on Internet"] -->|"Port 3306"| B{"Firewall"}
+    C["Customer on Internet"] -->|"Port 80"| B
     
-    B -->|Match: DENY| D["Dropped!"]
-    B -->|Match: ALLOW| E["Nginx Web Server"]
+    B -->|"Match: DENY"| D["Dropped!"]
+    B -->|"Match: ALLOW"| E["Nginx Web Server"]
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style C fill:#0984e3,stroke:#74b9ff,color:#fff

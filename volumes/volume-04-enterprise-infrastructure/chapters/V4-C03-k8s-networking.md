@@ -41,11 +41,11 @@ To solve this, Kubernetes uses an abstraction called a **Service**. A Service pr
 
 ```mermaid
 flowchart TD
-    A["Frontend Pod \n (Needs the Database)"] -->|Connects to 'db-service'| B{"Service \n (Stable IP: 10.96.0.10)"}
+    A["Frontend Pod \n (Needs the Database)"] -->|"Connects to 'db-service'"| B{"Service \n (Stable IP: 10.96.0.10)"}
     
     subgraph Ephemeral Pods
-        B -->|Round Robin| C[Database Pod 1 \n IP: 192.168.1.5]
-        B -->|Round Robin| D[Database Pod 2 \n IP: 192.168.1.6]
+        B -->|"Round Robin"| C["Database Pod 1 \n IP: 192.168.1.5"]
+        B -->|"Round Robin"| D["Database Pod 2 \n IP: 192.168.1.6"]
     end
     
     note1["If Pod 1 dies and is replaced, \n the Service automatically updates its routing table!"] -.-> B

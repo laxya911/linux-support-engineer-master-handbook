@@ -41,16 +41,16 @@ Your Linux server uses a Mail Transfer Agent (MTA) like Postfix to send mail via
 
 ```mermaid
 flowchart LR
-    A["Linux Server \n (Bash Script)"] -->|Sends via Postfix| B{"SMTP (Port 25)"}
+    A["Linux Server \n (Bash Script)"] -->|"Sends via Postfix"| B{"SMTP (Port 25)"}
     
-    B -->|Connects to| C["Google / Gmail \n (Recipient MTA)"]
+    B -->|"Connects to"| C["Google / Gmail \n (Recipient MTA)"]
     
-    C -.->|Wait! Let me check DNS| D[("DNS: TXT SPF Record")]
+    C -.->|"Wait! Let me check DNS"| D["('DNS: TXT SPF Record')"]
     
-    D -.->|Is Server IP Authorized?| C
+    D -.->|"Is Server IP Authorized?"| C
     
-    C -->|Yes: INBOX| E["User"]
-    C -->|No: SPAM| F["Trash"]
+    C -->|"Yes: INBOX"| E["User"]
+    C -->|"No: SPAM"| F["Trash"]
     
     style B fill:#f39c12,stroke:#f1c40f,color:#000
     style D fill:#0984e3,stroke:#74b9ff,color:#fff

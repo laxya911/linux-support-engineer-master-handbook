@@ -42,11 +42,11 @@ A common point of confusion is the difference between an Image and a Container.
 
 ```mermaid
 flowchart LR
-    A["Dockerfile \n (Source Code)"] -->|docker build| B[("Docker Image \n (The Blueprint)")]
+    A["Dockerfile \n (Source Code)"] -->|"docker build"| B["('Docker Image \n (The Blueprint)')"]
     
-    B -->|docker run| C["Container 1 \n (Running)"]
-    B -->|docker run| D["Container 2 \n (Running)"]
-    B -->|docker run| E["Container 3 \n (Running)"]
+    B -->|"docker run"| C["Container 1 \n (Running)"]
+    B -->|"docker run"| D["Container 2 \n (Running)"]
+    B -->|"docker run"| E["Container 3 \n (Running)"]
     
     style A fill:#f39c12,stroke:#f1c40f,color:#000
     style B fill:#00b894,stroke:#55efc4,color:#000
@@ -58,7 +58,7 @@ flowchart LR
 ### 1. The Dockerfile Anatomy
 To create a custom Image, you write a text file named `Dockerfile` (no extension). 
 * `FROM ubuntu:26.04`: (Mandatory) The Base Image you are building upon.
-* `RUN apt-get install -y nginx`: Executes a bash command during the build process to install software.
+* `RUN apt install -y nginx`: Executes a bash command during the build process to install software.
 * `COPY ./index.html /var/www/html/`: Copies a file from your laptop into the image.
 * `CMD ["nginx", "-g", "daemon off;"]`: The single command the container will execute when it starts. If this command stops, the container dies.
 
@@ -68,7 +68,7 @@ If you run `docker build` a second time, Docker does not rebuild from scratch. I
 
 > [!IMPORTANT]  
 > **Best Practice: The Cache Invalidation Rule**  
-> If Layer 3 changes, Docker invalidates the cache for Layer 3 **AND EVERY LAYER BELOW IT**. Therefore, you must always put commands that change frequently (like `COPY ./code`) at the absolute bottom of the Dockerfile, and commands that change rarely (like `RUN apt-get install`) at the absolute top!
+> If Layer 3 changes, Docker invalidates the cache for Layer 3 **AND EVERY LAYER BELOW IT**. Therefore, you must always put commands that change frequently (like `COPY ./code`) at the absolute bottom of the Dockerfile, and commands that change rarely (like `RUN apt install`) at the absolute top!
 
 ## Scenario-Based Troubleshooting
 
@@ -112,8 +112,8 @@ If you run `docker build` a second time, Docker does not rebuild from scratch. I
 ### Question 2: Explain the purpose of the `CMD` instruction in a Dockerfile.
 * **Target Answer**: "The `CMD` instruction defines the default executable or process that should run when the container starts. A container's entire lifespan is tied to the PID 1 process defined in the `CMD`. If that specific process exits or crashes, the entire container immediately shuts down."
 
-### Question 3: A developer's `docker build` process takes 10 minutes because the `RUN apt-get install` command executes every single time, even when they only modified one line of their HTML code. How do you fix the Dockerfile?
-* **Target Answer**: "The developer has likely placed the `COPY` instruction for their HTML code *above* the `RUN apt-get install` instruction in the Dockerfile. Because Docker caches layers sequentially, changing the HTML code invalidates the cache for the `COPY` layer and every layer beneath it. The fix is to move the `COPY` instruction to the bottom of the Dockerfile so that the static software installation layers can remain cached."
+### Question 3: A developer's `docker build` process takes 10 minutes because the `RUN apt install` command executes every single time, even when they only modified one line of their HTML code. How do you fix the Dockerfile?
+* **Target Answer**: "The developer has likely placed the `COPY` instruction for their HTML code *above* the `RUN apt install` instruction in the Dockerfile. Because Docker caches layers sequentially, changing the HTML code invalidates the cache for the `COPY` layer and every layer beneath it. The fix is to move the `COPY` instruction to the bottom of the Dockerfile so that the static software installation layers can remain cached."
 
 ## Chapter Summary
 

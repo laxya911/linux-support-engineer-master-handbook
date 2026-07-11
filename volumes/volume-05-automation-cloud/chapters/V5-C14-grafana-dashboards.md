@@ -41,13 +41,13 @@ Prometheus is a brilliant database, but its native interface is just a raw query
 
 ```mermaid
 flowchart TD
-    A[(Prometheus DB \n 1.0.0.0/16)] -->|Data Source| B{Grafana Server}
+    A["('Prometheus DB \n 1.0.0.0/16')"] -->|"Data Source"| B{"Grafana Server"}
     
-    B -->|Panel 1 Query| C[Traffic: 15,000 Req/s]
-    B -->|Panel 2 Query| D[Errors: 2%]
-    B -->|Panel 3 Query| E[Latency: p99 150ms]
+    B -->|"Panel 1 Query"| C["Traffic: 15,000 Req/s"]
+    B -->|"Panel 2 Query"| D["Errors: 2%"]
+    B -->|"Panel 3 Query"| E["Latency: p99 150ms"]
     
-    C --> F[Executive Dashboard]
+    C --> F["Executive Dashboard"]
     D --> F
     E --> F
     

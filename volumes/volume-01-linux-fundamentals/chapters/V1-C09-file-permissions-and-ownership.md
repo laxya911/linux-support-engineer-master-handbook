@@ -45,10 +45,10 @@ flowchart TD
     A --> D["Group (r-x)"]
     A --> E["Other (r--)"]
     
-    B -.->|File or Directory| B1("File")
-    C -.->|Owner's Rights| C1("Read, Write, Execute")
-    D -.->|Group's Rights| D1("Read, Execute")
-    E -.->|Everyone Else| E1("Read Only")
+    B -.->|"File or Directory"| B1("File")
+    C -.->|"Owner's Rights"| C1("Read, Write, Execute")
+    D -.->|"Group's Rights"| D1("Read, Execute")
+    E -.->|"Everyone Else"| E1("Read Only")
     
     style A fill:#2d3436,stroke:#b2bec3,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff

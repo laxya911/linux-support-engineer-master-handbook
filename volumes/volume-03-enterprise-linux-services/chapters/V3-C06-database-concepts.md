@@ -41,9 +41,9 @@ A Database is actually a Linux Daemon (a background service) that listens on a s
 
 ```mermaid
 flowchart LR
-    A["Web Application \n (The Client)"] -->|Sends SQL Query| B{"Database Daemon \n (Port 3306)"}
+    A["Web Application \n (The Client)"] -->|"Sends SQL Query"| B{"Database Daemon \n (Port 3306)"}
     
-    B -->|Reads Data| C["/var/lib/mysql/ \n (Raw Binary Files)"]
+    B -->|"Reads Data"| C["/var/lib/mysql/ \n (Raw Binary Files)"]
     
     style B fill:#f39c12,stroke:#f1c40f,color:#000
     style C fill:#0984e3,stroke:#74b9ff,color:#fff

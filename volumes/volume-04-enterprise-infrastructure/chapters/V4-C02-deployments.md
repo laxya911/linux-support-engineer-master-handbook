@@ -46,9 +46,9 @@ In Docker, you manage Containers directly. In Kubernetes, you almost never manag
 flowchart TD
     A["Deployment \n (Version 1.0)"] --> B{"ReplicaSet \n (Desired: 3)"}
     
-    B --> C[Pod 1]
-    B --> D[Pod 2]
-    B --> E[Pod 3]
+    B --> C["Pod 1"]
+    B --> D["Pod 2"]
+    B --> E["Pod 3"]
     
     note1["If Pod 3 dies, the ReplicaSet \n instantly creates Pod 4."] -.-> B
     

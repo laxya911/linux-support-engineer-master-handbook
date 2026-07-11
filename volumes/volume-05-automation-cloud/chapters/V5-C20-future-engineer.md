@@ -43,16 +43,16 @@ Today, the industry is shifting to **Platform Engineering**. Developers do not w
 ```mermaid
 flowchart LR
     subgraph 2005: SysAdmin
-        A[Developer] -->|Throws code \n over the wall| B[SysAdmin \n (Manual Deploy)]
+        A["Developer"] -->|"Throws code \n over the wall"| B["SysAdmin \n (Manual Deploy)"]
     end
     
     subgraph 2015: DevOps
-        C[Developer] <-->|Collaborates on CI/CD| D[Ops Engineer]
+        C["Developer"] <-->|"Collaborates on CI/CD"| D["Ops Engineer"]
     end
     
     subgraph 2025: Platform Engineering
-        E[Developer] -->|Clicks button on Internal Portal| F{Platform API}
-        F -->|Terraform/K8s Auto-Provisioning| G[Cloud Infrastructure]
+        E["Developer"] -->|"Clicks button on Internal Portal"| F{"Platform API"}
+        F -->|"Terraform/K8s Auto-Provisioning"| G["Cloud Infrastructure"]
     end
     
     style B fill:#d63031,stroke:#ff7675,color:#fff

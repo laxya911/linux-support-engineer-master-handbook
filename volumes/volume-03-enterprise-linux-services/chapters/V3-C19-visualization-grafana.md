@@ -41,10 +41,10 @@ In Chapter 18, we proved that looking at raw metrics (`node_memory_MemFree_bytes
 
 ```mermaid
 flowchart LR
-    A[("Prometheus \n (TSDB Database)")] -->|PromQL Queries| B{"Grafana \n (Web Dashboard)"}
+    A["('Prometheus \n (TSDB Database)')"] -->|"PromQL Queries"| B{"Grafana \n (Web Dashboard)"}
     
-    B -->|Generates CPU Graph| C["Support Engineer Monitor"]
-    B -->|Triggers Alert| D["Slack / PagerDuty"]
+    B -->|"Generates CPU Graph"| C["Support Engineer Monitor"]
+    B -->|"Triggers Alert"| D["Slack / PagerDuty"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

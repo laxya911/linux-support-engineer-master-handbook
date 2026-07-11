@@ -41,11 +41,11 @@ To fix this, we place NGINX at the edge of the network. NGINX acts as an invisib
 
 ```mermaid
 flowchart LR
-    A["Hacker / Client \n (Internet)"] -->|Requests Image| B{"NGINX \n (Port 80)"}
-    A -->|Requests API Data| B
+    A["Hacker / Client \n (Internet)"] -->|"Requests Image"| B{"NGINX \n (Port 80)"}
+    A -->|"Requests API Data"| B
     
-    B -->|Serves instantly| C["/var/www/images/ \n (Static Files)"]
-    B -->|proxy_pass| D["Node.js App \n (Localhost:3000)"]
+    B -->|"Serves instantly"| C["/var/www/images/ \n (Static Files)"]
+    B -->|"proxy_pass"| D["Node.js App \n (Localhost:3000)"]
     
     style B fill:#00b894,stroke:#55efc4,color:#000
     style D fill:#f39c12,stroke:#f1c40f,color:#000

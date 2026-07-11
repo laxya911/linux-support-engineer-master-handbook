@@ -41,12 +41,12 @@ LVM solves this by creating an abstract "pool" of storage. You throw hard drives
 
 ```mermaid
 flowchart TD
-    A[Hard Drive 1 \n 50GB] --> C{Volume Group \n 'ubuntu-vg' \n 150GB Pool}
-    B[Hard Drive 2 \n 100GB] --> C
+    A["Hard Drive 1 \n 50GB"] --> C{"Volume Group \n 'ubuntu-vg' \n 150GB Pool"}
+    B["Hard Drive 2 \n 100GB"] --> C
     
-    C -->|Carve out 20GB| D["Logical Volume \n '/' (Root)"]
-    C -->|Carve out 80GB| E["Logical Volume \n '/var' (Databases)"]
-    C -->|50GB Remaining| F["Free Space \n (Ready for emergencies)"]
+    C -->|"Carve out 20GB"| D["Logical Volume \n '/' (Root)"]
+    C -->|"Carve out 80GB"| E["Logical Volume \n '/var' (Databases)"]
+    C -->|"50GB Remaining"| F["Free Space \n (Ready for emergencies)"]
     
     style A fill:#2d3436,stroke:#b2bec3,color:#fff
     style B fill:#2d3436,stroke:#b2bec3,color:#fff

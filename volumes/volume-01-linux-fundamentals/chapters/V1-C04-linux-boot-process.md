@@ -44,11 +44,11 @@ If you do not understand the boot process, you will stare blankly at a black scr
 
 ```mermaid
 flowchart TD
-    A[Power On] --> B[Hardware Phase: BIOS / UEFI]
-    B -->|POST & Hardware Init| C[Bootloader Phase: GRUB2]
-    C -->|Loads Kernel into RAM| D[Kernel & Initramfs Phase]
-    D -->|Extracts drivers & mounts Root FS| E[Init Phase: systemd]
-    E -->|Starts services & reaches target| F[Login Prompt]
+    A["Power On"] --> B["Hardware Phase: BIOS / UEFI"]
+    B -->|"POST & Hardware Init"| C["Bootloader Phase: GRUB2"]
+    C -->|"Loads Kernel into RAM"| D["Kernel & Initramfs Phase"]
+    D -->|"Extracts drivers & mounts Root FS"| E["Init Phase: systemd"]
+    E -->|"Starts services & reaches target"| F["Login Prompt"]
     
     style A fill:#2d3436,stroke:#b2bec3,color:#fff
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

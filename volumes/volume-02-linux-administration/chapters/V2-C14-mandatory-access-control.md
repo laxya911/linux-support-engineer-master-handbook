@@ -42,13 +42,13 @@ The second bouncer is MAC (SELinux or AppArmor). He doesn't care about the owner
 
 ```mermaid
 flowchart LR
-    A["Process \n (Nginx Web Server)"] -->|Requests to read| B{"DAC Bouncer \n (chmod / chown)"}
+    A["Process \n (Nginx Web Server)"] -->|"Requests to read"| B{"DAC Bouncer \n (chmod / chown)"}
     
-    B -->|Permissions OK (777)| C{"MAC Bouncer \n (SELinux)"}
-    B -->|Permissions Denied| E["Access Denied"]
+    B -->|"Permissions OK (777)"| C{"MAC Bouncer \n (SELinux)"}
+    B -->|"Permissions Denied"| E["Access Denied"]
     
-    C -->|Security Context Matches| D["Read /var/www/html/index.html"]
-    C -->|Security Context Fails| F["Access Denied \n (Logged to /var/log/audit)"]
+    C -->|"Security Context Matches"| D["Read /var/www/html/index.html"]
+    C -->|"Security Context Fails"| F["Access Denied \n (Logged to /var/log/audit)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

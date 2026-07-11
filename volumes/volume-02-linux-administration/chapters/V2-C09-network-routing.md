@@ -40,12 +40,12 @@ An IP address gives your server an identity, but it doesn't tell your server how
 
 ```mermaid
 flowchart LR
-    A["Linux Server \n (10.0.0.50)"] -->|Checks Routing Table| B{"Is Destination Local?"}
+    A["Linux Server \n (10.0.0.50)"] -->|"Checks Routing Table"| B{"Is Destination Local?"}
     
-    B -->|Yes (10.0.0.51)| C["Send directly over switch"]
-    B -->|No (8.8.8.8)| D["Send to Default Gateway \n (10.0.0.1)"]
+    B -->|"Yes (10.0.0.51)"| C["Send directly over switch"]
+    B -->|"No (8.8.8.8)"| D["Send to Default Gateway \n (10.0.0.1)"]
     
-    D --> E((The Internet))
+    D --> E(("The Internet"))
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

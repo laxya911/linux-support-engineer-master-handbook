@@ -18,7 +18,7 @@ Helm needs to know where to download Charts from. Bitnami (owned by VMware) main
 
 1. Add the Bitnami repository to your local Helm client:
    `helm repo add bitnami https://charts.bitnami.com/bitnami`
-2. Update your local cache (just like `apt-get update`):
+2. Update your local cache (just like `apt update`):
    `helm repo update`
 3. Search the repository to see if they have an Apache chart:
    `helm search repo bitnami/apache`

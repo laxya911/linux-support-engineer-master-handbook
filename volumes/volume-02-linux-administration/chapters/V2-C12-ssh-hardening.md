@@ -39,11 +39,11 @@ In modern cloud environments, passwords are dead. If a server is accessible via 
 
 ```mermaid
 flowchart LR
-    A["Developer's Laptop"] -->|Holds the 'Private Key' \n (id_ed25519)| B{"The Internet"}
+    A["Developer's Laptop"] -->|"Holds the 'Private Key' \n (id_ed25519)"| B{"The Internet"}
     
-    B -->|Attempts to unlock| C["Linux Server"]
+    B -->|"Attempts to unlock"| C["Linux Server"]
     
-    C -->|Checks the 'Public Key' Padlock \n (~/.ssh/authorized_keys)| D["Access Granted"]
+    C -->|"Checks the 'Public Key' Padlock \n (~/.ssh/authorized_keys)"| D["Access Granted"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff

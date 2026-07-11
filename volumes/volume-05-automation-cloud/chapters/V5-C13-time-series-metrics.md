@@ -43,18 +43,18 @@ Older monitoring systems (like Nagios) rely on the servers "Pushing" their statu
 ```mermaid
 flowchart LR
     subgraph Target Applications
-        A[Web Server \n :9100/metrics]
-        B[Database \n :9100/metrics]
-        C[API Gateway \n :9100/metrics]
+        A["Web Server \n :9100/metrics"]
+        B["Database \n :9100/metrics"]
+        C["API Gateway \n :9100/metrics"]
     end
     
-    D[(Prometheus \n Time-Series DB)]
+    D["('Prometheus \n Time-Series DB')"]
     
-    D -.->|HTTP GET \n (Scrapes every 15s)| A
-    D -.->|HTTP GET \n (Scrapes every 15s)| B
-    D -.->|HTTP GET \n (Scrapes every 15s)| C
+    D -.->|"HTTP GET \n (Scrapes every 15s)"| A
+    D -.->|"HTTP GET \n (Scrapes every 15s)"| B
+    D -.->|"HTTP GET \n (Scrapes every 15s)"| C
     
-    E[PromQL Query \n 'Give me CPU > 90%'] --> D
+    E["PromQL Query \n 'Give me CPU > 90%'"] --> D
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#0984e3,stroke:#74b9ff,color:#fff

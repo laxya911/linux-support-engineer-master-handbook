@@ -41,20 +41,20 @@ Instead, you must use an **Auto Scaling Group (ASG)**. An ASG monitors the healt
 
 ```mermaid
 flowchart TD
-    A[Public Internet] --> B{Application Load Balancer \n (ALB)}
+    A["Public Internet"] --> B{"Application Load Balancer \n (ALB)"}
     
-    B -->|Routes Traffic| C[Target Group]
+    B -->|"Routes Traffic"| C["Target Group"]
     
-    subgraph Auto Scaling Group (ASG)
-        D[EC2 Instance 1 \n (CPU: 85%)]
-        E[EC2 Instance 2 \n (CPU: 88%)]
+    subgraph Auto Scaling Group [ASG]
+        D["EC2 Instance 1 \n (CPU: 85%)"]
+        E["EC2 Instance 2 \n (CPU: 88%)"]
     end
     
     C --> D
     C --> E
     
-    F[CloudWatch Alarm \n (Avg CPU > 80%)] -->|Triggers| G[ASG Scale-Out Policy]
-    G -->|Provisions & Attaches| H[EC2 Instance 3 \n (New!)]
+    F["CloudWatch Alarm \n (Avg CPU > 80%)"] -->|"Triggers"| G["ASG Scale-Out Policy"]
+    G -->|"Provisions & Attaches"| H["EC2 Instance 3 \n (New!)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff

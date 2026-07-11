@@ -40,11 +40,11 @@ How does a $5/month DigitalOcean droplet host 10 different websites on a single 
 
 ```mermaid
 flowchart TD
-    A["User types: apple.com"] -->|Host: apple.com| B["Nginx Web Server (IP: 192.168.1.50)"]
-    C["User types: banana.com"] -->|Host: banana.com| B
+    A["User types: apple.com"] -->|"Host: apple.com"| B["Nginx Web Server (IP: 192.168.1.50)"]
+    C["User types: banana.com"] -->|"Host: banana.com"| B
     
-    B -->|Matches 'apple' Server Block| D["Serve files from /var/www/apple/"]
-    B -->|Matches 'banana' Server Block| E["Serve files from /var/www/banana/"]
+    B -->|"Matches 'apple' Server Block"| D["Serve files from /var/www/apple/"]
+    B -->|"Matches 'banana' Server Block"| E["Serve files from /var/www/banana/"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style C fill:#f39c12,stroke:#f1c40f,color:#000

@@ -40,9 +40,9 @@ If you have three web servers sitting behind a load balancer, they must all serv
 
 ```mermaid
 flowchart TD
-    A[Web Server A \n /mnt/shared_images] -->|NFS Protocol| D[(Central Storage Server \n 10.0.0.50:/export/images)]
-    B[Web Server B \n /mnt/shared_images] -->|NFS Protocol| D
-    C[Web Server C \n /mnt/shared_images] -->|NFS Protocol| D
+    A["Web Server A \n /mnt/shared_images"] -->|"NFS Protocol"| D["('Central Storage Server \n 10.0.0.50:/export/images')"]
+    B["Web Server B \n /mnt/shared_images"] -->|"NFS Protocol"| D
+    C["Web Server C \n /mnt/shared_images"] -->|"NFS Protocol"| D
     
     style A fill:#00b894,stroke:#55efc4,color:#000
     style B fill:#00b894,stroke:#55efc4,color:#000

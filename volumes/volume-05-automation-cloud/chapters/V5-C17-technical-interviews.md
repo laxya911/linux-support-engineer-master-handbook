@@ -41,12 +41,12 @@ The interviewer is looking for the **Troubleshooting Funnel**. They want to see 
 
 ```mermaid
 flowchart TD
-    A[The Prompt: 'The Web Server is Slow'] --> B{Layer 7: Application}
+    A["The Prompt: 'The Web Server is Slow'"] --> B{"Layer 7: Application"}
     
-    B -->|Check NGINX Logs| C{Layer 4: Transport}
-    C -->|Run netstat/ss| D{Layer 3: Network}
-    D -->|Run ping/traceroute| E{Layer 1: Physical}
-    E -->|Run dmesg for Disk I/O| F[Root Cause Found!]
+    B -->|"Check NGINX Logs"| C{"Layer 4: Transport"}
+    C -->|"Run netstat/ss"| D{"Layer 3: Network"}
+    D -->|"Run ping/traceroute"| E{"Layer 1: Physical"}
+    E -->|"Run dmesg for Disk I/O"| F["Root Cause Found!"]
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000
