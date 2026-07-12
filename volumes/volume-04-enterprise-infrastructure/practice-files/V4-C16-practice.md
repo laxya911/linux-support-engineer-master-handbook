@@ -5,6 +5,7 @@ To conceptually design a Troubleshooting Matrix for a complex, multi-tier web ap
 
 ## Assignment 1: The Architecture
 Imagine the following architecture:
+
 1. **User Browser** -> 2. **Cloudflare CDN** -> 3. **AWS Application Load Balancer (ALB)** -> 4. **NGINX Web Server** -> 5. **PostgreSQL Database**
 
 ## Assignment 2: The Incident

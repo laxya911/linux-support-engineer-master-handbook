@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V1-C15
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 19 — Profiling Application Bottlenecks
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Your application is slow, but CPU and RAM look fine. What now? In this chapter, we explore advanced performance profiling using `strace`, `perf`, and flame graphs to uncover hidden bottlenecks.
 
 By the end of this chapter, you will be able to:
 * Define what a System Call (syscall) is.
@@ -43,24 +43,25 @@ When an application is acting strangely (hanging, failing silently, or running s
 ```mermaid
 flowchart TD
     subgraph User Space
-        A["Python Script"]
+        A["Python Script "]
     end
     
     subgraph Kernel Space
-        B["Linux Kernel"]
-        C["File System Driver"]
+        B["Linux Kernel "]
+        C["File System Driver "]
     end
     
-    A -->|"1. openat('/etc/config.json')"| B
+    A -->|"1. openat('/etc/config.json') "| B
     B --> C
-    C -.->|"2. Return: Permission Denied (EACCES)"| B
-    B -.->|"3. Return: -1 EACCES"| A
+    C -.->|"2. Return: Permission Denied (EACCES) "| B
+    B -.->|"3. Return: -1 EACCES "| A
     
     note1["'strace' intercepts and prints Steps 1 and 3 \n to your screen in real-time!"] -.-> A
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000
     style C fill:#00b894,stroke:#55efc4,color:#000
+
 ```
 
 ## Theory & Concepts
@@ -84,14 +85,22 @@ If you want to only see file opens, you filter it: `sudo strace -e trace=openat 
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Infinite Loop
-**The Incident:** A custom Java application is deployed to production. Immediately, the developers complain that the application has "frozen." It is not returning data, and the application log file is completely empty. The junior admin checks `top` and sees the Java process is at 0% CPU and 10% RAM. The junior admin decides to reboot the server, but the issue immediately returns.
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Infinite Loop**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A custom Java application is deployed to production. Immediately, the developers complain that the application has "frozen." It is not returning data, and the application log file is completely empty. The junior admin checks `top` and sees the Java process is at 0% CPU and 10% RAM. The junior admin decides to reboot the server, but the issue immediately returns.
+
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. The Senior Support Engineer logs into the server. They find the PID of the Java application using `ps aux | grep java` (Let's say the PID is 4055).
+
 2. The engineer attaches to the frozen process:
-   `sudo strace -p 4055`
+    `sudo strace -p 4055`
+
 3. **The Observation:** The engineer's screen instantly floods with thousands of repeated lines, scrolling so fast they are unreadable:
-   `openat(AT_FDCWD, "/etc/app/license.key", O_RDONLY) = -1 EACCES (Permission denied)`
+    `openat(AT_FDCWD, "/etc/app/license.key", O_RDONLY) = -1 EACCES (Permission denied)`
 4. **The Hypothesis:** The Java application is stuck in an infinite loop. The developers wrote a bad `while` loop that continuously attempts to read a license file. Because the file has the wrong Linux permissions, the kernel returns `EACCES` (Permission Denied). Instead of logging an error and crashing gracefully, the bad Java code just instantly tries to read the file again, forever. 
 5. **The Resolution:** The engineer does not even need to look at the Java source code. They simply run `sudo chmod 644 /etc/app/license.key`.
 6. The moment the permissions are fixed, the `openat()` syscall succeeds, the infinite loop breaks, and the Java application instantly unfreezes and begins processing data. The engineer tells the developers to fix their terrible error handling in the next sprint.

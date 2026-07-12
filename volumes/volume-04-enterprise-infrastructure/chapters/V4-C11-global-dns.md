@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V2-C09
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 11 — Enterprise DNS & Global Traffic Management
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Routing traffic seamlessly across the globe is a critical enterprise challenge. In this chapter, we explore Global DNS and Anycast, ensuring users always hit the fastest, most reliable datacenter.
 
 By the end of this chapter, you will be able to:
 * Differentiate between standard DNS (Bind9) and Enterprise Anycast DNS (Route53/Cloudflare).
@@ -42,19 +42,20 @@ If a hurricane destroys your primary datacenter in Virginia, you cannot wait for
 
 ```mermaid
 flowchart TD
-    A["Customer \n (Requests store.com)"] -->|"DNS Query"| B{"Global DNS \n (e.g., AWS Route53)"}
+    A["Customer \n (Requests store.com) "] -->|"DNS Query "| B{"Global DNS \n (e.g., AWS Route53) "}
     
-    B -->|"Health Check: OK"| C["Primary Datacenter \n (us-east-1)"]
-    B -.->|"Health Check: FAILED \n Reroutes Traffic"| D["Backup Datacenter \n (eu-west-1)"]
+    B -->|"Health Check: OK "| C["Primary Datacenter \n (us-east-1) "]
+    B -.->|"Health Check: FAILED \n Reroutes Traffic "| D["Backup Datacenter \n (eu-west-1) "]
     
-    E["Route53 Health Check \n (Pings servers every 10 seconds)"] -->|"Success"| C
-    E -->|"Timeout/Error"| D
+    E["Route53 Health Check \n (Pings servers every 10 seconds) "] -->|"Success "| C
+    E -->|"Timeout/Error "| D
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff
     style C fill:#00b894,stroke:#55efc4,color:#000
     style D fill:#f39c12,stroke:#f1c40f,color:#000
     style E fill:#d63031,stroke:#ff7675,color:#fff
+
 ```
 
 ## Theory & Concepts
@@ -73,11 +74,19 @@ Enterprise DNS doesn't just statically return IP addresses. It actively tests th
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Regional Outage
-**The Incident:** It is 3:00 AM on a Sunday. A massive fiber-optic cable is accidentally cut by a construction crew in Virginia, completely severing the AWS `us-east-1` region from the internet. The company's primary application load balancers go completely dark.
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Regional Outage**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** It is 3:00 AM on a Sunday. A massive fiber-optic cable is accidentally cut by a construction crew in Virginia, completely severing the AWS `us-east-1` region from the internet. The company's primary application load balancers go completely dark.
+
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. The Support Engineer is asleep. 
+
 2. At 3:00:10 AM, AWS Route53 attempts its routine health check on the primary load balancer. The request times out.
+
 3. At 3:00:30 AM, Route53 registers three consecutive failures. The Health Check status flips from `HEALTHY` to `UNHEALTHY`.
 4. At 3:00:31 AM, Route53 automatically triggers the **Active-Passive Failover** policy. It instantly alters the global DNS records for `www.company.com`. It stops returning the dead `us-east-1` IP address and begins returning the IP address for the Disaster Recovery datacenter in `eu-west-1` (Ireland).
 5. At 3:01 AM, customers attempting to reach the website are routed to Ireland. The site loads perfectly. 

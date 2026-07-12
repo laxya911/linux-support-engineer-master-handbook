@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: None
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 15 — Incident Response & Security Auditing
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+When a major outage occurs, chaos is your enemy. In this chapter, we outline a structured Incident Response framework, helping you manage communication, triage, and mitigation during critical events.
 
 By the end of this chapter, you will be able to:
 * Define the phases of the Incident Response Lifecycle.
@@ -41,14 +41,15 @@ When this happens, the Senior Support Engineer must follow a strict lifecycle. P
 
 ```mermaid
 flowchart LR
-    A["Preparation"] --> B["Detection & Analysis"]
-    B --> C["Containment"]
-    C --> D["Eradication"]
-    D --> E["Recovery"]
-    E --> F["Post-Incident Activity"]
+    A["Preparation "] --> B["Detection & Analysis "]
+    B --> C["Containment "]
+    C --> D["Eradication "]
+    D --> E["Recovery "]
+    E --> F["Post-Incident Activity "]
     
     style C fill:#d63031,stroke:#ff7675,color:#fff
     style D fill:#f39c12,stroke:#f1c40f,color:#000
+
 ```
 
 ## Theory & Concepts
@@ -68,11 +69,19 @@ To prevent this, enterprises use a **SIEM** (like Splunk or ELK). A small daemon
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Crypto Miner
-**The Incident:** At 4:00 PM, Prometheus triggers a PagerDuty alert: `CPU Usage > 99% for 15 minutes` on a legacy internal file server. 
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Crypto Miner**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** At 4:00 PM, Prometheus triggers a PagerDuty alert: `CPU Usage > 99% for 15 minutes` on a legacy internal file server.
+
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. The Support Engineer SSHes into the server and runs `top`. They see a process named `kthreadd` consuming 100% of the CPU. 
+
 2. The engineer recognizes this as a common disguise for a crypto-mining malware script. 
+
 3. **The Rookie Mistake:** The engineer considers typing `kill -9 <PID>` to stop the miner. They stop themselves. Doing so would tip off the hacker that they have been discovered, and destroy the malicious binary in RAM.
 4. **Containment:** Instead, the engineer logs into the AWS Console and modifies the EC2 Security Group. They remove the `0.0.0.0/0` outbound rule, completely disconnecting the server from the internet. The malware can no longer communicate with its mining pool or exfiltrate data, but it is still running in memory for analysis.
 5. **Detection & Analysis:** The engineer queries the centralized SIEM for logs related to this server over the past 24 hours. They discover that a developer's SSH key was used to log in at 3:15 PM from a Russian IP address. 

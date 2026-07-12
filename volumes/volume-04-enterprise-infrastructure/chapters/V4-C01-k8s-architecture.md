@@ -14,19 +14,19 @@ estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C25
+prerequisites: Volume 3
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 1 — Kubernetes Architecture & The Control Plane
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Kubernetes shifts your focus from individual servers to massive, self-healing clusters. In this chapter, we explore how the Control Plane orchestrates desired state, making application management resilient and automated.
 
 By the end of this chapter, you will be able to:
 * Explain the physical difference between the Control Plane and Worker Nodes.
@@ -38,38 +38,41 @@ By the end of this chapter, you will be able to:
 
 In Volume 3, you managed Docker on a single server. In Kubernetes (often abbreviated as **K8s**), you manage a "Cluster" of many servers (Nodes). 
 Nodes are strictly divided into two roles:
+
 1. **The Control Plane (Master Nodes):** The brain. These servers do not run your application code. They make decisions (like scheduling) and store the state of the cluster.
+
 2. **Worker Nodes:** The muscle. These servers run your actual application containers. 
 
 ```mermaid
 flowchart TD
     subgraph Control Plane
-        A["API Server"]
-        B["('etcd Database')"]
-        C["Scheduler"]
+        A["API Server "]
+        B["('etcd Database') "]
+        C["Scheduler "]
         A <--> B
         A <--> C
     end
     
     subgraph Worker Node 1
-        D["Kubelet"]
-        E["Web Container"]
+        D["Kubelet "]
+        E["Web Container "]
         D <--> E
     end
 
     subgraph Worker Node 2
-        F["Kubelet"]
-        G["Database Container"]
+        F["Kubelet "]
+        G["Database Container "]
         F <--> G
     end
     
-    A <-->|"Instructions"| D
-    A <-->|"Instructions"| F
+    A <-->|"Instructions "| D
+    A <-->|"Instructions "| F
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000
     style D fill:#00b894,stroke:#55efc4,color:#000
     style F fill:#00b894,stroke:#55efc4,color:#000
+
 ```
 
 ## Theory & Concepts
@@ -89,11 +92,32 @@ You do not SSH into Kubernetes servers to start containers. Instead, you sit on 
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Split Brain
-**The Incident:** A company has a Kubernetes cluster with 1 Control Plane node and 3 Worker Nodes. A network switch fails, completely severing the connection between the Control Plane and Worker Node #3. The applications on Worker Node #3 are still running perfectly and serving customer traffic, but the engineer notices something strange when running `kubectl get nodes`. Worker Node #3 says `NotReady`. 
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Split Brain**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A company has a Kubernetes cluster with 1 Control Plane node and 3 Worker Nodes. A network switch fails, completely severing the connection between the Control Plane and Worker Node #3. The applications on Worker Node #3 are still running perfectly and serving customer traffic, but the engineer notices something strange when running `kubectl get nodes`:
+
+
+    > **👨‍🔧 Support Engineer executes:**
+    > ```bash
+    > $ kubectl get nodes
+    > NAME           STATUS     ROLES           AGE   VERSION
+    > control-01     Ready      control-plane   10d   v1.28.0
+    > worker-01      Ready      <none>          10d   v1.28.0
+    > worker-02      Ready      <none>          10d   v1.28.0
+    > worker-03      NotReady   <none>          10d   v1.28.0
+    > ```
+
+
+
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. The Support Engineer understands Kubernetes architecture. `kubectl` talks to the API Server. The API Server talks to the `kubelet` on Worker Node #3.
+
 2. Because the network switch died, the API Server cannot hear the `kubelet`'s heartbeat. After 5 minutes, the Control Plane officially marks Node #3 as "Dead".
+
 3. **The Orchestration Magic:** Because the Control Plane thinks the node is dead, it assumes all the web containers on Node #3 are also dead. The Control Plane immediately tells the Scheduler to spin up replacement containers on Worker Nodes #1 and #2!
 4. The engineer fixes the physical network switch. 
 5. Worker Node #3 re-establishes communication with the API Server. The API Server realizes it now has *too many* web containers running, and gracefully deletes the extras to return the cluster to the desired state. 

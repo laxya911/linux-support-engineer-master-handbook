@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V4-C03
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 4 — Stateful Applications in K8s
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Containers are ephemeral, but databases are forever. In this chapter, we tackle the complexities of StatefulSets and PersistentVolumes, ensuring data survives even when Pods die.
 
 By the end of this chapter, you will be able to:
 * Explain the difference between Stateless and Stateful applications.
@@ -42,26 +42,27 @@ Kubernetes takes this concept further. Because Pods can be scheduled on *any* no
 ```mermaid
 flowchart TD
     subgraph K8s Control Plane
-        A["ConfigMap \n (Non-sensitive Configs)"]
-        B["Secret \n (Passwords/Keys)"]
+        A["ConfigMap \n (Non-sensitive Configs) "]
+        B["Secret \n (Passwords/Keys) "]
     end
     
     subgraph External Cloud Storage
-        C["AWS EBS Volume \n (PersistentVolume)"]
+        C["AWS EBS Volume \n (PersistentVolume) "]
     end
     
     subgraph Ephemeral Pod
-        D["Application Container"]
+        D["Application Container "]
     end
     
-    A -->|"Mounted as Environment Variables"| D
-    B -->|"Mounted as Secure File"| D
-    C -->|"Mounted via PVC to /var/lib/data"| D
+    A -->|"Mounted as Environment Variables "| D
+    B -->|"Mounted as Secure File "| D
+    C -->|"Mounted via PVC to /var/lib/data "| D
     
     style A fill:#f39c12,stroke:#f1c40f,color:#000
     style B fill:#d63031,stroke:#ff7675,color:#fff
     style C fill:#00b894,stroke:#55efc4,color:#000
     style D fill:#0984e3,stroke:#74b9ff,color:#fff
+
 ```
 
 ## Theory & Concepts
@@ -80,24 +81,34 @@ A K8s Secret is exactly like a ConfigMap, but it is meant for sensitive data (AP
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Hardcoded Secret
-**The Incident:** A security auditor is reviewing the company's GitHub repository. They discover that a junior developer committed a file named `database-deployment.yaml`. Inside the file, under the environment variables section, the auditor finds: `DB_PASSWORD: "SuperSecretAdminPassword123"`. 
+
+> [!IMPORTANT]  
+> **Incident Report: The Hardcoded Secret**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A security auditor is reviewing the company's GitHub repository. They discover that a junior developer committed a file named `database-deployment.yaml`. Inside the file, under the environment variables section, the auditor finds: `DB_PASSWORD: "SuperSecretAdminPassword123"`. 
 This is a massive security violation. Anyone with read access to the GitHub repository now has the production database password.
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. The Support Engineer (You) is tasked with fixing the vulnerability.
+
 2. The engineer immediately rotates the database password.
+
 3. The engineer removes the hardcoded password from the `database-deployment.yaml` file. 
 4. The engineer creates a Kubernetes Secret object directly in the cluster:
-   `kubectl create secret generic db-passwords --from-literal=DB_PASSWORD='NewSecurePassword456'`
+    `kubectl create secret generic db-passwords --from-literal=DB_PASSWORD='NewSecurePassword456'`
 5. The engineer modifies the `database-deployment.yaml` file to reference the Secret, rather than hardcoding it:
-   ```yaml
-   env:
+
+    ```yaml
+    env:
      - name: DB_PASSWORD
        valueFrom:
          secretKeyRef:
            name: db-passwords
            key: DB_PASSWORD
-   ```
+
+    ```
 6. **The Result:** The YAML file in GitHub is now completely safe. It simply tells Kubernetes, "Go find the Secret named `db-passwords` and inject it." The actual password lives securely inside the encrypted `etcd` database of the Kubernetes Control Plane.
 
 > [!CAUTION]  

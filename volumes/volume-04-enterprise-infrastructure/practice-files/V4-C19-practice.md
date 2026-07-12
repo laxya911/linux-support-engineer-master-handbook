@@ -8,8 +8,10 @@ We all know the `cat` command prints a file to the screen. But what does it *act
 
 1. Ensure `strace` is installed (it usually is on Ubuntu/RHEL):
    `sudo apt install strace` or `sudo dnf install strace`
+
 2. Run the `cat` command through `strace` to read a harmless file like `/etc/hostname`:
    `strace cat /etc/hostname`
+
 3. **Observation:** You will see about 30 lines of output before it actually prints the hostname! Don't panic, let's break it down.
    * The first 20 lines are `execve()`, `mmap()`, and `openat()`. This is the Linux kernel loading the `cat` binary into memory and loading all the required C libraries.
    * Look near the bottom. You will see `openat(AT_FDCWD, "/etc/hostname", O_RDONLY) = 3`. The kernel successfully opened the file and assigned it File Descriptor number 3.
@@ -21,8 +23,10 @@ Now let's see what it looks like when something goes wrong.
 
 1. Create a secret file:
    `echo "My Secret Data" > secret.txt`
+
 2. Change the permissions so that absolutely nobody has access to it:
    `chmod 000 secret.txt`
+
 3. Attempt to `cat` the file through `strace`, but we will filter it to ONLY show `openat` syscalls so the output is cleaner:
    `strace -e trace=openat cat secret.txt`
 4. **Analysis:** The output will be very short. Look at the final line:

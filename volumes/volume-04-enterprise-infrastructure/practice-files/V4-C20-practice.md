@@ -7,7 +7,9 @@ To theoretically calculate and evaluate Disaster Recovery metrics (RTO and RPO) 
 You are the Lead Engineer for a major e-commerce platform that processes $100,000 in sales every hour. 
 
 The CEO provides you with the following business requirements for a disaster scenario (e.g., the primary datacenter burns to the ground):
+
 1. "We cannot afford to be offline for more than 4 hours, or the brand damage will be permanent."
+
 2. "We cannot afford to lose more than 15 minutes of customer order data."
 
 ## Assignment 2: Metric Translation
@@ -15,6 +17,7 @@ Translate the CEO's requirements into technical DR metrics.
 
 1. **What is the RTO (Recovery Time Objective)?**
    * *Answer:* 4 Hours. You have exactly 4 hours to provision new servers, restore the database, and update the DNS records.
+
 2. **What is the RPO (Recovery Point Objective)?**
    * *Answer:* 15 Minutes.
 
@@ -30,10 +33,13 @@ Based on the metrics above, evaluate the following two proposed architectures.
 * The database asynchronously replicates every single transaction to a read-replica in a backup region with a 5-second delay.
 
 **Analysis:**
+
 1. Does Architecture A meet the RTO? 
    * *No. The RTO is 4 hours, but manual provisioning takes 6 hours.*
+
 2. Does Architecture A meet the RPO?
    * *No. The RPO is 15 minutes, but backups only happen every 24 hours. If the datacenter burns down at 11:59 PM, you lose 23 hours and 59 minutes of orders!*
+
 3. Does Architecture B meet the RTO and RPO?
    * *Yes. The Terraform deployment (15 mins) is well under the 4-hour RTO. The database replication delay (5 seconds) is well under the 15-minute RPO.*
 

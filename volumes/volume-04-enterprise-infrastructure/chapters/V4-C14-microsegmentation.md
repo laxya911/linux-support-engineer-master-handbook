@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V4-C03
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 14 — Network Policies & Microsegmentation
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+If an attacker breaches a web server, they shouldn't have unrestricted access to the database. In this chapter, we use Microsegmentation to strictly limit lateral movement within your networks.
 
 By the end of this chapter, you will be able to:
 * Define North-South vs East-West traffic.
@@ -43,24 +43,25 @@ This is dangerous. If a hacker compromises Server A, they use that trusted inter
 ```mermaid
 flowchart TD
     subgraph The Internet [North]
-        A["Hacker"]
+        A["Hacker "]
     end
     
     subgraph Corporate Network [South]
-        B["Compromised Web Server"]
-        C["HR Database"]
-        D["Payroll Database"]
+        B["Compromised Web Server "]
+        C["HR Database "]
+        D["Payroll Database "]
     end
     
-    A -->|"Hacks via Vulnerability"| B
+    A -->|"Hacks via Vulnerability "| B
     
-    B -.-x|"Blocked by Microsegmentation"| C
-    B -.-x|"Blocked by Microsegmentation"| D
+    B -.-x|"Blocked by Microsegmentation "| C
+    B -.-x|"Blocked by Microsegmentation "| D
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff
     style C fill:#00b894,stroke:#55efc4,color:#000
     style D fill:#00b894,stroke:#55efc4,color:#000
+
 ```
 
 ## Theory & Concepts
@@ -79,12 +80,20 @@ Then, you surgically write "Allow" policies to punch microscopic holes in the fi
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Lateral Movement
-**The Incident:** A company runs a WordPress blog and a highly secure Payroll application in the same Kubernetes cluster. A hacker finds an unpatched plugin on the WordPress blog, executes a Remote Code Execution (RCE) exploit, and gains a root shell inside the WordPress container. 
+
+> [!IMPORTANT]  
+> **Incident Report: The Lateral Movement**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A company runs a WordPress blog and a highly secure Payroll application in the same Kubernetes cluster. A hacker finds an unpatched plugin on the WordPress blog, executes a Remote Code Execution (RCE) exploit, and gains a root shell inside the WordPress container. 
 The hacker downloads `nmap` and begins scanning the internal cluster network to see what else they can find. They discover the IP address of the Payroll Postgres database and attempt to connect to it.
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. **The Flat Network Outcome:** The Postgres database accepts the TCP connection. The hacker brute-forces the password, dumps the Payroll tables, and steals the data.
+
 2. **The Microsegmentation Outcome:** The Support Engineer had previously implemented a Kubernetes `NetworkPolicy` on the Payroll database. 
+
 3. The hacker attempts to `curl` or `telnet` to the Postgres port. 
 4. The connection simply hangs, and eventually times out. 
 5. **The Orchestration Magic:** The Calico CNI plugin running on the Worker Node intercepts the packet. It sees that the packet came from a Pod labeled `app: wordpress`. It checks the Payroll NetworkPolicy, which states: `allow ingress from app: payroll-api`. Because the labels do not match, the Linux Kernel instantly drops the TCP packet.

@@ -10,6 +10,7 @@ Helm is a binary CLI tool, exactly like `kubectl`. It runs on your laptop, not i
    `curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3`
    `chmod 700 get_helm.sh`
    `./get_helm.sh`
+
 2. Verify the installation:
    `helm version`
 
@@ -18,8 +19,10 @@ Helm needs to know where to download Charts from. Bitnami (owned by VMware) main
 
 1. Add the Bitnami repository to your local Helm client:
    `helm repo add bitnami https://charts.bitnami.com/bitnami`
+
 2. Update your local cache (just like `apt update`):
    `helm repo update`
+
 3. Search the repository to see if they have an Apache chart:
    `helm search repo bitnami/apache`
 4. **Observation:** You should see the chart listed in the search results!
@@ -29,8 +32,10 @@ Let's deploy the entire Apache stack. We will name our specific installation (Re
 
 1. Ensure your local cluster is running:
    `minikube start`
+
 2. Install the Chart:
    `helm install my-web-server bitnami/apache`
+
 3. **Observation:** Helm will instantly output a summary of what it deployed.
 4. Verify what Helm actually created in your Kubernetes cluster:
    `kubectl get deployments`
@@ -43,6 +48,7 @@ Uninstalling a massive architecture is just as easy as installing it.
 
 1. Tell Helm to uninstall the Release:
    `helm uninstall my-web-server`
+
 2. Verify the cluster is clean:
    `kubectl get pods`
 

@@ -8,42 +8,45 @@ We can combine multiple Kubernetes resources into a single YAML file by separati
 
 1. Start your local cluster if it isn't running:
    `minikube start`
+
 2. Create a new file:
    `nano my-network-stack.yaml`
+
 3. Paste the following configuration:
-   ```yaml
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-     name: web-backend
-   spec:
-     replicas: 2
-     selector:
-       matchLabels:
-         app: nginx-backend
-     template:
-       metadata:
-         labels:
-           app: nginx-backend
-       spec:
-         containers:
-         - name: nginx
-           image: nginx:alpine
-           ports:
-           - containerPort: 80
-   ---
-   apiVersion: v1
-   kind: Service
-   metadata:
-     name: backend-service
-   spec:
-     type: ClusterIP
-     selector:
-       app: nginx-backend
-     ports:
-       - port: 8080
-         targetPort: 80
-   ```
+
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: web-backend
+    spec:
+      replicas: 2
+      selector:
+        matchLabels:
+          app: nginx-backend
+      template:
+        metadata:
+          labels:
+            app: nginx-backend
+        spec:
+          containers:
+          - name: nginx
+            image: nginx:alpine
+            ports:
+            - containerPort: 80
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: backend-service
+    spec:
+      type: ClusterIP
+      selector:
+        app: nginx-backend
+      ports:
+        - port: 8080
+          targetPort: 80
+    ```
 4. Save and exit (`Ctrl+O`, `Enter`, `Ctrl+X`).
 
 ## Assignment 2: Execution
@@ -51,8 +54,10 @@ Notice in the file above, the Service `selector` exactly matches the Deployment 
 
 1. Apply the manifest:
    `kubectl apply -f my-network-stack.yaml`
+
 2. Verify the Service was created:
    `kubectl get svc`
+
 3. **Observation:** You will see `backend-service` of type `ClusterIP` with an internal IP address (e.g., `10.96.x.x`). Because it is ClusterIP, you *cannot* reach it from your laptop browser.
 
 ## Assignment 3: Internal DNS Proving
@@ -60,7 +65,9 @@ Let's pretend we are a different application inside the cluster trying to reach 
 
 1. Run an interactive, disposable pod:
    `kubectl run test-pod -it --rm --image=alpine -- sh`
+
 2. **Observation:** Your prompt has changed. You are now inside a pod in the Kubernetes cluster.
+
 3. Inside the pod, install the `curl` utility:
    `apk add --no-cache curl`
 4. Now, attempt to reach the NGINX backend using the exact name of the Service we created, on the Service's port (8080):
@@ -70,6 +77,7 @@ Let's pretend we are a different application inside the cluster trying to reach 
    `exit`
 
 ## Assignment 4: Cleanup
+
 1. Delete the Deployment and Service:
    `kubectl delete -f my-network-stack.yaml`
 

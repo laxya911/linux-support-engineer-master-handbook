@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V2-C07
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 18 — Advanced Network Packet Analysis
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+When applications blame the network, packet captures are the ultimate source of truth. In this chapter, we dive into `tcpdump` and Wireshark to diagnose latency, drops, and complex protocol failures.
 
 By the end of this chapter, you will be able to:
 * Diagram the TCP 3-Way Handshake.
@@ -41,7 +41,7 @@ To answer this, Senior Engineers look at the raw packets on the wire. TCP (Trans
 
 ```mermaid
 flowchart TD
-    A["Client IP"] -->|"1. SYN 'Hello, are you there?'"| B["Server IP"]
+    A["Client IP "] -->|"1. SYN 'Hello, are you there?'"| B["Server IP "]
     B -->|"2. SYN-ACK 'Yes I am, I acknowledge you.'"| A
     A -->|"3. ACK 'Great, I acknowledge your acknowledgment.'"| B
     
@@ -49,6 +49,7 @@ flowchart TD
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#00b894,stroke:#55efc4,color:#000
+
 ```
 
 ## Theory & Concepts
@@ -67,13 +68,21 @@ Reading raw hex dumps in the terminal is difficult. Engineers use `tcpdump` to c
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Silent Drop
-**The Incident:** A web application in the AWS Cloud needs to connect to an on-premise mainframe over a Corporate VPN tunnel. The developer says, "My app is getting a Connection Timeout." The Network Team says, "The VPN firewall is completely open. The problem is your application." 
+
+> [!IMPORTANT]  
+> **Incident Report: The Silent Drop**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A web application in the AWS Cloud needs to connect to an on-premise mainframe over a Corporate VPN tunnel. The developer says, "My app is getting a Connection Timeout." The Network Team says, "The VPN firewall is completely open. The problem is your application." 
 The two teams argue for three hours.
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. The Senior Support Engineer steps in to mediate. They know that "Connection Timeout" means the 3-Way Handshake is failing.
+
 2. The engineer SSHes into the AWS Web Server and runs:
-   `sudo tcpdump -i eth0 host 10.0.5.50` (The IP of the mainframe).
+    `sudo tcpdump -i eth0 host 10.0.5.50` (The IP of the mainframe).
+
 3. The engineer tells the developer to trigger the connection.
 4. **The Observation:** In the `tcpdump` output, the engineer sees the Web Server sending a `SYN` packet to the mainframe. A millisecond later, they see a `SYN-ACK` packet return from the mainframe. But the Web Server never sends the final `ACK`. Instead, it re-transmits the `SYN` packet!
 5. **The Hypothesis:** Why would the Web Server ignore the `SYN-ACK`? The engineer checks the routing table (`ip route`). 

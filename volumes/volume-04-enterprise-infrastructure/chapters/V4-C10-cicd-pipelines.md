@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V4-C09
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 10 — CI/CD Pipelines
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Code deployment should be boring and predictable. In this chapter, we build CI/CD pipelines, demonstrating how to automate testing and deployment to eliminate human error from releases.
 
 By the end of this chapter, you will be able to:
 * Define Continuous Integration (CI) and Continuous Deployment (CD).
@@ -41,22 +41,23 @@ In Chapter 7, we ran `terraform apply` from our laptop. In Chapter 9, we ran `an
 
 ```mermaid
 flowchart LR
-    A["Engineer \n (git push)"] --> B["GitHub Repository"]
+    A["Engineer \n (git push) "] --> B["GitHub Repository "]
     
-    B -->|"Triggers Webhook"| C{"GitHub Actions \n (CI/CD Runner)"}
+    B -->|"Triggers Webhook "| C{"GitHub Actions \n (CI/CD Runner) "}
     
     subgraph The Pipeline
-        C -->|"Step 1"| D["Lint / Test Code"]
-        C -->|"Step 2"| E["terraform apply"]
-        C -->|"Step 3"| F["ansible-playbook"]
+        C -->|"Step 1 "| D["Lint / Test Code "]
+        C -->|"Step 2 "| E["terraform apply "]
+        C -->|"Step 3 "| F["ansible-playbook "]
     end
     
-    E --> G["('AWS Cloud')"]
+    E --> G["('AWS Cloud') "]
     F --> G
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style C fill:#8e44ad,stroke:#9b59b6,color:#fff
     style G fill:#f39c12,stroke:#f1c40f,color:#000
+
 ```
 
 ## Theory & Concepts
@@ -73,12 +74,20 @@ A Runner is an ephemeral worker machine (usually a Docker container) managed by 
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Laptop Bottleneck
-**The Incident:** The Lead DevOps Engineer goes on a two-week vacation to a cabin with no internet access. On Wednesday, the marketing team demands an urgent update to the production web servers. The junior engineers try to run the Ansible playbook, but it fails. The SSH keys required to access the production servers only exist on the Lead Engineer's physical laptop. 
+
+> [!IMPORTANT]  
+> **Incident Report: The Laptop Bottleneck**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** The Lead DevOps Engineer goes on a two-week vacation to a cabin with no internet access. On Wednesday, the marketing team demands an urgent update to the production web servers. The junior engineers try to run the Ansible playbook, but it fails. The SSH keys required to access the production servers only exist on the Lead Engineer's physical laptop. 
 All deployments come to a complete halt for two weeks.
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. When the Lead Engineer returns, they realize that local execution creates a massive Single Point of Failure (themselves).
+
 2. They migrate all Terraform and Ansible code into a GitHub repository.
+
 3. They create a `.github/workflows/deploy.yml` file defining a CI/CD pipeline.
 4. They store the AWS API keys and the Production SSH keys as highly encrypted **GitHub Secrets**.
 5. **The New Workflow:** A junior engineer wants to update the web servers. They modify the Ansible playbook locally and create a Pull Request in GitHub.

@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V4-C02
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 3 — Kubernetes Networking
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Without networking, a cluster is just a group of isolated containers. In this chapter, we unravel the magic of Services and Ingress, showing how external traffic securely reaches your internal Pods.
 
 By the end of this chapter, you will be able to:
 * Explain why Pod IP addresses should never be hardcoded.
@@ -41,11 +41,11 @@ To solve this, Kubernetes uses an abstraction called a **Service**. A Service pr
 
 ```mermaid
 flowchart TD
-    A["Frontend Pod \n (Needs the Database)"] -->|"Connects to 'db-service'"| B{"Service \n (Stable IP: 10.96.0.10)"}
+    A["Frontend Pod \n (Needs the Database) "] -->|"Connects to 'db-service'"| B{"Service \n (Stable IP: 10.96.0.10) "}
     
     subgraph Ephemeral Pods
-        B -->|"Round Robin"| C["Database Pod 1 \n IP: 192.168.1.5"]
-        B -->|"Round Robin"| D["Database Pod 2 \n IP: 192.168.1.6"]
+        B -->|"Round Robin "| C["Database Pod 1 \n IP: 192.168.1.5 "]
+        B -->|"Round Robin "| D["Database Pod 2 \n IP: 192.168.1.6 "]
     end
     
     note1["If Pod 1 dies and is replaced, \n the Service automatically updates its routing table!"] -.-> B
@@ -54,6 +54,7 @@ flowchart TD
     style B fill:#f39c12,stroke:#f1c40f,color:#000
     style C fill:#00b894,stroke:#55efc4,color:#000
     style D fill:#00b894,stroke:#55efc4,color:#000
+
 ```
 
 ## Theory & Concepts
@@ -75,12 +76,20 @@ An **Ingress** operates at Layer 7 (HTTP). It allows you to buy exactly *one* Lo
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The IP Shuffle
-**The Incident:** A junior developer deploys a Python Backend and a Redis Cache into the Kubernetes cluster. The Python Backend works fine for three days. Suddenly, the backend crashes with a `Connection Refused` error when trying to reach Redis. 
+
+> [!IMPORTANT]  
+> **Incident Report: The IP Shuffle**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A junior developer deploys a Python Backend and a Redis Cache into the Kubernetes cluster. The Python Backend works fine for three days. Suddenly, the backend crashes with a `Connection Refused` error when trying to reach Redis. 
 The junior developer is confused: "I checked the Redis Pod, and it is perfectly healthy and running!"
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
+
 1. The Support Engineer looks at the Python code. The developer hardcoded the Redis connection string as `redis://192.168.1.45:6379`.
+
 2. The engineer checks the cluster logs. Two hours ago, the physical server hosting the Redis Pod was rebooted for kernel patching.
+
 3. When the node rebooted, the ReplicaSet spun the Redis Pod up on a different node. Its new IP address is `192.168.2.100`. 
 4. The engineer explains the concept of "Ephemerality". You cannot trust a Pod IP. 
 5. The engineer writes a `service.yaml` file of type `ClusterIP` for the Redis deployment, naming it `redis-cache-svc`.

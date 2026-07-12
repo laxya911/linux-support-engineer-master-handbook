@@ -8,18 +8,21 @@ We want to lock down our entire `production` namespace so that no Pods can talk 
 
 1. Open a new file:
    `nano default-deny.yaml`
+
 2. Write the theoretical YAML. Notice that the `podSelector` is completely empty `{}`. This means "select ALL pods in this namespace". 
-   ```yaml
-   apiVersion: networking.k8s.io/v1
-   kind: NetworkPolicy
-   metadata:
-     name: default-deny-ingress
-     namespace: production
-   spec:
-     podSelector: {}
-     policyTypes:
-     - Ingress
-   ```
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      name: default-deny-ingress
+      namespace: production
+    spec:
+      podSelector: {}
+      policyTypes:
+      - Ingress
+    ```
+
 3. **Analysis:** Because we defined `Ingress` in `policyTypes`, but we did not provide an `ingress` rule block allowing traffic, this policy drops 100% of incoming TCP/UDP traffic to every single pod in the `production` namespace.
 
 ## Assignment 2: The Surgical Whitelist
@@ -27,28 +30,31 @@ Now that the database is completely isolated (and broken), we need to write a se
 
 1. Open a new file:
    `nano allow-db-traffic.yaml`
+
 2. Write the theoretical YAML. 
-   ```yaml
-   apiVersion: networking.k8s.io/v1
-   kind: NetworkPolicy
-   metadata:
-     name: allow-api-to-db
-     namespace: production
-   spec:
-     podSelector:
-       matchLabels:
-         app: postgres-database
-     policyTypes:
-     - Ingress
-     ingress:
-     - from:
-       - podSelector:
-           matchLabels:
-             app: backend-api
-       ports:
-       - protocol: TCP
-         port: 5432
-   ```
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      name: allow-api-to-db
+      namespace: production
+    spec:
+      podSelector:
+        matchLabels:
+          app: postgres-database
+      policyTypes:
+      - Ingress
+      ingress:
+      - from:
+        - podSelector:
+            matchLabels:
+              app: backend-api
+        ports:
+        - protocol: TCP
+          port: 5432
+    ```
+
 3. **Analysis:** Let's break this down line by line.
    * `podSelector: matchLabels: app: postgres-database`: This tells Kubernetes to apply this firewall rule ONLY to the database pods.
    * `ingress: - from: podSelector: matchLabels: app: backend-api`: This is the whitelisting rule. It says "Allow incoming traffic, but ONLY if the traffic originates from a Pod that has the label `app: backend-api`."
