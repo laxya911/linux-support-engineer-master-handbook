@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V4-C01
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 13 — Time-Series Databases & Metrics
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+You cannot manage what you do not measure. In this chapter, we dive deep into Time-Series Metrics, defining what data actually matters when alerting a sleeping engineer at 3:00 AM.
 
 By the end of this chapter, you will be able to:
 * Explain the difference between Relational and Time-Series data.
@@ -43,16 +43,16 @@ Older monitoring systems (like Nagios) rely on the servers "Pushing" their statu
 ```mermaid
 flowchart LR
     subgraph Target Applications
-        A["Web Server \n :9100/metrics"]
-        B["Database \n :9100/metrics"]
-        C["API Gateway \n :9100/metrics"]
+        A["Web Server \n :9100/metrics "]
+        B["Database \n :9100/metrics "]
+        C["API Gateway \n :9100/metrics "]
     end
     
-    D["('Prometheus \n Time-Series DB')"]
+    D["('Prometheus \n Time-Series DB') "]
     
-    D -.->|"HTTP GET \n (Scrapes every 15s)"| A
-    D -.->|"HTTP GET \n (Scrapes every 15s)"| B
-    D -.->|"HTTP GET \n (Scrapes every 15s)"| C
+    D -.->|"HTTP GET \n (Scrapes every 15s) "| A
+    D -.->|"HTTP GET \n (Scrapes every 15s) "| B
+    D -.->|"HTTP GET \n (Scrapes every 15s) "| C
     
     E["PromQL Query \n 'Give me CPU > 90%'"] --> D
     
@@ -82,10 +82,15 @@ To extract data from the TSDB, you use PromQL. It is highly mathematical.
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Silent Metric Drop
-**The Incident:** A company uses Prometheus to monitor their Kubernetes cluster. The SRE team has an alert configured: "If average CPU across the cluster drops below 5%, send an alert, because it means no customers are using the site."
+
+> [!IMPORTANT]  
+> **Incident Report: The Silent Metric Drop**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A company uses Prometheus to monitor their Kubernetes cluster. The SRE team has an alert configured: "If average CPU across the cluster drops below 5%, send an alert, because it means no customers are using the site."
 At 4:00 PM, traffic is normal. However, the SRE team receives a catastrophic alert that CPU is at 0%. They frantically check the website; it is perfectly healthy and processing thousands of orders.
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The SRE queries PromQL: `node_cpu_seconds_total`. 
 2. **The Observation:** The graph shows healthy CPU usage until exactly 4:00 PM, at which point the line simply vanishes. It doesn't go to zero; the data stops existing entirely.
 3. **The Analysis:** The SRE checks the Prometheus 'Targets' page. All the targets are marked `DOWN` with the error `context deadline exceeded (Timeout)`. 

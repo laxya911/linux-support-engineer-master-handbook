@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V2-C02
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 6 — Advanced Bash Scripting
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Manual administration doesn't scale past ten servers. In this chapter, we push Bash scripting to its absolute limits, building robust, self-healing automation tools for massive fleets.
 
 By the end of this chapter, you will be able to:
 * Use `set -e` and `set -o pipefail` for strict error handling.
@@ -41,15 +41,15 @@ In Volume 2, you learned basic Bash commands to navigate the filesystem and read
 
 ```mermaid
 flowchart TD
-    A["Cron Job \n (Triggers Script at 3:00 AM)"] --> B{"Strict Error Handling \n 'set -e'"}
+    A["Cron Job \n (Triggers Script at 3:00 AM) "] --> B{"Strict Error Handling \n 'set -e'"}
     
-    B --> C["Step 1: Mount Backup Drive"]
-    C -->|"Success"| D["Step 2: Dump Database"]
-    C -.->|"Failure (e.g. Drive Offline)"| E["Script Exits Immediately"]
+    B --> C["Step 1: Mount Backup Drive "]
+    C -->|"Success "| D["Step 2: Dump Database "]
+    C -.->|"Failure (e.g. Drive Offline) "| E["Script Exits Immediately "]
     
-    E --> F["Send Alert to Slack"]
+    E --> F["Send Alert to Slack "]
     
-    D --> G["Step 3: Unmount Drive"]
+    D --> G["Step 3: Unmount Drive "]
     
     note1["Without 'set -e', the script would fail Step 1, \n but blindly continue to Step 2, dumping the DB \n into the root filesystem and crashing the server!"] -.-> C
     
@@ -79,16 +79,21 @@ Instead of writing a script that specifically backs up the `/var/www` directory,
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Silent Catastrophe
-**The Incident:** A junior admin writes a nightly backup script:
+
+> [!IMPORTANT]  
+> **Incident Report: The Silent Catastrophe**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A junior admin writes a nightly backup script:
 ```bash
 #!/bin/bash
 cd /mnt/backup_drive
 rm -rf old_backups/*
 cp -r /var/lib/mysql /mnt/backup_drive/new_backups/
 ```
-The script runs as root via Cron. One night, the `/mnt/backup_drive` network share fails to mount. The next morning, the primary server is completely dead. 
+The script runs as root via Cron. One night, the `/mnt/backup_drive` network share fails to mount. The next morning, the primary server is completely dead.
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior Engineer investigates the outage. The server's primary hard drive is completely full. 
 2. **The Analysis:** The engineer looks at the script. Because the network drive failed to mount, the `cd /mnt/backup_drive` command failed. 
 3. Because the junior admin did not use `set -e`, Bash simply printed "No such file or directory" to the invisible Cron log, and then immediately executed the next line: `rm -rf old_backups/*`. (Since the `cd` failed, it ran this in the root directory!).

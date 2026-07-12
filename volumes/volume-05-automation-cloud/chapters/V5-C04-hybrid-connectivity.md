@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V1-C24
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 4 — Hybrid Cloud Connectivity
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+The enterprise is rarely 100% cloud. In this chapter, we bridge the gap between legacy on-premises datacenters and the cloud using VPNs and Direct Connect, creating seamless Hybrid architectures.
 
 By the end of this chapter, you will be able to:
 * Define a Hybrid Cloud architecture.
@@ -42,14 +42,14 @@ You cannot send this traffic over the public internet. You must build a secure, 
 ```mermaid
 flowchart LR
     subgraph AWS Cloud
-        A["Web App VPC \n 10.1.0.0/16"]
-        B["Database VPC \n 10.2.0.0/16"]
-        C{"AWS Transit Gateway"}
+        A["Web App VPC \n 10.1.0.0/16 "]
+        B["Database VPC \n 10.2.0.0/16 "]
+        C{"AWS Transit Gateway "}
     end
     
     subgraph On-Premise Datacenter [Chicago]
-        D{"Customer Router"}
-        E["Legacy Mainframe \n 192.168.0.0/16"]
+        D{"Customer Router "}
+        E["Legacy Mainframe \n 192.168.0.0/16 "]
     end
     
     A --> C
@@ -81,9 +81,14 @@ To manage all the routing tables automatically, the Transit Gateway uses **BGP (
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Overlapping Subnet
-**The Incident:** A company acquires a smaller competitor. They want to connect the competitor's on-premise datacenter to the corporate AWS Transit Gateway via a Site-to-Site VPN. The network team successfully establishes the VPN tunnel. The IPSec status shows "UP". However, when the AWS web servers try to ping the competitor's internal servers, the packets just disappear. 
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Overlapping Subnet**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A company acquires a smaller competitor. They want to connect the competitor's on-premise datacenter to the corporate AWS Transit Gateway via a Site-to-Site VPN. The network team successfully establishes the VPN tunnel. The IPSec status shows "UP". However, when the AWS web servers try to ping the competitor's internal servers, the packets just disappear.
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior Cloud Engineer is called in. They verify the VPN tunnel is healthy. The encryption is working.
 2. The engineer checks the AWS VPC subnet: `10.0.0.0/16`.
 3. The engineer asks the competitor's network team what their on-premise subnet is. The answer: `10.0.0.0/16`.

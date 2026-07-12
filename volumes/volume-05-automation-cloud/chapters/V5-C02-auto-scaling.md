@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V4-C03
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 2 — Auto-Scaling & Load Distribution
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+When a viral marketing campaign hits, a static fleet of servers will crash. In this chapter, we explore Auto Scaling, dynamically spinning up and destroying compute resources based on real-time demand.
 
 By the end of this chapter, you will be able to:
 * Define an Auto Scaling Group (ASG).
@@ -41,20 +41,20 @@ Instead, you must use an **Auto Scaling Group (ASG)**. An ASG monitors the healt
 
 ```mermaid
 flowchart TD
-    A["Public Internet"] --> B{"Application Load Balancer \n (ALB)"}
+    A["Public Internet "] --> B{"Application Load Balancer \n (ALB) "}
     
-    B -->|"Routes Traffic"| C["Target Group"]
+    B -->|"Routes Traffic "| C["Target Group "]
     
     subgraph Auto Scaling Group [ASG]
-        D["EC2 Instance 1 \n (CPU: 85%)"]
-        E["EC2 Instance 2 \n (CPU: 88%)"]
+        D["EC2 Instance 1 \n (CPU: 85%) "]
+        E["EC2 Instance 2 \n (CPU: 88%) "]
     end
     
     C --> D
     C --> E
     
-    F["CloudWatch Alarm \n (Avg CPU > 80%)"] -->|"Triggers"| G["ASG Scale-Out Policy"]
-    G -->|"Provisions & Attaches"| H["EC2 Instance 3 \n (New!)"]
+    F["CloudWatch Alarm \n (Avg CPU > 80%) "] -->|"Triggers "| G["ASG Scale-Out Policy "]
+    G -->|"Provisions & Attaches "| H["EC2 Instance 3 \n (New!) "]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff
@@ -79,9 +79,14 @@ When the ASG provisions a new EC2 instance, the Load Balancer does not immediate
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Viral Tweet
-**The Incident:** A marketing startup runs a monolithic Ruby on Rails application on a single EC2 instance. At 9:00 PM on a Friday, a famous influencer tweets a link to their product. Traffic spikes 5000%. The EC2 instance CPU hits 100%, and the website crashes with a `504 Gateway Timeout`. The CEO is furious about lost sales.
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Viral Tweet**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A marketing startup runs a monolithic Ruby on Rails application on a single EC2 instance. At 9:00 PM on a Friday, a famous influencer tweets a link to their product. Traffic spikes 5000%. The EC2 instance CPU hits 100%, and the website crashes with a `504 Gateway Timeout`. The CEO is furious about lost sales.
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior Cloud Engineer analyzes the failure. The application was a Single Point of Failure (SPOF) with no elasticity.
 2. **The Redesign:** The engineer creates an Application Load Balancer (ALB) and places it in front of the application.
 3. They create a Launch Template containing the Ruby on Rails configuration.

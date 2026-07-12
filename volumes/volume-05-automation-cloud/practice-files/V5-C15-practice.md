@@ -7,37 +7,38 @@ To conceptually analyze the JSON structure of a Distributed Trace Span, understa
 When an OpenTelemetry SDK (running inside a Java or Python application) generates a Span, it eventually ships a JSON object to the backend (like Jaeger).
 
 1. **Review this theoretical OpenTelemetry Span JSON:**
-   ```json
-   {
-     "traceId": "4bf92f3577b34da6a3ce929d0e0e4736",
-     "spanId": "00f067aa0ba902b7",
-     "parentSpanId": "5e2c34a1bc8f921d",
-     "name": "SELECT user_profiles",
-     "kind": "SPAN_KIND_CLIENT",
-     "startTimeUnixNano": 1698765432000000000,
-     "endTimeUnixNano": 1698765432150000000,
-     "attributes": [
-       {
-         "key": "http.method",
-         "value": {
-           "stringValue": "GET"
-         }
-       },
-       {
-         "key": "db.system",
-         "value": {
-           "stringValue": "postgresql"
-         }
-       },
-       {
-         "key": "db.statement",
-         "value": {
-           "stringValue": "SELECT * FROM user_profiles WHERE id = 1234"
-         }
-       }
-     ]
-   }
-   ```
+
+    ```json
+    {
+      "traceId": "4bf92f3577b34da6a3ce929d0e0e4736",
+      "spanId": "00f067aa0ba902b7",
+      "parentSpanId": "5e2c34a1bc8f921d",
+      "name": "SELECT user_profiles",
+      "kind": "SPAN_KIND_CLIENT",
+      "startTimeUnixNano": 1698765432000000000,
+      "endTimeUnixNano": 1698765432150000000,
+      "attributes": [
+        {
+          "key": "http.method",
+          "value": {
+            "stringValue": "GET"
+          }
+        },
+        {
+          "key": "db.system",
+          "value": {
+            "stringValue": "postgresql"
+          }
+        },
+        {
+          "key": "db.statement",
+          "value": {
+            "stringValue": "SELECT * FROM user_profiles WHERE id = 1234"
+          }
+        }
+      ]
+    }
+    ```
 
 2. **Analysis of the Identifiers:**
    * `"traceId"`: The globally unique ID for the entire customer transaction. If you search this ID in Jaeger, you will see the whole waterfall graph.

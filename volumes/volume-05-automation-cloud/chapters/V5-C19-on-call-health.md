@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V5-C12
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 19 — On-Call Mental Health & Alert Fatigue
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Burnout destroys more engineering careers than technical incompetence. In this chapter, we address the human element of operations, structuring on-call rotations that protect mental health and reduce fatigue.
 
 By the end of this chapter, you will be able to:
 * Define "Alert Fatigue" and its devastating impact on operations.
@@ -40,15 +40,15 @@ A toxic engineering culture routes every single system hiccup directly to a huma
 
 ```mermaid
 flowchart TD
-    A["Monitoring System \n Generates 1,000 Alerts"] --> B{"Is a Customer \n Actively Impacted?"}
+    A["Monitoring System \n Generates 1,000 Alerts "] --> B{"Is a Customer \n Actively Impacted?"}
     
-    B -->|"NO (e.g., Disk at 70%)"| C["Route to Slack / Email \n (Review during business hours)"]
+    B -->|"NO (e.g., Disk at 70%) "| C["Route to Slack / Email \n (Review during business hours) "]
     
-    B -->|"YES (e.g., Website is down)"| D{"Can a Human \n Fix it Right Now?"}
+    B -->|"YES (e.g., Website is down) "| D{"Can a Human \n Fix it Right Now?"}
     
-    D -->|"NO (e.g., Global AWS Outage)"| E["Automated Tweet to Customers. \n Do NOT wake up the engineer."]
+    D -->|"NO (e.g., Global AWS Outage) "| E["Automated Tweet to Customers. \n Do NOT wake up the engineer."]
     
-    D -->|"YES"| F["Trigger PagerDuty! \n Wake up the On-Call Engineer!"]
+    D -->|"YES "| F["Trigger PagerDuty! \n Wake up the On-Call Engineer!"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style C fill:#00b894,stroke:#55efc4,color:#000
@@ -75,10 +75,15 @@ You fix the system, not the human. If you fire Bob, you just wasted the $100,000
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Hero Complex
-**The Incident:** A mid-level SysAdmin named Sarah is brilliant. She knows the infrastructure better than anyone. Because she wants to prove her value, she volunteers to be on-call 24/7. For six months, she saves the company from dozens of outages. The CEO calls her a "Hero."
-In month seven, Sarah makes a minor typo in a firewall rule and accidentally takes the entire production network offline for 4 hours. She bursts into tears and quits the company the next day. 
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Hero Complex**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A mid-level SysAdmin named Sarah is brilliant. She knows the infrastructure better than anyone. Because she wants to prove her value, she volunteers to be on-call 24/7. For six months, she saves the company from dozens of outages. The CEO calls her a "Hero."
+In month seven, Sarah makes a minor typo in a firewall rule and accidentally takes the entire production network offline for 4 hours. She bursts into tears and quits the company the next day.
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The incoming Lead SRE reviews the incident. 
 2. **The Analysis:** The CEO blames Sarah for the typo. The SRE blames the CEO for creating a toxic "Hero Culture". 
 3. The SRE explains that Sarah was suffering from severe burnout. Working 24/7 on-call destroys cognitive function. A tired engineer will always make a catastrophic typo eventually.

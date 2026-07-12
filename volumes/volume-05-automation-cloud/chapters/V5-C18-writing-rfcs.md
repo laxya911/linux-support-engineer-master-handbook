@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V5-C16
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 18 — Writing Technical Documentation & RFCs
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+The best code in the world is useless if nobody agrees on how it should work. In this chapter, we write technical RFCs (Request for Comments), mastering the art of engineering persuasion and design documentation.
 
 By the end of this chapter, you will be able to:
 * Understand why writing is the most important skill for a Staff/Principal Engineer.
@@ -42,10 +42,10 @@ If a Senior Engineer writes a brilliant Python script, and then writes a one-pag
 
 ```mermaid
 flowchart LR
-    A["Junior Engineer"] -->|"Writes Code"| B["Impact: Localized (1x)"]
+    A["Junior Engineer "] -->|"Writes Code "| B["Impact: Localized (1x) "]
     
-    C["Senior Engineer"] -->|"Writes Code"| D["Writes Documentation"]
-    D -->|"Teaches Others"| E["Impact: Organizational (50x)"]
+    C["Senior Engineer "] -->|"Writes Code "| D["Writes Documentation "]
+    D -->|"Teaches Others "| E["Impact: Organizational (50x) "]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000
@@ -72,10 +72,15 @@ When you write an RFC, other engineers will leave comments pointing out flaws in
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Failed Migration
-**The Incident:** A mid-level engineer realizes the company's Jenkins CI/CD pipeline is outdated. Over the weekend, they work 20 hours to migrate the entire build system to GitHub Actions. On Monday morning, they proudly announce the switch. 
+
+> [!IMPORTANT]  
+> **Incident Report: The Failed Migration**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A mid-level engineer realizes the company's Jenkins CI/CD pipeline is outdated. Over the weekend, they work 20 hours to migrate the entire build system to GitHub Actions. On Monday morning, they proudly announce the switch. 
 Immediately, the QA team revolts because their automated testing plugins don't work in GitHub Actions. The Security team halts the deployment because GitHub Actions hasn't passed compliance auditing. The migration is rolled back, and the engineer's 20 hours of work are thrown in the trash. The engineer is furious.
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Staff Engineer pulls the frustrated mid-level engineer aside. 
 2. **The Analysis:** "Your code was brilliant, but your methodology failed. You attempted a massive organizational shift without gathering consensus. You surprised people."
 3. **The Resolution:** The Staff Engineer teaches them how to write an RFC. 

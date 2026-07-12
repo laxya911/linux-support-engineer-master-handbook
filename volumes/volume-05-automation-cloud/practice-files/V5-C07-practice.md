@@ -7,27 +7,29 @@ To write a Python script that bridges the gap between Python and Linux by using 
 We want to check if the root filesystem `/` is full, but we want to do the math and alerting in Python.
 
 1. Open a new file: `nano disk_monitor.py`
+
 2. Write the following code to run `df -h /`:
-   ```python
-   #!/usr/bin/env python3
-   import subprocess
-   import sys
 
-   # 1. Define the command as a list (for security)
-   command = ["df", "-h", "/"]
+    ```python
+    #!/usr/bin/env python3
+    import subprocess
+    import sys
 
-   # 2. Execute the command and capture the output
-   try:
-       result = subprocess.run(
-           command, 
-           capture_output=True, # We want to capture the text, not just print it to the screen
-           text=True,           # Decode the bytes into a string
-           check=True           # Throw a Python Exception if the command fails (e.g. invalid path)
-       )
-   except subprocess.CalledProcessError as e:
-       print(f"Error executing command: {e}")
-       sys.exit(1)
-   ```
+    # 1. Define the command as a list (for security)
+    command = ["df", "-h", "/"]
+
+    # 2. Execute the command and capture the output
+    try:
+        result = subprocess.run(
+            command, 
+            capture_output=True, # We want to capture the text, not just print it to the screen
+            text=True,           # Decode the bytes into a string
+            check=True           # Throw a Python Exception if the command fails (e.g. invalid path)
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing command: {e}")
+        sys.exit(1)
+    ```
 
 ## Assignment 2: Parsing the Output
 The `result.stdout` variable now contains the raw text output of the `df` command. It looks like this:
@@ -38,35 +40,39 @@ Filesystem      Size  Used Avail Use% Mounted on
 We need to extract the "75%".
 
 1. Append the parsing logic to your script:
-   ```python
-   # 3. Get the raw text
-   raw_output = result.stdout
 
-   # 4. Split the text into lines, and grab the second line (index 1)
-   data_line = raw_output.strip().split('\n')[1]
+    ```python
+    # 3. Get the raw text
+    raw_output = result.stdout
 
-   # 5. Split that line by spaces, and grab the 5th column (index 4)
-   # data_line.split() automatically handles multiple spaces!
-   usage_string = data_line.split()[4] 
+    # 4. Split the text into lines, and grab the second line (index 1)
+    data_line = raw_output.strip().split('\n')[1]
 
-   # 6. Remove the '%' sign and convert to an Integer
-   usage_percent = int(usage_string.replace('%', ''))
+    # 5. Split that line by spaces, and grab the 5th column (index 4)
+    # data_line.split() automatically handles multiple spaces!
+    usage_string = data_line.split()[4] 
 
-   print(f"Current Root Disk Usage: {usage_percent}%")
+    # 6. Remove the '%' sign and convert to an Integer
+    usage_percent = int(usage_string.replace('%', ''))
 
-   # 7. Alerting Logic
-   if usage_percent > 90:
-       print("CRITICAL: Disk space is critically low!")
-       # (Theoretical) Here you would use the 'requests' module to send a Slack alert
-       sys.exit(2)
-   else:
-       print("OK: Disk space is healthy.")
-       sys.exit(0)
-   ```
+    print(f"Current Root Disk Usage: {usage_percent}%")
+
+    # 7. Alerting Logic
+    if usage_percent > 90:
+        print("CRITICAL: Disk space is critically low!")
+        # (Theoretical) Here you would use the 'requests' module to send a Slack alert
+        sys.exit(2)
+    else:
+        print("OK: Disk space is healthy.")
+        sys.exit(0)
+    ```
 
 ## Assignment 3: Theoretical Execution
+
 1. You run `python3 disk_monitor.py`.
+
 2. Python reaches out to the Linux kernel and asks it to execute `/bin/df -h /`.
+
 3. Linux executes it and returns the text to Python.
 4. Python splits the text into arrays, grabs the specific word, strips the `%` sign, and turns it into a mathematical Integer.
 5. Python evaluates `if 75 > 90`, prints "OK", and exits with status 0.

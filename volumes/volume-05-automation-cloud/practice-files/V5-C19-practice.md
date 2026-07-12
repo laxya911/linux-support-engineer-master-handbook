@@ -17,6 +17,7 @@ If a traditional IT manager wrote the post-mortem, it would look like this:
 Write the SRE version of the post-mortem.
 
 1. **The Core Philosophy:** Assume Dave is a good developer who was trying to do his job.
+
 2. **The 'Five Whys' Root Cause Analysis:**
    * *Why did the site crash?* Because bad CSS was deployed to production.
    * *Why was it deployed?* Because Dave pushed directly to the `main` branch.

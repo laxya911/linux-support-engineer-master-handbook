@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V5-C07
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 8 — Building Custom ChatOps Bots
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Logging into servers to trigger deployments is slow and invisible. In this chapter, we build ChatOps integrations, allowing your team to deploy code and query system health directly from Slack or Teams.
 
 By the end of this chapter, you will be able to:
 * Define ChatOps and its benefits.
@@ -41,13 +41,13 @@ Ten years ago, when a server crashed, the monitoring system would send an email.
 
 ```mermaid
 flowchart LR
-    A["Python Backup Script \n (Runs on DB Server)"] -->|"Fails"| B{"Try/Except Block"}
+    A["Python Backup Script \n (Runs on DB Server) "] -->|"Fails "| B{"Try/Except Block "}
     
-    B -->|"Generates JSON Payload"| C["HTTP POST Request"]
+    B -->|"Generates JSON Payload "| C["HTTP POST Request "]
     
-    C -->|"Sends Payload over Internet"| D["Slack API (Incoming Webhook)"]
+    C -->|"Sends Payload over Internet "| D["Slack API (Incoming Webhook) "]
     
-    D -->|"Renders Message"| E["#database-alerts Channel \n (Engineers are notified instantly!)"]
+    D -->|"Renders Message "| E["#database-alerts Channel \n (Engineers are notified instantly!) "]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000
@@ -71,9 +71,14 @@ Slack APIs expect the JSON payload to have a specific schema. If you send `{"mes
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Broken Webhook
-**The Incident:** A junior engineer writes a Python script to monitor a critical system. If the system fails, it should post an alert to Slack. The system fails at 2:00 AM. The script runs, but no message appears in Slack. The outage is missed until 8:00 AM.
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Broken Webhook**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A junior engineer writes a Python script to monitor a critical system. If the system fails, it should post an alert to Slack. The system fails at 2:00 AM. The script runs, but no message appears in Slack. The outage is missed until 8:00 AM.
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior Engineer investigates the script. The junior engineer's code looks like this:
 ```python
 import requests

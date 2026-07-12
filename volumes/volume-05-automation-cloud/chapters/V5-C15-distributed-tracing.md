@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V4-C02
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 15 — Distributed Tracing
 
-* **Difficulty:** Expert
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+In a microservices architecture, a single request touches twenty different servers. In this chapter, we use Distributed Tracing to definitively prove exactly which microservice caused a timeout.
 
 By the end of this chapter, you will be able to:
 * Define Distributed Tracing and its necessity in Microservices.
@@ -42,12 +42,12 @@ In a modern Kubernetes architecture, a user clicks "Checkout", and the request j
 
 ```mermaid
 flowchart LR
-    A["Customer \n 'Checkout'"] -->|"Generates Trace: #1234"| B(API Gateway \n Span: A)
+    A["Customer \n 'Checkout'"] -->|"Generates Trace: #1234 "| B(API Gateway \n Span: A)
     
-    B -->|"Passes Trace: #1234"| C(Auth Service \n Span: B)
-    B -->|"Passes Trace: #1234"| D(Billing Service \n Span: C)
+    B -->|"Passes Trace: #1234 "| C(Auth Service \n Span: B)
+    B -->|"Passes Trace: #1234 "| D(Billing Service \n Span: C)
     
-    D -->|"Passes Trace: #1234"| E["('Database \n Span: D')"]
+    D -->|"Passes Trace: #1234 "| E["('Database \n Span: D') "]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff
@@ -73,10 +73,15 @@ Historically, every vendor (Datadog, New Relic, AppDynamics) had their own propr
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Invisible Bottleneck
-**The Incident:** The customer support team reports that the new "Generate Invoice" button is taking 15 seconds to load. 
+
+> [!IMPORTANT]  
+> **Incident Report: The Invisible Bottleneck**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** The customer support team reports that the new "Generate Invoice" button is taking 15 seconds to load. 
 The junior admin looks at the Grafana dashboards. The Invoice Microservice CPU is at 10%. The Database CPU is at 20%. The infrastructure metrics show absolutely nothing wrong. The admin throws their hands up and blames "the network."
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior SRE takes over. They open **Jaeger**, the distributed tracing UI.
 2. They filter for traces where the service is `invoice-service` and the latency is `> 10000ms`.
 3. They open the slowest Trace.

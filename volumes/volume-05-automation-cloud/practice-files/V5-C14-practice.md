@@ -7,26 +7,27 @@ To conceptually analyze the JSON structure of a Grafana Dashboard, reinforcing t
 When you build a graph in the Grafana UI, the server is just writing a JSON file in the background.
 
 1. **Review this theoretical Grafana Panel JSON:**
-   ```json
-   {
-     "id": 1,
-     "title": "Production Server CPU Usage",
-     "type": "timeseries",
-     "datasource": "Prometheus-Primary",
-     "targets": [
-       {
-         "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)",
-         "legendFormat": "{{instance}}"
-       }
-     ],
-     "gridPos": {
-       "h": 8,
-       "w": 12,
-       "x": 0,
-       "y": 0
-     }
-   }
-   ```
+
+    ```json
+    {
+      "id": 1,
+      "title": "Production Server CPU Usage",
+      "type": "timeseries",
+      "datasource": "Prometheus-Primary",
+      "targets": [
+        {
+          "expr": "100 - (avg by (instance) (irate(node_cpu_seconds_total{mode='idle'}[5m])) * 100)",
+          "legendFormat": "{{instance}}"
+        }
+      ],
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      }
+    }
+    ```
 
 2. **Analysis of the Fields:**
    * `"type": "timeseries"`: This tells Grafana to render a standard line graph over time.
@@ -39,19 +40,20 @@ When you build a graph in the Grafana UI, the server is just writing a JSON file
 Let's look at how Grafana creates dynamic dropdown menus.
 
 1. **Review this theoretical Variable JSON:**
-   ```json
-   "templating": {
-     "list": [
-       {
-         "name": "region",
-         "type": "query",
-         "datasource": "Prometheus-Primary",
-         "query": "label_values(node_cpu_seconds_total, region)",
-         "multi": true
-       }
-     ]
-   }
-   ```
+
+    ```json
+    "templating": {
+      "list": [
+        {
+          "name": "region",
+          "type": "query",
+          "datasource": "Prometheus-Primary",
+          "query": "label_values(node_cpu_seconds_total, region)",
+          "multi": true
+        }
+      ]
+    }
+    ```
 
 2. **Analysis:**
    * This creates a dropdown menu at the top of the dashboard named `$region`.

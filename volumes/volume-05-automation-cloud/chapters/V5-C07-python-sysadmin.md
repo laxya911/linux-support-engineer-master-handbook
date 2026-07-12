@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V5-C06
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 7 — Python for Systems Administrators
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+When Bash scripts become too complex, it's time for a real programming language. In this chapter, we leverage Python to interact with REST APIs, parse JSON, and build enterprise-grade administrative tooling.
 
 By the end of this chapter, you will be able to:
 * Determine when a task requires Python instead of Bash.
@@ -43,19 +43,19 @@ When a Bash script exceeds 100 lines, or when it needs to talk to a REST API, a 
 ```mermaid
 flowchart LR
     subgraph The Bash Zone
-        A["File System Operations"]
-        B["Simple Cron Jobs"]
-        C["Text Parsing / grep"]
+        A["File System Operations "]
+        B["Simple Cron Jobs "]
+        C["Text Parsing / grep "]
     end
     
     subgraph The Python Zone
-        D["REST API Communication"]
-        E["Complex JSON Parsing"]
-        F["Database Connections"]
-        G["AWS/Cloud Automation"]
+        D["REST API Communication "]
+        E["Complex JSON Parsing "]
+        F["Database Connections "]
+        G["AWS/Cloud Automation "]
     end
     
-    A -.->|"Threshold: >100 Lines"| D
+    A -.->|"Threshold: >100 Lines "| D
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#0984e3,stroke:#74b9ff,color:#fff
@@ -84,7 +84,11 @@ By importing the `json` module, you can convert a raw JSON string into a Python 
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Fragile API Script
-**The Incident:** A company uses a Bash script to query a third-party HR system API every night to sync user accounts. The script looks like this:
+
+> [!IMPORTANT]  
+> **Incident Report: The Fragile API Script**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A company uses a Bash script to query a third-party HR system API every night to sync user accounts. The script looks like this:
 ```bash
 RESPONSE=$(curl -s https://api.hr.com/users)
 EMAILS=$(echo $RESPONSE | grep -o '"email":"[^"]*' | grep -o '[^"]*$')
@@ -92,7 +96,8 @@ EMAILS=$(echo $RESPONSE | grep -o '"email":"[^"]*' | grep -o '[^"]*$')
 For six months, it works perfectly. Then, the HR vendor releases a minor update. They added a space after the colon in their JSON response (`"email": "xxx"` instead of `"email":"xxx"`). 
 The Bash `grep` pipeline instantly breaks. The script fails silently, and no new employee accounts are created for a week.
 
-**The Investigation & Fix:**
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior Engineer investigates the broken script. They realize the junior admin attempted to parse JSON using `grep` (text string matching). This is incredibly fragile. JSON is an object, not just a string of text.
 2. **The Resolution:** The engineer immediately scraps the Bash script and rewrites it in Python.
 

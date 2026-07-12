@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V5-C13
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 14 — Data Visualization & Dashboards
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Data without context is just noise. In this chapter, we build advanced Grafana dashboards, transforming millions of metric data points into instantly understandable visualizations of system health.
 
 By the end of this chapter, you will be able to:
 * Explain the relationship between Prometheus and Grafana.
@@ -41,13 +41,13 @@ Prometheus is a brilliant database, but its native interface is just a raw query
 
 ```mermaid
 flowchart TD
-    A["('Prometheus DB \n 1.0.0.0/16')"] -->|"Data Source"| B{"Grafana Server"}
+    A["('Prometheus DB \n 1.0.0.0/16') "] -->|"Data Source "| B{"Grafana Server "}
     
-    B -->|"Panel 1 Query"| C["Traffic: 15,000 Req/s"]
-    B -->|"Panel 2 Query"| D["Errors: 2%"]
-    B -->|"Panel 3 Query"| E["Latency: p99 150ms"]
+    B -->|"Panel 1 Query "| C["Traffic: 15,000 Req/s "]
+    B -->|"Panel 2 Query "| D["Errors: 2%"]
+    B -->|"Panel 3 Query "| E["Latency: p99 150ms "]
     
-    C --> F["Executive Dashboard"]
+    C --> F["Executive Dashboard "]
     D --> F
     E --> F
     
@@ -74,9 +74,14 @@ While Prometheus has its own Alertmanager, Grafana also provides visual alerting
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Useless Dashboard
-**The Incident:** The primary billing database goes offline. The On-Call engineer wakes up and opens the "Billing Service Dashboard" in Grafana. The dashboard contains 40 different graphs. Every single graph is flashing red. The engineer stares at the screen for 10 minutes, completely overwhelmed, unable to determine the root cause. 
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Useless Dashboard**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** The primary billing database goes offline. The On-Call engineer wakes up and opens the "Billing Service Dashboard" in Grafana. The dashboard contains 40 different graphs. Every single graph is flashing red. The engineer stares at the screen for 10 minutes, completely overwhelmed, unable to determine the root cause.
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Lead SRE conducts a post-mortem on the slow incident response.
 2. **The Observation:** The engineer notes that the dashboard was built with zero hierarchy. The graph for "Active Database Connections" was buried at the bottom right corner, hidden behind "Linux Kernel Context Switches."
 3. **The Analysis:** When the database went offline, the web servers started throwing HTTP 500 errors. Because everything broke at once, all 40 graphs spiked. The dashboard provided data, but it did not provide *context*.

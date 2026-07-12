@@ -7,6 +7,7 @@ To understand the mathematics behind Site Reliability Engineering by calculating
 Your company processes 5,000,000 HTTP API requests every day. 
 
 1. **The Scenario:** Today, your backend database experienced a brief 2-minute outage. During that outage, the API returned `HTTP 500 Internal Server Error` to 12,500 requests. 
+
 2. **The Calculation:** What is your exact SLI (Service Level Indicator) for today, expressed as a percentage of successful requests?
    * *Total Requests:* 5,000,000
    * *Failed Requests:* 12,500

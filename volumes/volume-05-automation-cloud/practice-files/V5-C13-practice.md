@@ -7,18 +7,20 @@ To understand the structure of raw Prometheus metrics and theoretically write Pr
 If you `curl http://localhost:9100/metrics` on a server running the Node Exporter, you will receive hundreds of lines of text.
 
 1. **Review this sample output:**
-   ```text
-   # HELP node_load1 1m load average.
-   # TYPE node_load1 gauge
-   node_load1 0.75
-   # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
-   # TYPE process_cpu_seconds_total counter
-   process_cpu_seconds_total 12345.67
-   # HELP http_requests_total Total HTTP requests
-   # TYPE http_requests_total counter
-   http_requests_total{method="GET", status="200"} 1500
-   http_requests_total{method="POST", status="500"} 45
-   ```
+
+    ```text
+    # HELP node_load1 1m load average.
+    # TYPE node_load1 gauge
+    node_load1 0.75
+    # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+    # TYPE process_cpu_seconds_total counter
+    process_cpu_seconds_total 12345.67
+    # HELP http_requests_total Total HTTP requests
+    # TYPE http_requests_total counter
+    http_requests_total{method="GET", status="200"} 1500
+    http_requests_total{method="POST", status="500"} 45
+    ```
+
 2. **Analysis:** 
    * A **Gauge** is a number that goes up and down (like a car speedometer, or current Load Average).
    * A **Counter** is a number that only *ever* goes up (like a car odometer, or total HTTP requests).

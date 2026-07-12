@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V5-C04
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 16 — The System Design Interview
 
-* **Difficulty:** Expert
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Senior engineers don't just fix systems; they design them. In this chapter, we tackle massive-scale System Design, architecting fault-tolerant, globally distributed platforms from the ground up.
 
 By the end of this chapter, you will be able to:
 * Understand the purpose and structure of a System Design Interview.
@@ -42,10 +42,10 @@ The interviewer does not actually expect you to design the entirety of YouTube i
 ```mermaid
 flowchart TD
     subgraph The 45-Minute Interview
-        A["1. Understand Requirements \n (5 mins)"] --> B["2. Capacity Estimation \n (5 mins)"]
-        B --> C["3. High-Level Design \n (10 mins)"]
-        C --> D["4. Deep Dive & Trade-offs \n (20 mins)"]
-        D --> E["5. Identify Bottlenecks \n (5 mins)"]
+        A["1. Understand Requirements \n (5 mins) "] --> B["2. Capacity Estimation \n (5 mins) "]
+        B --> C["3. High-Level Design \n (10 mins) "]
+        C --> D["4. Deep Dive & Trade-offs \n (20 mins) "]
+        D --> E["5. Identify Bottlenecks \n (5 mins) "]
     end
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff

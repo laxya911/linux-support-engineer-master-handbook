@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V4-C06
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 10 — Writing Custom Terraform Providers
 
-* **Difficulty:** Expert
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Standard Terraform modules don't always fit complex enterprise needs. In this chapter, we write Custom Terraform Providers and Modules to enforce organizational standards across hundreds of deployments.
 
 By the end of this chapter, you will be able to:
 * Explain how Terraform Core communicates with Terraform Providers via gRPC.
@@ -41,14 +41,14 @@ A Senior Cloud Engineer realizes that **anything with a REST API can be managed 
 
 ```mermaid
 flowchart TD
-    A["main.tf \n 'resource 'billing_account''"] -->|"1. Runs terraform apply"| B(Terraform Core)
+    A["main.tf \n 'resource 'billing_account''"] -->|"1. Runs terraform apply "| B(Terraform Core)
     
-    B -->|"2. gRPC Plugin Communication"| C{"Custom Provider \n (Written in Go)"}
+    B -->|"2. gRPC Plugin Communication "| C{"Custom Provider \n (Written in Go) "}
     
-    C -->|"3. HTTP POST /accounts"| D["Internal Proprietary API"]
+    C -->|"3. HTTP POST /accounts "| D["Internal Proprietary API "]
     
-    D -.->|"4. Returns 201 Created"| C
-    C -.->|"5. Saves ID to State File"| B
+    D -.->|"4. Returns 201 Created "| C
+    C -.->|"5. Saves ID to State File "| B
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff
@@ -75,9 +75,14 @@ HashiCorp writes almost all of their tools (Terraform, Vault, Consul, Nomad) in 
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Disappearing State
-**The Incident:** A Senior Engineer writes a custom Terraform Provider to manage user accounts on a proprietary internal API. A junior admin uses it to deploy an account via Terraform. The deployment succeeds. The next day, the junior admin runs `terraform plan`. Terraform says the account was deleted, and proposes to recreate it. The admin panics and checks the internal API. The account is still there and perfectly healthy!
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Disappearing State**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A Senior Engineer writes a custom Terraform Provider to manage user accounts on a proprietary internal API. A junior admin uses it to deploy an account via Terraform. The deployment succeeds. The next day, the junior admin runs `terraform plan`. Terraform says the account was deleted, and proposes to recreate it. The admin panics and checks the internal API. The account is still there and perfectly healthy!
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior Engineer investigates the custom Go code of the Provider, specifically looking at the `Read` function.
 2. **The Observation:** The engineer notices that the `Read` function makes an HTTP GET request to the API. If the API returns an error, the Go code does this: `d.SetId("")` (It blanks out the Resource ID in the state file).
 3. **The Analysis:** The engineer checks the API server logs from the time the `terraform plan` was executed. The API server was undergoing brief maintenance and returned an `HTTP 503 Service Unavailable` error for 10 seconds.

@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: None
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 3 — Cloud Storage & CDN Optimization
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Serving images directly from a web server in London means users in Sydney experience terrible latency. In this chapter, we decouple assets using Object Storage (S3) and global Content Delivery Networks (CDNs).
 
 By the end of this chapter, you will be able to:
 * Differentiate between Block Storage (EBS) and Object Storage (S3).
@@ -41,12 +41,12 @@ Serving large static files (like 4K videos or high-res images) directly from you
 
 ```mermaid
 flowchart TD
-    A["Customer in Sydney"] -->|"Requests Video"| B{"CDN Edge Node \n (Sydney, AU)"}
+    A["Customer in Sydney "] -->|"Requests Video "| B{"CDN Edge Node \n (Sydney, AU) "}
     
-    B -->|"Cache HIT"| A
-    B -.->|"Cache MISS"| C["('S3 Origin Bucket \n Virginia, USA')"]
+    B -->|"Cache HIT "| A
+    B -.->|"Cache MISS "| C["('S3 Origin Bucket \n Virginia, USA') "]
     
-    C -.->|"Returns Video to Cache"| B
+    C -.->|"Returns Video to Cache "| B
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#8e44ad,stroke:#9b59b6,color:#fff
@@ -72,9 +72,14 @@ When a CDN fetches a file from S3, it holds it in the Edge Cache. The **TTL (Tim
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Stubborn Logo Update
-**The Incident:** The marketing team launches a massive rebranding campaign. They replace the old company logo (`logo.png`) in the AWS S3 bucket with the new logo. They announce the rebrand on Twitter. Five minutes later, angry executives call the Support Engineer: "The website is still showing the old logo! We replaced the file in S3, but it didn't update on the live site!"
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Stubborn Logo Update**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** The marketing team launches a massive rebranding campaign. They replace the old company logo (`logo.png`) in the AWS S3 bucket with the new logo. They announce the rebrand on Twitter. Five minutes later, angry executives call the Support Engineer: "The website is still showing the old logo! We replaced the file in S3, but it didn't update on the live site!"
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Support Engineer checks the S3 bucket. The new logo is indeed there.
 2. The engineer opens the website in their browser. The old logo appears.
 3. The engineer uses `curl -I https://www.company.com/logo.png`. 

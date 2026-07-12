@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V5-C02
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 5 — Infrastructure Cost Optimization
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+The cloud is infinite, but your company's budget is not. In this chapter, we tackle FinOps and Cloud Cost Optimization, stopping the bleeding of unused resources and massive data transfer fees.
 
 By the end of this chapter, you will be able to:
 * Define FinOps (Financial Operations) in the Cloud.
@@ -42,14 +42,14 @@ In an on-premise datacenter, a server costs $10,000 upfront. Once it is paid for
 ```mermaid
 flowchart TD
     subgraph The FinOps Cycle
-        A["Inform"] --> B["Optimize"]
-        B --> C["Operate"]
+        A["Inform "] --> B["Optimize "]
+        B --> C["Operate "]
         C --> A
     end
     
-    A -.->|"Tagging & Visibility"| D["AWS Cost Explorer"]
-    B -.->|"Right-Sizing & Reserved Instances"| E["Cost Reduction"]
-    C -.->|"Automating Start/Stop Schedules"| F["Continuous Savings"]
+    A -.->|"Tagging & Visibility "| D["AWS Cost Explorer "]
+    B -.->|"Right-Sizing & Reserved Instances "| E["Cost Reduction "]
+    C -.->|"Automating Start/Stop Schedules "| F["Continuous Savings "]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#00b894,stroke:#55efc4,color:#000
@@ -73,9 +73,14 @@ If you know for an absolute fact that you will be running a database server 24/7
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Bill Shock
-**The Incident:** The CFO looks at the monthly AWS bill and has a panic attack. The bill skyrocketed from $5,000 to $25,000 in a single month. The CTO orders an immediate freeze on all engineering deployments until the leak is found.
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Bill Shock**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** The CFO looks at the monthly AWS bill and has a panic attack. The bill skyrocketed from $5,000 to $25,000 in a single month. The CTO orders an immediate freeze on all engineering deployments until the leak is found.
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior Cloud Engineer logs into AWS Cost Explorer. They group the daily costs by "Service". 
 2. They notice that "EC2 - Other" costs spiked drastically on the 14th of the month.
 3. The engineer uses the AWS CLI to scan all regions for unattached Elastic Block Store (EBS) volumes.

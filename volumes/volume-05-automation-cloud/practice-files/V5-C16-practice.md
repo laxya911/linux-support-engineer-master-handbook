@@ -37,6 +37,7 @@ Now that you know the traffic, you must determine how much hard drive space your
 Based on the numbers you just calculated on the whiteboard, you can now make definitive architectural choices!
 
 1. **The Database Choice:** A single PostgreSQL database can easily handle 2,000 writes per second. However, a single PostgreSQL hard drive cannot hold 150 Terabytes of data efficiently. 
+
 2. **The Conclusion:** Therefore, you look at the interviewer and say: "Because we need to store 150TB of data over 5 years, a standard relational database will hit vertical scaling limits. I propose we use a horizontally scalable NoSQL database like Cassandra or Amazon DynamoDB, which can easily distribute 150TB across dozens of physical nodes."
 
 ## Success Criteria

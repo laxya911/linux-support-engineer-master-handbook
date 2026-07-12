@@ -23,6 +23,7 @@ To practice the "Verbal Troubleshooting" methodology required to pass Senior Eng
 
 1. **The Verbose Output:**
    * *You say:* "First, I would run SSH in verbose mode: `ssh -vvv user@10.0.0.5`. This will tell me exactly where the connection is failing. If it fails immediately, the TCP port is blocked. If it hangs at 'expecting SSH2_MSG_KEXINIT', it's an MTU or packet fragmentation issue."
+
 2. **The Network Check:**
    * *You say:* "If I can't reach the port at all, I would run `traceroute 10.0.0.5` to see if a router in the middle is dropping the packets. If the packets make it to the destination subnet, it's highly likely a local firewall rule (like `iptables` or an AWS Security Group) is blocking port 22 inbound."
 

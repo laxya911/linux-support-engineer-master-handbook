@@ -17,16 +17,16 @@ interview_questions: 3
 prerequisites: V2-C06
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 17 — Surviving the Technical Deep-Dive
 
-* **Difficulty:** Expert
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Passing an advanced technical interview requires more than just knowing Linux commands. In this chapter, we decode the modern SRE interview process, focusing on communication and troubleshooting logic.
 
 By the end of this chapter, you will be able to:
 * Navigate the "Deep-Dive" technical interview without panicking.
@@ -41,12 +41,12 @@ The interviewer is looking for the **Troubleshooting Funnel**. They want to see 
 
 ```mermaid
 flowchart TD
-    A["The Prompt: 'The Web Server is Slow'"] --> B{"Layer 7: Application"}
+    A["The Prompt: 'The Web Server is Slow'"] --> B{"Layer 7: Application "}
     
-    B -->|"Check NGINX Logs"| C{"Layer 4: Transport"}
-    C -->|"Run netstat/ss"| D{"Layer 3: Network"}
-    D -->|"Run ping/traceroute"| E{"Layer 1: Physical"}
-    E -->|"Run dmesg for Disk I/O"| F["Root Cause Found!"]
+    B -->|"Check NGINX Logs "| C{"Layer 4: Transport "}
+    C -->|"Run netstat/ss "| D{"Layer 3: Network "}
+    D -->|"Run ping/traceroute "| E{"Layer 1: Physical "}
+    E -->|"Run dmesg for Disk I/O "| F["Root Cause Found!"]
     
     style A fill:#d63031,stroke:#ff7675,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000

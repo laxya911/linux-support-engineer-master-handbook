@@ -14,19 +14,19 @@ estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C07
+prerequisites: Volume 4
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 1 — Serverless & Event-Driven Architecture
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
-
 ## Learning Objectives
+
+Servers are expensive to run when nobody is using them. In this chapter, we explore Serverless architecture and event-driven design, paying only for the exact milliseconds our code executes.
 
 By the end of this chapter, you will be able to:
 * Define Serverless computing (FaaS).
@@ -41,14 +41,14 @@ In Volume 3, we built an NGINX web server on a Linux VM. That server runs 24/7. 
 
 ```mermaid
 flowchart LR
-    A["Customer \n (Uploads Image)"] -->|"Event Trigger"| B["('AWS S3 Bucket')"]
+    A["Customer \n (Uploads Image) "] -->|"Event Trigger "| B["('AWS S3 Bucket') "]
     
-    B -->|"Generates S3 Event"| C["AWS SNS Topic"]
-    C -->|"Fan-out Message"| D["AWS SQS Queue"]
+    B -->|"Generates S3 Event "| C["AWS SNS Topic "]
+    C -->|"Fan-out Message "| D["AWS SQS Queue "]
     
-    D -->|"Triggers Execution"| E{"AWS Lambda \n (Python Script)"}
+    D -->|"Triggers Execution "| E{"AWS Lambda \n (Python Script) "}
     
-    E -->|"Resizes Image"| F["('S3 Destination Bucket')"]
+    E -->|"Resizes Image "| F["('S3 Destination Bucket') "]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#f39c12,stroke:#f1c40f,color:#000
@@ -72,9 +72,14 @@ SNS is a Pub/Sub (Publish/Subscribe) engine. It is used for "Fan-out." If a user
 ## Scenario-Based Troubleshooting
 
 ### Scenario A: The Image Processing Pipeline
-**The Incident:** A media company allows users to upload high-resolution 4K photos to their web application. The web server uses a PHP library to compress the image and create a thumbnail. On Friday night, a celebrity posts a link, and 5,000 users upload photos simultaneously. The web servers max out at 100% CPU attempting to compress 5,000 photos at once, and the entire website goes offline.
 
-**The Investigation & Fix:**
+> [!IMPORTANT]  
+> **Incident Report: The Image Processing Pipeline**  
+> **Reporter:** Automated Monitoring / End User  
+> **The Incident:** A media company allows users to upload high-resolution 4K photos to their web application. The web server uses a PHP library to compress the image and create a thumbnail. On Friday night, a celebrity posts a link, and 5,000 users upload photos simultaneously. The web servers max out at 100% CPU attempting to compress 5,000 photos at once, and the entire website goes offline.
+
+
+**The Investigation (Single Engineer Diagnosis):**
 1. The Senior Cloud Engineer analyzes the outage and realizes that image compression is a highly CPU-intensive task that should *never* be done synchronously on the web server.
 2. **The Redesign:** The engineer redesigns the application into an Event-Driven Serverless architecture. 
 3. Now, when a user uploads a photo, the web server simply generates an "S3 Pre-signed URL". The user's browser uploads the heavy 4K file directly to an AWS S3 bucket, completely bypassing the web server's CPU.
