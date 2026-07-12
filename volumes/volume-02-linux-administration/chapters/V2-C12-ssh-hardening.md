@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 12 — SSH Hardening
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -32,6 +31,15 @@ By the end of this chapter, you will be able to:
 * Explain the concept of Public/Private Key Cryptography for SSH.
 * Configure the `/etc/ssh/sshd_config` file to disable root logins and password authentication.
 * Troubleshoot "Permission Denied" errors caused by incorrect `.ssh` directory permissions.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-46583**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to SSH Hardening. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Cryptographic Padlock
 
@@ -75,6 +83,7 @@ SSH is designed to be deeply paranoid. If the `~/.ssh` directory or the `authori
 However, when the developer tries to SSH in, the server completely ignores the key and prompts them for a password. 
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs in (using their own admin account) and checks the developer's home directory.
 2. The engineer runs `ls -la /home/devuser/` and checks the permissions of the `.ssh` folder.
    `drwxrwxrwx 2 devuser devuser 4096 Jul 08 .ssh`
@@ -84,6 +93,7 @@ However, when the developer tries to SSH in, the server completely ignores the k
    * The directory must only be accessible by the owner: `chmod 700 /home/devuser/.ssh`
    * The file must only be readable/writable by the owner: `chmod 600 /home/devuser/.ssh/authorized_keys`
 6. The developer tries again. The mathematical signature matches, and they are logged in without a password.
+
 
 ## Hands-on Lab
 
@@ -116,11 +126,8 @@ Securing SSH is the first and most important step when building a new server. Di
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 11 – Advanced Firewalls](V2-C11-advanced-firewalls.md)
+← Previous: [Chapter 11 — Advanced Firewalls (UFW & firewalld)](V2-C11-advanced-firewalls.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 13 – Intrusion Prevention](V2-C13-intrusion-prevention.md)
+→ Next: [Chapter 13 — Intrusion Prevention (fail2ban)](V2-C13-intrusion-prevention.md)

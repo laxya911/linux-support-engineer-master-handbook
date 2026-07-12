@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 15 — Security Auditing & Compliance
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Understand the role of `auditd` (The Linux Audit Daemon).
 * Place a persistent watch on a critical file to monitor for unauthorized changes.
 * Use `ausearch` to extract actionable forensics from the audit log.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-42237**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Security Auditing & Compliance. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Security Camera
 
@@ -75,6 +83,7 @@ For example, to place a watch (`-w`) on the password file, specifically monitori
 The problem? 50 different engineers have `sudo` access. Everyone claims they were asleep. Standard logs (`syslog`, `.bash_history`) show nothing. The team needs to find the culprit so they can provide them with additional training.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer restores the web server from a backup.
 2. Knowing the culprit might try again, the engineer places a Kernel-level watch on the configuration file:
    `auditctl -w /etc/nginx/nginx.conf -p wa -k nginx_watch`
@@ -86,6 +95,7 @@ The problem? 50 different engineers have `sudo` access. Everyone claims they wer
 6. The engineer extracts the critical data: The file was opened using `/usr/bin/vim` by a user with the Audit UID (`auid`) of `1005`. 
 7. The engineer runs `id 1005` and discovers it belongs to the junior developer "J. Smith". 
 8. The mystery is solved. The engineer contacts J. Smith to discuss proper change management procedures.
+
 
 ## Hands-on Lab
 
@@ -118,11 +128,8 @@ Compliance is not just paperwork; it is a mindset of total visibility. By utiliz
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 14 – Mandatory Access Control](V2-C14-mandatory-access-control.md)
+← Previous: [Chapter 14 — Mandatory Access Control (SELinux & AppArmor)](V2-C14-mandatory-access-control.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 16 – Advanced Bash Scripting *[Coming Soon]*](#)
+→ Next: [Chapter 16 — Advanced Bash Scripting](V2-C16-advanced-bash-scripting.md)

@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 19 — Incident Response Methodology
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Understand the concept of a Cascading Failure.
 * Use the "5 Whys" framework to discover the true Root Cause of an incident.
 * Write a basic Root Cause Analysis (RCA) document.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-56526**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Incident Response Methodology. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The 5 Whys
 
@@ -77,6 +85,7 @@ To find the Root Cause, you ask "Why?" until you reach a human process or config
 **The Incident:** At 3:00 AM, the company's PostgreSQL database crashes. 
 
 **The Investigation & Fix:**
+
 1. A Junior Engineer is paged. They log in, run `systemctl start postgresql`, and the database comes back online. The Junior Engineer closes the ticket, citing "Database crashed, restarted service."
 2. The next night at 3:00 AM, the database crashes again.
 3. A Senior Support Engineer takes over. They look at the logs and see `No space left on device`. 
@@ -85,6 +94,7 @@ To find the Root Cause, you ask "Why?" until you reach a human process or config
 6. The Senior Engineer begins the "5 Whys". They check the `/etc/logrotate.d/` directory. They discover that `myapp` is completely missing from the log rotation configuration.
 7. **The Root Cause:** When the application was installed 6 months ago, the installation script failed to create a logrotate rule.
 8. **The Permanent Fix:** The engineer writes a `logrotate` configuration for `myapp`, ensuring the logs will be zipped and deleted every week. The database never crashes from a full disk again.
+
 
 ## Hands-on Lab
 
@@ -117,11 +127,8 @@ The difference between a Junior and a Senior Administrator is how they handle th
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 18 – System Backup & Restoration](V2-C18-system-backup.md)
+← Previous: [Chapter 18 — System Backup & Restoration (rsync)](V2-C18-system-backup.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 20 – Capstone Project](V2-C20-capstone-project.md)
+→ Next: [Chapter 20 — Capstone Project](V2-C20-capstone-project.md)

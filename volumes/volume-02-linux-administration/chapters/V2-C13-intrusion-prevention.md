@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C12
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 13 — Intrusion Prevention (fail2ban)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Understand how `fail2ban` parses log files to identify malicious behavior.
 * Configure `fail2ban` jails for services like SSH.
 * Use the `fail2ban-client` to unban an IP address after a false positive lockout.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-65451**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Intrusion Prevention (fail2ban). Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Dynamic Defense
 
@@ -78,6 +86,7 @@ Later that afternoon, the engineer tries to log into the server. They have caps-
 On the 4th attempt, the connection simply drops. The terminal says `Connection refused`. They are completely locked out of the server.
 
 **The Investigation & Fix:**
+
 1. The engineer realizes exactly what happened. `fail2ban` did its job perfectly. It saw 3 failed attempts, assumed the engineer was a botnet, and commanded the firewall to drop their IP address. 
 2. The engineer cannot fix this from their laptop because their laptop's IP is blocked by the firewall. 
 3. The engineer connects to a VPN (or uses their cellphone hotspot) to get a different IP address. 
@@ -88,6 +97,7 @@ On the 4th attempt, the connection simply drops. The terminal says `Connection r
 7. The engineer uses the client to unban themselves:
    `fail2ban-client set sshd unbanip <LAPTOP_IP_ADDRESS>`
 8. The engineer disconnects from the VPN, tests the connection from their laptop, and successfully logs in.
+
 
 ## Hands-on Lab
 
@@ -120,11 +130,8 @@ If a server is on the internet, it is being attacked. `fail2ban` gives your serv
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 12 – SSH Hardening](V2-C12-ssh-hardening.md)
+← Previous: [Chapter 12 — SSH Hardening](V2-C12-ssh-hardening.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 14 – Mandatory Access Control *[Coming Soon]*](#)
+→ Next: [Chapter 14 — Mandatory Access Control (SELinux & AppArmor)](V2-C14-mandatory-access-control.md)

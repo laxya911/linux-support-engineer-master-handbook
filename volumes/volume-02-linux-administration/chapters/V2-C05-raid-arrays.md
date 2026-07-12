@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C04
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 5 — RAID Arrays
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Differentiate between RAID 0 (Striping), RAID 1 (Mirroring), and RAID 5 (Parity).
 * Identify a degraded array using `/proc/mdstat`.
 * Use `mdadm` to remove a dead drive and rebuild a RAID array.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-95181**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to RAID Arrays. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The RAID 1 Mirror
 
@@ -73,6 +81,7 @@ If your server has a RAID 1 Mirror and you accidentally run `rm -rf /etc`, the R
 **The Incident:** An automated monitoring system emails the Support Engineering team: `CRITICAL: Array /dev/md0 is DEGRADED`.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs in. They do not panic, because the server is still perfectly online. This is RAID 1 doing its job!
 2. The engineer runs `cat /proc/mdstat` to view the raw status of the array directly from the kernel.
 3. The output shows: `md0 : active raid1 sda[0] sdb[1](F)` and `[1/2] [U_]`. 
@@ -85,6 +94,7 @@ If your server has a RAID 1 Mirror and you accidentally run `rm -rf /etc`, the R
 8. The engineer adds the new drive to the array:
    `mdadm --manage /dev/md0 --add /dev/sdb`
 9. The engineer runs `cat /proc/mdstat` again. The output now says `[===>....] recovery = 15.0%`. The RAID controller is currently copying all the data from Drive 1 onto the new Drive 2. Once it reaches 100%, the array will return to `[UU]`.
+
 
 ## Hands-on Lab
 
@@ -117,11 +127,8 @@ RAID is your hardware safety net. Memorize the difference between `[UU]` (Health
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 4 – Logical Volume Management (LVM)](V2-C04-logical-volume-management.md)
+← Previous: [Chapter 4 — Logical Volume Management (LVM)](V2-C04-logical-volume-management.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 6 – Network Attached Storage *[Coming Soon]*](#)
+→ Next: [Chapter 6 — Network Attached Storage (NFS & SMB)](V2-C06-network-attached-storage.md)

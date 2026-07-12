@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 4 — Logical Volume Management (LVM)
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Define the 3 layers of LVM: Physical Volumes (PV), Volume Groups (VG), and Logical Volumes (LV).
 * Add a new hard drive to an existing Volume Group.
 * Extend a live filesystem using `lvextend` and `resize2fs` (or `xfs_growfs`).
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-57671**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Logical Volume Management (LVM). Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Storage Pool
 
@@ -76,6 +84,7 @@ You can view the state of your LVM architecture at any time using three simple c
 **The Incident:** An automated monitoring alert fires: `CRITICAL: /var is 100% full`. The `/var` directory is where the production MySQL database lives. Because the disk is full, the database crashes. Customers cannot place orders. 
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs in and runs `df -h`. They confirm that `/dev/mapper/ubuntu--vg-var` is at 100% usage.
 2. The engineer runs `vgs` to check if there is any free space left in the storage pool. The output shows `VFree: 50g`. They have 50GB of unassigned storage sitting in the pool!
 3. The engineer uses LVM to instantly extend the partition:
@@ -88,6 +97,7 @@ You can view the state of your LVM architecture at any time using three simple c
 
 > [!IMPORTANT]  
 > Notice that the engineer **never rebooted the server** and **never unmounted the drive**. LVM allows you to resize live filesystems while the server is running in production!
+
 
 ## Hands-on Lab
 
@@ -120,11 +130,8 @@ Storage emergencies are the most stressful events in IT. LVM reduces that stress
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 3 – Centralized Authentication](V2-C03-centralized-authentication.md)
+← Previous: [Chapter 3 — Centralized Authentication](V2-C03-centralized-authentication.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 5 – RAID Arrays](V2-C05-raid-arrays.md)
+→ Next: [Chapter 5 — RAID Arrays](V2-C05-raid-arrays.md)

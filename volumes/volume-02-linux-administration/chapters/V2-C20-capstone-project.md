@@ -17,14 +17,13 @@ interview_questions: 0
 prerequisites: Chapters 1-19
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 20 — Capstone Project
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 3 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 0
 
 ## The Journey So Far
 
@@ -42,6 +41,7 @@ To prove you are ready to manage enterprise production servers, you must pass th
 
 In this Capstone, you will not be given step-by-step commands. You will be given a list of symptoms and business requirements. It is entirely up to you to apply the OODA loop, investigate the symptoms, and implement the permanent fixes.
 
+
 ## Hands-on Lab
 
 > [!CAUTION]  
@@ -52,11 +52,8 @@ In this Capstone, you will not be given step-by-step commands. You will be given
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 19 – Incident Response Methodology](V2-C19-incident-response.md)
+← Previous: [Chapter 19 — Incident Response Methodology](V2-C19-incident-response.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Volume 3 – Enterprise Linux Services](../../volume-03-enterprise-linux-services/README.md) *[Planned]*
+→ Next: None

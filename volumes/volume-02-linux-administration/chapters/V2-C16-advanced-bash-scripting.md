@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 16 — Advanced Bash Scripting
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Use variables, `for` loops, and `if`/`else` conditionals.
 * Understand the critical importance of Exit Codes (`$?`).
 * Write robust scripts that "fail fast" using `set -e`.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-57146**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Advanced Bash Scripting. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Script Logic
 
@@ -90,6 +98,7 @@ echo "Backup Successful!" | mail -s "Backup Alert" admin@company.com
 One night, the external drive becomes physically unmounted from the server. The next morning, the administrator receives the "Backup Successful!" email. But when they check the server, the backup file is missing!
 
 **The Investigation & Fix:**
+
 1. The Support Engineer investigates the script. They realize the script suffered from a **Silent Failure**.
 2. Because the drive was unmounted, the `cd` command failed.
 3. However, Bash scripts do not stop when a command fails. The script mindlessly proceeded to the next line. It ran the `tar` command in the wrong directory, failed again, and then mindlessly proceeded to send the "Success" email.
@@ -104,6 +113,7 @@ One night, the external drive becomes physically unmounted from the server. The 
    fi
    ```
 7. The script is updated, and silent failures are eliminated.
+
 
 ## Hands-on Lab
 
@@ -136,11 +146,8 @@ Writing scripts is easy. Writing *robust* scripts is hard. Always assume your co
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 15 – Security Auditing & Compliance](V2-C15-security-auditing.md)
+← Previous: [Chapter 15 — Security Auditing & Compliance](V2-C15-security-auditing.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 17 – Cron & Task Scheduling](V2-C17-cron-and-task-scheduling.md)
+→ Next: [Chapter 17 — Cron & Task Scheduling](V2-C17-cron-and-task-scheduling.md)

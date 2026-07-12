@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C09
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 10 — Packet Capture & Analysis
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Use `tcpdump` to capture live network traffic on a specific interface.
 * Filter `tcpdump` output by IP address and port.
 * Write packet captures to a `.pcap` file for advanced analysis in Wireshark.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-26600**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Packet Capture & Analysis. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Invisible Observer
 
@@ -74,6 +82,7 @@ To write to a file, use the `-w` flag:
 **The Incident:** A software developer contacts the IT Helpdesk. "Our new API is down," they say. "My laptop (192.168.1.50) is sending data to the Linux web server (10.0.0.5) on port 8080, but I'm getting connection timeouts. The network team must have misconfigured a router. Please fix the network."
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs into the Linux web server. They do not assume the network is broken, and they do not assume the application is broken. They seek the truth.
 2. The engineer runs the following packet capture:
    `tcpdump -i eth0 port 8080 and host 192.168.1.50`
@@ -82,6 +91,7 @@ To write to a file, use the `-w` flag:
 5. The engineer stops the capture using `Ctrl+C`. 
 6. **The Conclusion:** The engineer has absolute proof that the network is fine. The developer's packet successfully traveled across the internet, through the routers, and physically arrived at the Linux server's network card. 
 7. Why did it fail? The Linux server sent a Reset packet because the application wasn't actually running. The engineer runs `systemctl status api-service` and sees it is stopped. They start the service, and the developer's connection succeeds. The "broken network" was actually a stopped service.
+
 
 ## Hands-on Lab
 
@@ -114,11 +124,8 @@ To write to a file, use the `-w` flag:
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 9 – Network Routing & Gateways](V2-C09-network-routing.md)
+← Previous: [Chapter 9 — Network Routing & Gateways](V2-C09-network-routing.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 11 – Advanced Firewalls](V2-C11-advanced-firewalls.md)
+→ Next: [Chapter 11 — Advanced Firewalls (UFW & firewalld)](V2-C11-advanced-firewalls.md)

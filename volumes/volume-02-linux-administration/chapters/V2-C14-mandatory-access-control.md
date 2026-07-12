@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 14 — Mandatory Access Control (SELinux & AppArmor)
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Understand the concept of SELinux Security Contexts.
 * Toggle SELinux between Enforcing and Permissive modes.
 * Troubleshoot "Hidden Denials" where SELinux blocks access despite `chmod 777` permissions.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-19190**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Mandatory Access Control (SELinux & AppArmor). Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Two Bouncers
 
@@ -81,6 +89,7 @@ They load the website in their browser, but they get a `403 Forbidden` error.
 Frustrated, the developer runs `chmod -R 777 /home/user/website`. They try again. They still get `403 Forbidden`! They submit a ticket to the Linux Engineering team claiming the server is broken.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs in. They see the `777` permissions and immediately know standard DAC is not the problem.
 2. The engineer runs `sestatus` and confirms SELinux is `Enforcing`. 
 3. To prove SELinux is the culprit, the engineer temporarily disables it: `setenforce 0`. They reload the webpage. The website loads perfectly! They immediately turn SELinux back on: `setenforce 1`.
@@ -90,6 +99,7 @@ Frustrated, the developer runs `chmod -R 777 /home/user/website`. They try again
 7. The engineer uses the `chcon` (Change Context) command to update the labels on the developer's folder:
    `chcon -Rt httpd_sys_content_t /home/user/website`
 8. The website loads perfectly, and the engineer removes the dangerous `777` permissions.
+
 
 ## Hands-on Lab
 
@@ -122,11 +132,8 @@ SELinux and AppArmor are incredibly powerful security tools that stop hackers fr
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 13 – Intrusion Prevention](V2-C13-intrusion-prevention.md)
+← Previous: [Chapter 13 — Intrusion Prevention (fail2ban)](V2-C13-intrusion-prevention.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 15 – Security Auditing & Compliance](V2-C15-security-auditing.md)
+→ Next: [Chapter 15 — Security Auditing & Compliance](V2-C15-security-auditing.md)

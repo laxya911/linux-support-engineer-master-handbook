@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C08
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 9 — Network Routing & Gateways
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Read and interpret the kernel routing table using `ip route`.
 * Diagnose network pathing issues using `traceroute`.
 * Troubleshoot "Asymmetric Routing" issues on servers with multiple network interfaces.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-53966**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Network Routing & Gateways. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Great Escape
 
@@ -80,6 +88,7 @@ default via 10.0.0.1 dev eth0
 An engineer tries to SSH into the server from their laptop over the Public Network (`eth0`). The connection just hangs and eventually times out. 
 
 **The Investigation & Fix:**
+
 1. The Support Engineer connects to the server via a secure console.
 2. They run `ip route` and see the following:
    ```text
@@ -90,6 +99,7 @@ An engineer tries to SSH into the server from their laptop over the Public Netwo
 5. However, when the server tried to reply, it looked at the engineer's laptop IP (which is on the internet). It consulted the routing table. The routing table says, "Send all internet traffic out the default gateway on `eth1`."
 6. The server sent the reply out the wrong door! The engineer's laptop never received the reply, so the connection timed out.
 7. The engineer resolves the issue by adding a static route. They explicitly tell the routing table: "If traffic comes in on `eth0`, the reply MUST leave on `eth0`." They update the `netplan` or `NetworkManager` configuration, and the SSH connection succeeds.
+
 
 ## Hands-on Lab
 
@@ -122,11 +132,8 @@ Networking is simply following the map. If the server cannot reach a destination
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 8 – Static IP Configuration](V2-C08-static-ip-configuration.md)
+← Previous: [Chapter 8 — Static IP Configuration](V2-C08-static-ip-configuration.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 10 – Packet Capture & Analysis *[Coming Soon]*](#)
+→ Next: [Chapter 10 — Packet Capture & Analysis](V2-C10-packet-capture.md)

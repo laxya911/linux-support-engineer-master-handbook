@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C05
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 6 — Network Attached Storage (NFS & SMB)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Differentiate between NFS (Linux native) and SMB/CIFS (Windows native).
 * Mount a remote filesystem using `/etc/fstab`.
 * Troubleshoot and recover a frozen "Stale NFS Mount."
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-76255**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Network Attached Storage (NFS & SMB). Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Shared File Pool
 
@@ -71,6 +79,7 @@ Example of an NFS fstab entry:
 **The Incident:** A junior admin accidentally reboots the central Storage Server. Immediately, Web Server A completely freezes. An engineer SSHs into Web Server A and types `df -h` to check the disk space. The command hangs indefinitely. The terminal refuses to respond to `Ctrl+C`. The entire server feels dead.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer opens a second SSH session to Web Server A. 
 2. They do not run `df -h`. They know that `df -h` queries every mounted drive on the system. If a network drive is unreachable, `df -h` will wait forever for a response.
 3. The engineer runs `cat /etc/mtab` to view the currently mounted drives without actually pinging them. They spot the NFS mount to `10.0.0.50`.
@@ -82,6 +91,7 @@ Example of an NFS fstab entry:
    `umount -l /mnt/shared_images`
 8. The command succeeds. Suddenly, the frozen `df -h` command in the first terminal finishes executing! The server is unfrozen. 
 9. The engineer runs `mount -a` to cleanly re-establish the connection to the storage server now that it has finished rebooting.
+
 
 ## Hands-on Lab
 
@@ -114,11 +124,8 @@ Network Attached Storage allows hundreds of servers to read the same files simul
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 5 – RAID Arrays](V2-C05-raid-arrays.md)
+← Previous: [Chapter 5 — RAID Arrays](V2-C05-raid-arrays.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 7 – Filesystem Tuning and Inodes](V2-C07-filesystem-tuning-and-inodes.md)
+→ Next: [Chapter 7 — Filesystem Tuning and Inodes](V2-C07-filesystem-tuning-and-inodes.md)

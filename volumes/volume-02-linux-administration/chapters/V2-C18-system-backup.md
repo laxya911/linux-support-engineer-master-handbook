@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C17
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 18 — System Backup & Restoration (rsync)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Understand why `rsync` is vastly superior to `cp` or `tar` for network backups.
 * Execute an `rsync` command over SSH to push or pull data.
 * Recover deleted files from a remote backup server.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-88267**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to System Backup & Restoration (rsync). Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Delta Transfer
 
@@ -82,6 +90,7 @@ The standard flags are `-avz`:
 They accidentally delete the entire Nginx configuration for the company's production website. The website goes down immediately. Panic ensues.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer receives the frantic phone call. "I deleted the web config!"
 2. The engineer stays calm. "We follow the 3-2-1 rule," they say. "A cronjob runs `rsync` every 15 minutes to our backup server."
 3. The engineer logs into the production web server. They do not use `cp` or `tar`. They need the files restored exactly as they were, with the exact same `root` permissions and SELinux contexts.
@@ -90,6 +99,7 @@ They accidentally delete the entire Nginx configuration for the company's produc
 5. `rsync` connects over SSH. It sees that `/etc/nginx/` on the production server is completely empty, so it safely transmits all the missing files.
 6. Because the engineer used the `-a` (archive) flag, all file permissions are perfectly restored. 
 7. The engineer runs `systemctl restart nginx`. The website is back online in less than 2 minutes.
+
 
 ## Hands-on Lab
 
@@ -122,11 +132,8 @@ Accidents happen. Hard drives fail. Hackers deploy ransomware. The only thing st
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 17 – Cron & Task Scheduling](V2-C17-cron-and-task-scheduling.md)
+← Previous: [Chapter 17 — Cron & Task Scheduling](V2-C17-cron-and-task-scheduling.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 19 – Incident Response Methodology](V2-C19-incident-response.md)
+→ Next: [Chapter 19 — Incident Response Methodology](V2-C19-incident-response.md)

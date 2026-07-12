@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 11 — Advanced Firewalls (UFW & firewalld)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Configure Ubuntu's UFW (Uncomplicated Firewall).
 * Configure RHEL's `firewalld` using Zones.
 * Avoid the catastrophic "Self-Lockout" scenario when enabling a firewall remotely.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-64162**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Advanced Firewalls (UFW & firewalld). Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Two Layers of Defense
 
@@ -83,6 +91,7 @@ Being proactive, they run `ufw enable`. The system prints a warning: `Command ma
 Instantly, their SSH terminal freezes. They close the terminal and try to SSH back in. The connection times out. They are locked out.
 
 **The Investigation & Fix:**
+
 1. A Senior Engineer gets the frantic phone call. 
 2. The senior engineer explains the mistake: By default, UFW drops *all* incoming traffic. When the junior admin enabled it, UFW immediately dropped the active SSH connection because no rule existed to allow Port 22.
 3. Because SSH is blocked, the senior engineer cannot fix it over the network. They must log into the Cloud Provider's Web Console and use the "Virtual Serial Console" to physically simulate plugging a keyboard and monitor into the server.
@@ -92,6 +101,7 @@ Instantly, their SSH terminal freezes. They close the terminal and try to SSH ba
 
 > [!CAUTION]  
 > **The Golden Rule of Firewalls:** Before you *ever* type `ufw enable`, you must **always** type `ufw allow ssh` first!
+
 
 ## Hands-on Lab
 
@@ -124,11 +134,8 @@ Firewalls are essential for security, but they are also the number one cause of 
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 10 – Packet Capture & Analysis](V2-C10-packet-capture.md)
+← Previous: [Chapter 10 — Packet Capture & Analysis](V2-C10-packet-capture.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 12 – SSH Hardening *[Coming Soon]*](#)
+→ Next: [Chapter 12 — SSH Hardening](V2-C12-ssh-hardening.md)

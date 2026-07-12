@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C16
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 17 — Cron & Task Scheduling
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -32,6 +31,15 @@ By the end of this chapter, you will be able to:
 * Read and write the 5-star `cron` syntax.
 * Differentiate between system cron (`/etc/crontab`) and user cron (`crontab -e`).
 * Troubleshoot the most common reason cronjobs fail: The Missing `$PATH`.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-95852**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Cron & Task Scheduling. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Five Stars
 
@@ -80,6 +88,7 @@ They use `crontab -e` to schedule it to run at midnight:
 The developer goes to sleep. The next morning, they check the logs. The script failed instantly. The `cron` logs simply say: `tar: command not found`.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer investigates. They ask the developer to run the script manually. It works! So why does it fail in `cron`?
 2. The engineer explains the **Missing `$PATH`** rule. 
 3. When the developer runs the script manually, their terminal knows that the `tar` command lives in `/usr/bin/tar`. 
@@ -87,6 +96,7 @@ The developer goes to sleep. The next morning, they check the logs. The script f
 5. **The Fix:** The engineer teaches the developer the Golden Rule of Cron: **Always use Absolute Paths.**
 6. The developer opens their script and changes `tar -czf` to `/usr/bin/tar -czf`. They change `python3 script.py` to `/usr/bin/python3 /home/dev/script.py`. 
 7. The script is scheduled for midnight and runs perfectly.
+
 
 ## Hands-on Lab
 
@@ -119,11 +129,8 @@ Automation is the key to scaling your career. If you find yourself typing the sa
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 16 – Advanced Bash Scripting](V2-C16-advanced-bash-scripting.md)
+← Previous: [Chapter 16 — Advanced Bash Scripting](V2-C16-advanced-bash-scripting.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 18 – System Backup & Restoration *[Coming Soon]*](#)
+→ Next: [Chapter 18 — System Backup & Restoration (rsync)](V2-C18-system-backup.md)

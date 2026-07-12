@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C06
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 7 — Filesystem Tuning and Inodes
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Differentiate between `df -h` (Disk Space) and `df -i` (Inode Space).
 * Troubleshoot "No space left on device" errors caused by Inode exhaustion.
 * Understand the `ext4` reserved block percentage.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-63300**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Filesystem Tuning and Inodes. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Library Card Catalog
 
@@ -81,6 +89,7 @@ By default, `ext4` reserves 5% of all disk space exclusively for the `root` user
 The customer panics and buys a larger hard drive. They contact Support and say, "My server says it is out of space, but when I run `df -h`, it says my hard drive is only 40% full! Your servers are broken!"
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs in. They run `df -h`. The customer is correct; the drive has 60% free physical space.
 2. The engineer knows the secret. They run the Inode command:
    `df -i`
@@ -92,6 +101,7 @@ The customer panics and buys a larger hard drive. They contact Support and say, 
 7. They discover that `/var/lib/php/sessions/` contains 4.5 million old, abandoned session files. A cron job meant to delete old sessions had failed a year ago.
 8. The engineer deletes the millions of tiny files (`find /var/lib/php/sessions -type f -delete`).
 9. The engineer runs `df -i` again. Inode usage drops to 5%. The website instantly comes back online.
+
 
 ## Hands-on Lab
 
@@ -124,11 +134,8 @@ The `df -h` command only tells you half the story. The physical size of the file
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 6 – Network Attached Storage](V2-C06-network-attached-storage.md)
+← Previous: [Chapter 6 — Network Attached Storage (NFS & SMB)](V2-C06-network-attached-storage.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 8 – Static IP Configuration *[Coming Soon]*](#)
+→ Next: [Chapter 8 — Static IP Configuration](V2-C08-static-ip-configuration.md)

@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C02
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 3 — Centralized Authentication
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Identify major centralized authentication servers (Windows Active Directory, FreeIPA, OpenLDAP).
 * Understand how Linux uses SSSD to bridge the gap and join a Windows Domain.
 * Troubleshoot "Stale Cache" login issues in SSSD.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-47907**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Centralized Authentication. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Windows to Linux Bridge
 
@@ -78,6 +86,7 @@ SSSD acts as a translator. When you type `id jdoe` on a Linux server, SSSD trans
 **The Incident:** A new developer, Jane, tries to SSH into the `db-server`. She receives `Permission Denied`. Jane contacts the Helpdesk. The Windows Administrator checks Active Directory and says, "Jane was just added to the *Database_Admins* group 5 minutes ago. She should have access."
 
 **The Investigation & Fix:**
+
 1. The Linux Support Engineer logs into the `db-server`. They run `id jane`.
 2. The output shows Jane's groups, but *Database_Admins* is missing.
 3. The engineer understands the architecture: To save network bandwidth, SSSD caches Active Directory responses. By default, this cache lasts for hours. The Linux server doesn't know Jane was promoted because it is looking at an old, cached version of her profile.
@@ -86,6 +95,7 @@ SSSD acts as a translator. When you type `id jdoe` on a Linux server, SSSD trans
 5. To be absolutely certain, the engineer restarts the SSSD service:
    `systemctl restart sssd`
 6. The engineer runs `id jane` again. The SSSD service is forced to query the Windows Domain Controller. The *Database_Admins* group appears in the output. Jane successfully logs in.
+
 
 ## Hands-on Lab
 
@@ -118,11 +128,8 @@ Centralized Authentication is the backbone of enterprise security. Whether the b
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 2 – Pluggable Authentication Modules (PAM)](V2-C02-pluggable-authentication-modules.md)
+← Previous: [Chapter 2 — Pluggable Authentication Modules (PAM)](V2-C02-pluggable-authentication-modules.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 4 – Logical Volume Management (LVM) *[Coming Soon]*](#)
+→ Next: [Chapter 4 — Logical Volume Management (LVM)](V2-C04-logical-volume-management.md)

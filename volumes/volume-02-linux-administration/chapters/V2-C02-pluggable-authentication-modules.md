@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V2-C01
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 2 — Pluggable Authentication Modules (PAM)
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Understand the 4 management groups of the PAM stack (`auth`, `account`, `password`, `session`).
 * Navigate the `/etc/pam.d/` directory.
 * Troubleshoot and reset user lockouts triggered by `pam_faillock` (or `pam_tally2`).
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-83394**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Pluggable Authentication Modules (PAM). Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The PAM Interceptor
 
@@ -81,6 +89,7 @@ PAM uses control flags to decide what happens if a module fails:
 **The Incident:** A customer's employee, `jdoe`, went on vacation. They forgot their password. They tried to guess it 5 times over SSH and failed. Then they remembered their password, but the server now says `Permission Denied` even though the password is correct!
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs in (using their own admin account) and checks the authentication logs: `grep jdoe /var/log/auth.log` (or `/var/log/secure` on RHEL).
 2. The logs show: `pam_faillock(sshd:auth): Consecutive login failures for user jdoe account temporarily locked`.
 3. The engineer realizes the security hardening module `pam_faillock` (or the older `pam_tally2`) intercepted the login. Because the user failed 5 times, the `account` management group has locked the user out for 15 minutes to prevent Brute Force attacks.
@@ -89,6 +98,7 @@ PAM uses control flags to decide what happens if a module fails:
 5. The output confirms 5 failures. The engineer resets the counter:
    `faillock --user jdoe --reset`
 6. `jdoe` tries to log in again with their correct password. The PAM stack passes them, and they successfully log in.
+
 
 ## Hands-on Lab
 
@@ -121,11 +131,8 @@ PAM is the hidden bouncer of the Linux operating system. It doesn't just check p
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 1 – The Root of All Power](V2-C01-the-root-of-all-power.md)
+← Previous: [Chapter 1 — The Root of All Power](V2-C01-the-root-of-all-power.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 3 – Centralized Authentication](V2-C03-centralized-authentication.md)
+→ Next: [Chapter 3 — Centralized Authentication](V2-C03-centralized-authentication.md)

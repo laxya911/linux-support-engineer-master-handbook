@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 8 — Static IP Configuration
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Configure a static IP in Ubuntu using the modern `netplan` YAML framework.
 * Configure a static IP in RHEL/CentOS using `nmcli` (NetworkManager).
 * Safely apply network changes using `netplan try` to prevent SSH lockouts.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-28675**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to Static IP Configuration. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Netplan Hierarchy
 
@@ -90,6 +98,7 @@ To set a static IP on RHEL:
 They can successfully `ping 10.0.0.51` (the database server sitting right next to it), but when they try to `ping 8.8.8.8` (Google/The Internet), the server replies: `Network is unreachable`.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs in and runs `ip route`. 
 2. The output shows the local subnet (`10.0.0.0/24`), but it is missing a `default` route. 
 3. The engineer realizes the mistake: The junior engineer assigned the IP address, but forgot to tell the server how to reach the router! Without a Default Gateway, the server cannot talk to anyone outside its own subnet.
@@ -103,6 +112,7 @@ They can successfully `ping 10.0.0.51` (the database server sitting right next t
    `netplan try`
 6. The system applies the change and starts a 120-second countdown: `Do you want to keep these settings?`. If the engineer's SSH session drops, the countdown will expire and Netplan will automatically revert the IP address back to its previous state.
 7. The SSH session remains stable. The engineer presses `ENTER` to permanently accept the change. The server can now reach the internet.
+
 
 ## Hands-on Lab
 
@@ -135,11 +145,8 @@ The days of editing `/etc/network/interfaces` are over. In the modern Linux land
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 7 – Filesystem Tuning and Inodes](V2-C07-filesystem-tuning-and-inodes.md)
+← Previous: [Chapter 7 — Filesystem Tuning and Inodes](V2-C07-filesystem-tuning-and-inodes.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 9 – Network Routing & Gateways](V2-C09-network-routing.md)
+→ Next: [Chapter 9 — Network Routing & Gateways](V2-C09-network-routing.md)

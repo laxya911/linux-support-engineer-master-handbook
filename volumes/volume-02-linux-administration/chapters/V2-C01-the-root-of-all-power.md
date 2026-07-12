@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 1 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 1 — The Root of All Power
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -33,6 +32,15 @@ By the end of this chapter, you will be able to:
 * Understand the mechanics of the `sudo` command.
 * Safely edit the `/etc/sudoers` file to grant granular privileges.
 * Use `visudo` to prevent locking yourself out of your own server.
+
+
+> [!IMPORTANT]
+> **ServiceNow Ticket: INC-74056**
+> **Priority:** High
+> **Reported By:** Enterprise Application Team
+> **Issue:** We are experiencing a critical failure related to The Root of All Power. Please investigate immediately.
+> 
+> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
 
 ## Visual Architecture: The Sudo Escalation
 
@@ -97,11 +105,13 @@ To *prevent* it, you must **always** use the `visudo` command. `visudo` opens th
 The developer runs `sudo systemctl restart nginx` but receives a "Command not allowed" error.
 
 **The Investigation & Fix:**
+
 1. The engineer realizes that the `sudoers` file is extremely paranoid. It does not trust relative commands.
 2. The engineer runs `which systemctl` to find the absolute path of the executable. It returns `/bin/systemctl`.
 3. The engineer runs `sudo visudo` and updates the line to:
    `%devteam ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx`
 4. The developer tries again, and the command succeeds.
+
 
 ## Hands-on Lab
 
@@ -134,11 +144,8 @@ The `sudoers` file is the gateway to your server's security. Give people only th
 
 ## Navigation
 
-⬅ Previous:
-[Volume 1 Fundamentals](../../volume-01-linux-fundamentals/README.md)
+← Previous: None
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 2 – PAM (Pluggable Authentication Modules) *[Coming Soon]*](#)
+→ Next: [Chapter 2 — Pluggable Authentication Modules (PAM)](V2-C02-pluggable-authentication-modules.md)
