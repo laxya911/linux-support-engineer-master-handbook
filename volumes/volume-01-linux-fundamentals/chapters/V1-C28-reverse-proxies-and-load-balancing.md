@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 27
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 28 — Reverse Proxies & Load Balancing
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Have you ever wondered how Linux handles Reverse Proxies & Load Balancing? In this chapter, we dive deep into the mechanics, exploring the tools and strategies that separate a junior admin from a true Linux Support Engineer.
 
 By the end of this chapter, you will be able to:
 * Explain the difference between a Web Server and a Reverse Proxy.

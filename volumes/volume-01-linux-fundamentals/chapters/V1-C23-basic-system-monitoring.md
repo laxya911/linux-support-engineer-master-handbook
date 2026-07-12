@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 22
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 23 — Basic System Monitoring
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+You can't fix what you can't measure. We'll explore the real-time monitoring tools that help you instantly identify whether the CPU, RAM, or Disk I/O is the bottleneck.
 
 By the end of this chapter, you will be able to:
 * Parse the `uptime` command to read 1-minute, 5-minute, and 15-minute Load Averages.
@@ -75,18 +80,26 @@ Checking RAM in Linux is tricky because Linux intentionally uses "free" RAM to c
 
 ## Real-World Scenarios
 
-**Customer:**
-*"My e-commerce website is completely unresponsive. It takes 30 seconds just to load the homepage!"*
-
-How should a Linux Support Engineer investigate?
-* **Diagnosis:** The server is bottlenecking on CPU, RAM, or Disk Space.
-* **Investigation:** 
-  1. The engineer runs `df -h` (Chapter 17). Disk space is at 40%. (Healthy).
-  2. The engineer runs `free -h`. The `available` column shows 4GB of RAM. (Healthy).
-  3. The engineer runs `uptime`. The server has 2 CPUs, but the load average is `18.5, 12.0, 5.0`. (Critical Traffic Jam).
-  4. The engineer runs `top` and sorts by CPU. They see a massive, runaway database query consuming 200% CPU (maxing out both cores).
-* **The Fix:** The engineer identifies the Process ID (PID) of the database query and kills it. The load average immediately drops back to `0.5`, and the website instantly loads.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""My e-commerce website is completely unresponsive. It takes 30 seconds just to load the homepage!""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Diagnosis:** The server is bottlenecking on CPU, RAM, or Disk Space.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Investigation:** 
+>     1. The engineer runs `df -h` (Chapter 17). Disk space is at 40%. (Healthy).
+>     2. The engineer runs `free -h`. The `available` column shows 4GB of RAM. (Healthy).
+>     3. The engineer runs `uptime`. The server has 2 CPUs, but the load average is `18.5, 12.0, 5.0`. (Critical Traffic Jam).
+>     4. The engineer runs `top` and sorts by CPU. They see a massive, runaway database query consuming 200% CPU (maxing out both cores).
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **The Fix:** The engineer identifies the Process ID (PID) of the database query and kills it. The load average immediately drops back to `0.5`, and the website instantly loads.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]

@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 12
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 13 — Software Logs & Journals
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+When things break, the logs hold the answer. We'll explore where applications write their errors and how `journalctl` acts as your central nervous system for troubleshooting system events.
 
 By the end of this chapter, you will be able to:
 * Identify the difference between traditional `/var/log` text files and the modern `systemd` binary journal.
@@ -82,14 +87,22 @@ If an outage occurred at 3:00 PM yesterday, you don't want to scroll through las
 
 ## Real-World Scenarios
 
-**Customer:**
-*"I modified the SSH configuration to change the default port, but now the SSH service won't restart. I ran `systemctl status sshd` but the output cuts off with `...` at the end of the line, so I can't read the error!"*
-
-How should a Linux Support Engineer investigate?
-* **Mental Map:** `systemctl status` only shows the last 10 lines of the log, and it truncates long lines to fit your terminal width. To see the full error, the engineer must query the journal.
-* **The Fix:** The engineer runs `journalctl -u sshd -e`. This queries the journal for the SSH service and jumps to the very end. The output reveals the full error message: `line 15: Bad configuration option: Portt 2222`. 
-* The engineer opens the file in `vim`, removes the extra 't' from 'Portt', saves, and restarts the service successfully.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""I modified the SSH configuration to change the default port, but now the SSH service won't restart. I ran `systemctl status sshd` but the output cuts off with `...` at the end of the line, so I can't read the error!""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Mental Map:** `systemctl status` only shows the last 10 lines of the log, and it truncates long lines to fit your terminal width. To see the full error, the engineer must query the journal.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix:** The engineer runs `journalctl -u sshd -e`. This queries the journal for the SSH service and jumps to the very end. The output reveals the full error message: `line 15: Bad configuration option: Portt 2222`. 
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - The engineer opens the file in `vim`, removes the extra 't' from 'Portt', saves, and restarts the service successfully.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

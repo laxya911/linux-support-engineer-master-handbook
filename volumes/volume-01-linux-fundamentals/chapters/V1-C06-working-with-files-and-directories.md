@@ -17,6 +17,9 @@ interview_questions: 2
 prerequisites: Chapter 5
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 6 — Working with Files & Directories
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 2
 
 ## Learning Objectives
+
+Mastering the command line starts with file manipulation. In this chapter, we move beyond basic navigation and dive into the powerful utilities that allow you to create, move, and manage data at lightning speed.
 
 By the end of this chapter, you will be able to:
 * Create, copy, move, and delete files and directories confidently.
@@ -81,14 +86,22 @@ Sometimes a script expects a file to be in `/usr/local/bin`, but you installed i
 
 ## Real-World Scenarios
 
-**Customer:**
-*"Our application is crashing when it starts up. The developer says we need to watch the application log while they trigger the script."*
-
-How should a Linux Support Engineer investigate?
-* **Action:** You SSH into the server and type `tail -f /var/log/myapp/error.log`. 
-* **Observation:** As the developer triggers the script, you instantly see: `ERROR: Cannot write to /tmp/myapp.lock - Permission denied`.
-* **The Fix:** Because you watched the log in real-time, you caught the exact error without having to dig through millions of lines of historical logs.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""Our application is crashing when it starts up. The developer says we need to watch the application log while they trigger the script.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Action:** You SSH into the server and type `tail -f /var/log/myapp/error.log`. 
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Observation:** As the developer triggers the script, you instantly see: `ERROR: Cannot write to /tmp/myapp.lock - Permission denied`.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **The Fix:** Because you watched the log in real-time, you caught the exact error without having to dig through millions of lines of historical logs.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

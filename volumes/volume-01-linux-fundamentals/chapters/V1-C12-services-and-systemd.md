@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 11
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 12 — Services & systemd
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Systemd has fundamentally changed how Linux manages services. From starting web servers on boot to managing dependencies, mastering systemd is essential for modern server administration.
 
 By the end of this chapter, you will be able to:
 * Define what a daemon is.
@@ -76,14 +81,22 @@ This is a massive point of confusion for beginners.
 
 ## Real-World Scenarios
 
-**Customer:**
-*"Our server underwent a scheduled reboot last night for kernel patching. This morning, our database is offline. We have to manually start it every time the server reboots!"*
-
-How should a Linux Support Engineer investigate?
-* **Diagnosis:** The database software (e.g., PostgreSQL or MySQL) was manually started, but never enabled in `systemd`.
-* **Investigation:** The engineer logs in and runs `systemctl status postgresql`. The output shows: `Loaded: loaded (/lib/systemd/system/postgresql.service; disabled; vendor preset: enabled)`. The word `disabled` confirms the theory.
-* **The Fix:** The engineer runs `sudo systemctl enable --now postgresql`. The database starts immediately, and the engineer assures the customer that it will survive all future reboots.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""Our server underwent a scheduled reboot last night for kernel patching. This morning, our database is offline. We have to manually start it every time the server reboots!""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Diagnosis:** The database software (e.g., PostgreSQL or MySQL) was manually started, but never enabled in `systemd`.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Investigation:** The engineer logs in and runs `systemctl status postgresql`. The output shows: `Loaded: loaded (/lib/systemd/system/postgresql.service; disabled; vendor preset: enabled)`. The word `disabled` confirms the theory.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **The Fix:** The engineer runs `sudo systemctl enable --now postgresql`. The database starts immediately, and the engineer assures the customer that it will survive all future reboots.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

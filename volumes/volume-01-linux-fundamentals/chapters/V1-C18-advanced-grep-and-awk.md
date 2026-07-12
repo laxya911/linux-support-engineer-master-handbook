@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 17
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 18 — Advanced Grep & Awk
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Parsing thousands of lines of logs by hand is impossible. Enter `grep` and `awk`: the ultimate text-processing Swiss Army knives that allow you to extract exactly what you need in milliseconds.
 
 By the end of this chapter, you will be able to:
 * Extract specific rows using advanced `grep` flags (`-i`, `-v`, `-r`).
@@ -75,17 +80,27 @@ You can chain these commands together. The output of the left command becomes th
 
 ## Real-World Scenarios
 
-**Customer:**
-*"Our Nginx web server is under attack! Someone is constantly trying to access `/admin.php` and getting 404 errors. I need a list of the IP addresses attacking us so I can block them in the firewall."*
-
-How should a Linux Support Engineer investigate?
-* **Diagnosis:** The access log contains hundreds of thousands of lines. Reading it manually is impossible.
-* **Investigation:** The engineer logs in and looks at one line of the log to understand the format:
-  `14.55.201.2 - - [08/Jul/2026] "GET /admin.php" 404 ...`
-* **The Fix:** The engineer realizes the IP address is in Column 1 (`$1`). They run:
-  `grep "admin.php" /var/log/nginx/access.log | awk '{print $1}'`
-* **Result:** The terminal instantly outputs a clean, neat list of every single IP address that has tried to hit the admin page. The engineer hands the list to the customer.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""Our Nginx web server is under attack! Someone is constantly trying to access `/admin.php` and getting 404 errors. I need a list of the IP addresses attacking us so I can block them in the firewall.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Diagnosis:** The access log contains hundreds of thousands of lines. Reading it manually is impossible.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Investigation:** The engineer logs in and looks at one line of the log to understand the format:
+>     `14.55.201.2 - - [08/Jul/2026] "GET /admin.php" 404 ...`
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **The Fix:** The engineer realizes the IP address is in Column 1 (`$1`). They run:
+>     `grep "admin.php" /var/log/nginx/access.log | awk '{print $1}'`
+>
+> **🏢 Business Owner (Eve):**
+> - **Result:** The terminal instantly outputs a clean, neat list of every single IP address that has tried to hit the admin page. The engineer hands the list to the customer.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]

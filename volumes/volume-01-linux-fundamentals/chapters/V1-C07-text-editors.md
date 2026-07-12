@@ -17,6 +17,9 @@ interview_questions: 2
 prerequisites: Chapter 6
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 7 — Text Editors (nano & vim)
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 2
 
 ## Learning Objectives
+
+Your configuration files are the lifeblood of your server. Whether you prefer the ubiquitous Vim or the straightforward Nano, mastering a terminal-based text editor is a non-negotiable skill for any Linux engineer.
 
 By the end of this chapter, you will be able to:
 * Understand why terminal-based text editors are mandatory for Linux Engineers.
@@ -91,13 +96,19 @@ From Normal Mode, if you press the colon key `:`, your cursor drops to the very 
 
 ## Real-World Scenarios
 
-**Customer:**
-*"I accidentally made a typo in my web server configuration. The server won't start. Please fix it!"*
-
-How should a Linux Support Engineer investigate?
-* **Action:** You SSH into the server and type `nano /etc/nginx/nginx.conf`. The system replies: `-bash: nano: command not found`.
-* **The Fix:** Because you are a trained professional, you do not panic. You type `vim /etc/nginx/nginx.conf`. You use your arrow keys to find the typo. You press `i` to enter Insert Mode. You fix the typo. You press `Esc`. You type `:wq` to save and quit. You restart the web server, and the ticket is resolved.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""I accidentally made a typo in my web server configuration. The server won't start. Please fix it!""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Action:** You SSH into the server and type `nano /etc/nginx/nginx.conf`. The system replies: `-bash: nano: command not found`.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix:** Because you are a trained professional, you do not panic. You type `vim /etc/nginx/nginx.conf`. You use your arrow keys to find the typo. You press `i` to enter Insert Mode. You fix the typo. You press `Esc`. You type `:wq` to save and quit. You restart the web server, and the ticket is resolved.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 14
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 15 — SSH Administration
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+SSH is your primary gateway into any remote system. Beyond just logging in, we'll cover key-based authentication, secure configurations, and tunneling to protect your remote sessions.
 
 By the end of this chapter, you will be able to:
 * Explain how the Public/Private Key exchange protocol works.
@@ -90,18 +95,24 @@ As a Support Engineer, you will frequently edit this file to lock down the serve
 
 ## Real-World Scenarios
 
-**Customer:**
-*"We are failing our security audit. The auditor's bot is brute-forcing our server on Port 22 with millions of password guesses for the root user. Stop this immediately."*
-
-How should a Linux Support Engineer investigate?
-* **Mental Map:** The server is exposed to the internet, and bots are guessing passwords. The fix is to completely disable root login and disable password authentication over SSH.
-* **The Fix:** 
-  1. The engineer ensures they have their Public Key installed on a standard user account and verifies they can escalate via `sudo`.
-  2. The engineer opens `/etc/ssh/sshd_config`.
-  3. They set `PermitRootLogin no` and `PasswordAuthentication no`.
-  4. They run `systemctl restart sshd`.
-  5. The bot immediately fails because the server no longer accepts passwords, and it completely rejects any attempt to log in directly as root.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""We are failing our security audit. The auditor's bot is brute-forcing our server on Port 22 with millions of password guesses for the root user. Stop this immediately.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Mental Map:** The server is exposed to the internet, and bots are guessing passwords. The fix is to completely disable root login and disable password authentication over SSH.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix:** 
+>     1. The engineer ensures they have their Public Key installed on a standard user account and verifies they can escalate via `sudo`.
+>     2. The engineer opens `/etc/ssh/sshd_config`.
+>     3. They set `PermitRootLogin no` and `PasswordAuthentication no`.
+>     4. They run `systemctl restart sshd`.
+>     5. The bot immediately fails because the server no longer accepts passwords, and it completely rejects any attempt to log in directly as root.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]

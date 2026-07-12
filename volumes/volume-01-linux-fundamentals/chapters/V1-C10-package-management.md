@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 9
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 10 — Package Management
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Gone are the days of manually compiling every piece of software. Package managers handle dependencies, updates, and removals automatically. Let's explore how Debian and Red Hat systems handle software lifecycles.
 
 By the end of this chapter, you will be able to:
 * Explain how Linux repositories differ from Windows `.exe` downloads.
@@ -87,17 +92,23 @@ Unlike Windows which constantly pesters you to reboot for updates, Linux allows 
 
 ## Real-World Scenarios
 
-**Customer:**
-*"I am trying to run a script that downloads a file from the internet, but it keeps failing with 'curl: command not found'. Please install it."*
-
-How should a Linux Support Engineer investigate?
-* **Mental Map:** The server is missing the `curl` binary. The engineer must install it using the package manager.
-* **The Fix (Ubuntu):** 
-  1. The engineer runs `sudo apt update` to ensure their cache is fresh.
-  2. The engineer runs `sudo apt install curl`.
-  3. The engineer types `curl --version` to verify it installed successfully.
-  4. The ticket is resolved in under 60 seconds.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""I am trying to run a script that downloads a file from the internet, but it keeps failing with 'curl: command not found'. Please install it.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Mental Map:** The server is missing the `curl` binary. The engineer must install it using the package manager.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix (Ubuntu):** 
+>     1. The engineer runs `sudo apt update` to ensure their cache is fresh.
+>     2. The engineer runs `sudo apt install curl`.
+>     3. The engineer types `curl --version` to verify it installed successfully.
+>     4. The ticket is resolved in under 60 seconds.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

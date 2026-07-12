@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 23
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 24 — Introduction to Networking (Firewalls)
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Security requires defense in depth. By mastering `iptables` and `firewalld`, you can control exactly which traffic is allowed into and out of your server, blocking attackers at the gate.
 
 By the end of this chapter, you will be able to:
 * Understand the concept of a "Default Deny" policy.
@@ -78,15 +83,25 @@ Firewalld is more complex and uses the concept of "Zones" (like public, trusted,
 
 ## Real-World Scenarios
 
-**Customer:**
-*"I just installed a web server on Ubuntu. When I type `ss -tulpn`, I clearly see it listening on Port 80. But when I type my IP address into my web browser on my laptop, it times out!"*
-
-How should a Linux Support Engineer investigate?
-* **Mental Map:** The service is running internally, but failing externally. It is being blocked at the perimeter.
-* **Investigation:** The engineer logs in and runs `sudo ufw status`. The output says `Status: active`, but Port 80 is not listed in the rules.
-* **The Fix:** The engineer runs `sudo ufw allow 80/tcp`. 
-* **Result:** The customer refreshes their browser and the website loads instantly.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""I just installed a web server on Ubuntu. When I type `ss -tulpn`, I clearly see it listening on Port 80. But when I type my IP address into my web browser on my laptop, it times out!""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Mental Map:** The service is running internally, but failing externally. It is being blocked at the perimeter.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Investigation:** The engineer logs in and runs `sudo ufw status`. The output says `Status: active`, but Port 80 is not listed in the rules.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **The Fix:** The engineer runs `sudo ufw allow 80/tcp`. 
+>
+> **🏢 Business Owner (Eve):**
+> - **Result:** The customer refreshes their browser and the website loads instantly.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]

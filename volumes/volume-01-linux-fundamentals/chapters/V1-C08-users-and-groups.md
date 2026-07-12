@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 7
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 8 — Users & Groups
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Linux is inherently a multi-user system. Understanding how identities are managed, authenticated, and grouped is the bedrock of system security and access control.
 
 By the end of this chapter, you will be able to:
 * Differentiate between the `root` user and standard users.
@@ -88,15 +93,21 @@ How do you give a user `sudo` privileges? You add them to the admin group.
 
 ## Real-World Scenarios
 
-**Customer:**
-*"We hired a new developer, Sarah. She needs to be able to restart the Nginx web server, but we do not want to give her full root access."*
-
-How should a Linux Support Engineer investigate?
-* **Mental Map:** Sarah needs elevated privileges, but only for one specific command. This is a job for `/etc/sudoers`.
-* **The Fix:** You type `visudo` and add a custom rule at the bottom of the file: 
-  `sarah ALL=(ALL) /bin/systemctl restart nginx`. 
-  Sarah can now restart the web server, but if she tries to run `sudo rm /etc/passwd`, it will be blocked.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""We hired a new developer, Sarah. She needs to be able to restart the Nginx web server, but we do not want to give her full root access.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Mental Map:** Sarah needs elevated privileges, but only for one specific command. This is a job for `/etc/sudoers`.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix:** You type `visudo` and add a custom rule at the bottom of the file: 
+>     `sarah ALL=(ALL) /bin/systemctl restart nginx`. 
+>     Sarah can now restart the web server, but if she tries to run `sudo rm /etc/passwd`, it will be blocked.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

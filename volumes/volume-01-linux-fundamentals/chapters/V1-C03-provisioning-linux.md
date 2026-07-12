@@ -17,6 +17,9 @@ interview_questions: 2
 prerequisites: Chapter 2
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 3 — Provisioning Linux
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 2
 
 ## Learning Objectives
+
+A server is only as good as its foundation. Whether you're deploying a local virtual machine or spinning up cloud infrastructure, understanding how to properly provision a Linux environment is your first step to building reliable systems.
 
 By the end of this chapter, you will be able to:
 * Explain the difference between installing a single OS via ISO and provisioning servers at scale.
@@ -78,14 +83,22 @@ If you deploy an Ubuntu VM in AWS or Azure, you are not installing an OS. You ar
 
 ## Real-World Scenarios
 
-**Customer:**
-*"We deployed a new database server yesterday. Today, nobody can SSH into it, and the website is throwing 500 Internal Server Errors."*
-
-How should a Linux Support Engineer investigate?
-* **Which logs?** Check monitoring graphs or use out-of-band console access to view `dmesg`. 
-* **Expected troubleshooting workflow:** If the server was provisioned with a single `/` partition, the new database likely consumed 100% of the disk. The OS crashed because it had no space to allocate basic session memory for SSH.
-* **The Fix:** Boot into a recovery environment, clear the logs, and strongly recommend the customer rebuild the server with a dedicated `/var/lib/mysql` partition to protect the root filesystem.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""We deployed a new database server yesterday. Today, nobody can SSH into it, and the website is throwing 500 Internal Server Errors.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Which logs?** Check monitoring graphs or use out-of-band console access to view `dmesg`. 
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Expected troubleshooting workflow:** If the server was provisioned with a single `/` partition, the new database likely consumed 100% of the disk. The OS crashed because it had no space to allocate basic session memory for SSH.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **The Fix:** Boot into a recovery environment, clear the logs, and strongly recommend the customer rebuild the server with a dedicated `/var/lib/mysql` partition to protect the root filesystem.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

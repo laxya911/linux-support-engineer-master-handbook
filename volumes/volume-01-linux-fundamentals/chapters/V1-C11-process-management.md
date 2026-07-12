@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 10
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 11 — Process Management
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Every running application is a process competing for CPU and RAM. When a server crawls to a halt, your ability to identify, trace, and terminate rogue processes is your most valuable weapon.
 
 By the end of this chapter, you will be able to:
 * Define what a Process ID (PID) is.
@@ -79,17 +84,25 @@ The `kill` command does not actually "kill" anything. It sends **Signals** to pr
 
 ## Real-World Scenarios
 
-**Customer:**
-*"Our server is completely unresponsive. Everything is incredibly slow. We think a developer ran a bad Python script."*
-
-How should a Linux Support Engineer investigate?
-* **Diagnosis:** The CPU is likely pegged at 100% by a rogue script.
-* **Investigation:** You SSH into the server and run `top`. At the very top of the list, consuming 99.9% CPU, you see a command called `python3 bad_script.py` with a PID of `4092`.
-* **The Fix:** 
-  1. You run `kill 4092` (the polite Signal 15).
-  2. You run `top` again. The process is still there. It is frozen and ignoring the signal.
-  3. You run `kill -9 4092`. The kernel executes the script. CPU usage immediately drops to 2%, and the server recovers.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""Our server is completely unresponsive. Everything is incredibly slow. We think a developer ran a bad Python script.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Diagnosis:** The CPU is likely pegged at 100% by a rogue script.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Investigation:** You SSH into the server and run `top`. At the very top of the list, consuming 99.9% CPU, you see a command called `python3 bad_script.py` with a PID of `4092`.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **The Fix:** 
+>     1. You run `kill 4092` (the polite Signal 15).
+>     2. You run `top` again. The process is still there. It is frozen and ignoring the signal.
+>     3. You run `kill -9 4092`. The kernel executes the script. CPU usage immediately drops to 2%, and the server recovers.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]

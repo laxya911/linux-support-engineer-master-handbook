@@ -17,6 +17,9 @@ interview_questions: 2
 prerequisites: None
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 1 — Welcome to Linux Support Engineering
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 2
 
 ## Learning Objectives
+
+Welcome to the front lines! Before we dive into the technical depths of Linux, we need to understand the mindset, the environment, and the tools that define a true Linux Support Engineer. This chapter sets the stage for your journey.
 
 By the end of this chapter, you will be able to:
 * Define what a Linux Support Engineer is and how the role differs from a traditional System Administrator.
@@ -64,15 +69,25 @@ To solve these problems, a Support Engineer relies on **evidence**, not guesswor
 
 ## Real-World Scenarios
 
-**Customer:**
-*"Our production web server is completely unresponsive, but ping works."*
-
-How should a Linux Support Engineer investigate?
-* **Which logs?** Check `/var/log/syslog` or `journalctl` for OOM (Out of Memory) kills.
-* **Which services?** Check if `sshd` and the web server (`nginx`/`apache2`) are running.
-* **Which commands?** Use `top`, `free -m`, or try logging in through an out-of-band console if SSH drops.
-* **Expected troubleshooting workflow:** Gain access without disrupting state, check resource exhaustion, restart the offending service, and document the root cause for prevention.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""Our production web server is completely unresponsive, but ping works.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Which logs?** Check `/var/log/syslog` or `journalctl` for OOM (Out of Memory) kills.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Which services?** Check if `sshd` and the web server (`nginx`/`apache2`) are running.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **Which commands?** Use `top`, `free -m`, or try logging in through an out-of-band console if SSH drops.
+>
+> **🏢 Business Owner (Eve):**
+> - **Expected troubleshooting workflow:** Gain access without disrupting state, check resource exhaustion, restart the offending service, and document the root cause for prevention.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

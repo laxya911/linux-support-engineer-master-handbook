@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 20
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 21 — Environment Variables
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+How do applications know where to find their configurations? Environment variables act as the invisible global state of your shell, dictating everything from your `$PATH` to system locales.
 
 By the end of this chapter, you will be able to:
 * Differentiate between local variables and global environment variables.
@@ -84,18 +89,26 @@ To make a variable permanent, you must write the `export` command into a configu
 
 ## Real-World Scenarios
 
-**Customer:**
-*"I downloaded a binary called `aws-cli` and put it in my `/home/user/tools` directory. But when I just type `aws-cli` in the terminal, it says 'command not found'. I don't want to type the full path every time. Fix this!"*
-
-How should a Linux Support Engineer investigate?
-* **Diagnosis:** The command is valid, but the `/home/user/tools` directory is not part of the system's `$PATH`.
-* **The Fix:** 
-  1. The engineer opens the user's configuration file: `nano ~/.bashrc`
-  2. At the very bottom of the file, they append: `export PATH=$PATH:/home/user/tools`
-  3. They save the file.
-  4. They run `source ~/.bashrc` to force the terminal to re-read the file immediately without logging out.
-* **Result:** The customer can now type `aws-cli` from anywhere in the system, and Linux will successfully find and execute it.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""I downloaded a binary called `aws-cli` and put it in my `/home/user/tools` directory. But when I just type `aws-cli` in the terminal, it says 'command not found'. I don't want to type the full path every time. Fix this!""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Diagnosis:** The command is valid, but the `/home/user/tools` directory is not part of the system's `$PATH`.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix:** 
+>     1. The engineer opens the user's configuration file: `nano ~/.bashrc`
+>     2. At the very bottom of the file, they append: `export PATH=$PATH:/home/user/tools`
+>     3. They save the file.
+>     4. They run `source ~/.bashrc` to force the terminal to re-read the file immediately without logging out.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **Result:** The customer can now type `aws-cli` from anywhere in the system, and Linux will successfully find and execute it.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]

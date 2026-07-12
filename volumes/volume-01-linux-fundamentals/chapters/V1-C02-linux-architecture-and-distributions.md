@@ -17,6 +17,9 @@ interview_questions: 2
 prerequisites: Chapter 1
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 2 — Linux Architecture & Distributions
@@ -29,6 +32,8 @@ status: In Progress
 *"You cannot troubleshoot what you don't understand."*
 
 ## Learning Objectives
+
+Linux isn't just one operating system; it's a vast ecosystem of distributions built on a shared foundation. In this chapter, we explore the core architecture that makes Linux tick and how different distributions tailor it to their needs.
 
 By the end of this chapter, you will be able to:
 * Explain the architecture of a Linux operating system.
@@ -61,21 +66,32 @@ To answer those questions, you must understand Linux architecture.
 
 Imagine Linux as a modern city. Every request travels through these layers. Understanding those layers is the foundation of troubleshooting.
 
-```text
-                 USER
-    Chrome, Firefox, SSH, Nginx, MySQL, Python, Docker, Bash
------------------------------
-        User Space
------------------------------
-      System Libraries
------------------------------
-      System Calls
------------------------------
-          Kernel
------------------------------
-      Hardware Drivers
------------------------------
-   CPU, RAM, SSD, NIC, GPU
+```mermaid
+flowchart TD
+    classDef userSpace fill:#2c3e50,stroke:#2980b9,stroke-width:2px,color:#ecf0f1,font-weight:bold
+    classDef kernelSpace fill:#c0392b,stroke:#e74c3c,stroke-width:2px,color:#ecf0f1,font-weight:bold
+    classDef hardware fill:#7f8c8d,stroke:#95a5a6,stroke-width:2px,color:#ecf0f1,font-weight:bold
+
+    subgraph UserSpace [User Space]
+        Apps["Applications (Bash, Chrome, SSH)"]:::userSpace
+        Libs["System Libraries (glibc, OpenSSL)"]:::userSpace
+    end
+
+    subgraph KernelSpace [Kernel Space]
+        SysCalls["System Calls (open, read, write)"]:::kernelSpace
+        Kern["Kernel Core (Scheduling, Memory)"]:::kernelSpace
+        Drivers["Hardware Drivers"]:::kernelSpace
+    end
+
+    subgraph Hardware [Hardware Devices]
+        HW["CPU, RAM, SSD, NIC, GPU"]:::hardware
+    end
+
+    Apps --> Libs
+    Libs --> SysCalls
+    SysCalls --> Kern
+    Kern --> Drivers
+    Drivers --> HW
 ```
 
 ## The Four Major Layers
@@ -163,15 +179,25 @@ At a high level, Linux starts by loading the kernel through a bootloader before 
 
 ## Real-World Scenarios
 
-**Customer:**
-*"My application freezes whenever it accesses a file."*
-
-How should a Linux Support Engineer investigate?
-* **Which logs?** Check `dmesg` or `journalctl` for I/O errors or filesystem corruption.
-* **Which services?** Check if network storage mounts (NFS/CIFS) are hanging.
-* **Which commands?** Use `strace` on the frozen application process, or `df -h` / `iostat` to check storage availability and latency.
-* **Expected troubleshooting workflow:** Determine if the process is stuck in Uninterruptible Sleep (D state) waiting for the kernel/disk, then trace the storage path.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""My application freezes whenever it accesses a file.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Which logs?** Check `dmesg` or `journalctl` for I/O errors or filesystem corruption.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Which services?** Check if network storage mounts (NFS/CIFS) are hanging.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **Which commands?** Use `strace` on the frozen application process, or `df -h` / `iostat` to check storage availability and latency.
+>
+> **🏢 Business Owner (Eve):**
+> - **Expected troubleshooting workflow:** Determine if the process is stuck in Uninterruptible Sleep (D state) waiting for the kernel/disk, then trace the storage path.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

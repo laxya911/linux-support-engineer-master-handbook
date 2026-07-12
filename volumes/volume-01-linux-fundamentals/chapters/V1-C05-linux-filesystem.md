@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 4
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 5 — Linux Filesystem
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+In Linux, 'everything is a file.' But where are those files actually stored? Navigating the Filesystem Hierarchy Standard is like learning the map of a new city—once you know the layout, you'll never get lost.
 
 By the end of this chapter, you will be able to:
 * Explain the "Everything is a file" philosophy.
@@ -91,13 +96,19 @@ Not everything in the tree exists on the hard drive. Some directories exist enti
 
 ## Real-World Scenarios
 
-**Customer:**
-*"I just installed a proprietary monitoring agent, but when I type its command in the terminal, it says 'command not found'. Where did it install?"*
-
-How should a Linux Support Engineer investigate?
-* **Mental Map:** You know it is third-party, proprietary software. It likely didn't install to the standard `/usr/bin`.
-* **The Fix:** You check the `/opt` directory and find `/opt/custom-monitor/`. You run `/opt/custom-monitor/bin/start.sh` directly, and the agent works. You then explain to the customer how to add that directory to their `$PATH`.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""I just installed a proprietary monitoring agent, but when I type its command in the terminal, it says 'command not found'. Where did it install?""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Mental Map:** You know it is third-party, proprietary software. It likely didn't install to the standard `/usr/bin`.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix:** You check the `/opt` directory and find `/opt/custom-monitor/`. You run `/opt/custom-monitor/bin/start.sh` directly, and the agent works. You then explain to the customer how to add that directory to their `$PATH`.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

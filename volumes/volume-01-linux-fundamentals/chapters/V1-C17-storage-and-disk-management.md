@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 16
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 17 — Storage & Disk Management
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Disks fill up and drives fail. Learn how to partition raw block devices, format them with modern filesystems, and mount them persistently so your data survives a reboot.
 
 By the end of this chapter, you will be able to:
 * Map the physical and logical layout of disks using `lsblk`.
@@ -78,19 +83,27 @@ You can take a massive 10 Terabyte hard drive (`/dev/sdb1`) and mount it to the 
 
 ## Real-World Scenarios
 
-**Customer:**
-*"Our MySQL database suddenly crashed. When we try to restart it using `systemctl`, it says 'No space left on device'. Please help!"*
-
-How should a Linux Support Engineer investigate?
-* **Diagnosis:** The hard drive is 100% full. The database cannot write to the disk, so it crashed.
-* **Investigation:** 
-  1. The engineer runs `df -h` and confirms that the Root partition (`/`) is at `100%` usage.
-  2. The engineer `cd`s into the root directory (`cd /`).
-  3. They run `sudo du -sh *`. They see that the `/var` directory is 90GB.
-  4. They `cd /var` and run `sudo du -sh *` again. They see `/var/log` is 85GB.
-  5. They `cd /var/log` and find a single file named `error.log` that is 85GB in size.
-* **The Fix:** The engineer deletes the runaway log file using `rm error.log`. They run `df -h` again and see usage drop to `15%`. They restart the database via `systemctl restart mysql`, and the service is restored.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""Our MySQL database suddenly crashed. When we try to restart it using `systemctl`, it says 'No space left on device'. Please help!""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Diagnosis:** The hard drive is 100% full. The database cannot write to the disk, so it crashed.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Investigation:** 
+>     1. The engineer runs `df -h` and confirms that the Root partition (`/`) is at `100%` usage.
+>     2. The engineer `cd`s into the root directory (`cd /`).
+>     3. They run `sudo du -sh *`. They see that the `/var` directory is 90GB.
+>     4. They `cd /var` and run `sudo du -sh *` again. They see `/var/log` is 85GB.
+>     5. They `cd /var/log` and find a single file named `error.log` that is 85GB in size.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **The Fix:** The engineer deletes the runaway log file using `rm error.log`. They run `df -h` again and see usage drop to `15%`. They restart the database via `systemctl restart mysql`, and the service is restored.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]

@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 19
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 20 — Bash Scripting Basics
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+Why do something twice when you can automate it? Bash scripting allows you to codify your troubleshooting workflows, transforming manual toil into executable solutions.
 
 By the end of this chapter, you will be able to:
 * Understand the purpose of a shell script.
@@ -87,24 +92,34 @@ Scripts become powerful when they can store data dynamically.
 
 ## Real-World Scenarios
 
-**Customer:**
-*"Every morning, I log into our database server and run `df -h` to check disk space, `free -m` to check RAM, and `uptime` to see how long it has been running. It takes me 10 minutes to do this across all our servers."*
-
-How should a Linux Support Engineer investigate?
-* **Mental Map:** This is manual, repetitive toil. It must be automated.
-* **The Fix:** The engineer creates a script called `health_check.sh`:
-  ```bash
-  #!/bin/bash
-  echo "--- Disk Space ---"
-  df -h
-  echo "--- RAM Usage ---"
-  free -m
-  echo "--- Uptime ---"
-  uptime
-  ```
-* The engineer runs `chmod +x health_check.sh`. 
-* **Result:** Now, the customer just types `./health_check.sh` and instantly receives a perfectly formatted report.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""Every morning, I log into our database server and run `df -h` to check disk space, `free -m` to check RAM, and `uptime` to see how long it has been running. It takes me 10 minutes to do this across all our servers.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Mental Map:** This is manual, repetitive toil. It must be automated.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix:** The engineer creates a script called `health_check.sh`:
+>     ```bash
+>     #!/bin/bash
+>     echo "--- Disk Space ---"
+>     df -h
+>     echo "--- RAM Usage ---"
+>     free -m
+>     echo "--- Uptime ---"
+>     uptime
+>     ```
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - The engineer runs `chmod +x health_check.sh`. 
+>
+> **🏢 Business Owner (Eve):**
+> - **Result:** Now, the customer just types `./health_check.sh` and instantly receives a perfectly formatted report.
+>   
+>
 ## Hands-on Lab
 
 > [!NOTE]

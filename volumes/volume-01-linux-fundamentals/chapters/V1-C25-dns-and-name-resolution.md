@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 24
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 25 — DNS & Name Resolution
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+It's always DNS. Understanding how hostnames are resolved into IP addresses is critical for diagnosing web application failures and network connectivity issues.
 
 By the end of this chapter, you will be able to:
 * Explain how Linux resolves domains to IP addresses.
@@ -75,15 +80,23 @@ You open the `/etc/hosts` file on your personal laptop. You add a line pointing 
 
 ## Real-World Scenarios
 
-**Customer:**
-*"We just bought a new database server. We migrated all the data over, and we updated the public DNS to point `database.ourcompany.com` to the new IP. But our web application is still writing data to the old server!"*
-
-How should a Linux Support Engineer investigate?
-* **Diagnosis:** The web application server is suffering from DNS caching. It is still resolving `database.ourcompany.com` to the old IP address because the new DNS record hasn't propagated through the internet yet.
-* **The Fix:** The engineer SSHs into the web server. They edit the `/etc/hosts` file.
-  They add the line: `192.168.5.50 database.ourcompany.com` (using the new IP).
-* **Result:** The moment the file is saved, the web server stops asking the internet for directions. It instantly routes all traffic for that domain to the new IP. The customer's application is fixed instantly, without waiting 24 hours for global DNS propagation.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""We just bought a new database server. We migrated all the data over, and we updated the public DNS to point `database.ourcompany.com` to the new IP. But our web application is still writing data to the old server!""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Diagnosis:** The web application server is suffering from DNS caching. It is still resolving `database.ourcompany.com` to the old IP address because the new DNS record hasn't propagated through the internet yet.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **The Fix:** The engineer SSHs into the web server. They edit the `/etc/hosts` file.
+>     They add the line: `192.168.5.50 database.ourcompany.com` (using the new IP).
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **Result:** The moment the file is saved, the web server stops asking the internet for directions. It instantly routes all traffic for that domain to the new IP. The customer's application is fixed instantly, without waiting 24 hours for global DNS propagation.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]

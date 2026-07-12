@@ -17,6 +17,9 @@ interview_questions: 3
 prerequisites: Chapter 13
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 14 — Networking Fundamentals
@@ -27,6 +30,8 @@ status: In Progress
 * **Interview Questions:** 3
 
 ## Learning Objectives
+
+A server without a network is just an expensive heater. We'll demystify IPs, subnets, and routing, giving you the foundation needed to diagnose why your server can't reach the outside world.
 
 By the end of this chapter, you will be able to:
 * Transition from legacy `net-tools` (like `ifconfig`) to modern `iproute2` commands (like `ip a`).
@@ -94,15 +99,25 @@ If you install a database, how do you know if it is actually listening for conne
 
 ## Real-World Scenarios
 
-**Customer:**
-*"I just installed Nginx, but when I go to my server's IP address in a web browser, it says Connection Refused."*
-
-How should a Linux Support Engineer investigate?
-* **Mental Map:** "Connection Refused" means the packet reached the server, but nobody answered the door at port 80.
-* **Investigation:** The engineer logs in and runs `sudo ss -tulpn | grep 80`.
-* **Diagnosis:** The output is completely blank. Nginx is not actually listening on port 80. 
-* **The Fix:** The engineer runs `systemctl status nginx` and realizes the service crashed on startup due to a configuration error. They fix the error, start the service, run `ss -tulpn` again to verify it is listening, and the website loads.
-
+> [!IMPORTANT]
+> **Incident Report & Roleplay**
+>
+> **👤 End User (Dave):**
+> *""I just installed Nginx, but when I go to my server's IP address in a web browser, it says Connection Refused.""*
+>
+> **🧑‍💻 Tech Support (Charlie):**
+> - **Mental Map:** "Connection Refused" means the packet reached the server, but nobody answered the door at port 80.
+>
+> **👨‍🔧 Junior Admin (Bob):**
+> - **Investigation:** The engineer logs in and runs `sudo ss -tulpn | grep 80`.
+>
+> **🦸‍♀️ Senior Admin (Alice):**
+> - **Diagnosis:** The output is completely blank. Nginx is not actually listening on port 80. 
+>
+> **🏢 Business Owner (Eve):**
+> - **The Fix:** The engineer runs `systemctl status nginx` and realizes the service crashed on startup due to a configuration error. They fix the error, start the service, run `ss -tulpn` again to verify it is listening, and the website loads.
+>   
+>
 ## Hands-on Lab
 
 > [!CAUTION]
