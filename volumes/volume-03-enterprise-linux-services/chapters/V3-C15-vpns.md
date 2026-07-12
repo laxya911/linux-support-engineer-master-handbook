@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C09
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 15 — Virtual Private Networks (OpenVPN/WireGuard)
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -72,6 +71,7 @@ For a VPN to actually work, the Linux server must be allowed to act as a router.
 **The Incident:** The HR Director is traveling. They connect to the hotel Wi-Fi and attempt to open the company's internal HR web portal. The page fails to load. The Director submits an angry ticket: "The portal is down again!"
 
 **The Investigation & Fix:**
+
 1. The Support Engineer checks the internal monitoring dashboard. The HR portal is completely online and healthy.
 2. The engineer replies to the ticket: "Are you connected to the WireGuard VPN?"
 3. The Director replies: "Oh, I forgot to turn it on."
@@ -82,6 +82,11 @@ For a VPN to actually work, the Linux server must be allowed to act as a router.
 > [!IMPORTANT]  
 > **Best Practice: Split Tunneling vs. Full Tunneling**  
 > When you configure a VPN, you decide the "Allowed IPs". If you configure Full Tunneling (`AllowedIPs = 0.0.0.0/0`), *all* of the remote worker's internet traffic (including Netflix and YouTube) goes through your corporate network, wasting your bandwidth. If you configure Split Tunneling (`AllowedIPs = 10.0.5.0/24`), only traffic destined for the corporate servers goes through the tunnel, and their YouTube traffic goes straight to the internet!
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Virtual Private Networks (OpenVPN/WireGuard) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -114,11 +119,8 @@ VPNs are the bridge between the hostile public internet and your secure, isolate
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 14 – Time Synchronization (Chrony/NTP)](V3-C14-time-synchronization.md)
+← Previous: [Chapter 14 — Time Synchronization (Chrony/NTP)](V3-C14-time-synchronization.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 16 – Advanced File Sharing (Samba) *[Coming Soon]*](#)
+→ Next: [Chapter 16 — Advanced File Sharing (Samba)](V3-C16-samba-filesharing.md)

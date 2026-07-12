@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C24
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 25 — Introduction to Orchestration (K8s Prep)
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -79,6 +78,7 @@ In Volume 4, you will abandon `docker-compose.yml` and learn to write Kubernetes
 The immense traffic causes the Docker daemon to panic and crash. All 50 microservices die instantly. The company loses thousands of dollars in sales while the CTO frantically tries to reboot the server. 
 
 **The Investigation & Fix:**
+
 1. The Support Engineer (You) is hired the next day to fix the architecture.
 2. The CTO says, "We need a bigger server! 128GB of RAM!"
 3. The engineer shakes their head. "A bigger server is just a bigger Single Point of Failure. If a 128GB server crashes, we still go offline."
@@ -90,6 +90,11 @@ The immense traffic causes the Docker daemon to panic and crash. All 50 microser
 > [!CAUTION]  
 > **Best Practice: Do Not Over-Engineer**  
 > Kubernetes is incredibly complex. It requires dedicated engineers to maintain. If you are running a small internal wiki for 10 employees, Docker Compose is perfect. Do not introduce Kubernetes into a business architecture unless the business requirements (like 99.99% uptime and auto-scaling) strictly demand it.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Introduction to Orchestration (K8s Prep) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -122,11 +127,8 @@ Congratulations! You have completed Volume 3. You have evolved from executing ba
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 24 – Persistent Data & Networking](V3-C24-persistent-data.md)
+← Previous: [Chapter 24 — Persistent Data & Networking](V3-C24-persistent-data.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-Volume 4: Enterprise Infrastructure & Troubleshooting *(Coming Soon)*
+→ Next: None

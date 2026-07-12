@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: None
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 14 — Time Synchronization (Chrony/NTP)
 
-* **Difficulty:** Beginner
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -77,6 +76,7 @@ Instead of pointing your server to one specific IP address, you point your `/etc
 The developer attempts to log in. They type their correct password, but the application instantly kicks them out with a generic `HTTP 401 Unauthorized` error.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer is called in to investigate. They look at the SSO logs. The logs say: `Token rejected: Issued in the future`.
 2. The engineer instantly knows this is a Time Synchronization issue. 
 3. The engineer logs into the new web server and types `date`. The server claims it is `14:15`. 
@@ -85,6 +85,11 @@ The developer attempts to log in. They type their correct password, but the appl
 6. They run `chronyc makestep` to force an immediate time correction.
 7. The server's clock snaps back to `14:08`. 
 8. The developer tries to log in again. The token is accepted instantly, and the application works perfectly.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Time Synchronization (Chrony/NTP) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -117,11 +122,8 @@ Clock drift is silent. It doesn't generate loud error messages; it just causes b
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 13 – Email Infrastructure (Postfix)](V3-C13-email-postfix.md)
+← Previous: [Chapter 13 — Email Infrastructure (Postfix)](V3-C13-email-postfix.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 15 – Virtual Private Networks (OpenVPN/WireGuard)](V3-C15-vpns.md)
+→ Next: [Chapter 15 — Virtual Private Networks (OpenVPN/WireGuard)](V3-C15-vpns.md)

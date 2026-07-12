@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C11
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 13 — Email Infrastructure (Postfix)
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -82,6 +81,7 @@ When Google receives an email claiming to be from `reports@company.com`, it chec
 **The Incident:** The IT team writes a brilliant bash script that runs every night. It analyzes the web server logs, generates a PDF report, and emails it to the IT Director. The script works perfectly, but the Director complains they are not receiving the emails. 
 
 **The Investigation & Fix:**
+
 1. The Support Engineer checks the mail logs on the Linux server:
    `tail -f /var/log/mail.log`
 2. They see the exact moment Postfix attempted to hand the email to Google's servers. The log reads: `550-5.7.26 This message does not have authentication information or fails to pass authentication checks. To best protect our users from spam, the message has been blocked.`
@@ -92,6 +92,11 @@ When Google receives an email claiming to be from `reports@company.com`, it chec
 6. They modify the record to include the Linux server's IP address:
    `v=spf1 ip4:203.0.113.50 include:spf.protection.outlook.com -all`
 7. The engineer saves the DNS record and waits for the TTL to expire. The next night, the report is successfully delivered to the Director's inbox.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Email Infrastructure (Postfix) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -124,11 +129,8 @@ Sending an email is easy. Proving you aren't a spammer is hard. As an Infrastruc
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 12 – Dynamic Host Configuration (DHCPd)](V3-C12-dhcp.md)
+← Previous: [Chapter 12 — Dynamic Host Configuration (DHCPd)](V3-C12-dhcp.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 14 – Time Synchronization (Chrony/NTP)](V3-C14-time-synchronization.md)
+→ Next: [Chapter 14 — Time Synchronization (Chrony/NTP)](V3-C14-time-synchronization.md)

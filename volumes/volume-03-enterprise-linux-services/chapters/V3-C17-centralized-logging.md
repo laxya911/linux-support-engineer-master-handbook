@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C16
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 17 — Centralized Logging (ELK Intro)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -88,6 +87,7 @@ To extract the IP address, Logstash must run complex Regex queries, which is slo
 **The Incident:** A VIP customer calls the helpdesk. They tried to process a $10,000 transaction at exactly 14:32, but the website crashed. The infrastructure team has 10 NGINX web servers behind a load balancer. Nobody knows which specific server the VIP customer was routed to, making it impossible to check the `/var/log/nginx/error.log` file.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer does not panic. They do not SSH into any of the 10 web servers.
 2. The engineer opens the centralized **Kibana** web dashboard.
 3. They set the time filter in Kibana to look strictly between `14:30` and `14:35`.
@@ -97,6 +97,11 @@ To extract the IP address, Logstash must run complex Regex queries, which is slo
 6. The result shows that the error occurred on `Web Server #7`.
 7. The engineer expands the JSON document in Kibana and reads the exact Python stack trace: `ValueError: Invalid currency format`.
 8. The engineer sends the stack trace to the developers. The issue was investigated and solved in 3 minutes without a single SSH connection.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Centralized Logging (ELK Intro) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -129,11 +134,8 @@ As you scale from 1 server to 100 servers, your administrative tools must scale 
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 16 – Advanced File Sharing (Samba)](V3-C16-samba-filesharing.md)
+← Previous: [Chapter 16 — Advanced File Sharing (Samba)](V3-C16-samba-filesharing.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 18 – Application Performance Monitoring (Prometheus) *[Coming Soon]*](#)
+→ Next: [Chapter 18 — Application Performance Monitoring (Prometheus)](V3-C18-monitoring-prometheus.md)

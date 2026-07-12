@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C01
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 2 — Deploying Apache HTTP Server
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -40,11 +39,11 @@ In the 1990s, one server hosted exactly one website. Today, a single Linux serve
 
 ```mermaid
 flowchart TD
-    A["Client requests \n http://sales.company.com"] -->|"Port 80"| B{"Apache (httpd)"}
-    C["Client requests \n http://blog.company.com"] -->|"Port 80"| B
+    A["Client requests \\n http://sales.company.com "] -->|"Port 80"| B{"Apache (httpd)"}
+    C["Client requests \\n http://blog.company.com "] -->|"Port 80"| B
     
-    B -->|"Host: sales"| D["/var/www/sales/ \n (Sales HTML)"]
-    B -->|"Host: blog"| E["/var/www/blog/ \n (Blog HTML)"]
+    B -->|"Host: sales"| D["/var/www/sales/ \\n (Sales HTML)"]
+    B -->|"Host: blog"| E["/var/www/blog/ \\n (Blog HTML)"]
     
     style B fill:#f39c12,stroke:#f1c40f,color:#000
     style D fill:#0984e3,stroke:#74b9ff,color:#fff
@@ -76,12 +75,18 @@ To activate a site, you don't copy the file; you create a symlink using the comm
 They restart Apache (`systemctl restart apache2`). But when they visit the URL, the browser just displays the default "Welcome to Ubuntu Apache" page!
 
 **The Investigation & Fix:**
+
 1. The Support Engineer logs in. They run `apachectl -S` (or `httpd -S` on RHEL). This command forces Apache to print out every Virtual Host it is currently loading.
 2. The output shows the default site, but `sales.company.internal` is completely missing from the list.
 3. The engineer checks the `/etc/apache2/sites-enabled/` directory. It is empty except for the default site symlink. 
 4. The engineer explains the issue: "Apache doesn't read the `sites-available` folder. It only reads `sites-enabled`."
 5. The engineer runs `a2ensite sales.conf`. This automatically creates a symlink from `sites-available` to `sites-enabled`.
 6. They reload the service (`systemctl reload apache2`). The `apachectl -S` command now lists the sales site, and the website loads perfectly.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Deploying Apache HTTP Server in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -114,11 +119,8 @@ Deploying a web server is the moment Linux becomes truly fun. By mastering Virtu
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 1 – Web Server Fundamentals](V3-C01-web-fundamentals.md)
+← Previous: [Chapter 1 — Web Server Fundamentals](V3-C01-web-fundamentals.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 3 – Deploying NGINX *[Coming Soon]*](#)
+→ Next: [Chapter 3 — Deploying NGINX](V3-C03-deploying-nginx.md)

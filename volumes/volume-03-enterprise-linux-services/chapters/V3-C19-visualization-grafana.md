@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C18
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 19 — Data Visualization (Grafana)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -72,6 +71,7 @@ In large enterprise environments, there is usually a room called the NOC (Networ
 Five minutes later, the Support Engineer glances at the Grafana NOC dashboard on the wall. The line graph tracking `node_cpu_seconds_total` for the application servers has instantly spiked from a healthy 20% to a terrifying 98%. 
 
 **The Investigation & Fix:**
+
 1. The Support Engineer doesn't wait for a customer to complain. They know the servers will crash within minutes under this CPU load.
 2. They click on the Grafana CPU panel and change the time window from "Last 24 Hours" to "Last 15 Minutes". The graph confirms the massive spike happened at the exact second the new code was deployed.
 3. The engineer pings the lead developer: "Your new code has an infinite loop or a massive memory leak. CPU is at 98%. Initiating emergency rollback."
@@ -81,6 +81,11 @@ Five minutes later, the Support Engineer glances at the Grafana NOC dashboard on
 > [!IMPORTANT]  
 > **Best Practice: Alert Fatigue**  
 > Grafana allows you to configure Slack or Email alerts when a graph crosses a threshold. Do not create alerts for things that don't require human intervention (e.g., "CPU hit 80% for 2 seconds"). If you spam your team with useless alerts, they will develop "Alert Fatigue" and start ignoring them. Only alert on actionable emergencies (e.g., "Disk space has 5 minutes remaining").
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Data Visualization (Grafana) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -113,11 +118,8 @@ Raw data is useless if you cannot interpret it quickly. Grafana takes the millio
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 18 – Application Performance Monitoring (Prometheus)](V3-C18-monitoring-prometheus.md)
+← Previous: [Chapter 18 — Application Performance Monitoring (Prometheus)](V3-C18-monitoring-prometheus.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 20 – Caching Services (Redis)](V3-C20-caching-redis.md)
+→ Next: [Chapter 20 — Caching Services (Redis)](V3-C20-caching-redis.md)

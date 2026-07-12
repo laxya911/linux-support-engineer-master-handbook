@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 3, Part 2
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 11 — The Domain Name System (BIND9)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -84,6 +83,7 @@ Every DNS record has a TTL value, measured in seconds. If an A Record has a TTL 
 However, chaos ensues. Half the company sees the new website. The other half sees the old website. A frustrated manager submits a ticket: "The DNS is broken. Please fix the propagation immediately."
 
 **The Investigation & Fix:**
+
 1. The Support Engineer knows that "DNS is broken" is almost never true. DNS is just doing exactly what it was told. 
 2. The engineer uses the `dig` command from their own laptop to query the domain:
    `dig company.com`
@@ -92,6 +92,11 @@ However, chaos ensues. Half the company sees the new website. The other half see
    `dig @ns1.company-authoritative.com company.com`
 5. The Authoritative server responds with the *new* IP address. 
 6. The engineer replies to the manager: "DNS is working perfectly. The record was changed successfully. However, the previous TTL was set to 24 hours. The internet is legally caching the old IP address. We cannot force global routers to clear their cache. We simply have to wait for the TTL to expire."
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting The Domain Name System (BIND9) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -124,11 +129,8 @@ However, chaos ensues. Half the company sees the new website. The other half see
 
 ## Navigation
 
-⬅ Previous:
-[Volume 3, Part 2: Database Services](../README.md)
+← Previous: [Chapter 10 — Database Backup & Restoration](V3-C10-database-backups.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 12 – Dynamic Host Configuration (DHCPd)](V3-C12-dhcp.md)
+→ Next: [Chapter 12 — Dynamic Host Configuration (DHCPd)](V3-C12-dhcp.md)

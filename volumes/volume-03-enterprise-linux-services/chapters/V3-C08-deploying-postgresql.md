@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C07
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 8 — Deploying PostgreSQL
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -76,6 +75,7 @@ If a web application is trying to connect using a password, you must edit this f
 When they start the application, it crashes instantly, throwing the error: `FATAL: Peer authentication failed for user "db_admin"`. The developer complains to IT that the password isn't working.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer understands that PostgreSQL isn't even checking the password. It is checking the Linux user running the Django app, and rejecting the connection because the app isn't running as the `db_admin` Linux user!
 2. The engineer opens the Host-Based Authentication file:
    `nano /etc/postgresql/14/main/pg_hba.conf`
@@ -85,6 +85,11 @@ When they start the application, it crashes instantly, throwing the error: `FATA
    `host    all             all             127.0.0.1/32            md5`
 5. The engineer reloads the database service (`systemctl reload postgresql`).
 6. The Django application connects perfectly using the password.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Deploying PostgreSQL in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -117,11 +122,8 @@ PostgreSQL is a fortress. It is designed to be impenetrable by default. By maste
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 7 – Deploying MariaDB / MySQL](V3-C07-deploying-mariadb.md)
+← Previous: [Chapter 7 — Deploying MariaDB / MySQL](V3-C07-deploying-mariadb.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 9 – Database Security & User Management](V3-C09-database-security.md)
+→ Next: [Chapter 9 — Database Security & User Management](V3-C09-database-security.md)

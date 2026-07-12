@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C03
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 4 — Reverse Proxies & Load Balancing
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 2 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -95,6 +94,7 @@ By default, NGINX uses the "Round Robin" algorithm. It gives the first request t
 **The Incident:** The company launches a massive marketing campaign. The single Java Tomcat application server is overwhelmed. CPU hits 100%, and the application crashes. The developers are panicking because they cannot optimize the code fast enough.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer knows that fixing the code takes weeks, but fixing the infrastructure takes minutes. 
 2. The engineer tells the developers to spin up two more identical virtual machines running the exact same Java code.
 3. The engineer logs into the NGINX Reverse Proxy server that sits in front of the Java application.
@@ -109,6 +109,11 @@ By default, NGINX uses the "Round Robin" algorithm. It gives the first request t
 5. They change the `proxy_pass` directive to point to `http://java_cluster`.
 6. They run `nginx -t` and `systemctl reload nginx`.
 7. Instantly, the CPU usage on the original server drops from 100% to 33%. The traffic is perfectly load-balanced across all three machines. The website stays online.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Reverse Proxies & Load Balancing in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -141,11 +146,8 @@ The ability to write an NGINX `proxy_pass` configuration is the defining skill o
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 3 – Deploying NGINX](V3-C03-deploying-nginx.md)
+← Previous: [Chapter 3 — Deploying NGINX](V3-C03-deploying-nginx.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 5 – TLS/SSL Cryptography & Certbot *[Coming Soon]*](#)
+→ Next: [Chapter 5 — TLS/SSL Cryptography & Certbot](V3-C05-tls-ssl-cryptography.md)

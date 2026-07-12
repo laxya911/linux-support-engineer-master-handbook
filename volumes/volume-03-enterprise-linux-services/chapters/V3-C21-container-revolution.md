@@ -3,7 +3,7 @@ volume: 3
 chapter: 21
 part: 5
 id: V3-C21
-title: The Container Revolution (Docker)
+title: The Container Revolution (the Container Runtime)
 author: Laxman Aryal
 edition: First Edition
 reviewed_by:
@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: None
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
-# Chapter 21 — The Container Revolution (Docker)
+# Chapter 21 — The Container Revolution (the Container Runtime)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -32,7 +31,7 @@ By the end of this chapter, you will be able to:
 * Explain the architectural difference between a Virtual Machine (Hypervisor) and a Container.
 * Understand Linux Kernel Namespaces and Control Groups (Cgroups).
 * Explain how containers solve the "Dependency Hell" problem.
-* Install the Docker Engine and run your first container.
+* Install the the Container Runtime Engine and run your first container.
 
 ## Visual Architecture: VMs vs. Containers
 
@@ -49,7 +48,7 @@ flowchart TD
     end
     
     subgraph Containers
-        D["Docker Engine"]
+        D["the Container Runtime Engine"]
         D --> E["Container 1: \n App A + Bins/Libs"]
         D --> F["Container 2: \n App B + Bins/Libs"]
         
@@ -63,7 +62,7 @@ flowchart TD
 ## Theory & Concepts
 
 ### 1. Namespaces and Cgroups
-Docker did not invent containers. Linux did. Docker is just a wrapper around two massive Linux kernel features:
+the Container Runtime did not invent containers. Linux did. The Container Runtime is just a wrapper around two massive Linux kernel features:
 * **Namespaces:** This provides isolation. A namespace lies to a process. When you run Apache in a container, the namespace tells Apache: "You are the only process running on this machine! Your PID is 1." 
 * **Cgroups (Control Groups):** This provides resource limitation. A cgroup tells the kernel: "This specific container is never allowed to use more than 500MB of RAM, even if the physical server has 64GB."
 
@@ -81,27 +80,33 @@ With containers, the developer does not just hand you the code. They hand you a 
 The engineer logs into the main web server. It is currently hosting the company's critical legacy ERP system, which requires PHP 7.4. 
 
 **The Investigation & Fix:**
+
 1. The engineer knows that if they run `apt upgrade php`, the new marketing app will work, but the legacy ERP system will instantly crash because it is incompatible with PHP 8.1.
 2. If they don't upgrade PHP, the marketing app cannot be installed. This is a classic Dependency Conflict.
-3. The engineer refuses to touch the host operating system. Instead, they install Docker.
+3. The engineer refuses to touch the host operating system. Instead, they install the Container Runtime.
 4. The engineer downloads a container image that contains PHP 8.1 and NGINX. 
 5. They place the new marketing code inside the container and spin it up on Port 8080.
 6. **The Result:** The host OS is still running PHP 7.4, keeping the legacy ERP system perfectly safe. Simultaneously, the new container is happily running PHP 8.1 in total isolation. The conflict is completely resolved without buying a second server!
 
 > [!IMPORTANT]  
 > **Best Practice: Never Upgrade the Host**  
-> In a modern containerized environment, the Host OS (Ubuntu/RHEL) should be as empty as possible. You should *never* run `apt install python3` or `dnf install nginx` on the host. The host's only job is to run the Docker Engine. Everything else must live inside a container.
+> In a modern containerized environment, the Host OS (Ubuntu/RHEL) should be as empty as possible. You should *never* run `apt install python3` or `dnf install nginx` on the host. The host's only job is to run the the Container Runtime Engine. Everything else must live inside a container.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting The Container Revolution (the Container Runtime) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
 > [!TIP]
 > **Practice Assignment Available**
-> Proceed to the [Chapter 21 Practice Guide](../practice-files/V3-C21-practice.md) to install Docker and run your first isolated Ubuntu container!
+> Proceed to the [Chapter 21 Practice Guide](../practice-files/V3-C21-practice.md) to install the Container Runtime and run your first isolated Ubuntu container!
 
 ## Interview Questions
 
 ### Question 1: What is the fundamental architectural difference between a Virtual Machine and a Container?
-* **Target Answer**: "A Virtual Machine relies on a Hypervisor to emulate physical hardware, requiring a complete, heavy Guest Operating System (like Windows or Ubuntu) to boot up. A container relies on a Container Engine (like Docker) and virtualizes the Operating System level. Containers share the Host machine's Linux kernel directly, making them incredibly lightweight, with near-instant boot times and minimal RAM overhead."
+* **Target Answer**: "A Virtual Machine relies on a Hypervisor to emulate physical hardware, requiring a complete, heavy Guest Operating System (like Windows or Ubuntu) to boot up. A container relies on a Container Engine (like the Container Runtime) and virtualizes the Operating System level. Containers share the Host machine's Linux kernel directly, making them incredibly lightweight, with near-instant boot times and minimal RAM overhead."
 
 ### Question 2: How do containers solve the 'It works on my machine' problem?
 * **Target Answer**: "Historically, code would work on a developer's laptop but fail in production due to different OS versions, conflicting libraries, or missing dependencies. Containers solve this by packaging the application code *together* with its exact runtime, libraries, and dependencies into a single, immutable Image. When that image runs on the production server, it executes in an isolated environment exactly as it did on the developer's laptop."
@@ -111,7 +116,7 @@ The engineer logs into the main web server. It is currently hosting the company'
 
 ## Chapter Summary
 
-Containers have completely destroyed the traditional paradigm of server administration. We no longer treat servers as fragile pets that we carefully nurse with dependency updates. We treat servers as dumb, identical hosts whose only purpose is to run Docker.
+Containers have completely destroyed the traditional paradigm of server administration. We no longer treat servers as fragile pets that we carefully nurse with dependency updates. We treat servers as dumb, identical hosts whose only purpose is to run the Container Runtime.
 
 ## Completion Checklist
 
@@ -123,11 +128,8 @@ Containers have completely destroyed the traditional paradigm of server administ
 
 ## Navigation
 
-⬅ Previous:
-[Volume 3, Part 4: Infrastructure Services](../README.md)
+← Previous: [Chapter 20 — Caching Services (Redis)](V3-C20-caching-redis.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 22 – Building Container Images (Dockerfiles)](V3-C22-building-images.md)
+→ Next: [Chapter 22 — Building Container Images (Dockerfiles)](V3-C22-building-images.md)

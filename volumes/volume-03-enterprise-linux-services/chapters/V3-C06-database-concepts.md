@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C05
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 6 — Relational Database Concepts
 
-* **Difficulty:** Beginner
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -74,6 +73,7 @@ To communicate with the Database Daemon, you must speak its language.
 **The Incident:** A developer is deploying a new Python application on `Server A`. They installed a MySQL database on `Server B`. The developer configures the Python app to connect to `Server B`'s IP address, but the application throws an error: `Connection Refused` or `Connection Timed Out`.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer starts by verifying the database daemon is actually running. They SSH into `Server B` and run `systemctl status mysql`. It is active and running.
 2. The engineer checks if the daemon is listening on the correct port:
    `ss -tulpn | grep 3306`
@@ -84,6 +84,11 @@ To communicate with the Database Daemon, you must speak its language.
 5. The engineer logs back into `Server B` and checks the firewall rules (`ufw status` or `iptables -L`). They discover that Port 3306 is not open.
 6. The engineer runs `ufw allow 3306/tcp`. 
 7. The Python application instantly connects to the database successfully.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Relational Database Concepts in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -116,11 +121,8 @@ Before we deploy complex database systems, we must remember the golden rule: A d
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 5 – TLS/SSL Cryptography & Certbot](V3-C05-tls-ssl-cryptography.md)
+← Previous: [Chapter 5 — TLS/SSL Cryptography & Certbot](V3-C05-tls-ssl-cryptography.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 7 – Deploying MariaDB / MySQL](V3-C07-deploying-mariadb.md)
+→ Next: [Chapter 7 — Deploying MariaDB / MySQL](V3-C07-deploying-mariadb.md)

@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C04
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 5 — TLS/SSL Cryptography & Certbot
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -76,6 +75,7 @@ They provide a tool called `certbot`. You run `certbot --nginx`, and it will aut
 **The Incident:** The marketing team buys a new domain, `newproduct.com`. They point it to the NGINX server. When the CEO visits the site in Google Chrome, they get a massive red warning that says "Your connection is not private." The CEO is furious.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer investigates. They realize the NGINX configuration is only listening on Port 80 (HTTP). 
 2. The engineer runs `certbot --nginx -d newproduct.com`.
 3. Certbot automatically requests a certificate from Let's Encrypt. Let's Encrypt sends a "challenge" to the server to prove the engineer actually owns the domain. Certbot answers the challenge automatically.
@@ -83,6 +83,11 @@ They provide a tool called `certbot`. You run `certbot --nginx`, and it will aut
    * Listen on Port 443 (HTTPS) with the new certificate.
    * Listen on Port 80 (HTTP) and immediately return a `301 Redirect` to the HTTPS version.
 5. The CEO refreshes the page. The traffic is redirected to Port 443, the padlock icon appears, and the connection is secure.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting TLS/SSL Cryptography & Certbot in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -115,11 +120,8 @@ The internet is hostile. Every website, from a massive bank to a tiny personal b
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 4 – Reverse Proxies & Load Balancing](V3-C04-reverse-proxies.md)
+← Previous: [Chapter 4 — Reverse Proxies & Load Balancing](V3-C04-reverse-proxies.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 6 – Relational Database Concepts *[Coming Soon]*](#)
+→ Next: [Chapter 6 — Relational Database Concepts](V3-C06-database-concepts.md)

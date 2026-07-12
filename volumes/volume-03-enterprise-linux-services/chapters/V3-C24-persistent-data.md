@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C23
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 24 — Persistent Data & Networking
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -79,6 +78,7 @@ By default, Docker places all containers on a virtual `bridge` network (usually 
 Docker gracefully destroys the old container and spins up the new one. Ten minutes later, the customer support phones begin to ring. Every single customer account on the website is gone. The database is totally empty.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer looks at the junior's `docker-compose.yml` file. It looks like this:
    ```yaml
    services:
@@ -103,6 +103,11 @@ Docker gracefully destroys the old container and spins up the new one. Ten minut
 > [!IMPORTANT]  
 > **Best Practice: Stateless vs. Stateful**  
 > Web servers, PHP applications, and Python scripts should be "Stateless" (no volumes required). If they die, a new one spins up and instantly takes over. Databases and Caches are "Stateful". They must *always* have a Volume attached.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Persistent Data & Networking in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -135,11 +140,8 @@ Data gravity is real. You can treat your web servers like disposable cattle, but
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 23 – Multi-Container Apps (Docker Compose)](V3-C23-docker-compose.md)
+← Previous: [Chapter 23 — Multi-Container Apps (the Container Runtime Compose)](V3-C23-docker-compose.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 25 – Introduction to Orchestration (K8s Prep)](V3-C25-orchestration-intro.md)
+→ Next: [Chapter 25 — Introduction to Orchestration (K8s Prep)](V3-C25-orchestration-intro.md)

@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C06
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 20 — Caching Services (Redis)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -76,6 +75,7 @@ Because RAM is expensive and limited, you cannot store everything in Redis forev
 Calculating the Top 10 requires MySQL to scan 5 million transaction rows. As thousands of users load the homepage simultaneously, MySQL is forced to calculate the Top 10 thousands of times a second. The database CPU hits 100%, and the entire website goes offline.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer opens the Grafana dashboard and identifies that the MySQL server is completely overwhelmed by read-queries.
 2. The engineer realizes the "Top 10" list only realistically changes once every 5 minutes. There is no reason to force MySQL to calculate it 10,000 times a second!
 3. The engineer installs `redis-server` alongside the web application.
@@ -87,6 +87,11 @@ Calculating the Top 10 requires MySQL to scan 5 million transaction rows. As tho
 > [!CAUTION]  
 > **Best Practice: Cache Invalidation**  
 > There are two hard problems in computer science: naming things, and Cache Invalidation. If an administrator deletes a product from the database, but forgets to clear the Redis cache, customers will continue to see the deleted product on the website until the TTL expires! Always ensure your application is configured to proactively delete (invalidate) cached keys when the underlying database is updated.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Caching Services (Redis) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -119,11 +124,8 @@ The secret to scaling massive web applications is not buying bigger databases; i
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 19 – Data Visualization (Grafana)](V3-C19-visualization-grafana.md)
+← Previous: [Chapter 19 — Data Visualization (Grafana)](V3-C19-visualization-grafana.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Volume 3, Part 5: Modern App Deployment (Containers) *[Planned]*](#)
+→ Next: [Chapter 21 — The Container Revolution (the Container Runtime)](V3-C21-container-revolution.md)

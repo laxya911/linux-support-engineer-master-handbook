@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 2 Completion
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 1 — Web Server Fundamentals
 
-* **Difficulty:** Beginner
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -82,6 +81,7 @@ To see which ports are currently in use on your server, you use the `ss` command
 **The Incident:** An engineer is tasked with deploying a new, lightweight web server. They install the software and run `systemctl start myserver`. The command fails. They check `systemctl status myserver` and see a fatal error: `Address already in use: bind(0.0.0.0:80)`. 
 
 **The Investigation & Fix:**
+
 1. The Support Engineer knows exactly what this error means. Two programs are trying to share the same mailbox!
 2. The engineer runs the command to find out who is squatting on Port 80:
    `sudo ss -tulpn | grep :80`
@@ -90,6 +90,11 @@ To see which ports are currently in use on your server, you use the `ss` command
 4. Ah-ha! The server already had `apache2` installed and running in the background. The new web server cannot start because Apache is already listening on Port 80.
 5. The engineer runs `systemctl stop apache2` and `systemctl disable apache2`.
 6. They start the new web server again, and it binds to Port 80 successfully.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Web Server Fundamentals in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -122,11 +127,8 @@ Web servers are not magic. They are simply Linux daemons (background processes) 
 
 ## Navigation
 
-⬅ Previous:
-[Volume 2 – Capstone Project](../../volume-02-linux-administration/chapters/V2-C20-capstone-project.md)
+← Previous: None
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 2 – Deploying Apache HTTP Server](V3-C02-deploying-apache.md)
+→ Next: [Chapter 2 — Deploying Apache HTTP Server](V3-C02-deploying-apache.md)

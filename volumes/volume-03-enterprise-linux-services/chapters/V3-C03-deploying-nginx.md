@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C02
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 3 — Deploying NGINX
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -89,6 +88,7 @@ The command to test the configuration is:
 **The Incident:** The marketing team reports that their new NGINX-powered blog is down. When they visit the URL, the browser displays a stark, white page that simply says: `502 Bad Gateway (nginx)`.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer understands what a 502 error means. It means NGINX is online and working perfectly, but it is trying to talk to a backend service (like a PHP processor or a database) that is offline. NGINX is acting as a "Gateway" and the backend is "Bad."
 2. The engineer checks the NGINX configuration for the blog. They see a line like this:
    `fastcgi_pass unix:/run/php/php8.1-fpm.sock;`
@@ -98,6 +98,11 @@ The command to test the configuration is:
 5. The service is `failed`! It crashed overnight due to an out-of-memory error.
 6. The engineer restarts the PHP service (`systemctl start php8.1-fpm`). 
 7. The engineer refreshes the blog. The `502 Bad Gateway` error disappears, and the website loads perfectly. NGINX is happy because its backend service is alive again.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Deploying NGINX in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -130,11 +135,8 @@ NGINX has taken the world by storm because of its incredible speed, low memory f
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 2 – Deploying Apache HTTP Server](V3-C02-deploying-apache.md)
+← Previous: [Chapter 2 — Deploying Apache HTTP Server](V3-C02-deploying-apache.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 4 – Reverse Proxies & Load Balancing](V3-C04-reverse-proxies.md)
+→ Next: [Chapter 4 — Reverse Proxies & Load Balancing](V3-C04-reverse-proxies.md)

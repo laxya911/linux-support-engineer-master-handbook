@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: Volume 3, Part 3
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 16 — Advanced File Sharing (Samba)
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1 Hour
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -79,6 +78,7 @@ When a Windows user opens an Excel file on a network share, Windows asks Samba f
 For three days in a row, the script has failed with a `Permission denied` error. However, when the Support Engineer checks the file permissions using `ls -l`, the permissions are perfectly open (`chmod 777`).
 
 **The Investigation & Fix:**
+
 1. The engineer knows that standard Linux permissions (`rwx`) are not the only thing that can block a file.
 2. The engineer runs the `smbstatus` command on the Linux server. This tool lists all active connections and locks on the Samba daemon.
 3. The output shows that a Windows machine (`IP: 10.0.5.15`) currently holds an `EXCLUSIVE+BATCH` oplock on `master.csv`.
@@ -91,6 +91,11 @@ For three days in a row, the script has failed with a `Permission denied` error.
 > [!CAUTION]  
 > **Best Practice: Disabling Oplocks**  
 > Disabling oplocks solves automated scripting issues, but it introduces a new risk: if *two* accountants try to save the Excel file at the exact same millisecond, the file will become corrupted. Only disable oplocks on shares where automated Linux scripts are the primary writers, or where applications are designed to handle concurrent writes.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Advanced File Sharing (Samba) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -123,11 +128,8 @@ Samba is the ultimate diplomat. It allows Linux to integrate flawlessly into cor
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 15 – Virtual Private Networks (OpenVPN/WireGuard)](V3-C15-vpns.md)
+← Previous: [Chapter 15 — Virtual Private Networks (OpenVPN/WireGuard)](V3-C15-vpns.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 17 – Centralized Logging (ELK Intro)](V3-C17-centralized-logging.md)
+→ Next: [Chapter 17 — Centralized Logging (ELK Intro)](V3-C17-centralized-logging.md)

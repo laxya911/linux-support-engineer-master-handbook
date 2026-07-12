@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C17
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 18 — Application Performance Monitoring (Prometheus)
 
-* **Difficulty:** Advanced
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -80,6 +79,7 @@ Prometheus can monitor anything, as long as there is an "Exporter" for it.
 **The Incident:** At 4:00 AM on a Sunday, the production database server crashes. The company loses 4 hours of sales before the team wakes up and discovers the issue: the `/var` partition hit 100% disk usage, causing MariaDB to instantly panic and shut down. 
 
 **The Investigation & Fix:**
+
 1. The Support Engineer fixes the immediate issue by deleting old log files, but the CTO demands a permanent solution so it never happens again. "Why didn't we know the disk was filling up?!"
 2. The engineer implements Prometheus. They install the `node_exporter` daemon on the database server. 
 3. The exporter begins hosting hardware metrics on `http://db-server:9100/metrics`.
@@ -88,6 +88,11 @@ Prometheus can monitor anything, as long as there is an "Exporter" for it.
    `node_filesystem_free_bytes < 5000000000` (Alert me if free disk space drops below 5 Gigabytes).
 6. Six months later, the disk begins to fill up again. When it hits 5.1GB remaining, Prometheus triggers an alert to the engineer's phone.
 7. The engineer safely expands the disk *before* it hits 100%. The company never experiences a silent outage again.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Application Performance Monitoring (Prometheus) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -120,11 +125,8 @@ Monitoring is the difference between being a reactive sysadmin and a proactive e
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 17 – Centralized Logging (ELK Intro)](V3-C17-centralized-logging.md)
+← Previous: [Chapter 17 — Centralized Logging (ELK Intro)](V3-C17-centralized-logging.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 19 – Data Visualization (Grafana) *[Coming Soon]*](#)
+→ Next: [Chapter 19 — Data Visualization (Grafana)](V3-C19-visualization-grafana.md)

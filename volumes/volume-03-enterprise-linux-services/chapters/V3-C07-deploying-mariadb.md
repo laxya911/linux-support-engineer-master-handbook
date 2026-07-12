@@ -17,14 +17,13 @@ interview_questions: 3
 prerequisites: V3-C06
 last_updated: 2026-07
 status: In Progress
+learning_outcomes: To be updated
+career_level: Associate to Professional
+enterprise_relevance: High
 ---
 
 # Chapter 7 — Deploying MariaDB / MySQL
 
-* **Difficulty:** Intermediate
-* **Estimated Time:** 1.5 Hours
-* **Hands-on Labs:** 1
-* **Interview Questions:** 3
 
 ## Learning Objectives
 
@@ -74,6 +73,7 @@ To fix the massive security holes of a fresh install, the developers included a 
 **The Incident:** A junior developer deploys a new database server for a staging environment. They install MariaDB, open Port 3306 on the firewall, and go to lunch. An automated security scanner flags the server as critically compromised.
 
 **The Investigation & Fix:**
+
 1. The Support Engineer investigates the alert. They connect to the server's IP address from their own workstation using the MySQL client:
    `mysql -u root -h 10.0.0.55`
 2. The database lets them in immediately, without asking for a password! The engineer now has full `root` access to the staging database.
@@ -84,6 +84,11 @@ To fix the massive security holes of a fresh install, the developers included a 
    * Remove anonymous users? `Y`
    * Disallow root login remotely? `Y`
 6. The engineer tries to connect from their workstation again. This time, the connection is instantly rejected. The database is secure.
+
+> [!TIP]
+> **Senior Engineer Note**
+> When troubleshooting Deploying MariaDB / MySQL in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
+
 
 ## Hands-on Lab
 
@@ -116,11 +121,8 @@ Installing the database is the easy part. Securing it is what makes you an engin
 
 ## Navigation
 
-⬅ Previous:
-[Chapter 6 – Relational Database Concepts](V3-C06-database-concepts.md)
+← Previous: [Chapter 6 — Relational Database Concepts](V3-C06-database-concepts.md)
 
-🏠 Volume Contents:
-[Table of Contents](../TOC.md)
+↑ Volume Contents: [Table of Contents](TOC.md)
 
-➡ Next:
-[Chapter 8 – Deploying PostgreSQL *[Coming Soon]*](#)
+→ Next: [Chapter 8 — Deploying PostgreSQL](V3-C08-deploying-postgresql.md)
