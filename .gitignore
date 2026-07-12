@@ -3,6 +3,7 @@ build/
 diagrams/
 dist/
 out/
+reviews/
 *.pdf
 *.epub
 *.docx
