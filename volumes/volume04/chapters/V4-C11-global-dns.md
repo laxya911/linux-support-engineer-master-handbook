@@ -101,6 +101,17 @@ Enterprise DNS doesn't just statically return IP addresses. It actively tests th
 > **Best Practice: Mind the TTL (Time to Live)**  
 > DNS Failover is only effective if your DNS records have a very low TTL (e.g., 60 seconds). If you set your TTL to 24 hours, customer web browsers and ISPs will cache the dead IP address for an entire day, completely bypassing Route53's attempt to redirect them to the backup datacenter!
 
+## Industry Incident Spotlight: The 2021 Facebook DNS/BGP Outage
+
+> [!CAUTION] Industry Incident Spotlight: Facebook Global Outage (2021)
+> **What Happened:** In October 2021, Facebook, Instagram, and WhatsApp disappeared from the internet entirely. Even Facebook employees were locked out of their office buildings because their smart badges relied on the same internal network.
+>
+> **The Mistake:** During routine maintenance, a command was issued to assess the availability of global backbone capacity. A bug in the auditing tool caused it to inadvertently sever all BGP (Border Gateway Protocol) routes to Facebook's DNS servers. 
+> 
+> **The Fallout:** Without BGP routes, the rest of the internet literally forgot how to find Facebook's DNS servers. Because the DNS servers were unreachable, users' browsers could not resolve `facebook.com` to an IP address. The outage lasted 6 hours, costing the company an estimated $60 million in ad revenue and wiping $47 billion off its market cap in a single day.
+>
+> **The Lesson:** DNS is the Achilles heel of the modern internet. No matter how many redundant web servers or database clusters you have, if your DNS servers go offline (or lose their BGP routes), your entire infrastructure ceases to exist to the outside world.
+
 ## Hands-on Lab
 
 > [!TIP]

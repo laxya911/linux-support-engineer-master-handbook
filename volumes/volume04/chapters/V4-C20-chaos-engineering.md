@@ -97,13 +97,16 @@ You do not unleash Chaos Monkey on day one. You schedule a "Game Day." All the s
 >
 > 8. **Documentation:** Update the architecture to use Aurora Global Databases and schedule a follow-up Game Day to verify the fix.
 
-## Common Mistakes & Pro-Tips
+## Industry Incident Spotlight: The 2017 AWS S3 Outage
 
-> [!WARNING] Common Mistake
-> Running Chaos Experiments in Production without a "Big Red Button." If you simulate a database failure and it accidentally cascades and brings down the entire company billing system, you *must* have an automated, instantaneous rollback mechanism ready to abort the experiment immediately. Never inject chaos if you don't know exactly how to stop it.
-
-> [!TIP] Pro-Tip
-> You don't have to start Chaos Engineering in Production! Start by injecting chaos into your staging or testing environments during the CI/CD pipeline. Build confidence in your automated recovery scripts before you ever touch a live customer server.
+> [!CAUTION] Industry Incident Spotlight: AWS S3 Outage (2017)
+> **What Happened:** In February 2017, the Amazon Web Services (AWS) team was investigating an issue with the S3 billing system in the `us-east-1` region. An engineer intended to execute a script to take a few billing servers offline.
+>
+> **The Mistake:** The engineer typed the command incorrectly. The typo caused the script to remove a massive set of servers instead of just a few. These servers were responsible for the metadata and location subsystems of S3.
+> 
+> **The Fallout:** Because almost every other AWS service (and consequently, half the internet) relied on S3 for storage, the typo caused a cascading failure. Major websites, mobile apps, and enterprise platforms went completely dark for over 4 hours. The cost of the outage to S&P 500 companies was estimated at over $150 million.
+>
+> **The Lesson:** Even the largest tech companies in the world are vulnerable to human error. This is why Chaos Engineering and Blameless Post-Mortems are critical. AWS didn't fire the engineer; instead, they completely rewrote the tooling to prevent anyone from ever being able to take down that much capacity at once, implementing hard limits and guardrails.
 
 ## Hands-on Lab
 
