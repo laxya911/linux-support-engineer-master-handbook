@@ -83,21 +83,16 @@ Then, you surgically write "Allow" policies to punch microscopic holes in the fi
 
 > [!IMPORTANT]  
 > **Incident Report: The Lateral Movement**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A company runs a WordPress blog and a highly secure Payroll application in the same Kubernetes cluster. A hacker finds an unpatched plugin on the WordPress blog, executes a Remote Code Execution (RCE) exploit, and gains a root shell inside the WordPress container. 
-The hacker downloads `nmap` and begins scanning the internal cluster network to see what else they can find. They discover the IP address of the Payroll Postgres database and attempt to connect to it.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. **The Flat Network Outcome:** The Postgres database accepts the TCP connection. The hacker brute-forces the password, dumps the Payroll tables, and steals the data.
-
-2. **The Microsegmentation Outcome:** The Support Engineer had previously implemented a Kubernetes `NetworkPolicy` on the Payroll database. 
-
-3. The hacker attempts to `curl` or `telnet` to the Postgres port. 
-4. The connection simply hangs, and eventually times out. 
-5. **The Orchestration Magic:** The Calico CNI plugin running on the Worker Node intercepts the packet. It sees that the packet came from a Pod labeled `app: wordpress`. It checks the Payroll NetworkPolicy, which states: `allow ingress from app: payroll-api`. Because the labels do not match, the Linux Kernel instantly drops the TCP packet.
-6. The hacker is trapped inside the WordPress container, unable to move laterally. The intrusion is contained.
+> **Reporter:** Security Operations Center (SOC)  
+> **SOP execution:**
+> 1. **22:00 PM — Incident Receipt:** SOC detects anomalous `nmap` scanning originating from the `wordpress-deployment` pod inside the production Kubernetes cluster.
+> 2. **22:05 PM — Triage & Containment:** The engineer cordons the node and isolates the WordPress pod, but realizes the hacker has already attempted to connect to the internal Payroll Postgres database.
+> 3. **22:10 PM — Investigation:** In a flat network, the hacker would have brute-forced the DB. But the engineer previously implemented a strict default-deny `NetworkPolicy` across the cluster.
+> 4. **22:15 PM — Root Cause:** An unpatched plugin on the WordPress blog allowed an RCE exploit, granting a root shell inside the container.
+> 5. **22:20 PM — Resolution:** The Calico CNI intercepted the hacker's lateral traffic. Because the network policy strictly dictated `allow ingress from app: payroll-api`, traffic from the `app: wordpress` pod was silently dropped at the kernel level.
+> 6. **22:25 PM — Verification:** The intrusion was entirely contained to the edge pod. The Payroll DB logs show zero connection attempts. The WordPress pod is killed and patched. Downtime: 0 for core services.
+> 7. **Post-Mortem:** Accelerate the patch cycle for third-party CMS plugins.
+> 8. **Documentation:** Add a SOC dashboard specifically tracking dropped packets from the default-deny policy to identify future compromised edge nodes.
 
 > [!CAUTION]  
 > **Best Practice: Verify Your CNI Plugin**  
@@ -117,8 +112,16 @@ The hacker downloads `nmap` and begins scanning the internal cluster network to 
 ### Question 2: Why is a default Kubernetes network configuration considered a security risk?
 * **Target Answer**: "By default, Kubernetes implements a 'flat' network architecture where all Pods can communicate with all other Pods across all Namespaces without restriction. This is a massive security risk because if a single public-facing container is compromised, the attacker can use it as a jump host to launch lateral attacks against internal databases or other sensitive applications within the cluster."
 
-### Question 3: How do Kubernetes Network Policies implement Microsegmentation?
-* **Target Answer**: "Network Policies act as declarative, distributed firewalls. They use Label Selectors to identify specific groups of Pods and explicitly define which ingress and egress traffic is permitted. By implementing a 'Default Deny' policy and explicitly whitelisting only the necessary communication paths (Microsegmentation), you ensure that a compromised Pod is isolated and cannot move laterally."
+### Question 3: How does Microsegmentation limit the 'Blast Radius' of a security breach?
+* **Target Answer**: "The blast radius is the total amount of damage an attacker can do after compromising a single system. In a flat network, the blast radius is the entire datacenter. With microsegmentation, if an attacker compromises a frontend web server, they are physically blocked at the network level from moving laterally to the backend databases or internal HR tools. The blast radius is restricted solely to the single compromised segment."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Assuming AWS Security Groups or Kubernetes Network Policies provide Application-Layer (Layer 7) security. They do not. A Network Policy will allow *all* HTTP traffic on port 80 if the rule permits it, even if that HTTP traffic contains a malicious SQL injection payload. You must pair Microsegmentation (Layer 4) with a Web Application Firewall (Layer 7) for full defense-in-depth.
+
+> [!TIP] Pro-Tip
+> When implementing a default-deny policy in an existing legacy cluster, use a "Log-Only" or "Dry-Run" mode first if your CNI supports it (like Calico Enterprise). This allows you to monitor exactly what legitimate traffic you are about to break before you actually flip the switch to block mode.
 
 ## Chapter Summary
 

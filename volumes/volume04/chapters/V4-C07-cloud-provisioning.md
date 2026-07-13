@@ -48,7 +48,7 @@ flowchart TD
     C -->|"Lock Granted "| A
     C -->|"Lock Denied: Try Again Later "| B
     
-    A -->|"Updates State "| D["('AWS S3 Bucket \n (terraform.tfstate)') "]
+    A -->|"Updates State "| D["AWS S3 Bucket \n (terraform.tfstate)"]
     
     style A fill:#0984e3,stroke:#74b9ff,color:#fff
     style B fill:#d63031,stroke:#ff7675,color:#fff
@@ -79,23 +79,16 @@ What happens if Engineer A and Engineer B both run `terraform apply` on a Remote
 
 > [!IMPORTANT]  
 > **Incident Report: The State File Conflict**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A mid-level engineer is tasked with adding a new Subnet to the AWS Production VPC. They write the Terraform code and type `terraform apply`. The console freezes for 10 seconds, and then throws a massive error: 
-`Error acquiring the state lock. Lock Info: ID: 4b29f... Operation: OperationTypeApply... Who: admin@laptop`.
-The engineer panics, thinking they broke the production infrastructure.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Senior Support Engineer is called in. They look at the error message and smile. 
-
-2. "You didn't break anything," the Senior Engineer explains. "The State Lock just saved the company."
-
-3. The Senior Engineer points to the `Who:` section of the error. It says `admin@laptop`. 
-4. They message the Lead Architect on Slack. "Are you currently running a Terraform apply on the Production VPC?"
-5. The Lead Architect replies, "Yes! I'm updating the core Route Tables right now. Give me 2 minutes to finish."
-6. The Senior Engineer explains to the mid-level engineer: "Because we configured an S3 Remote Backend with DynamoDB State Locking, Terraform prevented you from corrupting the state file while the Architect was modifying it. If the state file was local, you both would have succeeded, resulting in massive AWS API conflicts and an unrecoverable infrastructure state."
-7. Two minutes later, the lock clears, and the mid-level engineer runs `terraform apply` successfully.
+> **Reporter:** CI/CD Pipeline  
+> **SOP execution:**
+> 1. **10:00 AM — Incident Receipt:** An automated Terraform deployment fails with `Error acquiring the state lock. Lock Info: ID: 4b29f... Who: admin@laptop`.
+> 2. **10:02 AM — Triage & Containment:** The pipeline halts gracefully, ensuring no partial infrastructure changes occur.
+> 3. **10:05 AM — Investigation:** The engineer sees the lock error. The DynamoDB lock table actively prevented the pipeline from corrupting the state file.
+> 4. **10:07 AM — Root Cause:** A Lead Architect was concurrently running a manual `terraform apply` locally (`admin@laptop`), locking the remote state.
+> 5. **10:10 AM — Resolution:** The engineer pings the architect to finish their apply. Once completed, the lock clears. The pipeline is restarted.
+> 6. **10:15 AM — Verification:** The pipeline completes the deployment successfully. Downtime: 0 minutes (prevented).
+> 7. **Post-Mortem:** Discuss why the architect ran a local apply instead of pushing code through the pipeline.
+> 8. **Documentation:** Enforce a strict "No Local Apply" policy except for break-glass scenarios.
 
 > [!IMPORTANT]  
 > **Best Practice: Remote State Security**  
@@ -115,8 +108,16 @@ The engineer panics, thinking they broke the production infrastructure.
 ### Question 2: Explain the concept of State Locking and how it prevents corruption.
 * **Target Answer**: "State Locking is a safety mechanism used alongside a Remote Backend. When an engineer executes a `terraform apply`, Terraform writes a lock entry to a central database (like DynamoDB). If a second engineer attempts an `apply` concurrently, Terraform checks the database, sees the active lock, and rejects the second execution. This prevents simultaneous write-operations that would irreparably corrupt the JSON state file."
 
-### Question 3: Is it secure to store database passwords in Terraform variables and `.tfstate` files? How should this be handled?
-* **Target Answer**: "No, it is highly insecure. Terraform writes all variables and outputs to the `.tfstate` file in raw, unencrypted plain text. Anyone with read access to the state file can see the passwords. To handle this, the state file bucket must have strict IAM access controls and KMS encryption. Furthermore, sensitive data should ideally be passed directly into external secret managers (like AWS Secrets Manager or Vault) rather than hardcoded in Terraform."
+### Question 3: How do you pass secrets, such as a Database Password, into Terraform without hardcoding them in the `.tf` file?
+* **Target Answer**: "You should declare a variable for the password (e.g., `variable "db_password" { sensitive = true }`), but you never assign the value in the code. Instead, you pass the value at runtime via the CLI using `-var="db_password=value"`, or you set an environment variable named `TF_VAR_db_password` which Terraform will automatically detect. Furthermore, setting `sensitive = true` ensures Terraform redacts the value from the console output."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Hardcoding cloud credentials directly into Terraform `provider` blocks. If you commit an AWS Access Key to GitHub inside a `.tf` file, bots will scrape it and spin up thousands of dollars of crypto-miners in minutes. Always use IAM roles or environment variables.
+
+> [!TIP] Pro-Tip
+> Use `terraform fmt` before committing code to automatically format it to the Hashicorp standard, and use `terraform validate` in your CI/CD pipeline to catch syntax errors before generating a plan.
 
 ## Chapter Summary
 

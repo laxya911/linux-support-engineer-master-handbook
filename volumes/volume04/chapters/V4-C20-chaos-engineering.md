@@ -77,25 +77,24 @@ You do not unleash Chaos Monkey on day one. You schedule a "Game Day." All the s
 
 > [!IMPORTANT]  
 > **Incident Report: The Black Hole Game Day**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** The engineering team believes they have designed a perfect, globally redundant AWS architecture. The CTO demands proof. They schedule a Game Day for 2:00 PM on a Wednesday. The goal: Simulate the complete destruction of the `us-east-1` datacenter.
+> **Reporter:** SRE Team (Controlled Experiment)  
+> **SOP execution:**
+> 1. **14:00 PM — Incident Receipt:** The CTO demands proof that the new global AWS architecture can survive a region failure. A "Game Day" is scheduled to simulate the complete destruction of the `us-east-1` datacenter.
+> 2. **14:02 PM — Triage & Containment:** The Lead Engineer executes a Chaos script that deletes all Network ACLs in the `us-east-1` VPC, creating a network "Black Hole."
+> 3. **14:05 PM — Investigation:** Within 30 seconds, Route53 Health Checks fail. Global traffic redirects to `eu-west-1`. However, Datadog alerts that users cannot log in!
+> 4. **14:08 PM — Root Cause:** The authentication microservice in Europe was hardcoded to query the master database in `us-east-1` (which is now offline). The team failed to set up an active-active global database.
+> 5. **14:10 PM — Resolution:** The engineers abort the experiment and execute the automated rollback script, restoring the Network ACLs in `us-east-1`.
+> 6. **14:15 PM — Verification:** The authentication service reconnects to the master database. Logins succeed. Downtime: 13 minutes (controlled).
+> 7. **Post-Mortem:** A Blameless Post-Mortem is held. The architecture team realizes their cross-region database replication strategy was fundamentally flawed.
+> 8. **Documentation:** Update the architecture to use Aurora Global Databases and schedule a follow-up Game Day to verify the fix.
 
+## Common Mistakes & Pro-Tips
 
-**The Investigation (Single Engineer Diagnosis):**
+> [!WARNING] Common Mistake
+> Running Chaos Experiments in Production without a "Big Red Button." If you simulate a database failure and it accidentally cascades and brings down the entire company billing system, you *must* have an automated, instantaneous rollback mechanism ready to abort the experiment immediately. Never inject chaos if you don't know exactly how to stop it.
 
-1. At 2:00 PM, the Lead Engineer executes a terraform script that completely deletes all Network ACLs in the `us-east-1` VPC, essentially creating a network "Black Hole." The datacenter is instantly severed from the internet.
-
-2. The team watches the Datadog monitoring screens.
-
-3. Within 30 seconds, the Route53 DNS Health Checks fail (as learned in Chapter 11). Global traffic automatically redirects to the `eu-west-1` datacenter.
-4. **The Failure:** The frontend website loads perfectly in Europe, but users cannot log in!
-5. **The Analysis:** The engineers quickly realize they made a critical architectural error. The authentication microservice in Europe was hardcoded to query the database in `us-east-1`, which is now offline. They failed to set up an active-active database cluster.
-6. The engineers instantly roll back the Network ACL deletion. The `us-east-1` datacenter comes back online, and the system recovers.
-7. **The Resolution:** Because this was a controlled Game Day, the outage only lasted 5 minutes, and all the engineers were already at their desks ready to fix it. If this had happened during a real AWS outage at 3:00 AM, the business would have been down for hours. The team updates the architecture to replicate the database to Europe, and schedules another Game Day for next month.
-
-> [!IMPORTANT]  
-> **Best Practice: The Blameless Post-Mortem**  
-> When a Game Day fails, or a real disaster occurs, you must hold a Post-Mortem meeting. The absolute golden rule of this meeting is that it must be **Blameless**. You do not say, "Bob brought down the server because he typed the wrong command." You say, "The system allowed an engineer to execute a dangerous command without a secondary review." You fix the system, you do not punish the engineer. Punishing engineers creates a culture of fear where mistakes are hidden instead of fixed.
+> [!TIP] Pro-Tip
+> You don't have to start Chaos Engineering in Production! Start by injecting chaos into your staging or testing environments during the CI/CD pipeline. Build confidence in your automated recovery scripts before you ever touch a live customer server.
 
 ## Hands-on Lab
 
@@ -113,6 +112,14 @@ You do not unleash Chaos Monkey on day one. You schedule a "Game Day." All the s
 
 ### Question 3: Why is a 'Blameless Post-Mortem' critical to the long-term stability of an engineering organization?
 * **Target Answer**: "If an organization punishes or fires engineers for causing an outage, it creates a culture of fear. Engineers will hide their mistakes, avoid making necessary changes, and cover up near-misses. A Blameless Post-Mortem assumes the engineer acted with good intentions based on the information they had. It focuses entirely on fixing the *systemic* failures (e.g., lack of guardrails, poor testing, missing alerts) that allowed the human error to bring down the system."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running Chaos Experiments in Production without a "Big Red Button." If you simulate a database failure and it accidentally cascades and brings down the entire company billing system, you *must* have an automated, instantaneous rollback mechanism ready to abort the experiment immediately. Never inject chaos if you don't know exactly how to stop it.
+
+> [!TIP] Pro-Tip
+> You don't have to start Chaos Engineering in Production! Start by injecting chaos into your staging or testing environments during the CI/CD pipeline. Build confidence in your automated recovery scripts before you ever touch a live customer server.
 
 ## Chapter Summary
 

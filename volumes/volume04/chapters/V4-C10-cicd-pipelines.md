@@ -77,23 +77,16 @@ A Runner is an ephemeral worker machine (usually a Docker container) managed by 
 
 > [!IMPORTANT]  
 > **Incident Report: The Laptop Bottleneck**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** The Lead DevOps Engineer goes on a two-week vacation to a cabin with no internet access. On Wednesday, the marketing team demands an urgent update to the production web servers. The junior engineers try to run the Ansible playbook, but it fails. The SSH keys required to access the production servers only exist on the Lead Engineer's physical laptop. 
-All deployments come to a complete halt for two weeks.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. When the Lead Engineer returns, they realize that local execution creates a massive Single Point of Failure (themselves).
-
-2. They migrate all Terraform and Ansible code into a GitHub repository.
-
-3. They create a `.github/workflows/deploy.yml` file defining a CI/CD pipeline.
-4. They store the AWS API keys and the Production SSH keys as highly encrypted **GitHub Secrets**.
-5. **The New Workflow:** A junior engineer wants to update the web servers. They modify the Ansible playbook locally and create a Pull Request in GitHub.
-6. The Senior Engineer reviews the code in the browser and clicks "Approve & Merge".
-7. GitHub Actions instantly spins up a Runner, injects the secure SSH keys, and runs `ansible-playbook` against the production environment. 
-8. **The Result:** Anyone with approval can deploy code without needing secure keys on their personal laptops. The laptop bottleneck is permanently resolved.
+> **Reporter:** Product Marketing Team  
+> **SOP execution:**
+> 1. **09:00 AM — Incident Receipt:** Marketing demands an urgent, zero-day copy change to the production website.
+> 2. **09:05 AM — Triage & Containment:** Junior engineers attempt to run the Ansible playbook, but it fails because the production SSH keys only exist on the Lead Engineer's physical laptop, and the Lead is on vacation in a cabin with no internet.
+> 3. **09:15 AM — Investigation:** The team realizes that local execution has created a massive Single Point of Failure (the Lead's laptop). All deployments are hard-blocked.
+> 4. **09:20 AM — Root Cause:** Infrastructure execution is tied to local machines instead of a centralized, automated pipeline.
+> 5. **09:30 AM — Resolution:** A break-glass procedure is used to retrieve the SSH keys from the enterprise password vault. A Senior Engineer executes the deployment. 
+> 6. **09:45 AM — Verification:** The website updates successfully. Downtime: 0 (but 45 minutes of blocked deployment).
+> 7. **Post-Mortem:** The team mandates that all deployments must be triggered via GitHub Actions. SSH keys are migrated to GitHub Secrets.
+> 8. **Documentation:** Write a `.github/workflows/deploy.yml` pipeline. From now on, anyone with PR approval can merge to `main`, and the pipeline handles the execution automatically.
 
 > [!CAUTION]  
 > **Best Practice: Protect the Main Branch**  
@@ -113,8 +106,16 @@ All deployments come to a complete halt for two weeks.
 ### Question 2: Explain the difference between Continuous Integration (CI) and Continuous Deployment (CD).
 * **Target Answer**: "Continuous Integration (CI) is the automated process of testing, linting, and validating code every time it is pushed to a repository, ensuring bad code is caught before it is merged. Continuous Deployment (CD) is the subsequent automated process of taking that validated code, building the necessary artifacts (like Docker images), and deploying it out to the staging or production infrastructure."
 
-### Question 3: How does a CI/CD Runner authenticate to AWS or a production server without exposing credentials in the Git repository?
-* **Target Answer**: "Credentials should never be hardcoded in the pipeline files (`.gitlab-ci.yml` or GitHub Actions workflows) or committed to Git. Instead, credentials are saved securely as masked 'Secrets' within the CI/CD platform's settings. When the ephemeral Runner spins up to execute a job, the platform securely injects those secrets into the Runner as temporary environment variables, which are immediately destroyed when the job completes."
+### Question 3: What is the purpose of a "Pre-Flight Check" in a CI pipeline?
+* **Target Answer**: "A pre-flight check executes tests *before* any infrastructure is actually touched. For example, running `terraform plan` to see what *would* change, or running `ansible-playbook --syntax-check` to catch YAML errors. By putting these checks in the CI phase, you prevent malformed code from ever reaching the CD deployment phase."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Giving a CI/CD pipeline permanent, highly privileged admin credentials. If an attacker compromises your pipeline runner, they own your entire AWS account. Use OIDC (OpenID Connect) to grant temporary, time-bound tokens to your runners instead of storing static `AWS_ACCESS_KEY_ID` secrets.
+
+> [!TIP] Pro-Tip
+> Use Branch Protection Rules in GitHub/GitLab. Configure the repository so that no human can push directly to the `main` branch. Require at least one peer approval on a Pull Request, and require that all CI tests pass before the 'Merge' button unlocks.
 
 ## Chapter Summary
 

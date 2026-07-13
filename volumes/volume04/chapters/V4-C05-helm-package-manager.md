@@ -78,22 +78,16 @@ Helm keeps a history of everything you deploy (called a Release). If you upgrade
 
 > [!IMPORTANT]  
 > **Incident Report: The Tedious Deployment**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** The CTO requests that the engineering team deploy Prometheus and Grafana into the new Kubernetes cluster. A junior engineer spends three days reading documentation and writing 15 different YAML files (Deployments, Services, ClusterRoles, ServiceAccounts) to get it working. They finally succeed and present it to the Senior Support Engineer for review.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Senior Engineer looks at the 1,500 lines of raw YAML code. "This is great for learning," they say, "but who is going to maintain this? When Prometheus releases a new version next month, you'll have to manually update 15 files."
-
-2. The Senior Engineer deletes the junior's manual YAML files from the cluster.
-
-3. They install Helm on their laptop.
-4. They add the official Prometheus community repository:
-    `helm repo add prometheus-community https://prometheus-community.github.io/helm-charts`
-5. They deploy the entire stack in one command:
-    `helm install my-monitoring prometheus-community/kube-prometheus-stack`
-6. **The Result:** Within 60 seconds, Helm deploys the exact same 15 YAML resources, perfectly configured by the maintainers of Prometheus themselves. The junior engineer realizes they wasted three days doing manual labor that a package manager could do in one minute.
+> **Reporter:** Infrastructure Team Lead  
+> **SOP execution:**
+> 1. **13:00 PM — Incident Receipt:** A junior engineer reports they have spent 3 days writing 1,500 lines of manual YAML (Deployments, Services, RBAC) to deploy Prometheus.
+> 2. **13:05 PM — Triage & Containment:** The Lead halts the manual deployment, realizing that maintaining 15 custom YAML files across versions is an operational nightmare.
+> 3. **13:10 PM — Investigation:** The Lead checks the official Prometheus repository and confirms a mature Helm Chart exists.
+> 4. **13:12 PM — Root Cause:** Re-inventing the wheel instead of leveraging community package managers for 3rd party software.
+> 5. **13:15 PM — Resolution:** The Lead deletes the custom YAML, adds the repo (`helm repo add prometheus-community https://prometheus-community.github.io/helm-charts`), and deploys: `helm install my-monitoring prometheus-community/kube-prometheus-stack`.
+> 6. **13:17 PM — Verification:** Within 60 seconds, Helm dynamically renders and deploys all 15 resources perfectly configured. 
+> 7. **Post-Mortem:** Define a policy: never write custom YAML for off-the-shelf software.
+> 8. **Documentation:** Add a Helm repository catalog to the team wiki.
 
 > [!IMPORTANT]  
 > **Best Practice: Never Reinvent the Wheel**  
@@ -113,8 +107,16 @@ Helm keeps a history of everything you deploy (called a Release). If you upgrade
 ### Question 2: Explain the relationship between Helm Templates and the `values.yaml` file.
 * **Target Answer**: "Helm Templates are generic YAML manifests with placeholder variables instead of hardcoded values. The `values.yaml` file is a central configuration file containing the actual data (like replica counts, image tags, and passwords). During deployment, the Helm engine merges the `values.yaml` data into the Templates to generate the final, valid Kubernetes manifests."
 
-### Question 3: Why is it considered a Best Practice to use official Helm Charts for third-party software instead of writing your own YAML?
-* **Target Answer**: "Official Helm Charts are maintained by the creators of the software or large open-source communities. They embed years of production experience, security hardening, and optimal configurations into the chart. Writing your own YAML for third-party software is 'reinventing the wheel' and dramatically increases the risk of misconfiguration and operational overhead."
+### Question 3: What is the purpose of the `values.yaml` file?
+* **Target Answer**: "The `values.yaml` file provides the default configuration variables for a Helm Chart. When a user runs `helm install`, they can provide their own custom `values.yaml` to override these defaults (such as enabling an ingress controller or increasing the replica count), allowing them to customize the deployment without altering the underlying templates."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running `helm upgrade` without understanding the state of your cluster. If someone manually edited a Deployment via `kubectl edit`, Helm has no idea. When you run `helm upgrade`, Helm will blindly overwrite those manual changes with what is in the template.
+
+> [!TIP] Pro-Tip
+> Use `helm template <release-name> <chart>` to output the raw YAML that Helm *would* apply, without actually applying it. This is phenomenal for debugging syntax errors or inspecting exactly what a 3rd party chart is going to install.
 
 ## Chapter Summary
 

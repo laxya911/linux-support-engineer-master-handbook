@@ -82,22 +82,16 @@ You cannot read a `vmcore` file with `cat`. It is a massive binary blob of raw m
 
 > [!IMPORTANT]  
 > **Incident Report: The Midnight Reboot**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A critical database server randomly reboots itself roughly every three days, always in the middle of the night.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Support Engineer logs in the morning after a reboot. They check `/var/log/syslog`. There are no errors. The logs simply stop at 2:14 AM and resume at 2:18 AM when the server booted back up.
-
-2. The engineer realizes the server is suffering from a hardware-induced Kernel Panic. Because the kernel dies instantly, it cannot write the error to `syslog`.
-
-3. The engineer installs `kexec-tools` and configures `kdump` to reserve 128MB of RAM for the crash kernel.
-4. Three days later, the server reboots again.
-5. The engineer logs in. This time, they check `/var/log/crash/`. They find a 4GB `vmcore` file!
-6. The engineer installs the `crash` utility and the kernel debug symbols, and opens the core dump.
-7. They type `bt` (backtrace) inside the `crash` prompt. The backtrace shows the CPU executing a string of functions inside a proprietary RAID controller driver (`megaraid_sas`) right before the panic occurred.
-8. **The Resolution:** The engineer checks the hardware vendor's website, finds a known bug in that specific driver version causing memory leaks during heavy nighttime backups, and updates the driver. The panics cease entirely.
+> **Reporter:** Infrastructure Monitoring  
+> **SOP execution:**
+> 1. **08:00 AM — Incident Receipt:** An alert shows a critical database server has randomly rebooted in the middle of the night for the third time this week.
+> 2. **08:05 AM — Triage & Containment:** The server is back online, but the engineer shifts database traffic to the read-replica to prevent application crashes if it reboots again.
+> 3. **08:15 AM — Investigation:** The engineer checks `/var/log/syslog`. There are no errors. The logs simply stop at 2:14 AM and resume at 2:18 AM. Because the kernel died instantly, it couldn't write the error to disk.
+> 4. **08:30 AM — Root Cause:** Unknown hardware or driver fault causing a Kernel Panic. The engineer configures `kdump` to capture the memory state on the next crash.
+> 5. **Three Days Later — Resolution:** The server crashes again. The engineer opens the resulting `vmcore` dump using the `crash` utility. The `bt` (backtrace) reveals a proprietary RAID controller driver (`megaraid_sas`) leaking memory and triggering a panic during heavy I/O. The engineer updates the driver to a patched version.
+> 6. **09:00 AM — Verification:** The server runs for 14 days without a reboot. Traffic is shifted back. Downtime: 4 minutes (previous reboots).
+> 7. **Post-Mortem:** Discuss why `kdump` is not enabled by default on high-tier database images.
+> 8. **Documentation:** Add a Terraform provisioner to ensure `kexec-tools` and `kdump` are active on all bare-metal database instances.
 
 > [!CAUTION]  
 > **Best Practice: Disk Space for Core Dumps**  
@@ -109,6 +103,14 @@ You cannot read a `vmcore` file with `cat`. It is a massive binary blob of raw m
 > **Practice Assignment Available**
 > Proceed to the [Chapter 17 Practice Guide](../practice-files/V4-C17-practice.md) to force a kernel panic manually using the `sysrq` trigger!
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Analyzing a crash dump using the wrong `kernel-debuginfo` package. The debug symbols you use *must* exactly match the specific kernel version that crashed (down to the minor version number). If the server crashed on `v5.4.0-104`, using the symbols for `v5.4.0-105` will result in completely unreadable garbage in the `crash` utility.
+
+> [!TIP] Pro-Tip
+> You can manually trigger a kernel panic to test if your `kdump` configuration is actually working before an emergency happens. Run `echo c > /proc/sysrq-trigger` as root. (Warning: This will instantly crash the machine, do not do this in production!)
+
 ## Interview Questions
 
 ### Question 1: Why won't you find the cause of a Kernel Panic in `/var/log/syslog`?
@@ -117,8 +119,8 @@ You cannot read a `vmcore` file with `cat`. It is a massive binary blob of raw m
 ### Question 2: Explain how `kdump` circumvents a frozen kernel to capture memory.
 * **Target Answer**: "`kdump` uses the `kexec` system call to boot a secondary, minimal 'Crash Kernel' from a pre-reserved chunk of RAM. When the primary kernel panics, the CPU bypasses the BIOS/UEFI hardware initialization and instantly jumps into the Crash Kernel. Because the Crash Kernel is perfectly healthy, it mounts the filesystem and safely dumps the contents of the frozen primary kernel's RAM to a `vmcore` file on the disk."
 
-### Question 3: Once you have a `vmcore` file, what tool do you use to analyze it, and what is the most useful command to find the root cause?
-* **Target Answer**: "You use the Linux `crash` utility, which requires both the `vmcore` file and the corresponding kernel debug symbols (`vmlinux-dbg`). Once inside the crash shell, the most useful command is `bt` (backtrace). This prints the exact stack trace of the CPU at the millisecond of the crash, revealing the specific kernel function or driver module that triggered the panic."
+### Question 3: What is the `OOM Killer` and why does it exist?
+* **Target Answer**: "The Out-Of-Memory (OOM) Killer is a Linux kernel mechanism designed to save the operating system from completely freezing. When the server runs out of physical RAM and Swap space, the kernel calculates an 'oom_score' for every running process (based on memory usage and priority). It then forcibly sends a `SIGKILL` to the process with the highest score to free up memory and keep the kernel alive. It is a last-resort sacrifice to prevent a full system panic."
 
 ## Chapter Summary
 

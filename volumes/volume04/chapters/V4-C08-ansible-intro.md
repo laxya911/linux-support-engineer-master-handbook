@@ -85,22 +85,16 @@ If you want to install Apache, you don't write `apt install apache2` (which woul
 
 > [!IMPORTANT]  
 > **Incident Report: The Mass Password Rotation**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** The Chief Information Security Officer (CISO) bursts into the NOC. A disgruntled system administrator was just fired. The CISO demands that the root password on all 500 company Linux servers be rotated immediately.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. A Junior Sysadmin groans. "It takes me about 2 minutes to SSH into a server, run `passwd`, generate a secure string, and log out. 500 servers will take me 16 hours. I'll get some coffee."
-
-2. The Senior DevOps Engineer laughs. "Sit down. We use Ansible."
-
-3. The Senior Engineer opens their laptop. They already have an `inventory.ini` file that contains the IP addresses of all 500 servers.
-4. They generate a secure hashed password. 
-5. They run a single ad-hoc Ansible command, utilizing the `user` module:
-    `ansible all -m user -a "name=root password='$6$HASHED_PASSWORD'" --become`
-6. **The Orchestration Magic:** Ansible instantly initiates 500 concurrent SSH connections to all the servers. It executes the Python user module, rotates the password, and logs out. 
-7. **The Result:** The entire 500-server fleet is secured in exactly 12 seconds. The CISO is thrilled.
+> **Reporter:** Chief Information Security Officer (CISO)  
+> **SOP execution:**
+> 1. **16:00 PM — Incident Receipt:** A disgruntled system administrator was just terminated. The CISO demands the `root` password on all 500 company Linux servers be rotated immediately.
+> 2. **16:02 PM — Triage & Containment:** Doing this manually via SSH (`passwd`) would take 16 hours, leaving a massive window of vulnerability.
+> 3. **16:05 PM — Investigation:** The Senior Engineer confirms the dynamic `inventory.ini` has the latest IPs for all 500 servers.
+> 4. **16:08 PM — Root Cause:** A compromised human threat vector requires an immediate, fleet-wide state change.
+> 5. **16:10 PM — Resolution:** The engineer generates a secure hashed password. They run a single ad-hoc Ansible command: `ansible all -m user -a "name=root password='$6$HASHED_PASSWORD'" --become`.
+> 6. **16:11 PM — Verification:** Ansible initiates 500 concurrent SSH connections and rotates all passwords. The entire fleet is secured in 12 seconds.
+> 7. **Post-Mortem:** Discuss migrating away from shared `root` passwords entirely in favor of strict SSH Key + IAM-backed sudo authentication.
+> 8. **Documentation:** Update offboarding procedures to trigger an automated Ansible password-rotation playbook.
 
 > [!CAUTION]  
 > **Best Practice: Never Use Passwords for SSH**  
@@ -120,8 +114,16 @@ If you want to install Apache, you don't write `apt install apache2` (which woul
 ### Question 2: Explain Ansible's "Agentless" architecture and why it is a major advantage.
 * **Target Answer**: "Tools like Puppet or Chef require a dedicated 'Agent' software daemon to be installed and running constantly on every managed server. Ansible is Agentless; it only requires Python and a standard SSH connection. This is a massive advantage because there is no agent software to upgrade, no agent CPU/RAM overhead on the target servers, and you can manage a brand new server instantly as long as you have SSH access."
 
-### Question 3: What is the purpose of an Ansible Module?
-* **Target Answer**: "An Ansible Module is a standalone, reusable script (usually written in Python) that Ansible executes on the target node. Instead of writing raw bash scripts, which are error-prone and OS-specific, you use Modules (like `user`, `package`, or `copy`) to abstract away the underlying OS commands. Modules handle the complex logic of checking the system state before making changes."
+### Question 3: Explain the difference between executing a shell script via SSH, and executing an Ansible Module.
+* **Target Answer**: "A shell script executes raw commands blindly. It does not know the state of the system before or after it runs. An Ansible Module is written in Python and is idempotent. Before an Ansible Module executes, it checks the current state of the system. If the system already matches the desired state, the Module does absolutely nothing, returning an 'OK' status and saving execution time."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running `ansible all -m command -a "rm -rf /tmp/cache"` without `--check`. Ad-hoc commands using the `command` or `shell` modules are NOT idempotent! Running them twice could crash a system. Always use dedicated modules (like the `file` module with `state=absent`) instead of raw shell commands whenever possible.
+
+> [!TIP] Pro-Tip
+> Use the `-f` (forks) parameter to speed up ad-hoc commands on massive fleets. By default, Ansible uses 5 concurrent forks. If you are managing 500 servers, `ansible all -m ping -f 50` will execute 50 SSH connections at a time, drastically reducing the total execution duration.
 
 ## Chapter Summary
 

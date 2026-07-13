@@ -73,23 +73,16 @@ This file is the mapping between your local code and the real world. If you chan
 
 > [!IMPORTANT]  
 > **Incident Report: The Click-Ops Disaster**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A junior engineer is tasked with deleting an unused "Sandbox" network in the AWS web console. They log in, find a VPC, and click delete. Unfortunately, they were in the wrong AWS region. They just deleted the entire European Production VPC. 
-All European web servers, databases, and subnets are instantly destroyed. The company is losing $10,000 a minute.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. If the infrastructure had been built using "Click-Ops", the Senior Engineer would have to frantically try to remember exactly how the network was configured. They would spend hours manually clicking through the AWS console to recreate 5 subnets, 3 route tables, and 12 security groups.
-
-2. Fortunately, the infrastructure was built using Terraform!
-
-3. The Senior Engineer opens their laptop and navigates to the `eu-prod-network` directory. 
-4. The engineer types:
-    `terraform apply`
-5. **The Orchestration Magic:** Terraform reads the `.tfstate` file, compares it to the reality in AWS, and realizes the entire VPC is missing. Terraform instantly generates an execution plan to recreate all 50 network components in the exact, perfect order required by AWS.
-6. The engineer types `yes`.
-7. Within 3 minutes, the entire production network is rebuilt flawlessly. The downtime was minimal, and no human error was introduced during the recovery.
+> **Reporter:** Automated Monitoring  
+> **SOP execution:**
+> 1. **15:00 PM — Incident Receipt:** AWS GuardDuty and Datadog light up. The entire European Production VPC has disappeared.
+> 2. **15:02 PM — Triage & Containment:** The engineer realizes a junior admin accidentally deleted the wrong VPC while doing "Click-Ops" in the AWS console. The company is losing $10,000 a minute.
+> 3. **15:04 PM — Investigation:** The engineer confirms the deletion. Because the infrastructure is managed by Terraform, they do not need to manually guess how to rebuild 50 network components.
+> 4. **15:05 PM — Root Cause:** Manual intervention via the AWS Console instead of strict IaC workflows.
+> 5. **15:06 PM — Resolution:** The engineer navigates to the `eu-prod-network` directory and runs `terraform apply`.
+> 6. **15:09 PM — Verification:** Terraform reads the `.tfstate`, sees the missing VPC, and flawlessly rebuilds 5 subnets, 3 route tables, and 12 security groups in the exact required dependency order. Downtime: 9 minutes.
+> 7. **Post-Mortem:** Revoke console write-access for all engineers. All infrastructure changes must now go through Terraform PRs.
+> 8. **Documentation:** Add a stern warning to the onboarding wiki about the dangers of Click-Ops.
 
 > [!IMPORTANT]  
 > **Best Practice: Never Touch the Console**  
@@ -109,8 +102,16 @@ All European web servers, databases, and subnets are instantly destroyed. The co
 ### Question 2: Why is the `terraform.tfstate` file critical, and what happens if you delete it?
 * **Target Answer**: "The state file acts as the source of truth that maps the declarative Terraform code to the actual physical resources in the cloud. If you delete the state file, Terraform suffers amnesia. It still has your code, and the cloud resources still exist, but Terraform no longer knows it owns them. If you run `terraform apply` again, it will attempt to create brand new duplicate resources, causing massive errors and conflicts."
 
-### Question 3: A team member modifies a Terraform-managed Security Group directly in the AWS Web Console. What happens during the next `terraform apply`?
-* **Target Answer**: "This is known as 'Configuration Drift'. During the `apply` phase, Terraform will refresh its state by querying the AWS API. It will detect that the reality in AWS no longer matches the desired state defined in the `.tf` code. Because Terraform is declarative, it will automatically overwrite or delete the manual console changes to force the Security Group back into alignment with the code."
+### Question 3: Explain the concept of "Infrastructure Drift".
+* **Target Answer**: "Infrastructure Drift occurs when the actual state of resources in the cloud diverges from the desired state defined in your Terraform files. This usually happens when an administrator manually modifies a resource via the cloud console. Running `terraform plan` will detect this drift and propose modifying or deleting the resource to force it back into alignment with the code."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Losing or corrupting the `terraform.tfstate` file. If you delete this file, Terraform forgets what it built. If you run `terraform apply` again, it will try to create everything from scratch, resulting in massive "Resource Already Exists" errors. Always use a remote backend like an S3 bucket with versioning enabled!
+
+> [!TIP] Pro-Tip
+> When someone manually edits a resource and causes drift, sometimes you *want* to keep their change. Instead of applying Terraform to revert them, you can update your `.tf` files to match reality, and the next `terraform plan` will show zero changes.
 
 ## Chapter Summary
 

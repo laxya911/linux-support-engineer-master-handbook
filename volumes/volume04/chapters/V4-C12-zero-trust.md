@@ -83,21 +83,16 @@ Zero Trust evaluates *context*. Even if you have the correct password and the co
 
 > [!IMPORTANT]  
 > **Incident Report: The Stolen Laptop**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A Senior Developer goes to a coffee shop. They get up to grab their coffee, and a thief steals their unlocked laptop. The laptop already has an active, authenticated VPN session connected to the corporate network.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. **The Traditional Outcome:** The thief takes the laptop home. Because the VPN is active, the corporate firewall trusts the laptop's IP address. The thief opens the browser, navigates to the internal Jira server, downloads the company's proprietary source code, and navigates to the internal HR portal to download employee social security numbers. Massive data breach.
-
-2. **The Zero Trust Outcome:** The thief takes the laptop home. The company does not use a VPN. The internal Jira server is exposed to the public internet, but protected by a Zero Trust proxy (like Cloudflare Access or Zscaler) tied to Okta.
-
-3. The thief opens the browser and navigates to Jira. 
-4. Even though the laptop was previously authenticated, the Zero Trust proxy enforces a strict "Verify Every Request" policy. It detects that the laptop's IP address changed from the coffee shop to the thief's home network (a context change).
-5. The proxy immediately intercepts the request and redirects the thief's browser to Okta.
-6. Okta demands a biometric fingerprint scan (WebAuthn) or a YubiKey tap to re-authenticate the session. 
-7. The thief cannot provide the biometric factor. Access is denied. The laptop is utterly useless. The source code and HR data remain perfectly safe.
+> **Reporter:** Employee (via phone call to Helpdesk)  
+> **SOP execution:**
+> 1. **17:00 PM — Incident Receipt:** A Senior Developer reports their unlocked laptop was stolen at a coffee shop. It had an active VPN session.
+> 2. **17:02 PM — Triage & Containment:** The Helpdesk agent immediately suspends the user's Okta account and triggers a remote wipe command via MDM.
+> 3. **17:05 PM — Investigation:** In a traditional VPN architecture, the thief would already be inside the network downloading source code. However, the company uses a Zero Trust proxy (e.g., Zscaler/Cloudflare Access).
+> 4. **17:06 PM — Root Cause:** Physical theft of an authenticated device.
+> 5. **17:08 PM — Resolution:** The thief opens Jira at their home network. The Zero Trust proxy enforces a strict "Verify Every Request" policy. It detects a context change (IP/Location shift) and immediately intercepts the request, redirecting to Okta.
+> 6. **17:10 PM — Verification:** Okta demands a biometric YubiKey tap to re-authenticate the session. The thief cannot provide it. Access is denied. The source code remains perfectly safe. Downtime: 0.
+> 7. **Post-Mortem:** Review the MDM wipe logs to confirm the physical hard drive was successfully zeroed.
+> 8. **Documentation:** Update physical security training emphasizing screen locks in public spaces.
 
 > [!IMPORTANT]  
 > **Best Practice: Eliminate Shared Accounts**  
@@ -117,8 +112,16 @@ Zero Trust evaluates *context*. Even if you have the correct password and the co
 ### Question 2: Explain the roles of the Identity Provider (IdP) and the Service Provider (SP) in a SAML transaction.
 * **Target Answer**: "The Service Provider (SP) is the application the user wants to access (e.g., Salesforce, Jira, or an internal HR app). The Identity Provider (IdP) is the centralized authentication authority (e.g., Okta or Keycloak). The SP never sees the user's password; it redirects the user to the IdP. The IdP authenticates the user (via MFA) and redirects them back to the SP with a cryptographically signed SAML assertion proving their identity."
 
-### Question 3: How does Device Posture enhance Zero Trust Architecture beyond simple MFA?
-* **Target Answer**: "MFA only proves that the correct human is logging in, but it doesn't prove the device is safe. An employee might approve an MFA prompt while logging in from a malware-infected home computer. Device Posture integrates with the IdP to evaluate the context of the device itself (e.g., checking if the corporate MDM profile is installed, if the OS is patched, and if the firewall is active). If the device fails the posture check, the IdP blocks access even if the password and MFA are correct."
+### Question 3: Explain the concept of "Context-Aware Access" in a Zero Trust environment.
+* **Target Answer**: "Context-Aware Access means that authentication is not just a username and password. The Identity Provider evaluates the *context* of the request: Is this login coming from a known corporate laptop? Is it running the latest OS patches? Is it coming from a suspicious IP address at 3 AM? If the context changes or looks risky, the system dynamically challenges the user with MFA or denies access entirely, even if the password is correct."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Treating Zero Trust as a single product you can buy. Zero Trust is an architectural philosophy, not a SKU. Slapping an Identity Proxy in front of a web app while leaving port 22 (SSH) open to the internet with password authentication entirely defeats the purpose.
+
+> [!TIP] Pro-Tip
+> When implementing Identity Aware Proxies (IAP), configure your internal web servers to drop all traffic that doesn't contain the specific cryptographic JWT token generated by the proxy. This prevents attackers from bypassing the proxy and hitting the web server IP directly!
 
 ## Chapter Summary
 

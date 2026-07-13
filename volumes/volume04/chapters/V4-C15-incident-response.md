@@ -72,21 +72,16 @@ To prevent this, enterprises use a **SIEM** (like Splunk or ELK). A small daemon
 
 > [!IMPORTANT]  
 > **Incident Report: The Crypto Miner**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** At 4:00 PM, Prometheus triggers a PagerDuty alert: `CPU Usage > 99% for 15 minutes` on a legacy internal file server.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Support Engineer SSHes into the server and runs `top`. They see a process named `kthreadd` consuming 100% of the CPU. 
-
-2. The engineer recognizes this as a common disguise for a crypto-mining malware script. 
-
-3. **The Rookie Mistake:** The engineer considers typing `kill -9 <PID>` to stop the miner. They stop themselves. Doing so would tip off the hacker that they have been discovered, and destroy the malicious binary in RAM.
-4. **Containment:** Instead, the engineer logs into the AWS Console and modifies the EC2 Security Group. They remove the `0.0.0.0/0` outbound rule, completely disconnecting the server from the internet. The malware can no longer communicate with its mining pool or exfiltrate data, but it is still running in memory for analysis.
-5. **Detection & Analysis:** The engineer queries the centralized SIEM for logs related to this server over the past 24 hours. They discover that a developer's SSH key was used to log in at 3:15 PM from a Russian IP address. 
-6. **Eradication:** The engineer finds the developer, revokes their compromised SSH key globally, and wipes the infected server completely, replacing it with a fresh image from a clean Terraform state.
-7. **Post-Incident Activity:** The engineer writes an incident report detailing the failure, resulting in a new policy requiring Okta MFA for all SSH access.
+> **Reporter:** Datadog Anomaly Detection  
+> **SOP execution:**
+> 1. **16:00 PM — Incident Receipt:** An alert fires for `CPU Usage > 99% for 15 minutes` on a legacy internal file server.
+> 2. **16:05 PM — Triage & Containment:** The engineer logs in, runs `top`, and sees a process disguised as `kthreadd` consuming 100% CPU. Instead of killing the process (which destroys evidence in RAM), they contain it by removing the `0.0.0.0/0` outbound security group rule, cutting the miner off from its pool.
+> 3. **16:10 PM — Investigation:** The engineer queries the centralized SIEM for auth logs on this server. They discover a developer's SSH key was used to log in at 15:15 PM from an unknown foreign IP.
+> 4. **16:15 PM — Root Cause:** A compromised developer SSH key allowed an attacker to bypass the perimeter and install a crypto-mining payload.
+> 5. **16:20 PM — Resolution:** The engineer contacts the developer and globally revokes their compromised SSH key. 
+> 6. **16:25 PM — Verification:** The infected server is treated as toxic waste. It is isolated for forensics, and a clean replacement is instantly spun up via Terraform. Traffic is routed to the clean node.
+> 7. **Post-Mortem:** Conduct a full review of how the developer's private key was stolen (it was uploaded to a public pastebin). 
+> 8. **Documentation:** Update access policies to require hardware-backed YubiKey SSH certificates instead of static PEM files.
 
 > [!IMPORTANT]  
 > **Best Practice: Immutable Infrastructure**  
@@ -107,7 +102,15 @@ To prevent this, enterprises use a **SIEM** (like Splunk or ELK). A small daemon
 * **Target Answer**: "Standard system logs (`syslog`) generally only capture high-level application events. The `auditd` daemon ties directly into the Linux kernel to monitor system calls. It provides a highly granular, irrefutable audit trail of security-relevant events, such as tracking exactly which user ID read a sensitive file, executed a specific binary, or modified system permissions."
 
 ### Question 3: A hacker gains root access to a server and immediately deletes the `/var/log` directory to cover their tracks. How does a SIEM architecture defeat this?
-* **Target Answer**: "A SIEM (Security Information and Event Management) architecture relies on log forwarding agents running on the endpoint servers. These agents instantly stream log events over the network to a centralized, highly secure logging cluster (like Splunk or ELK) in near real-time. By the time the hacker gains root access and deletes the local log files, the evidence of their intrusion has already been safely transmitted and permanently stored in the centralized SIEM."
+* **Target Answer**: "A SIEM (Security Information and Event Management) system relies on remote log aggregation. As soon as a log event (like a successful SSH login) occurs on the server, a local agent (like Promtail or Filebeat) instantly ships a copy of that log over the network to the centralized SIEM database. Even if the hacker deletes the local files on the compromised machine a minute later, the irrefutable evidence has already been securely archived off-site in the SIEM."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Rushing straight to Eradication during an active breach. If you panic and reboot the server or delete the malware files, you destroy critical forensic evidence (like active network connections in RAM or temporary payload files). Always isolate and contain the machine at the network level first, preserving the crime scene for the SOC team.
+
+> [!TIP] Pro-Tip
+> When isolating a compromised virtual machine, don't just change the firewall rules. Take a snapshot of the VM's hard drive and a dump of its RAM *before* you turn it off. Security analysts use these memory dumps to extract encryption keys and uncover advanced fileless malware.
 
 ## Chapter Summary
 

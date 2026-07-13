@@ -78,31 +78,28 @@ In Kubernetes, you do not type imperative commands like `kubectl run nginx --rep
 
 > [!IMPORTANT]  
 > **Incident Report: The Botched Update**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** It is 2:00 PM on a Tuesday. The developers want to release Version 2.0 of the company's main Python application. The Support Engineer updates the `deployment.yaml` file to use `image: python-app:v2.0` and applies it.
-Kubernetes successfully executes a Rolling Update. However, 5 minutes later, customer support lines light up. The new V2 code has a fatal bug causing the checkout cart to crash!
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. In the old Virtual Machine days, the engineer would have to frantically search for the old V1 code, recompile it, and figure out how to manually install it over the broken V2 code, taking hours.
-
-2. Because the engineer is using Kubernetes Deployments, this is trivial. The Deployment automatically kept the old V1 ReplicaSet paused in the background.
-
-3. The engineer simply types:
-
-    > **👨‍🔧 Support Engineer executes:**
-    > ```bash
-    > $ kubectl rollout undo deployment python-app
-    > deployment.apps/python-app rolled back
-    > ```
-
-4. **The Orchestration Magic:** Kubernetes instantly spins the V1 ReplicaSet back up and gracefully terminates the broken V2 Pods. 
-5. Within 15 seconds, the entire application is reverted to the stable V1 code. The checkout cart works again. The engineer tells the developers to fix their code in a staging environment.
+> **Reporter:** Automated Monitoring  
+> **SOP execution:**
+> 1. **14:00 PM — Incident Receipt:** Datadog alerts on a 500-error spike across the `checkout-cart` endpoints immediately following a CI/CD deployment.
+> 2. **14:02 PM — Triage & Containment:** The engineer recognizes the new V2 code is crashing. They immediately run `kubectl rollout undo deployment python-app` to fallback to V1.
+> 3. **14:03 PM — Investigation:** The engineer watches `kubectl get pods`. Kubernetes instantly spins the V1 ReplicaSet back up and gracefully terminates the broken V2 Pods.
+> 4. **14:05 PM — Root Cause:** The V2 container image was missing a critical environment variable required for database authentication.
+> 5. **14:06 PM — Resolution:** Traffic has already recovered on V1. The code is pulled from production routing.
+> 6. **14:08 PM — Verification:** 500-errors drop to 0. Total customer downtime: 3 minutes.
+> 7. **Post-Mortem:** Discuss why the missing environment variable was not caught in the staging environment.
+> 8. **Documentation:** Add a pre-flight check in the CI/CD pipeline to validate environment variables before applying to production.
 
 > [!IMPORTANT]  
 > **Best Practice: Never Use 'Latest'**  
 > In your Deployment YAML, never use `image: nginx:latest`. If a Pod crashes and the Kubelet tries to restart it, it will reach out to Docker Hub and pull whatever the absolute newest version of NGINX is on that specific day. This can introduce breaking changes silently. Always pin your versions (e.g., `image: nginx:1.21.4`).
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Relying on the `latest` image tag. If you use `image: my-app:latest`, Kubernetes won't know when the image actually changes, so it might not pull the new version when restarting a Pod. Always use specific, immutable version tags (e.g., `v2.0.1` or git commit hashes).
+
+> [!TIP] Pro-Tip
+> Use `kubectl rollout history deployment/<name>` to see previous revisions. You can rollback to a specific revision by appending `--to-revision=N` to the `undo` command.
 
 ## Hands-on Lab
 
@@ -118,8 +115,8 @@ Kubernetes successfully executes a Rolling Update. However, 5 minutes later, cus
 ### Question 2: Why should you create a Deployment instead of creating Pods manually?
 * **Target Answer**: "If you create a Pod manually and the physical node dies, the Pod is permanently gone. A Deployment manages a ReplicaSet, which constantly monitors the cluster to ensure the exact requested number of Pods are running. Furthermore, Deployments allow for zero-downtime rolling updates and instant rollbacks to previous versions."
 
-### Question 3: Describe the process of a Zero-Downtime Rolling Update in Kubernetes.
-* **Target Answer**: "When a Deployment is updated with a new image version, it creates a new ReplicaSet. It then scales up the new ReplicaSet by one Pod, waits for it to become healthy, and scales down the old ReplicaSet by one Pod. It repeats this process sequentially until the old ReplicaSet is at zero and the new ReplicaSet is fully scaled, ensuring the application remains available to users throughout the entire update."
+### Question 3: What is the relationship between a Deployment, a ReplicaSet, and a Pod?
+* **Target Answer**: "A Deployment manages a ReplicaSet. A ReplicaSet ensures a specific number of identical Pods are running. When you update a Deployment's image, it creates a *new* ReplicaSet, scales it up, and scales the old ReplicaSet down. Pods are just the ephemeral workers running the actual containers."
 
 ## Chapter Summary
 

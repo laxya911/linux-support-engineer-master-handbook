@@ -95,37 +95,20 @@ You do not SSH into Kubernetes servers to start containers. Instead, you sit on 
 
 > [!IMPORTANT]  
 > **Incident Report: The Split Brain**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A company has a Kubernetes cluster with 1 Control Plane node and 3 Worker Nodes. A network switch fails, completely severing the connection between the Control Plane and Worker Node #3. The applications on Worker Node #3 are still running perfectly and serving customer traffic, but the engineer notices something strange when running `kubectl get nodes`:
+> **Reporter:** Automated Monitoring  
+> **SOP execution:**
+> 1. **10:00 AM — Incident Receipt:** PagerDuty alerts that Worker Node #3 has missed 5 consecutive heartbeats. 
+> 2. **10:02 AM — Triage & Containment:** The engineer verifies that the applications on Node #3 are actually still serving traffic, but the Control Plane cannot see the node.
+> 3. **10:05 AM — Investigation:** The engineer runs `kubectl get nodes` and sees Worker Node #3 marked as `NotReady`. Pinging the node's management IP from the Control Plane fails.
+> 4. **10:10 AM — Root Cause:** A top-of-rack network switch port died, severing the management plane connection.
+> 5. **10:12 AM — Resolution:** The Orchestration Magic! Because the Control Plane thinks the node is dead, it assumes all web containers on Node #3 are also dead. The Scheduler instantly spins up replacement containers on Worker Nodes #1 and #2. The engineer then resets the physical switch port.
+> 6. **10:15 AM — Verification:** Worker Node #3 re-establishes communication. The API Server realizes it now has *too many* web containers, and gracefully deletes the extras. Total customer downtime: 0 seconds.
+> 7. **Post-Mortem:** Investigate switch port failure and add redundant management uplinks.
+> 8. **Documentation:** Update infrastructure wiki with the switch port mapping.
 
-
-    > **👨‍🔧 Support Engineer executes:**
-    > ```bash
-    > $ kubectl get nodes
-    > NAME           STATUS     ROLES           AGE   VERSION
-    > control-01     Ready      control-plane   10d   v1.28.0
-    > worker-01      Ready      <none>          10d   v1.28.0
-    > worker-02      Ready      <none>          10d   v1.28.0
-    > worker-03      NotReady   <none>          10d   v1.28.0
-    > ```
-
-
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Support Engineer understands Kubernetes architecture. `kubectl` talks to the API Server. The API Server talks to the `kubelet` on Worker Node #3.
-
-2. Because the network switch died, the API Server cannot hear the `kubelet`'s heartbeat. After 5 minutes, the Control Plane officially marks Node #3 as "Dead".
-
-3. **The Orchestration Magic:** Because the Control Plane thinks the node is dead, it assumes all the web containers on Node #3 are also dead. The Control Plane immediately tells the Scheduler to spin up replacement containers on Worker Nodes #1 and #2!
-4. The engineer fixes the physical network switch. 
-5. Worker Node #3 re-establishes communication with the API Server. The API Server realizes it now has *too many* web containers running, and gracefully deletes the extras to return the cluster to the desired state. 
-6. Total customer downtime: 0 seconds.
-
-> [!IMPORTANT]  
+> [!TIP]
 > **Best Practice: Control Plane High Availability**  
-> In the scenario above, the Control Plane was fine, so it could heal the cluster. But what if the single Control Plane node died? The Worker Nodes would keep running the apps, but the cluster could no longer self-heal, scale, or accept new deployments. For production, you must *always* run an odd number of Control Plane nodes (usually 3 or 5) to establish an `etcd` quorum and prevent a total administrative lockout.
+> In the scenario above, the Control Plane was fine, so it could heal the cluster. But what if the single Control Plane node died? For production, you must *always* run an odd number of Control Plane nodes (3 or 5) to establish an `etcd` quorum and prevent a total administrative lockout.
 
 ## Hands-on Lab
 
@@ -143,6 +126,14 @@ You do not SSH into Kubernetes servers to start containers. Instead, you sit on 
 
 ### Question 3: Explain the interaction between the API Server, the Scheduler, and the Kubelet when deploying a new application.
 * **Target Answer**: "1. The engineer sends a YAML deployment to the API Server via `kubectl`. 2. The API Server writes this desired state to `etcd`. 3. The Scheduler notices a new pending Pod, finds a suitable Worker Node with enough resources, and tells the API Server its decision. 4. The `kubelet` on that specific Worker Node sees the API Server's update, downloads the container image, and starts the application."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Assuming the Control Plane hosts the application. Master nodes only coordinate; they do not run user workloads. If the Control Plane dies, existing Pods on Worker Nodes will continue to run, but you cannot schedule new ones.
+
+> [!TIP] Pro-Tip
+> When a node goes `NotReady`, don't immediately delete it. Check if it's a transient network issue. The Scheduler will wait 5 minutes (by default) before evicting its Pods to prevent flapping.
 
 ## Chapter Summary
 

@@ -79,22 +79,16 @@ An **Ingress** operates at Layer 7 (HTTP). It allows you to buy exactly *one* Lo
 
 > [!IMPORTANT]  
 > **Incident Report: The IP Shuffle**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A junior developer deploys a Python Backend and a Redis Cache into the Kubernetes cluster. The Python Backend works fine for three days. Suddenly, the backend crashes with a `Connection Refused` error when trying to reach Redis. 
-The junior developer is confused: "I checked the Redis Pod, and it is perfectly healthy and running!"
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Support Engineer looks at the Python code. The developer hardcoded the Redis connection string as `redis://192.168.1.45:6379`.
-
-2. The engineer checks the cluster logs. Two hours ago, the physical server hosting the Redis Pod was rebooted for kernel patching.
-
-3. When the node rebooted, the ReplicaSet spun the Redis Pod up on a different node. Its new IP address is `192.168.2.100`. 
-4. The engineer explains the concept of "Ephemerality". You cannot trust a Pod IP. 
-5. The engineer writes a `service.yaml` file of type `ClusterIP` for the Redis deployment, naming it `redis-cache-svc`.
-6. They instruct the developer to change the Python code to `redis://redis-cache-svc:6379`.
-7. **The Result:** Kubernetes internal CoreDNS resolves `redis-cache-svc` to the permanent Service IP. No matter how many times the Redis Pod dies and changes IPs in the future, the Service instantly updates its backend endpoints, and the Python app never breaks again.
+> **Reporter:** Automated Monitoring  
+> **SOP execution:**
+> 1. **16:00 PM — Incident Receipt:** Python Backend throws `Connection Refused` when reaching Redis.
+> 2. **16:02 PM — Triage & Containment:** The engineer verifies the Redis Pod is running, but the backend is trying to reach a dead IP `192.168.1.45`.
+> 3. **16:05 PM — Investigation:** A node was rebooted two hours ago. Kubernetes rescheduled the Redis Pod to a new node, assigning it a new ephemeral IP `192.168.2.100`. The junior developer had hardcoded the old Pod IP in the backend config.
+> 4. **16:08 PM — Root Cause:** Hardcoded ephemeral Pod IPs instead of using a stable Kubernetes Service.
+> 5. **16:10 PM — Resolution:** The engineer writes a `ClusterIP` Service named `redis-cache-svc`. The developer updates the Python code to use `redis://redis-cache-svc:6379`.
+> 6. **16:12 PM — Verification:** CoreDNS resolves the name correctly. The application connects. Total downtime: 12 minutes.
+> 7. **Post-Mortem:** Educate developers on Pod ephemerality and Service discovery.
+> 8. **Documentation:** Update onboarding wiki to mandate Service names for all internal communication.
 
 > [!CAUTION]  
 > **Best Practice: Never Expose Databases Externally**  
@@ -111,11 +105,19 @@ The junior developer is confused: "I checked the Redis Pod, and it is perfectly 
 ### Question 1: What is the primary problem that a Kubernetes 'Service' solves?
 * **Target Answer**: "Because Pods are ephemeral, their internal IP addresses are dynamic and change whenever they are recreated or rescheduled. A Service provides a stable, permanent IP address and a DNS name that abstracts away the underlying dynamic Pods. It acts as an internal load balancer, ensuring traffic reliably reaches the healthy Pods regardless of their current IP addresses."
 
-### Question 2: Explain how a Service knows which Pods it should route traffic to.
-* **Target Answer**: "Services do not track Pods by IP or name. They use a Label Selector mechanism. In the Service YAML, you define a selector (e.g., `app: frontend`). The Service will dynamically search the cluster for any and all Pods that possess the matching `app: frontend` label, and automatically add their dynamic IP addresses to its load-balancing endpoint pool."
+### Question 2: Explain the difference between `ClusterIP` and `NodePort`.
+* **Target Answer**: "`ClusterIP` is the default Service type. It creates a virtual IP that is ONLY accessible from inside the Kubernetes cluster. It is used for internal microservice communication. `NodePort` exposes the Service on a specific static port (e.g., 30080) across the IP addresses of every single physical Worker Node, allowing external traffic to hit the cluster."
 
 ### Question 3: Why would an enterprise use an Ingress Controller instead of provisioning multiple LoadBalancer Services?
 * **Target Answer**: "A standard LoadBalancer Service operates at Layer 4 and requires provisioning a dedicated, expensive cloud load balancer (like an AWS ALB) for every single application. An Ingress Controller operates at Layer 7 (HTTP/HTTPS). It allows an enterprise to provision just *one* cloud load balancer, and then define routing rules based on hostnames or URL paths to route traffic to dozens of different internal ClusterIP services, saving massive amounts of money and simplifying SSL termination."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Creating a `LoadBalancer` service for an internal database. Databases should never be exposed to the public internet. Use `ClusterIP` exclusively for data stores.
+
+> [!TIP] Pro-Tip
+> Use `kubectl get endpoints <service-name>` to verify that a Service is actually successfully routing to active Pods. If the endpoints list is empty, your Service's `selector` labels don't match your Pod labels!
 
 ## Chapter Summary
 

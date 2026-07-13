@@ -84,25 +84,24 @@ If an engineer encounters a bizarre issue and immediately types `sudo reboot`, t
 
 > [!IMPORTANT]  
 > **Incident Report: The "Slow" Server**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** The customer service team submits a High Priority ticket: "The CRM server is incredibly slow. Clicking any button takes 30 seconds."
+> **Reporter:** Customer Service Team  
+> **SOP execution:**
+> 1. **11:00 AM — Incident Receipt:** A High Priority ticket arrives: "The CRM server is incredibly slow. Clicking any button takes 30 seconds."
+> 2. **11:02 AM — Triage & Containment:** A junior admin attempts a reboot. The server works for 5 minutes, then grinds to a halt again. A Senior Engineer steps in to apply the scientific method (OODA loop).
+> 3. **11:05 AM — Investigation:** **Observe:** The engineer runs `top`. CPU usage is 5%. RAM is 20%. The server has plenty of compute. However, `wa` (I/O Wait) is hovering at 95%. **Orient:** High I/O wait means the CPU is idle, waiting for disk. `df -h` shows an NFS share mounted at `/var/www/uploads`.
+> 4. **11:10 AM — Root Cause:** **Decide:** Hypothesis: The network to the NFS server is dropping packets, freezing the CRM whenever a file is uploaded.
+> 5. **11:15 AM — Resolution:** **Act:** The engineer uses `ping` to test the NFS server. 40% packet loss is returned. The network team is contacted and fixes a failing switch port connecting to the NFS server.
+> 6. **11:30 AM — Verification:** The `wa` metric instantly drops to 0%, and the CRM server becomes lightning fast. Downtime: 30 minutes of degraded performance.
+> 7. **Post-Mortem:** Discuss why the junior admin blindly rebooted the server instead of looking at system metrics.
+> 8. **Documentation:** Add a dashboard specifically tracking I/O Wait times and NFS latency to catch this before users report it.
 
+## Common Mistakes & Pro-Tips
 
-**The Investigation (Single Engineer Diagnosis):**
+> [!WARNING] Common Mistake
+> Practicing "Shotgun Troubleshooting." This is when an engineer furiously types commands, edits config files, and reboots services randomly, hoping one of them magically fixes the problem. This usually creates *new* problems and completely obscures the original error.
 
-1. **The Junior Approach:** The junior admin logs in, sees the server is indeed slow, panics, and runs `sudo reboot`. The server comes back up, works fine for 5 minutes, and then grinds to a halt again. The junior admin tells the customer, "I don't know, maybe we need more RAM?"
-
-2. **The Senior Approach:** The Senior Engineer takes over and applies the OODA loop.
-
-3. **Observe:** The engineer runs `top`. The CPU usage is at 5%. The RAM usage is at 20%. The server is not starved for compute resources. However, the engineer notices the `wa` (I/O Wait) metric in `top` is hovering at 95%. 
-4. **Orient:** High I/O wait means the CPU is literally sitting idle, waiting for a hard drive to spin or return data. The engineer runs `df -h` and notices an NFS (Network File System) share is mounted at `/var/www/uploads`.
-5. **Decide:** Hypothesis: The network connection to the NFS server is dropping packets, causing the CRM application to freeze every time a user uploads a file.
-6. **Act:** The engineer uses `ping` to test the network latency to the NFS server. The ping returns a 40% packet loss!
-7. **Resolution:** The engineer contacts the network team, who fixes a failing switch port connecting to the NFS server. The `wa` metric instantly drops to 0%, and the CRM server becomes lightning fast. The Senior Engineer found the true Root Cause without ever rebooting the CRM server.
-
-> [!IMPORTANT]  
-> **Best Practice: Change One Thing at a Time**  
-> If you form a hypothesis and execute a test, *only change one variable*. If you change the NGINX config, update the Python code, and restart the database all at the same time, and the system starts working... you have no idea which of the three actions actually fixed it. 
+> [!TIP] Pro-Tip
+> Maintain a "Troubleshooting Diary" (even a simple notepad file) during major outages. Write down the exact timestamp, the command you ran, and the result. This prevents you from running the same diagnostic tool three times because you forgot the output in the heat of the moment.
 
 ## Hands-on Lab
 

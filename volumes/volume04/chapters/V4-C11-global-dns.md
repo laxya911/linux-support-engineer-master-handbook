@@ -77,20 +77,16 @@ Enterprise DNS doesn't just statically return IP addresses. It actively tests th
 
 > [!IMPORTANT]  
 > **Incident Report: The Regional Outage**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** It is 3:00 AM on a Sunday. A massive fiber-optic cable is accidentally cut by a construction crew in Virginia, completely severing the AWS `us-east-1` region from the internet. The company's primary application load balancers go completely dark.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Support Engineer is asleep. 
-
-2. At 3:00:10 AM, AWS Route53 attempts its routine health check on the primary load balancer. The request times out.
-
-3. At 3:00:30 AM, Route53 registers three consecutive failures. The Health Check status flips from `HEALTHY` to `UNHEALTHY`.
-4. At 3:00:31 AM, Route53 automatically triggers the **Active-Passive Failover** policy. It instantly alters the global DNS records for `www.company.com`. It stops returning the dead `us-east-1` IP address and begins returning the IP address for the Disaster Recovery datacenter in `eu-west-1` (Ireland).
-5. At 3:01 AM, customers attempting to reach the website are routed to Ireland. The site loads perfectly. 
-6. At 8:00 AM, the Support Engineer wakes up, checks the Slack alerts, and realizes the company survived a catastrophic datacenter failure without a single human having to log in or type a command. 
+> **Reporter:** Automated Monitoring  
+> **SOP execution:**
+> 1. **03:00 AM — Incident Receipt:** A massive fiber-optic cable is severed in Virginia, dropping AWS `us-east-1` offline.
+> 2. **03:00:10 AM — Triage & Containment:** Route53 health checks attempt to reach the primary load balancers and time out.
+> 3. **03:00:30 AM — Investigation:** Route53 registers three consecutive failures. The Health Check status flips from `HEALTHY` to `UNHEALTHY`.
+> 4. **03:00:31 AM — Root Cause:** A hard physical infrastructure failure at the datacenter level.
+> 5. **03:00:32 AM — Resolution:** Route53 automatically triggers the **Active-Passive Failover** policy. It instantly stops returning the dead `us-east-1` IP address and begins returning the Disaster Recovery IP for `eu-west-1` (Ireland).
+> 6. **03:01 AM — Verification:** Global DNS propagates (thanks to a 60-second TTL). Customers are routed to Ireland. The Support Engineer is never paged because the automated failover was flawless.
+> 7. **Post-Mortem:** Confirm DR cluster autoscaled properly to handle the sudden global traffic spike.
+> 8. **Documentation:** Log the automated failover event for compliance and SLA tracking.
 
 > [!CAUTION]  
 > **Best Practice: Mind the TTL (Time to Live)**  
@@ -110,8 +106,16 @@ Enterprise DNS doesn't just statically return IP addresses. It actively tests th
 ### Question 2: Explain how DNS Failover works in an Active-Passive architecture.
 * **Target Answer**: "In an Active-Passive architecture, all traffic normally flows to the Primary (Active) datacenter. The Enterprise DNS provider continuously monitors the Primary datacenter via Health Checks (HTTP/TCP probes). If the Primary datacenter fails to respond, the DNS provider marks it as unhealthy and automatically changes the A-record response to return the IP address of the Backup (Passive) datacenter, redirecting all user traffic."
 
-### Question 3: Why is a low TTL critical for disaster recovery routing?
-* **Target Answer**: "TTL (Time to Live) dictates how long downstream DNS resolvers and client web browsers are allowed to cache a DNS record. If a catastrophic failure occurs and the DNS provider updates the record to point to a backup datacenter, users will not see the change until their cached record expires. A low TTL (e.g., 60 seconds) ensures global traffic shifts to the backup datacenter almost immediately."
+### Question 3: Explain the difference between Latency-Based Routing and Geolocation Routing.
+* **Target Answer**: "Geolocation Routing makes decisions based solely on the physical location of the user (e.g., routing all IP addresses originating from France to a datacenter in Paris). Latency-Based Routing ignores physical location and routes traffic to whichever datacenter responds the fastest in milliseconds at that exact moment. If the Paris datacenter is physically closer but experiencing heavy network congestion, Latency routing might dynamically send the French user to London instead to ensure the fastest load time."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Setting your DNS TTL (Time To Live) to 24 hours while using Health Checks. If the primary site dies, Route53 will instantly failover the DNS record, but ISPs and customer browsers will cache the *old dead IP* for 24 hours, causing a massive outage anyway. Always use a 60-second TTL for active-passive endpoints.
+
+> [!TIP] Pro-Tip
+> When migrating a high-traffic domain to a new server, do not do a hard cutover. Use a Weighted Routing policy: send 95% of traffic to the old server and 5% to the new server. Monitor the new server's error rates. If it holds up, gradually dial the weight to 100%.
 
 ## Chapter Summary
 

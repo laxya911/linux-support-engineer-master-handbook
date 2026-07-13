@@ -71,23 +71,16 @@ Reading raw hex dumps in the terminal is difficult. Engineers use `tcpdump` to c
 
 > [!IMPORTANT]  
 > **Incident Report: The Silent Drop**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A web application in the AWS Cloud needs to connect to an on-premise mainframe over a Corporate VPN tunnel. The developer says, "My app is getting a Connection Timeout." The Network Team says, "The VPN firewall is completely open. The problem is your application." 
-The two teams argue for three hours.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Senior Support Engineer steps in to mediate. They know that "Connection Timeout" means the 3-Way Handshake is failing.
-
-2. The engineer SSHes into the AWS Web Server and runs:
-    `sudo tcpdump -i eth0 host 10.0.5.50` (The IP of the mainframe).
-
-3. The engineer tells the developer to trigger the connection.
-4. **The Observation:** In the `tcpdump` output, the engineer sees the Web Server sending a `SYN` packet to the mainframe. A millisecond later, they see a `SYN-ACK` packet return from the mainframe. But the Web Server never sends the final `ACK`. Instead, it re-transmits the `SYN` packet!
-5. **The Hypothesis:** Why would the Web Server ignore the `SYN-ACK`? The engineer checks the routing table (`ip route`). 
-6. **The Resolution:** The engineer discovers **Asymmetrical Routing**. The `SYN` packet goes out through the VPN tunnel. The mainframe replies with the `SYN-ACK`, but due to a misconfiguration on the on-premise router, the `SYN-ACK` is sent back via the *public internet*, not the VPN tunnel! The AWS server's firewall sees a random `SYN-ACK` arriving from the public internet (without a corresponding outbound connection on that interface) and instantly drops it. 
-7. The engineer provides the packet capture to the Network Team, proving the on-premise routing is asymmetrical. The network team fixes their router, and the connection works perfectly.
+> **Reporter:** Developer Team  
+> **SOP execution:**
+> 1. **13:00 PM — Incident Receipt:** A web application in AWS is getting a "Connection Timeout" when reaching an on-premise mainframe over a Corporate VPN.
+> 2. **13:05 PM — Triage & Containment:** The Network Team claims the VPN firewall is completely open. The Dev Team claims their code is fine. The engineer steps in to mediate.
+> 3. **13:10 PM — Investigation:** "Timeout" means the 3-Way Handshake is failing. The engineer runs `sudo tcpdump -i eth0 host 10.0.5.50` on the AWS server and watches the traffic.
+> 4. **13:15 PM — Root Cause:** The `tcpdump` reveals **Asymmetrical Routing**. The AWS server sends a `SYN` through the VPN. The mainframe replies with a `SYN-ACK`, but due to an on-premise router misconfig, the `SYN-ACK` returns via the *public internet*. The AWS firewall drops the unsolicited public packet.
+> 5. **13:20 PM — Resolution:** The engineer provides the PCAP file to the Network Team as irrefutable proof. The network team fixes the router's return-path metric.
+> 6. **13:25 PM — Verification:** The developer triggers the connection again. A perfect `SYN, SYN-ACK, ACK` is captured. The app connects. Downtime: 3 hours of blocked development.
+> 7. **Post-Mortem:** Discuss how subjective arguing delayed resolution, and how packet capture provided objective truth.
+> 8. **Documentation:** Add a runbook for diagnosing asymmetrical routing across hybrid-cloud VPN tunnels.
 
 > [!CAUTION]  
 > **Best Practice: Secure your PCAP files**  
@@ -107,8 +100,16 @@ The two teams argue for three hours.
 ### Question 2: What is a SYN Flood attack, and how does it overwhelm a server?
 * **Target Answer**: "A SYN Flood is a DDoS attack where the attacker rapidly sends thousands of `SYN` requests to a server, but deliberately never sends the final `ACK` to complete the handshake. The server allocates memory for each 'half-open' connection, waiting for the final ACK. Eventually, the server's connection queue fills up, exhausting memory and preventing legitimate users from connecting."
 
-### Question 3: How does `tcpdump` help prove that a firewall is blocking traffic?
-* **Target Answer**: "By using `tcpdump`, you can observe the raw packets on the wire. If you see the client sending `SYN` packets but never receiving a `SYN-ACK` reply, you can prove the traffic is being dropped before it reaches the application. If you run `tcpdump` on the destination server and do not even see the incoming `SYN` packets, you have definitive proof that an upstream firewall or router is dropping the traffic."
+### Question 3: What does the `-w` flag do in `tcpdump`, and why is it useful?
+* **Target Answer**: "The `-w` flag tells `tcpdump` to write the raw, binary packet data to a file (e.g., `capture.pcap`) instead of printing text to the console. This is crucial for two reasons: First, analyzing a massive capture is much easier using a graphical tool like Wireshark on your local workstation. Second, binary PCAP files retain the full payload of the packet, allowing for deep forensic analysis later."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running `tcpdump` on a high-traffic production load balancer without using strict filters. If you just run `tcpdump -i eth0`, you will capture millions of packets per second, instantly maxing out the CPU and filling the hard drive, bringing the entire load balancer down. Always filter by `host` and `port`!
+
+> [!TIP] Pro-Tip
+> By default, `tcpdump` attempts to resolve IP addresses to hostnames (reverse DNS lookups) before printing them to the screen. On a busy server, this can cause massive lag. Always pass the `-n` flag (e.g., `tcpdump -n -i eth0`) to disable DNS resolution and print raw IP addresses instantly.
 
 ## Chapter Summary
 

@@ -84,32 +84,16 @@ A K8s Secret is exactly like a ConfigMap, but it is meant for sensitive data (AP
 
 > [!IMPORTANT]  
 > **Incident Report: The Hardcoded Secret**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A security auditor is reviewing the company's GitHub repository. They discover that a junior developer committed a file named `database-deployment.yaml`. Inside the file, under the environment variables section, the auditor finds: `DB_PASSWORD: "SuperSecretAdminPassword123"`. 
-This is a massive security violation. Anyone with read access to the GitHub repository now has the production database password.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Support Engineer (You) is tasked with fixing the vulnerability.
-
-2. The engineer immediately rotates the database password.
-
-3. The engineer removes the hardcoded password from the `database-deployment.yaml` file. 
-4. The engineer creates a Kubernetes Secret object directly in the cluster:
-    `kubectl create secret generic db-passwords --from-literal=DB_PASSWORD='NewSecurePassword456'`
-5. The engineer modifies the `database-deployment.yaml` file to reference the Secret, rather than hardcoding it:
-
-    ```yaml
-    env:
-     - name: DB_PASSWORD
-       valueFrom:
-         secretKeyRef:
-           name: db-passwords
-           key: DB_PASSWORD
-
-    ```
-6. **The Result:** The YAML file in GitHub is now completely safe. It simply tells Kubernetes, "Go find the Secret named `db-passwords` and inject it." The actual password lives securely inside the encrypted `etcd` database of the Kubernetes Control Plane.
+> **Reporter:** Security Operations Center (SOC)  
+> **SOP execution:**
+> 1. **11:00 AM — Incident Receipt:** SOC flags a critical vulnerability: `DB_PASSWORD: "SuperSecretAdminPassword123"` was committed to the public `database-deployment.yaml` file in GitHub.
+> 2. **11:05 AM — Triage & Containment:** The engineer immediately connects to the production database directly and manually rotates the password, breaking the application temporarily to secure the data.
+> 3. **11:08 AM — Investigation:** The engineer confirms that anyone with repo access could read the plaintext password. The deployment must be updated to use a secure object.
+> 4. **11:10 AM — Root Cause:** A junior developer hardcoded the password directly in the Kubernetes Deployment manifest instead of using a Kubernetes Secret.
+> 5. **11:12 AM — Resolution:** The engineer creates a Kubernetes Secret directly in the cluster (`kubectl create secret generic db-passwords --from-literal=DB_PASSWORD='NewSecurePassword456'`). They then modify the deployment YAML to inject the password via `valueFrom: secretKeyRef` and apply it.
+> 6. **11:15 AM — Verification:** The newly deployed Pod successfully connects to the database using the securely injected secret. Total application downtime: 10 minutes.
+> 7. **Post-Mortem:** Discuss secrets management in Kubernetes and implement a Git hook to scan for plaintext passwords.
+> 8. **Documentation:** Write a guide on creating and injecting Kubernetes Secrets for the engineering team.
 
 > [!CAUTION]  
 > **Best Practice: Secrets are not Encrypted by Default**  
@@ -126,11 +110,19 @@ This is a massive security violation. Anyone with read access to the GitHub repo
 ### Question 1: What is the difference between a PersistentVolume (PV) and a PersistentVolumeClaim (PVC)?
 * **Target Answer**: "A PersistentVolume (PV) is the actual physical storage resource in the cluster, such as an AWS EBS volume or an NFS share, provisioned by the cluster administrator. A PersistentVolumeClaim (PVC) is a request made by a developer/user for a specific amount of storage and access mode. Kubernetes dynamically binds the PVC to an available PV, allowing a Pod to mount the PVC and safely write data independent of the Pod's lifecycle."
 
-### Question 2: Why should you use a ConfigMap instead of hardcoding environment variables directly into a Dockerfile or Pod YAML?
-* **Target Answer**: "ConfigMaps allow you to completely decouple application configuration from the container image. This means you can use the exact same Docker image across Dev, Staging, and Production environments, simply by mounting a different ConfigMap in each cluster. Hardcoding variables into a Dockerfile would require rebuilding the image for every environment change."
+### Question 2: Why should you avoid storing large, unstructured data in ConfigMaps?
+* **Target Answer**: "ConfigMaps are designed for small configuration files and environmental variables, and they are ultimately stored in the `etcd` database. `etcd` has a hard 1MB limit on object size. If you try to store massive data dumps or binary files in a ConfigMap, you will break the cluster's backing store. Large data belongs in Persistent Volumes."
 
 ### Question 3: A developer commits a Kubernetes Secret YAML file containing `password: bXlfc2VjcmV0` to a public GitHub repository. They claim it is secure because it is encrypted. Are they correct?
 * **Target Answer**: "No, they are fundamentally incorrect. Kubernetes Secrets are base64-encoded, which is a data formatting scheme, not an encryption algorithm. Anyone who finds that string can easily decode it back to plain text (`my_secret`). Secrets should never be committed to source control in plain text or base64 format."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Assuming Kubernetes Secrets are encrypted. By default, Secrets are only base64-encoded, NOT encrypted! Anyone who can run `kubectl get secret -o yaml` can decode it instantly. You must configure Encryption at Rest for `etcd` or use a KMS (Key Management System).
+
+> [!TIP] Pro-Tip
+> When injecting ConfigMaps as files via Volume Mounts, Kubernetes automatically updates the mounted files inside the running Pod when the ConfigMap is edited. However, if you inject them as Environment Variables, the Pod must be restarted to pick up the new values!
 
 ## Chapter Summary
 

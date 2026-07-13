@@ -88,22 +88,16 @@ If you want to only see file opens, you filter it: `sudo strace -e trace=openat 
 
 > [!IMPORTANT]  
 > **Incident Report: The Infinite Loop**  
-> **Reporter:** Automated Monitoring / End User  
-> **The Incident:** A custom Java application is deployed to production. Immediately, the developers complain that the application has "frozen." It is not returning data, and the application log file is completely empty. The junior admin checks `top` and sees the Java process is at 0% CPU and 10% RAM. The junior admin decides to reboot the server, but the issue immediately returns.
-
-
-**The Investigation (Single Engineer Diagnosis):**
-
-1. The Senior Support Engineer logs into the server. They find the PID of the Java application using `ps aux | grep java` (Let's say the PID is 4055).
-
-2. The engineer attaches to the frozen process:
-    `sudo strace -p 4055`
-
-3. **The Observation:** The engineer's screen instantly floods with thousands of repeated lines, scrolling so fast they are unreadable:
-    `openat(AT_FDCWD, "/etc/app/license.key", O_RDONLY) = -1 EACCES (Permission denied)`
-4. **The Hypothesis:** The Java application is stuck in an infinite loop. The developers wrote a bad `while` loop that continuously attempts to read a license file. Because the file has the wrong Linux permissions, the kernel returns `EACCES` (Permission Denied). Instead of logging an error and crashing gracefully, the bad Java code just instantly tries to read the file again, forever. 
-5. **The Resolution:** The engineer does not even need to look at the Java source code. They simply run `sudo chmod 644 /etc/app/license.key`.
-6. The moment the permissions are fixed, the `openat()` syscall succeeds, the infinite loop breaks, and the Java application instantly unfreezes and begins processing data. The engineer tells the developers to fix their terrible error handling in the next sprint.
+> **Reporter:** End User / Helpdesk  
+> **SOP execution:**
+> 1. **14:00 PM — Incident Receipt:** A custom Java application is deployed. Immediately, developers complain it is "frozen," not returning data, and the logs are empty.
+> 2. **14:05 PM — Triage & Containment:** A junior admin attempts a reboot. The issue immediately returns. A Senior Engineer steps in to debug the live process.
+> 3. **14:10 PM — Investigation:** `top` shows 0% CPU. The engineer attaches to the frozen process: `sudo strace -p 4055`. The screen instantly floods with: `openat(AT_FDCWD, "/etc/app/license.key", O_RDONLY) = -1 EACCES (Permission denied)`.
+> 4. **14:15 PM — Root Cause:** The developers wrote a bad `while` loop that continuously attempts to read a license file. The file has incorrect permissions. Instead of crashing gracefully, the code loops infinitely on the `EACCES` syscall.
+> 5. **14:20 PM — Resolution:** Without looking at Java source code, the engineer fixes the file permissions: `sudo chmod 644 /etc/app/license.key`.
+> 6. **14:21 PM — Verification:** The next `openat()` succeeds, breaking the infinite loop. The Java app instantly unfreezes and processes data. Downtime: 21 minutes.
+> 7. **Post-Mortem:** Send the `strace` output to the Dev team to prove their error-handling logic is fatally flawed.
+> 8. **Documentation:** Add a step to the deployment pipeline to automatically verify `/etc/app` permissions on boot.
 
 > [!CAUTION]  
 > **Best Practice: Tracing Child Processes**  
@@ -123,8 +117,17 @@ If you want to only see file opens, you filter it: `sudo strace -e trace=openat 
 ### Question 2: Why would you use `strace` to troubleshoot a hanging application instead of looking at the application's logs?
 * **Target Answer**: "Application logs are only useful if the developer explicitly wrote code to catch an error and log it. If an application hangs due to a deadlock (`futex`), an infinite loop, or a blocked network connection, it is often incapable of writing to its log file. `strace` bypasses the application entirely, allowing the engineer to watch the raw interactions between the process and the Linux kernel in real-time to definitively prove what the application is waiting for."
 
-### Question 3: What is the primary performance drawback of using `strace` in a production environment, and what is the modern alternative?
-* **Target Answer**: "`strace` uses the `ptrace` mechanism, which requires the kernel to context-switch and pause the target application for a fraction of a millisecond every time a syscall is executed. On a high-throughput database doing thousands of syscalls a second, this overhead can cripple performance. The modern alternative is eBPF, which allows safe, sandboxed profiling programs to run directly within the kernel space with near-zero performance overhead."
+### Question 3: What does the `lsof` command do, and why is it useful when an application claims a "Port is already in use"?
+* **Target Answer**: "`lsof` stands for 'List Open Files'. In Linux, everything is a file, including network sockets. If an application fails to start because port 8080 is in use, running `sudo lsof -i :8080` will reveal the exact Process ID (PID) and the name of the rogue application currently bound to that network port, allowing the engineer to kill it and free the port."
+
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running `strace` on a high-throughput database server in production. `strace` introduces massive overhead (sometimes slowing down the traced process by 50x) because it intercepts every single system call. If you attach `strace` to a busy Postgres master, you could cause an immediate, catastrophic performance outage.
+
+> [!TIP] Pro-Tip
+> When using `strace`, use the `-c` (count) flag for a high-level summary instead of a blinding wall of text. E.g., `strace -c -p <PID>`. It will monitor the process for a few seconds, and when you press `Ctrl+C`, it prints a neat table showing which system calls took the most time.
+
 
 ## Chapter Summary
 
