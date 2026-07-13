@@ -120,6 +120,14 @@ To extract the IP address, Logstash must run complex Regex queries, which is slo
 ### Question 3: Why is 'Structured Logging' (like writing logs in JSON format) preferred over traditional plain-text logging?
 * **Target Answer**: "Traditional plain-text logs require complex and fragile Regular Expressions (Regex) to parse and extract valuable data (like IP addresses or User IDs) inside Logstash. If a developer changes the wording of the log message, the Regex breaks. Structured Logging (JSON) outputs data in strict key-value pairs (e.g., `{"ip": "10.0.0.1"}`). This allows Logstash to parse the data natively, perfectly, and instantly, with zero risk of breakage."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Forwarding debug-level logs to the central logging server, overwhelming the network and filling up the disk in hours.
+
+> [!CAUTION] Think Before You Type
+> `logger 'Test message'` (Did you check which facility and severity it was sent to?)
+
 ## Chapter Summary
 
 As you scale from 1 server to 100 servers, your administrative tools must scale with you. Centralized logging ensures that your Mean Time To Recovery (MTTR) remains at 5 minutes, whether you are managing a single Raspberry Pi or a massive cloud cluster.
@@ -131,6 +139,12 @@ As you scale from 1 server to 100 servers, your administrative tools must scale 
 - [ ] I understand the superiority of Structured JSON logs over raw text.
 
 ---
+
+**Chapter Transition**
+> Logs tell us what happened *in the past*, but how do we know if the server is crashing *right now*?
+
+---
+
 
 ## Navigation
 

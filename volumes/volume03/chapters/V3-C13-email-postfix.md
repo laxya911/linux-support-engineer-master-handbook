@@ -115,6 +115,14 @@ When Google receives an email claiming to be from `reports@company.com`, it chec
 ### Question 3: An automated Linux script is sending emails that are landing in the recipient's Spam folder. How do you fix this using DNS?
 * **Target Answer**: "The emails are being flagged as spoofed because the recipient's mail server cannot verify the sender's identity. I must configure an SPF (Sender Policy Framework) record. This is a DNS `TXT` record on the sender's domain that explicitly lists the public IP address of the Linux server, authorizing it to legally send mail on behalf of that domain."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Leaving Postfix configured as an open relay. You will be blacklisted by every major email provider within 24 hours.
+
+> [!CAUTION] Think Before You Type
+> `postsuper -d ALL` (Did you just delete legitimate outgoing email along with the spam?)
+
 ## Chapter Summary
 
 Sending an email is easy. Proving you aren't a spammer is hard. As an Infrastructure Engineer, you must deeply understand how SMTP intersects with DNS. Never send an automated email without first configuring your SPF records!
@@ -126,6 +134,12 @@ Sending an email is easy. Proving you aren't a spammer is hard. As an Infrastruc
 - [ ] I know how to check `/var/log/mail.log` for bounce messages.
 
 ---
+
+**Chapter Transition**
+> Logs from email, web, and database servers are scattered everywhere. We need to synchronize the timestamps to make sense of them.
+
+---
+
 
 ## Navigation
 

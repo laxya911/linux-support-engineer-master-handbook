@@ -102,6 +102,38 @@ The developer is confused. "I configured WordPress to connect to `localhost:3306
 > When troubleshooting Multi-Container Apps (the Container Runtime Compose) in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
 
 
+## Real-World Support Ticket
+
+> [!IMPORTANT] ServiceNow Ticket: INC-3026323
+> **Title:** Database Connection Failure in Docker Compose
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie takes a P2 ticket: The newly deployed staging environment via Docker Compose is failing to start.
+> 
+> **2) Discovery & diagnosis**
+> Charlie runs `docker-compose logs web` and sees `Host not found: db`. He checks `docker-compose.yml` and notices the web service and the database service are on entirely different custom bridge networks.
+> 
+> **3) Immediate containment**
+> Charlie stops the broken deployment (`docker-compose down`) to free up the ports.
+> 
+> **4) Resolution planning & execution**
+> Charlie edits the `docker-compose.yml` file, moving both services to the same custom bridge network so Docker's internal DNS can resolve the service names.
+> 
+> **5) Verification**
+> Charlie runs `docker-compose up -d` and watches the logs. The web service successfully connects to the database.
+> 
+> **6) Closure & documentation**
+> Charlie documents the network isolation issue and resolves the ticket.
+> 
+> **7) Post-resolution follow-up**
+> Charlie adds a network validation step to the CI/CD pipeline.
+> 
+> **8) Escalation rules**
+> If the container kept crashing silently without logs, Charlie would escalate to the application developers to add debug logging.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -119,6 +151,14 @@ The developer is confused. "I configured WordPress to connect to `localhost:3306
 ### Question 3: A web container is trying to connect to a database container. The web container's configuration file is set to connect to `localhost:5432`. Why will this fail, and how do you fix it using the Container Runtime Compose?
 * **Target Answer**: "It will fail because of network isolation (Namespaces). To a container, `localhost` means its own internal loopback interface, not the host machine or other containers. To fix it, you write a `docker-compose.yml` file, defining the database service with a name (e.g., `db`). The Container Runtime Compose's internal DNS will automatically resolve that service name. You then change the web container's configuration to connect to `db:5432` instead of `localhost`."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Hardcoding IP addresses in `docker-compose.yml` instead of relying on the internal Docker DNS resolver.
+
+> [!CAUTION] Think Before You Type
+> `docker-compose down -v` (Did you just delete the named volumes and all the database data?)
+
 ## Chapter Summary
 
 the Container Runtime Compose is the absolute standard for local development. By mastering the `docker-compose.yml` file, you can hand any developer a single file that guarantees their application will boot perfectly with all required databases and caches attached.
@@ -130,6 +170,12 @@ the Container Runtime Compose is the absolute standard for local development. By
 - [ ] I can explain how the Container Runtime internal DNS maps service names to containers.
 
 ---
+
+**Chapter Transition**
+> The containers are running, but what happens to the database when the container stops? We need persistence.
+
+---
+
 
 ## Navigation
 

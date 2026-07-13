@@ -90,6 +90,27 @@ To fix the massive security holes of a fresh install, the developers included a 
 > When troubleshooting Deploying MariaDB / MySQL in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
 
 
+## Industry Incident Spotlight: The 2017 British Airways IT Outage
+
+> [!CAUTION] **When High Availability Fails**
+> In May 2017, British Airways suffered a massive IT outage that grounded flights globally for three days.
+>
+> **The Timeline:**
+> - A contractor performing maintenance at a primary data center accidentally disconnected a power supply.
+> - When power was restored minutes later, the surge caused massive damage to the database servers.
+> - The automated failover to the backup data center failed because the database replication became unsynchronized and corrupted.
+>
+> **The Root Cause:**
+> The primary database systems were violently shut down, and the disaster recovery protocols had not been properly tested for this specific "unclean shutdown" scenario.
+>
+> **The Business Impact:**
+> 75,000 passengers stranded, thousands of flights canceled, and an estimated £80 million in compensation costs.
+>
+> **The Lessons Learned:**
+> 1. **Test your Disaster Recovery.** Having a backup database is useless if the failover mechanism fails when you actually need it.
+> 2. Uncontrolled power restoration can be more damaging than the power loss itself.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -107,6 +128,14 @@ To fix the massive security holes of a fresh install, the developers included a 
 ### Question 3: Why is running `mysql_secure_installation` considered a mandatory step after installing MariaDB?
 * **Target Answer**: "By default, a fresh MariaDB installation contains several insecure defaults meant for testing purposes. It often includes a blank root password, anonymous user accounts, and a globally accessible 'test' database. The `mysql_secure_installation` script is an automated wizard that permanently removes these security risks and forces you to set a strong root password."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running MariaDB without running `mysql_secure_installation`, leaving the root password blank.
+
+> [!CAUTION] Think Before You Type
+> `DROP TABLE users;` (Do you have a backup from 5 minutes ago?)
+
 ## Chapter Summary
 
 Installing the database is the easy part. Securing it is what makes you an engineer. Never assume software is secure by default, and always remember that database users exist in a completely different universe than Linux system users!
@@ -118,6 +147,12 @@ Installing the database is the easy part. Securing it is what makes you an engin
 - [ ] I know to always run `mysql_secure_installation` on a fresh server.
 
 ---
+
+**Chapter Transition**
+> MariaDB is excellent for traditional apps, but complex analytical queries might require something more robust.
+
+---
+
 
 ## Navigation
 

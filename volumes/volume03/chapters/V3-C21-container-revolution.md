@@ -114,6 +114,14 @@ The engineer logs into the main web server. It is currently hosting the company'
 ### Question 3: Explain the role of Namespaces and Cgroups in Linux containers.
 * **Target Answer**: "Namespaces provide isolation. They trick the processes inside the container into believing they have their own dedicated filesystem, network stack, and process tree (PID 1), completely separate from the host. Cgroups (Control Groups) provide resource governance. They enforce hard limits on the amount of CPU, memory, and disk I/O a container is allowed to consume, preventing a single container from crashing the entire host."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running containers with the `--privileged` flag, giving the container root access to the host machine.
+
+> [!CAUTION] Think Before You Type
+> `docker run -d -p 80:80 nginx` (Is port 80 already in use by Apache on the host?)
+
 ## Chapter Summary
 
 Containers have completely destroyed the traditional paradigm of server administration. We no longer treat servers as fragile pets that we carefully nurse with dependency updates. We treat servers as dumb, identical hosts whose only purpose is to run the Container Runtime.
@@ -125,6 +133,12 @@ Containers have completely destroyed the traditional paradigm of server administ
 - [ ] I understand why we should never install application dependencies on the Host OS.
 
 ---
+
+**Chapter Transition**
+> We understand containers, but how do we actually build our own custom application images?
+
+---
+
 
 ## Navigation
 

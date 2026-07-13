@@ -113,6 +113,14 @@ The immense traffic causes the Docker daemon to panic and crash. All 50 microser
 ### Question 3: Why shouldn't every company immediately migrate all their applications from Docker Compose to Kubernetes?
 * **Target Answer**: "Kubernetes introduces massive operational complexity, requiring specialized knowledge to manage the Control Plane, Ingress controllers, and RBAC security. For simple, low-traffic applications, or internal tools where a few minutes of downtime is acceptable, Docker Compose is vastly simpler and cheaper to maintain. Kubernetes should only be adopted when the business requirements explicitly demand high availability, zero-downtime deployments, and horizontal auto-scaling."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Trying to manually manage 100 containers across 10 hosts using Docker CLI instead of moving to an orchestrator like Kubernetes.
+
+> [!CAUTION] Think Before You Type
+> `docker swarm init` (Are you prepared for the complexity of distributed state?)
+
 ## Chapter Summary
 
 Congratulations! You have completed Volume 3. You have evolved from executing basic Linux commands to designing decoupled, containerized microservices. Take a deep breath. In Volume 4, we will take these isolated containers and wire them together into massive, self-healing Kubernetes clusters.
@@ -124,6 +132,12 @@ Congratulations! You have completed Volume 3. You have evolved from executing ba
 - [ ] I am ready to begin Volume 4!
 
 ---
+
+**Chapter Transition**
+> Congratulations on completing Volume 3. Next up: Volume 4 - Enterprise Infrastructure.
+
+---
+
 
 ## Navigation
 

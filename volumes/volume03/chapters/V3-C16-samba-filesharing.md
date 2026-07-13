@@ -114,6 +114,14 @@ For three days in a row, the script has failed with a `Permission denied` error.
 ### Question 3: An automated Linux script is failing to write to a file inside a Samba share, but the Linux `chmod` permissions are 777. What Samba feature is likely causing this?
 * **Target Answer**: "The file is likely being locked by a Windows client using an 'Opportunistic Lock' (Oplock). When a Windows user leaves a file open, Samba honors the oplock and prevents any other process (including local Linux scripts) from writing to it. You can verify this using the `smbstatus` command, and you can prevent it by setting `oplocks = False` in the `smb.conf` share definition."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Setting Samba permissions wide open (`guest ok = yes`) on a share containing HR documents.
+
+> [!CAUTION] Think Before You Type
+> `smbpasswd -a user` (Does the Linux user actually exist in `/etc/passwd`?)
+
 ## Chapter Summary
 
 Samba is the ultimate diplomat. It allows Linux to integrate flawlessly into corporate environments dominated by Windows desktops. By understanding how `smb.conf` maps to Linux directories, and how Oplocks affect local processes, you can manage enterprise file servers with confidence.
@@ -125,6 +133,12 @@ Samba is the ultimate diplomat. It allows Linux to integrate flawlessly into cor
 - [ ] I understand how Windows Oplocks can interfere with local Linux scripts.
 
 ---
+
+**Chapter Transition**
+> With file sharing active, the number of logs being generated is overwhelming. We need a central location for them.
+
+---
+
 
 ## Navigation
 

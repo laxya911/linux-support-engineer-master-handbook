@@ -120,6 +120,14 @@ If you run `docker build` a second time, the Container Runtime does not rebuild 
 ### Question 3: A developer's `docker build` process takes 10 minutes because the `RUN apt install` command executes every single time, even when they only modified one line of their HTML code. How do you fix the Dockerfile?
 * **Target Answer**: "The developer has likely placed the `COPY` instruction for their HTML code *above* the `RUN apt install` instruction in the Dockerfile. Because the Container Runtime caches layers sequentially, changing the HTML code invalidates the cache for the `COPY` layer and every layer beneath it. The fix is to move the `COPY` instruction to the bottom of the Dockerfile so that the static software installation layers can remain cached."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Putting `apt-get update` and `apt-get install` on separate lines in the Dockerfile. Docker will cache the update and install outdated packages.
+
+> [!CAUTION] Think Before You Type
+> `docker build --no-cache .` (Do you have the time to wait 20 minutes for a full rebuild?)
+
 ## Chapter Summary
 
 Writing a Dockerfile is easy. Writing a *good* Dockerfile is hard. Understanding how the layer cache operates is the difference between a CI/CD pipeline that finishes in 30 seconds and one that takes 30 minutes.
@@ -131,6 +139,12 @@ Writing a Dockerfile is easy. Writing a *good* Dockerfile is hard. Understanding
 - [ ] I know how to order a Dockerfile to optimize the layer cache.
 
 ---
+
+**Chapter Transition**
+> Building one image is easy. Managing a stack of five interdependent containers is not. Enter Docker Compose.
+
+---
+
 
 ## Navigation
 

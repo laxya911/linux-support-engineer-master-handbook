@@ -126,6 +126,14 @@ Docker gracefully destroys the old container and spins up the new one. Ten minut
 ### Question 3: What is the difference between a Named Volume and a Bind Mount?
 * **Target Answer**: "A Named Volume is fully managed by Docker. You simply provide a name (e.g., `db_data`), and Docker creates the directory in a secure location on the host (`/var/lib/docker/volumes/`). A Bind Mount requires the engineer to explicitly specify a hardcoded path on the host system (e.g., `/home/user/project`). Bind Mounts are excellent for local development, while Named Volumes are preferred for production data safety."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Mounting a local host directory `/data` into a container without setting the correct SELinux context (`:z`). The container will get Permission Denied.
+
+> [!CAUTION] Think Before You Type
+> `rm -rf /var/lib/docker/volumes/` (Are you sure you want to destroy all persistent data for all containers?)
+
 ## Chapter Summary
 
 Data gravity is real. You can treat your web servers like disposable cattle, but your databases must be treated like pets. Volumes are the anchor that ties ephemeral compute containers to permanent, safe storage.
@@ -137,6 +145,12 @@ Data gravity is real. You can treat your web servers like disposable cattle, but
 - [ ] I know how to attach a volume in a `docker-compose.yml` file.
 
 ---
+
+**Chapter Transition**
+> We have persistent containers on a single host. But what happens when that host dies?
+
+---
+
 
 ## Navigation
 

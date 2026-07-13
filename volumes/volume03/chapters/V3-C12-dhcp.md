@@ -119,6 +119,14 @@ An hour later, an employee brings their laptop back from a meeting. The laptop c
 ### Question 3: How do you guarantee a specific server always gets the same IP address without configuring a static IP on the server itself?
 * **Target Answer**: "You can configure a DHCP (or MAC address) Reservation on the DHCP server. You input the hardware MAC address of the server's Network Interface Card (NIC) into the DHCP configuration and map it to a specific IP address outside the dynamic pool. Whenever that server boots and asks for an IP, the DHCP server recognizes the MAC and always provides that specific, fixed address."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Creating a DHCP scope that overlaps with your statically assigned servers, causing massive IP conflicts.
+
+> [!CAUTION] Think Before You Type
+> `systemctl restart isc-dhcp-server` (Are you sure there isn't another rogue DHCP server on the network?)
+
 ## Chapter Summary
 
 IP Conflicts are one of the most frustrating Layer 2/Layer 3 networking issues to troubleshoot. By enforcing a strict policy of using DHCP Reservations (and never allowing users to set manual Static IPs inside a dynamic pool), you eliminate the possibility of conflicts and centralize all your network IP management into one single Linux file.
@@ -130,6 +138,12 @@ IP Conflicts are one of the most frustrating Layer 2/Layer 3 networking issues t
 - [ ] I know why manual static IPs cause network conflicts.
 
 ---
+
+**Chapter Transition**
+> The network is fully routed and resolved, but our applications need to send notifications to users.
+
+---
+
 
 ## Navigation
 

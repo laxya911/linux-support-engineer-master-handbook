@@ -104,6 +104,38 @@ The command to test the configuration is:
 > When troubleshooting Deploying NGINX in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
 
 
+## Real-World Support Ticket
+
+> [!IMPORTANT] ServiceNow Ticket: INC-3026303
+> **Title:** 502 Bad Gateway on All Web Traffic
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie receives a P1 Critical alert: The primary e-commerce site is returning 502 errors.
+> 
+> **2) Discovery & diagnosis**
+> Charlie checks the NGINX error logs (`/var/log/nginx/error.log`) and sees `connect() failed (111: Connection refused) while connecting to upstream`. The proxy cannot reach the backend application.
+> 
+> **3) Immediate containment**
+> Charlie places a static 'Maintenance' page on the NGINX proxy to provide a better user experience while he investigates.
+> 
+> **4) Resolution planning & execution**
+> Charlie SSHes into the backend application server and discovers the Node.js process crashed. He restarts the service (`systemctl restart node-app`).
+> 
+> **5) Verification**
+> Charlie runs `curl -I localhost:3000` on the backend, then removes the Maintenance page on NGINX. The site loads successfully.
+> 
+> **6) Closure & documentation**
+> Charlie documents the upstream connection refusal and resolves the ticket.
+> 
+> **7) Post-resolution follow-up**
+> Charlie adds a systemd `Restart=always` directive to the Node.js service to automatically recover from future crashes.
+> 
+> **8) Escalation rules**
+> If the backend application continuously crashed on startup, Charlie would escalate to the Development team.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -121,6 +153,14 @@ The command to test the configuration is:
 ### Question 3: A user complains they are seeing a `502 Bad Gateway` error served by NGINX. Is NGINX broken? How do you troubleshoot this?
 * **Target Answer**: "No, NGINX is not broken; in fact, the 502 error proves NGINX is running successfully. A `502 Bad Gateway` means NGINX is acting as a proxy or gateway and attempted to forward the request to a backend application server (like Node.js, Tomcat, or PHP-FPM), but that backend server failed to respond. To troubleshoot, I would check the status and logs of the backend application service, not NGINX."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Forgetting to pass the `X-Forwarded-For` header. Your backend app will think all traffic is coming from the NGINX server itself!
+
+> [!CAUTION] Think Before You Type
+> `nginx -s reload` (Did you test the config?)
+
 ## Chapter Summary
 
 NGINX has taken the world by storm because of its incredible speed, low memory footprint, and clean configuration syntax. By mastering Server Blocks and understanding how NGINX interacts with backend services, you are well on your way to building modern web infrastructure.
@@ -132,6 +172,12 @@ NGINX has taken the world by storm because of its incredible speed, low memory f
 - [ ] I know to always run `nginx -t` before restarting the service.
 
 ---
+
+**Chapter Transition**
+> Having a web server is great, but exposing it directly to the internet is dangerous. We need a proxy.
+
+---
+
 
 ## Navigation
 

@@ -109,6 +109,14 @@ The entire customer database is instantly annihilated. The application goes down
 ### Question 3: How do you restore a `.sql` file into a MariaDB database?
 * **Target Answer**: "You do not need a special restoration tool. You use the standard `mysql` command-line client and use the Linux standard input redirect (`<`) to feed the `.sql` file into the database. For example: `mysql -u root -p database_name < backup.sql`. The daemon will simply read and execute every SQL command in the file."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Backing up the database to the same physical disk the database is running on.
+
+> [!CAUTION] Think Before You Type
+> `mysqldump --all-databases > backup.sql` (Will this lock the tables and cause an outage during the dump?)
+
 ## Chapter Summary
 
 Data is the most valuable asset a company owns. The web servers can burn down, the load balancers can crash, but if the data is lost, the company dies. By mastering `mysqldump` and `pg_dump`, you become the ultimate safety net for your organization.
@@ -120,6 +128,12 @@ Data is the most valuable asset a company owns. The web servers can burn down, t
 - [ ] I know how to use the `<` operator to restore a `.sql` file.
 
 ---
+
+**Chapter Transition**
+> The data is safe, but how do users actually find our web application? They aren't going to type an IP address.
+
+---
+
 
 ## Navigation
 

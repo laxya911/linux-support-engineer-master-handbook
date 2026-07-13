@@ -89,6 +89,38 @@ They provide a tool called `certbot`. You run `certbot --nginx`, and it will aut
 > When troubleshooting TLS/SSL Cryptography & Certbot in production, never restart the service immediately. Restarts clear memory buffers, wipe temporary state, and destroy the exact evidence you need to find the root cause. Always capture logs (e.g., `journalctl` or container logs) *before* attempting a fix.
 
 
+## Real-World Support Ticket
+
+> [!IMPORTANT] ServiceNow Ticket: INC-3026305
+> **Title:** Expired SSL Certificate
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie takes a P1 ticket: Users report their browsers are showing a terrifying 'Your connection is not private' red screen.
+> 
+> **2) Discovery & diagnosis**
+> Charlie runs `curl -vI https://example.com` and sees `SSL certificate problem: certificate has expired`. He checks the Let's Encrypt logs and sees the automated renewal cron job failed due to a firewall change.
+> 
+> **3) Immediate containment**
+> Charlie immediately opens port 80 on the firewall, which Let's Encrypt requires for the HTTP-01 challenge.
+> 
+> **4) Resolution planning & execution**
+> Charlie manually forces the renewal using `certbot renew --force-renewal`. He then reloads NGINX to apply the new certificate.
+> 
+> **5) Verification**
+> Charlie accesses the site in a fresh browser session and verifies the padlock is green and valid for another 90 days.
+> 
+> **6) Closure & documentation**
+> Charlie documents the firewall blockage and resolves the ticket.
+> 
+> **7) Post-resolution follow-up**
+> Charlie sets up an external monitoring alert to notify the team 14 days before a certificate expires.
+> 
+> **8) Escalation rules**
+> If the certificate authority was completely unreachable, Charlie would escalate to Network Engineering to check outbound routing.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -106,6 +138,14 @@ They provide a tool called `certbot`. You run `certbot --nginx`, and it will aut
 ### Question 3: How do you force all incoming Port 80 web traffic to use Port 443 instead?
 * **Target Answer**: "You configure the web server (like NGINX) with a `server` block listening on Port 80 that performs an HTTP 301 Permanent Redirect to the `https://` version of the exact same URL. Tools like `certbot` will usually configure this automatic redirection block for you when provisioning a certificate."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Letting an SSL certificate expire silently, causing every browser in the world to block your website.
+
+> [!CAUTION] Think Before You Type
+> `certbot renew --force-renewal` (Are you sure? You might hit the Let's Encrypt rate limit and be blocked for a week.)
+
 ## Chapter Summary
 
 The internet is hostile. Every website, from a massive bank to a tiny personal blog, must use HTTPS. With NGINX acting as your Reverse Proxy and Certbot automating your SSL certificates, securing your applications takes less than thirty seconds.
@@ -117,6 +157,12 @@ The internet is hostile. Every website, from a massive bank to a tiny personal b
 - [ ] I understand how `certbot` automates HTTPS configuration.
 
 ---
+
+**Chapter Transition**
+> With the web tier secured, we must now focus on where the actual data lives: the database.
+
+---
+
 
 ## Navigation
 

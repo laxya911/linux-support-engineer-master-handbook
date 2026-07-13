@@ -105,6 +105,14 @@ They restart Apache (`systemctl restart apache2`). But when they visit the URL, 
 ### Question 3: In an Ubuntu Apache environment, why might a perfectly written Virtual Host configuration file in `/etc/apache2/sites-available/` fail to load?
 * **Target Answer**: "Apache on Ubuntu is configured to only load configuration files that exist in the `/etc/apache2/sites-enabled/` directory. The `sites-available` directory is just for storage. To fix the issue, you must activate the configuration by creating a symbolic link into the `sites-enabled` directory, which is most easily done using the `a2ensite` command."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Leaving the default Apache index page active, exposing your server version to attackers.
+
+> [!CAUTION] Think Before You Type
+> `systemctl reload apache2` (Did you run `apachectl configtest` first?)
+
 ## Chapter Summary
 
 Deploying a web server is the moment Linux becomes truly fun. By mastering Virtual Hosts and Document Roots, you can host 50 different websites on a single $5/month cloud server. Just remember: always enable your sites, and always reload your daemon!
@@ -116,6 +124,12 @@ Deploying a web server is the moment Linux becomes truly fun. By mastering Virtu
 - [ ] I can explain why `a2ensite` is necessary on Ubuntu systems.
 
 ---
+
+**Chapter Transition**
+> Apache is robust, but for high-concurrency environments, we need an asynchronous alternative.
+
+---
+
 
 ## Navigation
 

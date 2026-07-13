@@ -107,6 +107,14 @@ To communicate with the Database Daemon, you must speak its language.
 ### Question 3: An application server cannot connect to a remote database server. The DB service is running. What two tools would you use to troubleshoot the connection?
 * **Target Answer**: "First, I would log into the database server and use `ss -tulpn` to verify the DB daemon is actually listening on the correct port and bound to the public IP (not just `127.0.0.1`). Second, I would log into the application server and use a tool like `nc -vz <db_ip> <port>` (or `telnet`) to verify if a firewall is blocking the TCP connection."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Assuming NoSQL is faster than SQL for everything, leading to unmaintainable data structures.
+
+> [!CAUTION] Think Before You Type
+> `SELECT * FROM users` (Do you really need all 50 columns for a million rows?)
+
 ## Chapter Summary
 
 Before we deploy complex database systems, we must remember the golden rule: A database is just a daemon listening on a port. If you cannot connect to it, it is almost always a firewall issue, a binding issue, or an authentication issue.
@@ -118,6 +126,12 @@ Before we deploy complex database systems, we must remember the golden rule: A d
 - [ ] I know how to use `nc` or `telnet` to test if a database port is open through a firewall.
 
 ---
+
+**Chapter Transition**
+> Concepts are fine, but our application needs a real relational database to store its data.
+
+---
+
 
 ## Navigation
 

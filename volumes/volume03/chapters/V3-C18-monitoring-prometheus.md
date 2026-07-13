@@ -111,6 +111,14 @@ Prometheus can monitor anything, as long as there is an "Exporter" for it.
 ### Question 3: What is a Time-Series Database (TSDB), and why is it necessary for Prometheus?
 * **Target Answer**: "A Time-Series Database is a database specifically optimized for storing data where time is the primary axis. When scraping 50 servers every 15 seconds for thousands of metrics, a standard relational database like MySQL would be crushed under the write-load. A TSDB efficiently stores millions of `[Timestamp, Value]` pairs, allowing for rapid ingestion and incredibly fast graph generation."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Scraping metrics every 1 second from hundreds of targets. Prometheus will run out of memory and crash.
+
+> [!CAUTION] Think Before You Type
+> `systemctl restart prometheus` (Did you validate the YAML syntax? Prometheus will refuse to start if there's a single extra space.)
+
 ## Chapter Summary
 
 Monitoring is the difference between being a reactive sysadmin and a proactive engineer. By installing exporters and aggregating metrics into a Time-Series Database, you grant yourself the superpower of seeing outages before they actually occur.
@@ -122,6 +130,12 @@ Monitoring is the difference between being a reactive sysadmin and a proactive e
 - [ ] I know that `node_exporter` is used to expose hardware metrics.
 
 ---
+
+**Chapter Transition**
+> Prometheus is collecting metrics, but staring at raw numbers is inefficient. We need dashboards.
+
+---
+
 
 ## Navigation
 

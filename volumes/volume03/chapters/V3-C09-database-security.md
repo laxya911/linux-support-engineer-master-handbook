@@ -115,6 +115,14 @@ Once the user is created, they have zero power. You must explicitly grant them p
 ### Question 3: What does the syntax `company_blog.*` mean in the command `GRANT ALL PRIVILEGES ON company_blog.* TO 'blog_user'@'localhost';`?
 * **Target Answer**: "The `company_blog` part specifies the exact name of the database. The `.*` is a wildcard that means 'all tables'. Therefore, this syntax grants the user permissions across every single table, but *only* within the `company_blog` database, preventing them from accessing or modifying any other databases on the server."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Binding the database to `0.0.0.0` without a firewall, exposing it to the entire internet.
+
+> [!CAUTION] Think Before You Type
+> `GRANT ALL PRIVILEGES ON *.* TO 'app'@'%'` (Does the web app really need DROP privileges?)
+
 ## Chapter Summary
 
 The `root` database user is for humans. It is for you, the Support Engineer, to create databases, manage backups, and perform maintenance. You must never, ever put the `root` username and password into an application's configuration file. Always create a dedicated user, grant it access to a single database, and limit the blast radius!
@@ -126,6 +134,12 @@ The `root` database user is for humans. It is for you, the Support Engineer, to 
 - [ ] I know how to use the `GRANT` and `FLUSH` commands.
 
 ---
+
+**Chapter Transition**
+> Security is in place, but if the disk dies, the data is still lost. We need a backup strategy.
+
+---
+
 
 ## Navigation
 

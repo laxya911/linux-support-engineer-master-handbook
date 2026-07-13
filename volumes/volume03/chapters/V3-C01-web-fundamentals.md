@@ -113,6 +113,14 @@ To see which ports are currently in use on your server, you use the `ss` command
 ### Question 3: What does the `curl -I` command do?
 * **Target Answer**: "The `curl` command fetches data from a URL. The `-I` flag (or `--head`) tells `curl` to only fetch the HTTP Headers from the server, ignoring the actual HTML body content. This is incredibly useful for troubleshooting to see what server software the destination is running, or to check the HTTP status code (like 200 OK or 404 Not Found) without downloading massive amounts of page data."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Ignoring HTTP status codes. A 200 OK doesn't mean the app works if the page is completely blank.
+
+> [!CAUTION] Think Before You Type
+> `curl -I example.com` (Are you checking the headers or just the body?)
+
 ## Chapter Summary
 
 Web servers are not magic. They are simply Linux daemons (background processes) that bind to Port 80 or 443, accept TCP connections, read text-based HTTP requests, and send text-based HTTP responses back to the client. If you understand the network layer, troubleshooting web servers becomes remarkably simple.
@@ -124,6 +132,12 @@ Web servers are not magic. They are simply Linux daemons (background processes) 
 - [ ] I can use `ss -tulpn` to find out which application is listening on a specific port.
 
 ---
+
+**Chapter Transition**
+> We understand how the web works in theory. Now, let's deploy the server that powers half the internet.
+
+---
+
 
 ## Navigation
 

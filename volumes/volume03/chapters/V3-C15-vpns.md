@@ -105,6 +105,14 @@ For a VPN to actually work, the Linux server must be allowed to act as a router.
 ### Question 3: What is the difference between 'Split Tunneling' and 'Full Tunneling' in a VPN configuration?
 * **Target Answer**: "Full Tunneling forces 100% of the client's network traffic (including general web browsing) to travel through the encrypted VPN tunnel to the corporate network, which is highly secure but consumes massive amounts of corporate bandwidth. Split Tunneling only routes traffic destined for specific internal corporate subnets (e.g., 10.0.0.0/24) through the tunnel, while allowing standard internet traffic to bypass the VPN and go directly to the internet."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Routing all internet traffic through the VPN (0.0.0.0/0) instead of just the corporate subnet, saturating your office bandwidth.
+
+> [!CAUTION] Think Before You Type
+> `wg-quick down wg0` (Are you connected over the VPN right now? You will drop your own connection.)
+
 ## Chapter Summary
 
 VPNs are the bridge between the hostile public internet and your secure, isolated internal infrastructure. WireGuard has revolutionized this space by replacing massive, complex OpenVPN configurations with simple, elegant cryptography. 
@@ -116,6 +124,12 @@ VPNs are the bridge between the hostile public internet and your secure, isolate
 - [ ] I know the difference between Split and Full tunneling.
 
 ---
+
+**Chapter Transition**
+> Remote access is secured via VPN, but developers need a way to share files across the network.
+
+---
+
 
 ## Navigation
 

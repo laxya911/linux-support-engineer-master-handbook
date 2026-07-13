@@ -104,6 +104,14 @@ Five minutes later, the Support Engineer glances at the Grafana NOC dashboard on
 ### Question 3: What is 'Alert Fatigue' and how do you prevent it when configuring Grafana alerts?
 * **Target Answer**: "Alert Fatigue occurs when engineers receive too many non-critical or false-positive alerts, causing them to subconsciously ignore all alerts, including real emergencies. To prevent it, Grafana alerts should only be configured for actionable, critical thresholds (e.g., a database disk is 95% full), rather than transient, self-resolving spikes (e.g., CPU hit 90% for one minute)."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Creating a dashboard that queries a year of high-resolution data on load, causing the browser to freeze and the database to spike.
+
+> [!CAUTION] Think Before You Type
+> `systemctl restart grafana-server` (Did you backup the SQLite database first?)
+
 ## Chapter Summary
 
 Raw data is useless if you cannot interpret it quickly. Grafana takes the millions of data points collected by Prometheus and turns them into a story. If the story turns red, you know exactly when and where to act.
@@ -115,6 +123,12 @@ Raw data is useless if you cannot interpret it quickly. Grafana takes the millio
 - [ ] I understand the danger of Alert Fatigue.
 
 ---
+
+**Chapter Transition**
+> We can see the traffic spikes in Grafana, and our database is struggling to keep up. We need a caching layer.
+
+---
+
 
 ## Navigation
 

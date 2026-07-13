@@ -108,6 +108,14 @@ When they start the application, it crashes instantly, throwing the error: `FATA
 ### Question 3: How do you configure PostgreSQL to accept standard username and password connections from a web application running on the same server?
 * **Target Answer**: "You must modify the Host-Based Authentication file, `pg_hba.conf`. You need to locate the IPv4 local connection line (`host all all 127.0.0.1/32`) and change the authentication method from `peer` (or `ident`) to a password-based method like `md5` or `scram-sha-256`. After saving the file, you must reload the PostgreSQL service."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Forgetting to update `pg_hba.conf`, locking everyone out of PostgreSQL including yourself.
+
+> [!CAUTION] Think Before You Type
+> `ALTER USER postgres WITH PASSWORD '123';` (Did you just set a trivial password on the superuser?)
+
 ## Chapter Summary
 
 PostgreSQL is a fortress. It is designed to be impenetrable by default. By mastering the `pg_hba.conf` file, you gain the keys to the fortress, allowing you to securely connect your applications to one of the most powerful database engines on the planet.
@@ -119,6 +127,12 @@ PostgreSQL is a fortress. It is designed to be impenetrable by default. By maste
 - [ ] I understand the purpose of the `pg_hba.conf` file.
 
 ---
+
+**Chapter Transition**
+> The database is running, but an exposed database is a compromised database. We must secure it.
+
+---
+
 
 ## Navigation
 

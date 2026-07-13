@@ -108,6 +108,14 @@ The developer attempts to log in. They type their correct password, but the appl
 ### Question 3: How does the NTP Stratum hierarchy work?
 * **Target Answer**: "The Stratum hierarchy measures the distance from a perfectly accurate time source. Stratum 0 represents actual hardware atomic clocks or GPS receivers. Stratum 1 servers are directly connected to Stratum 0 devices. Stratum 2 servers synchronize over a network with Stratum 1 servers, and so on. A standard Linux server is usually Stratum 3, pulling its time from a Stratum 2 server like `pool.ntp.org`."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Relying on hardware clocks across a distributed database cluster. The nodes will reject transactions if they are out of sync by a few milliseconds.
+
+> [!CAUTION] Think Before You Type
+> `date -s '12:00:00'` (Did you just manually jump the time? Databases might crash due to time-traveling transactions!)
+
 ## Chapter Summary
 
 Clock drift is silent. It doesn't generate loud error messages; it just causes bizarre, inexplicable authentication and database failures. Whenever you build a new server, before you install Apache, before you install PostgreSQL, you must ensure `chrony` is running.
@@ -119,6 +127,12 @@ Clock drift is silent. It doesn't generate loud error messages; it just causes b
 - [ ] I know that `chrony` is the modern replacement for `ntpd`.
 
 ---
+
+**Chapter Transition**
+> Time is synchronized, but how do remote engineers securely access this infrastructure to read the logs?
+
+---
+
 
 ## Navigation
 

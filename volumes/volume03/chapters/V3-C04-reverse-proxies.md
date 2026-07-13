@@ -132,6 +132,14 @@ By default, NGINX uses the "Round Robin" algorithm. It gives the first request t
 ### Question 3: What is 'Round Robin' load balancing?
 * **Target Answer**: "Round Robin is the default load balancing algorithm used by NGINX. It distributes incoming client requests sequentially across a list of backend servers defined in an `upstream` block. Server 1 gets the first request, Server 2 gets the second, and so on, looping back to Server 1 when it reaches the end of the list."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Creating an open proxy by accident, allowing attackers to route their malicious traffic through your server.
+
+> [!CAUTION] Think Before You Type
+> `proxy_pass http://localhost:8080/` (Does the trailing slash matter? Yes, it changes the entire URI path!)
+
 ## Chapter Summary
 
 The ability to write an NGINX `proxy_pass` configuration is the defining skill of a modern Infrastructure Engineer. It allows you to build highly available, secure, and horizontally scalable systems without the developers ever needing to change their application code.
@@ -143,6 +151,12 @@ The ability to write an NGINX `proxy_pass` configuration is the defining skill o
 - [ ] I understand how an `upstream` block enables Round Robin load balancing.
 
 ---
+
+**Chapter Transition**
+> The proxy is in place, but traffic is still transmitted in plaintext. It's time to secure the transport layer.
+
+---
+
 
 ## Navigation
 

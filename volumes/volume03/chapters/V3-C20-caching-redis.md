@@ -110,6 +110,14 @@ Calculating the Top 10 requires MySQL to scan 5 million transaction rows. As tho
 ### Question 3: What does the `EXPIRE` command do in Redis, and why is it necessary?
 * **Target Answer**: "The `EXPIRE` command sets a Time-To-Live (TTL) in seconds on a specific key. Once the timer reaches zero, Redis automatically deletes the key. This is critical for two reasons: First, RAM is limited, so we must purge old data to prevent the server from running out of memory. Second, it ensures the cache does not hold stale data indefinitely; forcing a periodic Cache Miss ensures the application fetches fresh data from the primary database."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Using Redis as a primary persistent database without understanding that it holds data in volatile RAM.
+
+> [!CAUTION] Think Before You Type
+> `FLUSHALL` (Did you just delete the cache for the entire production cluster?)
+
 ## Chapter Summary
 
 The secret to scaling massive web applications is not buying bigger databases; it's buying smaller databases and placing a massive Redis cache in front of them. By understanding how to offload read-heavy traffic to RAM, you become an invaluable asset to any high-traffic engineering team.
@@ -121,6 +129,12 @@ The secret to scaling massive web applications is not buying bigger databases; i
 - [ ] I know why Time-To-Live (TTL) is critical for preventing stale data.
 
 ---
+
+**Chapter Transition**
+> Redis solved our database load, but installing all these services manually is becoming a nightmare.
+
+---
+
 
 ## Navigation
 
