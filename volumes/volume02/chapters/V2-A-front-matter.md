@@ -67,16 +67,16 @@ To understand why this handbook is structured the way it is, you need to underst
 **08:30 AM — Shift Begins**
 You log into the ticketing system. There are 15 open tickets. Most are routine access requests, but one catches your eye: *"The accounting application is slow."*
 
-**09:10 AM — The Investigation**
+**08:40 AM — The Investigation**
 You SSH into the application server. You don't restart anything yet. Instead, you run `top` and `iostat`. The CPU is idle, but the disk wait (iowait) is at 95%. Something is hammering the disk.
 
-**09:40 AM — The Root Cause**
+**08:45 AM — The Root Cause**
 You trace the disk activity to a rogue backup script that was accidentally scheduled to run during business hours. You pause the script. The application speed returns to normal.
 
-**10:30 AM — The Escalation**
+**09:10 AM — The Escalation**
 A new alert pops up: *"Database Replica is out of sync."* You switch contexts. You check the network between the primary and the replica. A firewall rule was updated last night, inadvertently blocking port 3306. You roll back the rule and watch the replica catch up.
 
-**11:20 AM — Documentation**
+**09:30 AM — Documentation**
 You update the tickets with the root causes and the specific commands you used to fix them. You write a brief post-mortem for the backup script issue to ensure it isn't scheduled incorrectly again.
 
 **12:00 PM — Lunch**
