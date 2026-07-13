@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C21
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -144,6 +144,12 @@ Writing a Dockerfile is easy. Writing a *good* Dockerfile is hard. Understanding
 > Building one image is easy. Managing a stack of five interdependent containers is not. Enter Docker Compose.
 
 ---
+
+**Chapter Transition**
+> Building one image is easy. Managing a stack of five interdependent containers is not. Enter Docker Compose.
+
+---
+
 
 
 ## Navigation

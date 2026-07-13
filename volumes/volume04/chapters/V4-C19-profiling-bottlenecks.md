@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V1-C15
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -148,15 +148,20 @@ When an application lies to you, or simply stops speaking, `strace` allows you t
 - [ ] I can explain what a System Call is.
 - [ ] I know how to use `strace` to attach to a running PID.
 
+
+
+**Chapter Transition**
+> We've optimized the code and systems, but how do we prove our infrastructure can survive a real failure? By intentionally breaking it.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 18 – Chapter Title](V4-C18-packet-analysis.md)
+[Chapter 18 — Advanced Network Packet Analysis](V4-C18-packet-analysis.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 20 – Chapter Title](V4-C20-chaos-engineering.md)
+[Chapter 20 — Disaster Recovery & Chaos Engineering](V4-C20-chaos-engineering.md)

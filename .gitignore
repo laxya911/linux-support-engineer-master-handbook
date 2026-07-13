@@ -2,11 +2,15 @@ build/
 dist/
 out/
 reviews/
+handbooks/
+volumes/volume*/diagrams/
+samples/
 *.pdf
 *.epub
 *.docx
 *.html
-
+final-review*.md
+lms-website-plan.md
 # IDEs and Editors
 .vscode/
 .idea/

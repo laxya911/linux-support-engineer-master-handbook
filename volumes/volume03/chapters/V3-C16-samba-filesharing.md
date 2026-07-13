@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1 Hour
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Volume 3, Part 3
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -138,6 +138,12 @@ Samba is the ultimate diplomat. It allows Linux to integrate flawlessly into cor
 > With file sharing active, the number of logs being generated is overwhelming. We need a central location for them.
 
 ---
+
+**Chapter Transition**
+> With file sharing active, the number of logs being generated is overwhelming. We need a central location for them.
+
+---
+
 
 
 ## Navigation

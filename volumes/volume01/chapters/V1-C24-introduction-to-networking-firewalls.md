@@ -14,7 +14,7 @@ estimated_time: 1.5 Hours
 reading_time: 40 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 23
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -140,15 +140,20 @@ As a Support Engineer, the firewall is the first suspect whenever an application
 - [ ] I can check the status of `ufw`.
 - [ ] I know why locking yourself out via Port 22 is the most common beginner mistake.
 
+
+
+**Chapter Transition**
+> The firewall is active, but humans cannot remember IP addresses. How do we translate 'google.com' into an IP?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 23 – Basic System Monitoring](V1-C23-basic-system-monitoring.md)
+[Chapter 23 — Basic System Monitoring](V1-C23-basic-system-monitoring.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 25 – DNS & Name Resolution](V1-C25-dns-and-name-resolution.md)
+[Chapter 25 — DNS & Name Resolution](V1-C25-dns-and-name-resolution.md)

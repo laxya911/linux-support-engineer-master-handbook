@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V2-C07
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -130,15 +130,20 @@ Logs can lie. Applications can provide misleading error messages. The Network Te
 - [ ] I understand how Asymmetrical Routing breaks connections.
 - [ ] I know how to filter `tcpdump` output.
 
+
+
+**Chapter Transition**
+> Network packets are flowing correctly, but the application is still unacceptably slow. Where is the CPU spending all its time?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 17 – Chapter Title](V4-C17-kernel-panics.md)
+[Chapter 17 — Kernel Panics & Crash Analysis](V4-C17-kernel-panics.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 19 – Chapter Title](V4-C19-profiling-bottlenecks.md)
+[Chapter 19 — Profiling Application Bottlenecks](V4-C19-profiling-bottlenecks.md)

@@ -98,6 +98,11 @@ To apply the USE Method, you need to know which Linux commands map to which metr
 ### Question 3: You have high I/O wait (`%iowait` in `top`). Does this mean your CPU is the bottleneck?
 * **Target Answer**: "No, `%iowait` actually means the CPU is idle, but it is unable to process the next instruction because it is waiting on the physical disk to return data. High I/O wait indicates a storage bottleneck, not a CPU bottleneck."
 
+
+
+**Chapter Transition**
+> We have the philosophy of performance analysis, but the standard tools are too slow and invasive. We need something running directly in the kernel: eBPF.
+
 ---
 
 ## Navigation
@@ -109,4 +114,4 @@ None
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 2 – Tracing with eBPF and BCC](V5-C02-ebpf-and-bcc.md)
+[Chapter 2: Tracing with eBPF and BCC](V5-C02-ebpf-and-bcc.md)

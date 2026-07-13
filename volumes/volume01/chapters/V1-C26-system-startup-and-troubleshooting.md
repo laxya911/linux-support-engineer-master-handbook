@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 25
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -143,15 +143,20 @@ The boot sequence is not magic; it is a predictable chain of four events. If the
 - [ ] I know how to view logs for the current boot cycle (`journalctl -b`).
 - [ ] I understand the command needed to escape a Read-Only emergency state.
 
+
+
+**Chapter Transition**
+> We can recover broken systems. Now, let's look at the most common workload you will support in your career: the web server.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 25 – DNS & Name Resolution](V1-C25-dns-and-name-resolution.md)
+[Chapter 25 — DNS & Name Resolution](V1-C25-dns-and-name-resolution.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 27 – Introduction to Web Servers](V1-C27-introduction-to-web-servers.md)
+[Chapter 27 — Introduction to Web Servers](V1-C27-introduction-to-web-servers.md)

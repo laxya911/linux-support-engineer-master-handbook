@@ -45,6 +45,11 @@ Connect with Laxman:<br/>
 
 # Preface
 
+
+**Target Audience & Outcomes:**
+> If you can navigate Linux but haven't handled production incidents, this volume turns you into a forensic CLI-first support engineer.
+
+
 Why another Linux book?
 
 If you search for "Linux Guide," you will find thousands of excellent resources teaching you how to install packages, configure web servers, and memorize bash commands. 
@@ -78,12 +83,7 @@ To help you navigate this handbook, we have established several recurring sectio
 > [!CAUTION] Checklists & Escalations
 > Critical steps to follow before modifying a production system, and protocols on how to escalate issues effectively.
 
-**Terminology**
-Whenever you see a code block like this:
-```bash
-$ df -h
-```
-The `$` indicates a command run as a standard user. If the prompt is `#`, the command requires `root` privileges (e.g., using `sudo`).
+
 
 ---
 

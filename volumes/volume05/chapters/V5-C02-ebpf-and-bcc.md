@@ -88,15 +88,20 @@ When you install the BCC tools (`sudo apt install bpfcc-tools`), you get over 10
 ### Question 3: How does the kernel guarantee that an eBPF program won't crash the server?
 * **Target Answer**: "Before an eBPF program is allowed to load into the kernel, it must pass through the eBPF Verifier. The verifier mathematically analyzes the code to ensure it does not contain infinite loops, illegal memory accesses, or uninitialized variables. If the program cannot be proven safe, the kernel rejects it."
 
+
+
+**Chapter Transition**
+> eBPF gives us incredible data, but raw data is impossible for a human to interpret quickly. We need to visualize it with Flame Graphs.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 1 – The USE Method & System Profiling](V5-C01-the-brendan-gregg-method.md)
+[Chapter 1: The USE Method & System Profiling](V5-C01-the-brendan-gregg-method.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 3 – Flame Graphs](V5-C03-flame-graphs.md)
+[Chapter 3: Flame Graphs](V5-C03-flame-graphs.md)

@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 16
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -138,15 +138,20 @@ Running out of disk space is one of the most common causes of server outages. Re
 - [ ] I can check if my hard drive is 100% full using `df -h`.
 - [ ] I know how to summarize folder sizes using `du -sh *`.
 
+
+
+**Chapter Transition**
+> Storage is mounted, but searching through gigabytes of logs manually is impossible. We need powerful text processing tools.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 16 – Archiving and Compression](V1-C16-archiving-and-compression.md)
+[Chapter 16 — Archiving and Compression](V1-C16-archiving-and-compression.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 18 – Advanced Grep & Awk](V1-C18-advanced-grep-and-awk.md)
+[Chapter 18 — Advanced Grep & Awk](V1-C18-advanced-grep-and-awk.md)

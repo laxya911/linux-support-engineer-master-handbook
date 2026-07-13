@@ -98,15 +98,20 @@ For complex microservices, it is often better to scale based on **Request Queue 
 ### Question 3: Why might CPU utilization be a terrible metric for auto-scaling a Node.js microservice?
 * **Target Answer**: "Node.js is single-threaded and heavily relies on asynchronous I/O. If the microservice is waiting on a slow backend database to return queries, the CPU will sit idle (at 5% utilization) while thousands of incoming user requests pile up in the memory queue. The server will crash from memory exhaustion or connection limits long before the CPU reaches the 70% threshold required to trigger the auto-scaler. Scaling on concurrent requests or socket queue length is much safer."
 
+
+
+**Chapter Transition**
+> We have planned capacity, but a sudden viral traffic spike will overwhelm it regardless. We must aggressively drop traffic with Rate Limiting.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 10 – Performance Tuning the Kernel Parameters (sysctl)](V5-C10-kernel-parameters-sysctl.md)
+[Chapter 10: Performance Tuning the Kernel Parameters (sysctl)](V5-C10-kernel-parameters-sysctl.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 12 – Rate Limiting and Load Shedding](V5-C12-rate-limiting.md)
+[Chapter 12: Rate Limiting and Load Shedding](V5-C12-rate-limiting.md)

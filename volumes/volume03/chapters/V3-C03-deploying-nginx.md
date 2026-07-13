@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C02
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -136,6 +136,38 @@ The command to test the configuration is:
 > If the backend application continuously crashed on startup, Charlie would escalate to the Development team.
 
 
+## Real-World Support Ticket
+
+> [!IMPORTANT] ServiceNow Ticket: INC-3026303
+> **Title:** 502 Bad Gateway on All Web Traffic
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie receives a P1 Critical alert: The primary e-commerce site is returning 502 errors.
+> 
+> **2) Discovery & diagnosis**
+> Charlie checks the NGINX error logs (`/var/log/nginx/error.log`) and sees `connect() failed (111: Connection refused) while connecting to upstream`. The proxy cannot reach the backend application.
+> 
+> **3) Immediate containment**
+> Charlie places a static 'Maintenance' page on the NGINX proxy to provide a better user experience while he investigates.
+> 
+> **4) Resolution planning & execution**
+> Charlie SSHes into the backend application server and discovers the Node.js process crashed. He restarts the service (`systemctl restart node-app`).
+> 
+> **5) Verification**
+> Charlie runs `curl -I localhost:3000` on the backend, then removes the Maintenance page on NGINX. The site loads successfully.
+> 
+> **6) Closure & documentation**
+> Charlie documents the upstream connection refusal and resolves the ticket.
+> 
+> **7) Post-resolution follow-up**
+> Charlie adds a systemd `Restart=always` directive to the Node.js service to automatically recover from future crashes.
+> 
+> **8) Escalation rules**
+> If the backend application continuously crashed on startup, Charlie would escalate to the Development team.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -177,6 +209,12 @@ NGINX has taken the world by storm because of its incredible speed, low memory f
 > Having a web server is great, but exposing it directly to the internet is dangerous. We need a proxy.
 
 ---
+
+**Chapter Transition**
+> Having a web server is great, but exposing it directly to the internet is dangerous. We need a proxy.
+
+---
+
 
 
 ## Navigation

@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C06
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -111,6 +111,27 @@ To fix the massive security holes of a fresh install, the developers included a 
 > 2. Uncontrolled power restoration can be more damaging than the power loss itself.
 
 
+## Industry Incident Spotlight: The 2017 British Airways IT Outage
+
+> [!CAUTION] **When High Availability Fails**
+> In May 2017, British Airways suffered a massive IT outage that grounded flights globally for three days.
+>
+> **The Timeline:**
+> - A contractor performing maintenance at a primary data center accidentally disconnected a power supply.
+> - When power was restored minutes later, the surge caused massive damage to the database servers.
+> - The automated failover to the backup data center failed because the database replication became unsynchronized and corrupted.
+>
+> **The Root Cause:**
+> The primary database systems were violently shut down, and the disaster recovery protocols had not been properly tested for this specific "unclean shutdown" scenario.
+>
+> **The Business Impact:**
+> 75,000 passengers stranded, thousands of flights canceled, and an estimated £80 million in compensation costs.
+>
+> **The Lessons Learned:**
+> 1. **Test your Disaster Recovery.** Having a backup database is useless if the failover mechanism fails when you actually need it.
+> 2. Uncontrolled power restoration can be more damaging than the power loss itself.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -152,6 +173,12 @@ Installing the database is the easy part. Securing it is what makes you an engin
 > MariaDB is excellent for traditional apps, but complex analytical queries might require something more robust.
 
 ---
+
+**Chapter Transition**
+> MariaDB is excellent for traditional apps, but complex analytical queries might require something more robust.
+
+---
+
 
 
 ## Navigation

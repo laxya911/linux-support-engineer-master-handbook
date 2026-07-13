@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 4
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -161,15 +161,20 @@ The Linux Filesystem is highly organized. Configuration goes in `/etc`. Logs go 
 - [ ] I know exactly where to look for application log files.
 - [ ] I understand that `/proc` exists only in memory, not on disk.
 
+
+
+**Chapter Transition**
+> You know where files are supposed to live. Now, how do you actually traverse the filesystem and manipulate them?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 4 – Linux Boot Process](V1-C04-linux-boot-process.md)
+[Chapter 4 — Linux Boot Process](V1-C04-linux-boot-process.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 6 – Working with Files & Directories](V1-C06-working-with-files-and-directories.md)
+[Chapter 6 — Working with Files & Directories](V1-C06-working-with-files-and-directories.md)

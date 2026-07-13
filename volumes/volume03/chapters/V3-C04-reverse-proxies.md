@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 2 Hours
 reading_time: 35 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C03
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -156,6 +156,12 @@ The ability to write an NGINX `proxy_pass` configuration is the defining skill o
 > The proxy is in place, but traffic is still transmitted in plaintext. It's time to secure the transport layer.
 
 ---
+
+**Chapter Transition**
+> The proxy is in place, but traffic is still transmitted in plaintext. It's time to secure the transport layer.
+
+---
+
 
 
 ## Navigation

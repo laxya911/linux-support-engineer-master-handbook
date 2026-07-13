@@ -97,15 +97,20 @@ If the Leader crashes, the Followers instantly detect the silence and hold a new
 ### Question 3: Existing read queries are succeeding, but all write queries to your distributed database are failing. What is the most likely cause?
 * **Target Answer**: "The cluster has likely lost Quorum. In this state, the remaining nodes recognize they do not have the mathematical majority required by the consensus algorithm to safely commit new data. To protect data integrity and prevent a Split-Brain, the cluster automatically demotes itself to a Read-Only state."
 
+
+
+**Chapter Transition**
+> Our systems are globally distributed, but how do we mathematically measure if they are 'reliable enough' for our users? Service Level Objectives.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 13 – Service Mesh and Circuit Breakers](V5-C13-service-mesh.md)
+[Chapter 13: Service Mesh and Circuit Breakers](V5-C13-service-mesh.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 15 – SLOs and Error Budgets](V5-C15-slos-error-budgets.md)
+[Chapter 15: SLOs and Error Budgets](V5-C15-slos-error-budgets.md)

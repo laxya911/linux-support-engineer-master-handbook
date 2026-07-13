@@ -95,12 +95,12 @@ Congratulations, Senior Support Engineer.
 ### Question 3: How do you approach an intermittent problem that leaves no obvious errors in the application logs?
 * **Target Answer**: "I would apply systems thinking and tools like eBPF to gather objective data without relying on application-level logging. I would use the USE Method (Utilization, Saturation, Errors) across all layers of the stack—hardware, network, kernel, and dependencies—looking for hidden saturation points or noisy neighbors that might be starving the application of resources momentarily."
 
----
+
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 19 – War Room Simulation: The Database Meltdown](V5-C19-war-room-simulation.md)
+[Chapter 19: War Room Simulation: The Database Meltdown](V5-C19-war-room-simulation.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)

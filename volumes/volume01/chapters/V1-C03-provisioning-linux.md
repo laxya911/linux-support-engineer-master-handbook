@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 40 Minutes
 labs: 1
 interview_questions: 2
-prerequisites: Chapter 2
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -133,15 +133,20 @@ Provisioning is about scale, consistency, and resilience. As a Support Engineer,
 - [ ] I can explain the difference between Kickstart and Cloud-init.
 - [ ] I know why enterprise environments rely on automated provisioning.
 
+
+
+**Chapter Transition**
+> The server is provisioned, but what exactly happens between pressing the power button and seeing the login prompt?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 2 – Linux Architecture & Distributions](V1-C02-linux-architecture-and-distributions.md)
+[Chapter 2 — Linux Architecture & Distributions](V1-C02-linux-architecture-and-distributions.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 4 – Linux Boot Process](V1-C04-linux-boot-process.md)
+[Chapter 4 — Linux Boot Process](V1-C04-linux-boot-process.md)

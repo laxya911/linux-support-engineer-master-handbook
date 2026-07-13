@@ -113,12 +113,17 @@ A list of Jira tickets created specifically to fix the root cause. If a Post-Mor
 ### Question 3: What makes a 'good' Action Item in a Post-Mortem?
 * **Target Answer**: "A good action item must be a concrete, measurable, and assignable engineering task with a clear deadline. Vague statements like 'improve monitoring' are useless. A good action item is: 'Create a Datadog alert for Disk Space > 85%, assign to Bob, due by Friday.' Without concrete action items, the post-mortem is just an essay that won't prevent the incident from recurring."
 
+
+
+**Chapter Transition**
+> We've learned from the incident, but implementing the fix requires 10 hours of manual, repetitive work. This is Toil, and it must be destroyed.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 16 – Incident Command System (ICS)](V5-C16-incident-command.md)
+[Chapter 16: Incident Command System (ICS)](V5-C16-incident-command.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)

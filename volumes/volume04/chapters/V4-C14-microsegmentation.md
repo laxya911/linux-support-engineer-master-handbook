@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C03
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -142,15 +142,20 @@ Trusting an IP address just because it is "inside" your network is a recipe for 
 - [ ] I understand the danger of a flat network.
 - [ ] I know how a NetworkPolicy uses Labels to restrict traffic.
 
+
+
+**Chapter Transition**
+> The perimeter and interior are secured, but what happens when a novel attack still succeeds? You must execute a formal Incident Response.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 13 – Chapter Title](V4-C13-secrets-management.md)
+[Chapter 13 — Secrets Management & PKI](V4-C13-secrets-management.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 15 – Chapter Title](V4-C15-incident-response.md)
+[Chapter 15 — Incident Response & Security Auditing](V4-C15-incident-response.md)

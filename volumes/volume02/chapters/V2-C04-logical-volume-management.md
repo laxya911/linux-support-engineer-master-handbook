@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Volume 1 Completion
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -150,6 +150,12 @@ Storage emergencies are the most stressful events in IT. LVM reduces that stress
 > Logical volumes give us flexibility, but what happens when the underlying physical disk dies? We need hardware redundancy.
 
 ---
+
+**Chapter Transition**
+> Logical volumes give us flexibility, but what happens when the underlying physical disk dies? We need hardware redundancy.
+
+---
+
 
 
 

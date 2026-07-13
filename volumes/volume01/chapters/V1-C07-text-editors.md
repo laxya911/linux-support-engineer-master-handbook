@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 2
-prerequisites: Chapter 6
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -136,15 +136,20 @@ You will not become a `vim` master overnight, and that is perfectly okay. The go
 - [ ] I can successfully save and exit a file using `:wq`.
 - [ ] I know how to panic-quit using `:q!` if I make a mistake.
 
+
+
+**Chapter Transition**
+> You can edit files, but Linux is a multi-user system. How do you separate the administrators from the regular users?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 6 – Working with Files & Directories](V1-C06-working-with-files-and-directories.md)
+[Chapter 6 — Working with Files & Directories](V1-C06-working-with-files-and-directories.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 8 – Users & Groups](V1-C08-users-and-groups.md)
+[Chapter 8 — Users & Groups](V1-C08-users-and-groups.md)

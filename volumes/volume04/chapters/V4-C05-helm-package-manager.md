@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1 Hour
 reading_time: 20 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C04
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -137,15 +137,20 @@ Helm bridges the gap between infrastructure engineers and software consumers. It
 - [ ] I understand how the `values.yaml` file works.
 - [ ] I know why we use Helm instead of manual YAML for third-party apps.
 
+
+
+**Chapter Transition**
+> Kubernetes handles the application layer beautifully. But who provisions the underlying Kubernetes clusters and VMs? We need Infrastructure as Code.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 4 – Chapter Title](V4-C04-stateful-apps.md)
+[Chapter 4 — Stateful Applications in K8s](V4-C04-stateful-apps.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 6 – Chapter Title](V4-C06-iac-terraform.md)
+[Chapter 6 — Introduction to IaC & Terraform](V4-C06-iac-terraform.md)

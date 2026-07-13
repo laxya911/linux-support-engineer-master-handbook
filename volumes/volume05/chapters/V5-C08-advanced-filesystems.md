@@ -94,15 +94,20 @@ It offers the same core CoW features as ZFS: checksumming, self-healing, native 
 ### Question 3: Why should you never use Hardware RAID underneath ZFS?
 * **Target Answer**: "ZFS relies on end-to-end checksumming to detect and heal data corruption. If ZFS detects a corrupted block, it needs to be able to talk directly to the mirror drive to fetch the healthy block. A Hardware RAID controller obscures the physical drives from the operating system, presenting them as a single logical disk. If corruption occurs, ZFS cannot see the underlying disks to perform the repair."
 
+
+
+**Chapter Transition**
+> Storage is scalable, but as our clusters grow, standard iptables firewalls melt down. We must use eBPF for networking and security.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 7 – Kernel Panics and Kdump](V5-C07-kernel-panics-kdump.md)
+[Chapter 7: Kernel Panics and Kdump](V5-C07-kernel-panics-kdump.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 9 – eBPF for Security (Cilium)](V5-C09-ebpf-security-cilium.md)
+[Chapter 9: eBPF for Security (Cilium)](V5-C09-ebpf-security-cilium.md)

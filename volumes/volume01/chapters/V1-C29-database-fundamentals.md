@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 28
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -146,15 +146,20 @@ When a database connection fails, always check the `bind-address` using `ss -tul
 - [ ] I can locate the `bind-address` configuration file on my distro.
 - [ ] I know how to check the system logs for the OOM Killer.
 
+
+
+**Chapter Transition**
+> You've built the foundation from the boot process to database backends. So, where do you go from here?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 28 – Reverse Proxies & Load Balancing](V1-C28-reverse-proxies-and-load-balancing.md)
+[Chapter 28 — Reverse Proxies & Load Balancing](V1-C28-reverse-proxies-and-load-balancing.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 30 – Conclusion & Career Path](V1-C30-conclusion-and-career-path.md)
+[Chapter 30 — Conclusion & Career Path](V1-C30-conclusion-and-career-path.md)

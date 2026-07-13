@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C03
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -143,15 +143,20 @@ The true power of Kubernetes is decoupling. By strictly separating Compute (Pods
 - [ ] I understand the purpose of a ConfigMap.
 - [ ] I know why Secrets should never be hardcoded into Deployment YAMLs.
 
+
+
+**Chapter Transition**
+> We can manage complex workloads, but manually editing dozens of YAML files is error-prone. Enter the Helm package manager.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 3 – Chapter Title](V4-C03-k8s-networking.md)
+[Chapter 3 — Kubernetes Networking](V4-C03-k8s-networking.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 5 – Chapter Title](V4-C05-helm-package-manager.md)
+[Chapter 5 — Helm & Package Management](V4-C05-helm-package-manager.md)

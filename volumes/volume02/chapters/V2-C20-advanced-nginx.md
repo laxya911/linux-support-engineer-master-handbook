@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Volume 1
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -116,6 +116,12 @@ NGINX is the shield of the enterprise. By utilizing proxying and caching, you ca
 > The web tier is scaled, but the application is only as fast as its database. We must master database replication.
 
 ---
+
+**Chapter Transition**
+> The web tier is scaled, but the application is only as fast as its database. We must master database replication.
+
+---
+
 
 
 

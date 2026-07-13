@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C22
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -134,6 +134,38 @@ The developer is confused. "I configured WordPress to connect to `localhost:3306
 > If the container kept crashing silently without logs, Charlie would escalate to the application developers to add debug logging.
 
 
+## Real-World Support Ticket
+
+> [!IMPORTANT] ServiceNow Ticket: INC-3026323
+> **Title:** Database Connection Failure in Docker Compose
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie takes a P2 ticket: The newly deployed staging environment via Docker Compose is failing to start.
+> 
+> **2) Discovery & diagnosis**
+> Charlie runs `docker-compose logs web` and sees `Host not found: db`. He checks `docker-compose.yml` and notices the web service and the database service are on entirely different custom bridge networks.
+> 
+> **3) Immediate containment**
+> Charlie stops the broken deployment (`docker-compose down`) to free up the ports.
+> 
+> **4) Resolution planning & execution**
+> Charlie edits the `docker-compose.yml` file, moving both services to the same custom bridge network so Docker's internal DNS can resolve the service names.
+> 
+> **5) Verification**
+> Charlie runs `docker-compose up -d` and watches the logs. The web service successfully connects to the database.
+> 
+> **6) Closure & documentation**
+> Charlie documents the network isolation issue and resolves the ticket.
+> 
+> **7) Post-resolution follow-up**
+> Charlie adds a network validation step to the CI/CD pipeline.
+> 
+> **8) Escalation rules**
+> If the container kept crashing silently without logs, Charlie would escalate to the application developers to add debug logging.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -175,6 +207,12 @@ the Container Runtime Compose is the absolute standard for local development. By
 > The containers are running, but what happens to the database when the container stops? We need persistence.
 
 ---
+
+**Chapter Transition**
+> The containers are running, but what happens to the database when the container stops? We need persistence.
+
+---
+
 
 
 ## Navigation

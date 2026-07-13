@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Volume 1 Completion
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -157,6 +157,12 @@ Writing scripts is easy. Writing *robust* scripts is hard. Always assume your co
 > Scripts are powerful, but they shouldn't require manual execution. We need the server to run them on a schedule.
 
 ---
+
+**Chapter Transition**
+> Scripts are powerful, but they shouldn't require manual execution. We need the server to run them on a schedule.
+
+---
+
 
 
 

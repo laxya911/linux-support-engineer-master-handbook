@@ -96,15 +96,20 @@ The sidecar proxy intercepts the outbound request. The proxy handles the DNS res
 ### Question 3: How does a Service Mesh facilitate 'Canary Deployments'?
 * **Target Answer**: "Instead of updating all pods to the new version simultaneously, you deploy a few pods of the new 'v2' version alongside the existing 'v1' pods. You then configure the Service Mesh proxy rules to transparently route a small percentage (e.g., 5%) of incoming traffic to the v2 pods. If the telemetry from the Service Mesh shows that v2 is returning 500 errors or high latency, you instantly roll back the routing rule to send 100% of traffic to v1, minimizing customer impact."
 
+
+
+**Chapter Transition**
+> The mesh routes traffic flawlessly, but how do multiple databases agree on the truth across geographic regions? Distributed Consensus.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 12 – Rate Limiting and Load Shedding](V5-C12-rate-limiting.md)
+[Chapter 12: Rate Limiting and Load Shedding](V5-C12-rate-limiting.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 14 – Distributed Consensus (Raft & Paxos)](V5-C14-distributed-consensus.md)
+[Chapter 14: Distributed Consensus (Raft & Paxos)](V5-C14-distributed-consensus.md)

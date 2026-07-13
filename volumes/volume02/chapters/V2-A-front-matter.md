@@ -1,4 +1,3 @@
-
 # Copyright and Legal Notice
 
 Copyright © 2026 Laxman Aryal. All rights reserved.
@@ -45,6 +44,11 @@ Connect with Laxman:<br/>
 ---
 
 # Preface
+
+
+**Target Audience & Outcomes:**
+> From Junior to capable Systems Administrator with storage, networking, security, and automation foundations.
+
 
 Why another Linux book?
 
@@ -103,12 +107,7 @@ To help you navigate this handbook, we have established several recurring sectio
 > [!CAUTION] Checklists & Escalations
 > Critical steps to follow before modifying a production system, and protocols on how to escalate issues effectively.
 
-**Terminology**
-Whenever you see a code block like this:
-```bash
-$ df -h
-```
-The `$` indicates a command run as a standard user. If the prompt is `#`, the command requires `root` privileges (e.g., using `sudo`).
+
 
 ---
 

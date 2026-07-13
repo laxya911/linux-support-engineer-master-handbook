@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 3 Hours
 reading_time: 15 Minutes
 labs: 1
 interview_questions: 0
-prerequisites: Chapters 1-19
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -88,6 +88,12 @@ In this Capstone, you will not be given step-by-step commands. You will be given
 > Congratulations on completing Volume 2. Next up: Volume 3 - Automation & Infrastructure.
 
 ---
+
+**Chapter Transition**
+> Congratulations on completing Volume 2. Next up: Volume 3 - Automation & Infrastructure.
+
+---
+
 
 
 

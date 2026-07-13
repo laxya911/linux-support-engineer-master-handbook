@@ -105,15 +105,20 @@ $ reboot
 ### Question 3: How would you reset a lost root password on an enterprise Linux server assuming you have physical (or virtual console) access?
 * **Target Answer**: "I would reboot the server and interrupt the GRUB menu. I would edit the kernel boot parameters by appending `rd.break` (or `init=/bin/bash` depending on the distro) to the end of the `linux` line. This halts the boot process and drops me into a root shell before the normal system restrictions apply. I would then remount the filesystem as read-write, use the `passwd` command to change the root password, and force an SELinux relabel (`touch /.autorelabel`) before rebooting."
 
+
+
+**Chapter Transition**
+> The system boots, but under heavy load, it abruptly dies with a kernel panic. We must extract the core dump to find out why.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 5 – Network Latency Profiling](V5-C05-network-latency-profiling.md)
+[Chapter 5: Network Latency Profiling](V5-C05-network-latency-profiling.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 7 – Kernel Panics and Kdump](V5-C07-kernel-panics-kdump.md)
+[Chapter 7: Kernel Panics and Kdump](V5-C07-kernel-panics-kdump.md)

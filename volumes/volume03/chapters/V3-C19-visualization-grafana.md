@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C18
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -128,6 +128,12 @@ Raw data is useless if you cannot interpret it quickly. Grafana takes the millio
 > We can see the traffic spikes in Grafana, and our database is struggling to keep up. We need a caching layer.
 
 ---
+
+**Chapter Transition**
+> We can see the traffic spikes in Grafana, and our database is struggling to keep up. We need a caching layer.
+
+---
+
 
 
 ## Navigation

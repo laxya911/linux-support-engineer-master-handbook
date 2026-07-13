@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C23
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -150,6 +150,12 @@ Data gravity is real. You can treat your web servers like disposable cattle, but
 > We have persistent containers on a single host. But what happens when that host dies?
 
 ---
+
+**Chapter Transition**
+> We have persistent containers on a single host. But what happens when that host dies?
+
+---
+
 
 
 ## Navigation

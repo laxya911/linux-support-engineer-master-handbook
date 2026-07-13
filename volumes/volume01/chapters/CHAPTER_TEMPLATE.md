@@ -8,7 +8,7 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: [Beginner / Intermediate / Advanced]
 estimated_time: X Hours
 reading_time: Y Minutes
@@ -16,7 +16,7 @@ labs: Z
 interview_questions: W
 prerequisites: [None / Chapter Y]
 last_updated: YYYY-MM
-status: In Progress
+status: Published
 ---
 
 # Chapter [Chapter Number] — [Chapter Title]

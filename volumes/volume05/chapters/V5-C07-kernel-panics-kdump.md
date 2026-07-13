@@ -106,15 +106,20 @@ Inside the `crash>` prompt, you can run commands like:
 ### Question 3: What is the `crash` utility used for?
 * **Target Answer**: "The `crash` utility is a debugging tool used to analyze a `vmcore` memory dump file. It acts like an interactive shell, allowing an engineer to run commands (like `log` or `bt`) against the frozen memory to reconstruct the stack trace and identify the exact driver or function that caused the system to panic."
 
+
+
+**Chapter Transition**
+> The kernel is stable, but our traditional filesystems can't handle petabytes of data and snapshotting. We need advanced filesystems.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 6 – The Boot Process Deep Dive](V5-C06-boot-process.md)
+[Chapter 6: The Boot Process Deep Dive](V5-C06-boot-process.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 8 – Advanced Filesystems (ZFS & Btrfs)](V5-C08-advanced-filesystems.md)
+[Chapter 8: Advanced Filesystems (ZFS & Btrfs)](V5-C08-advanced-filesystems.md)

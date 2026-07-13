@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 40 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 9
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -139,15 +139,20 @@ Installing software in Linux is incredibly streamlined once you understand the p
 - [ ] I can translate an `apt` command into a `dnf` command.
 - [ ] I know the difference between `remove` and `purge`.
 
+
+
+**Chapter Transition**
+> The software is installed and running. But when it misbehaves, how do you find and stop the rogue process?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 9 – File Permissions & Ownership](V1-C09-file-permissions-and-ownership.md)
+[Chapter 9 — File Permissions & Ownership](V1-C09-file-permissions-and-ownership.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 11 – Process Management](V1-C11-process-management.md)
+[Chapter 11 — Process Management](V1-C11-process-management.md)

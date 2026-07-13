@@ -10,15 +10,15 @@ I would structure the series like this.
 
 # Linux Support Engineer Master Handbook
 
-## Planned Series Overview
+## Completed Series Overview
 
-| Volume   | Title                                       | Difficulty        | Estimated Chapters |
-| -------- | ------------------------------------------- | ----------------- | -----------------: |
-| Volume 1 | Linux Fundamentals                          | Beginner → Junior |             **30** |
-| Volume 2 | Linux Administration                        | Junior            |             **25** |
-| Volume 3 | Enterprise Linux Services                   | Junior → Mid      |             **25** |
-| Volume 4 | Enterprise Infrastructure & Troubleshooting | Mid               |             **20** |
-| Volume 5 | Automation, Cloud & Career Development      | Mid → Senior      |             **20** |
+| Volume   | Title                                       | Difficulty        | Final Chapters | Status |
+| -------- | ------------------------------------------- | ----------------- | -------------: | :--- |
+| Volume 1 | Linux Fundamentals                          | Beginner → Junior |         **30** | ✅ Published |
+| Volume 2 | Linux Administration                        | Junior            |         **25** | ✅ Published |
+| Volume 3 | Enterprise Linux Services                   | Junior → Mid      |         **25** | ✅ Published |
+| Volume 4 | Enterprise Infrastructure & Troubleshooting | Mid               |         **20** | ✅ Published |
+| Volume 5 | Automation, Cloud & Career Development      | Mid → Senior      |         **20** | ✅ Published |
 
 **Total:** **120 Chapters**
 
@@ -108,7 +108,7 @@ Enterprise operations:
 
 ---
 
-# Volume 4 — Enterprise Infrastructure & Troublesbleshooting (20 Chapters)
+# Volume 4 — Enterprise Infrastructure & Troubleshooting (20 Chapters)
 
 Real production work:
 

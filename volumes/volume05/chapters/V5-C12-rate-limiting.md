@@ -92,15 +92,20 @@ Load Shedding is often paired with Graceful Degradation. If the system is overwh
 ### Question 3: How does the Token Bucket algorithm allow for traffic bursts?
 * **Target Answer**: "The token bucket fills at a steady rate (e.g., 10 tokens per second), up to a maximum capacity (e.g., 100 tokens). If a user hasn't made a request recently, their bucket is full. This allows them to instantly fire off 100 rapid requests (a burst) before the bucket empties. Once empty, they are restricted to the steady refill rate of 10 requests per second. This perfectly models realistic human web browsing."
 
+
+
+**Chapter Transition**
+> Traffic is shaped, but managing rate limits across 500 microservices is impossible. We need a dedicated Service Mesh.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 11 – Capacity Planning & Auto-Scaling](V5-C11-capacity-planning.md)
+[Chapter 11: Capacity Planning & Auto-Scaling](V5-C11-capacity-planning.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 13 – Service Mesh and Circuit Breakers](V5-C13-service-mesh.md)
+[Chapter 13: Service Mesh and Circuit Breakers](V5-C13-service-mesh.md)

@@ -90,15 +90,20 @@ If we perform a "5 Whys" analysis on this incident for the Post-Mortem:
 > **Practice Assignment Available**
 > Proceed to the [Chapter 19 Practice Guide](../practice-files/V5-C19-practice.md) to review a simulated "Broken" transcript and rewrite it using proper ICS protocols!
 
+
+
+**Chapter Transition**
+> You've survived the simulations and mastered the technology. It's time to talk about the final transition: leading other engineers.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 18 – Eliminating Toil](V5-C18-toil-and-automation.md)
+[Chapter 18: Eliminating Toil](V5-C18-toil-and-automation.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 20 – The Capstone: Senior Support Engineer](V5-C20-the-senior-mindset.md)
+[Chapter 20: The Capstone: Senior Support Engineer](V5-C20-the-senior-mindset.md)

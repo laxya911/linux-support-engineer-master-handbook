@@ -110,15 +110,20 @@ If you see constant retransmissions to a specific subnet, you know a router or f
 ### Question 3: Where in the kernel network stack would you look to identify hardware packet drops vs kernel packet drops?
 * **Target Answer**: "To check for hardware drops (where the NIC buffer is full), I would use `ethtool -S eth0` and look for `rx_missed_errors`. To check for kernel drops (where the CPU couldn't process the SoftIRQs fast enough), I would look at the global SNMP counters using `netstat -s` or inspect `/proc/net/softnet_stat`."
 
+
+
+**Chapter Transition**
+> Network latency is under control, but a misconfiguration has left the system completely unbootable. How do we recover?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 4 – Memory Leaks and Analysis](V5-C04-memory-leaks.md)
+[Chapter 4: Memory Leaks and Analysis](V5-C04-memory-leaks.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 6 – The Boot Process Deep Dive](V5-C06-boot-process.md)
+[Chapter 6: The Boot Process Deep Dive](V5-C06-boot-process.md)

@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Beginner
 estimated_time: 1 Hour
 reading_time: 20 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: None
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -132,6 +132,12 @@ Clock drift is silent. It doesn't generate loud error messages; it just causes b
 > Time is synchronized, but how do remote engineers securely access this infrastructure to read the logs?
 
 ---
+
+**Chapter Transition**
+> Time is synchronized, but how do remote engineers securely access this infrastructure to read the logs?
+
+---
+
 
 
 ## Navigation

@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Beginner
 estimated_time: 1 Hour
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C05
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -131,6 +131,12 @@ Before we deploy complex database systems, we must remember the golden rule: A d
 > Concepts are fine, but our application needs a real relational database to store its data.
 
 ---
+
+**Chapter Transition**
+> Concepts are fine, but our application needs a real relational database to store its data.
+
+---
+
 
 
 ## Navigation

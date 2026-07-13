@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C12
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -136,15 +136,20 @@ Static passwords are a massive liability. By implementing dynamic secrets and sh
 - [ ] I can explain how a Dynamic Secret with a TTL works.
 - [ ] I know how applications use K8s Auth to talk to Vault without a password.
 
+
+
+**Chapter Transition**
+> Secrets are secured centrally, but what stops a compromised web server from talking directly to a payroll database? Microsegmentation.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 12 – Chapter Title](V4-C12-zero-trust.md)
+[Chapter 12 — Zero Trust Architecture & Identity Providers](V4-C12-zero-trust.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 14 – Chapter Title](V4-C14-microsegmentation.md)
+[Chapter 14 — Network Policies & Microsegmentation](V4-C14-microsegmentation.md)

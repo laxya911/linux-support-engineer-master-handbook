@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C07
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -132,6 +132,12 @@ PostgreSQL is a fortress. It is designed to be impenetrable by default. By maste
 > The database is running, but an exposed database is a compromised database. We must secure it.
 
 ---
+
+**Chapter Transition**
+> The database is running, but an exposed database is a compromised database. We must secure it.
+
+---
+
 
 
 ## Navigation

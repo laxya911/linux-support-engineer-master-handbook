@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 40 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 19
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -150,15 +150,20 @@ Scripting is the difference between a Junior Administrator and a Senior Engineer
 - [ ] I know why `chmod +x` is mandatory for new scripts.
 - [ ] I know how to declare a variable without syntax errors.
 
+
+
+**Chapter Transition**
+> Scripts run sequentially, but how do they adapt to different users and system states dynamically? We must use environment variables.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 19 – Output Redirection (Piping)](V1-C19-output-redirection.md)
+[Chapter 19 — Output Redirection (Piping)](V1-C19-output-redirection.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 21 – Environment Variables](V1-C21-environment-variables.md)
+[Chapter 21 — Environment Variables](V1-C21-environment-variables.md)

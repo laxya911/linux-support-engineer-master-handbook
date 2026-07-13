@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V2-C01
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -123,6 +123,12 @@ PAM is the hidden bouncer of the Linux operating system. It doesn't just check p
 > Local authentication is fine for one server, but what happens when you have a thousand? You need a central authority.
 
 ---
+
+**Chapter Transition**
+> Local authentication is fine for one server, but what happens when you have a thousand? You need a central authority.
+
+---
+
 
 
 

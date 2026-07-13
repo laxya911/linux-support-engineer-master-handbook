@@ -109,15 +109,20 @@ We discussed the OOM killer in Chapter 4. The kernel's preference for moving mem
 ### Question 3: What causes Port Exhaustion, and how do you mitigate it?
 * **Target Answer**: "Port Exhaustion occurs when a server (usually a load balancer or proxy) makes so many outbound connections to backend servers that it runs out of ephemeral TCP ports. To mitigate it, you can widen the available port range (`net.ipv4.ip_local_port_range`), and enable `tcp_tw_reuse` so the kernel can safely reuse ports that are stuck in the `TIME_WAIT` state rather than waiting 60 seconds for them to fully close."
 
+
+
+**Chapter Transition**
+> The system is perfectly tuned, but how do we know when we will physically run out of servers? We need formal Capacity Planning.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 9 – eBPF for Security (Cilium)](V5-C09-ebpf-security-cilium.md)
+[Chapter 9: eBPF for Security (Cilium)](V5-C09-ebpf-security-cilium.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 11 – Capacity Planning & Auto-Scaling](V5-C11-capacity-planning.md)
+[Chapter 11: Capacity Planning & Auto-Scaling](V5-C11-capacity-planning.md)

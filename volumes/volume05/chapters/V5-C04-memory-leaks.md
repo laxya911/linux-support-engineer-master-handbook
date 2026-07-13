@@ -103,15 +103,20 @@ If it sees an application call `malloc()` 1,000 times, but only call `free()` 90
 ### Question 3: How does the BCC `memleak` tool find leaks without the massive overhead of Valgrind?
 * **Target Answer**: "It uses eBPF probes attached to memory allocation functions like `malloc()` and `free()`. Every time memory is allocated, eBPF records the stack trace. Every time memory is freed, it deletes that record. Anything left over when the tool stops is a leak. Because eBPF runs highly optimized, JIT-compiled code directly in the kernel, it can perform this tracking with minimal performance impact, making it safe for production analysis."
 
+
+
+**Chapter Transition**
+> Memory leaks are resolved, but the application is still slow. Is it the code, or is the network silently dropping packets?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 3 – Flame Graphs](V5-C03-flame-graphs.md)
+[Chapter 3: Flame Graphs](V5-C03-flame-graphs.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 5 – Network Latency Profiling](V5-C05-network-latency-profiling.md)
+[Chapter 5: Network Latency Profiling](V5-C05-network-latency-profiling.md)

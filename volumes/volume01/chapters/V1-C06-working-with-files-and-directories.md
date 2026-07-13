@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 40 Minutes
 labs: 1
 interview_questions: 2
-prerequisites: Chapter 5
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -127,15 +127,20 @@ The ability to swiftly manipulate the filesystem is the foundation of Linux admi
 - [ ] I understand the difference between renaming a file and moving it.
 - [ ] I can use `tail -f` to monitor logs in real-time.
 
+
+
+**Chapter Transition**
+> We can move and copy files, but as an engineer, your most important job is reading logs and editing configurations. You need a text editor.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 5 – Linux Filesystem](V1-C05-linux-filesystem.md)
+[Chapter 5 — Linux Filesystem](V1-C05-linux-filesystem.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 7 – Text Editors (nano & vim)](V1-C07-text-editors.md)
+[Chapter 7 — Text Editors (nano & vim)](V1-C07-text-editors.md)

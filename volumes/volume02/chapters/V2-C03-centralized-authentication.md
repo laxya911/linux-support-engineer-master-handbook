@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V2-C02
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -120,6 +120,12 @@ Centralized Authentication is the backbone of enterprise security. Whether the b
 > With users authenticated, we must give them storage. But physical partitions are inflexible. We need a dynamic solution.
 
 ---
+
+**Chapter Transition**
+> With users authenticated, we must give them storage. But physical partitions are inflexible. We need a dynamic solution.
+
+---
+
 
 
 

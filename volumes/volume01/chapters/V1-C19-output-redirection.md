@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 40 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 18
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -144,15 +144,20 @@ Piping and Redirection allow you to mold Linux commands like clay. By stringing 
 - [ ] I understand that `stdout` and `stderr` are two separate streams.
 - [ ] I know how to suppress errors by sending them to `/dev/null`.
 
+
+
+**Chapter Transition**
+> Piping commands is great, but typing the same 5 commands every day is a waste of time. It's time to start scripting.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 18 – Advanced Grep & Awk](V1-C18-advanced-grep-and-awk.md)
+[Chapter 18 — Advanced Grep & Awk](V1-C18-advanced-grep-and-awk.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 20 – Bash Scripting Basics](V1-C20-bash-scripting-basics.md)
+[Chapter 20 — Bash Scripting Basics](V1-C20-bash-scripting-basics.md)

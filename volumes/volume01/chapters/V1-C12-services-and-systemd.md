@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 11
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -126,15 +126,20 @@ This is a massive point of confusion for beginners.
 - [ ] I can differentiate between a service being "active" and being "enabled".
 - [ ] I know how to check the status of a daemon.
 
+
+
+**Chapter Transition**
+> Systemd is managing the services, but when a service fails to start, how do you find out *why*? You must read the logs.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 11 – Process Management](V1-C11-process-management.md)
+[Chapter 11 — Process Management](V1-C11-process-management.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 13 – Software Logs & Journals](V1-C13-software-logs-and-journals.md)
+[Chapter 13 — Software Logs & Journals](V1-C13-software-logs-and-journals.md)

@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C06
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -138,15 +138,20 @@ Terraform is incredibly powerful, but with great power comes the ability to comp
 - [ ] I can explain how DynamoDB provides State Locking.
 - [ ] I know why API keys should never be committed to `.tf` files.
 
+
+
+**Chapter Transition**
+> The cloud infrastructure is provisioned, but the VMs are blank. How do we configure them automatically at scale? We need Configuration Management.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 6 – Chapter Title](V4-C06-iac-terraform.md)
+[Chapter 6 — Introduction to IaC & Terraform](V4-C06-iac-terraform.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 8 – Chapter Title](V4-C08-ansible-intro.md)
+[Chapter 8 — Configuration Management at Scale](V4-C08-ansible-intro.md)

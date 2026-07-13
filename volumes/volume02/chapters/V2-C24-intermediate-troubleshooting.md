@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Volume 1
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -108,6 +108,12 @@ The OSI Model is not just academic theory; it is a practical checklist for solvi
 > You have the theory. You have the tools. Now, it's time for the ultimate test of your skills.
 
 ---
+
+**Chapter Transition**
+> You have the theory. You have the tools. Now, it's time for the ultimate test of your skills.
+
+---
+
 
 
 

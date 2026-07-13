@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 27
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -141,15 +141,20 @@ As a Support Engineer, the most valuable lesson in this chapter is understanding
 - [ ] I know that a 502 error means the backend is down, not Nginx.
 - [ ] I understand why Sticky Sessions (`ip_hash`) prevent logout loops.
 
+
+
+**Chapter Transition**
+> The front-end traffic is balanced, but where do those web applications store their persistent data?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 27 – Introduction to Web Servers](V1-C27-introduction-to-web-servers.md)
+[Chapter 27 — Introduction to Web Servers](V1-C27-introduction-to-web-servers.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 29 – Database Fundamentals](V1-C29-database-fundamentals.md)
+[Chapter 29 — Database Fundamentals](V1-C29-database-fundamentals.md)

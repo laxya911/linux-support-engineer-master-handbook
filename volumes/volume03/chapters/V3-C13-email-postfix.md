@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C11
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -139,6 +139,12 @@ Sending an email is easy. Proving you aren't a spammer is hard. As an Infrastruc
 > Logs from email, web, and database servers are scattered everywhere. We need to synchronize the timestamps to make sense of them.
 
 ---
+
+**Chapter Transition**
+> Logs from email, web, and database servers are scattered everywhere. We need to synchronize the timestamps to make sense of them.
+
+---
+
 
 
 ## Navigation

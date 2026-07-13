@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1 Hour
 reading_time: 20 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: None
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -139,15 +139,20 @@ Troubleshooting is not an innate magical talent; it is a rigid, scientific disci
 - [ ] I understand the danger of changing multiple variables at once.
 - [ ] I know why I/O Wait causes a system to feel slow despite low CPU usage.
 
+
+
+**Chapter Transition**
+> The scientific method guides us, but how do you diagnose a system that entirely locks up and crashes? You must analyze Kernel Panics.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 15 – Chapter Title](V4-C15-incident-response.md)
+[Chapter 15 — Incident Response & Security Auditing](V4-C15-incident-response.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 17 – Chapter Title](V4-C17-kernel-panics.md)
+[Chapter 17 — Kernel Panics & Crash Analysis](V4-C17-kernel-panics.md)

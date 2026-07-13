@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C07
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -144,15 +144,20 @@ If you find yourself SSH'ing into more than two servers a day to perform the exa
 - [ ] I can explain the benefits of an Agentless architecture.
 - [ ] I know how to use an Inventory file and run Ad-Hoc commands.
 
+
+
+**Chapter Transition**
+> We know the basics of Ansible, but running ad-hoc commands doesn't scale. We must structure our automation into Playbooks.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 7 – Chapter Title](V4-C07-cloud-provisioning.md)
+[Chapter 7 — Provisioning Cloud Resources](V4-C07-cloud-provisioning.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 9 – Chapter Title](V4-C09-ansible-playbooks.md)
+[Chapter 9 — Writing Ansible Playbooks & Roles](V4-C09-ansible-playbooks.md)

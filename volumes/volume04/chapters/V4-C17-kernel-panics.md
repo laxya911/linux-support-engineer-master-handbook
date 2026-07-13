@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 2 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C16
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -141,15 +141,20 @@ Kernel Panics are intimidating because they provide zero feedback in standard lo
 - [ ] I understand the architecture of the Crash Kernel.
 - [ ] I know how to use `crash` and the `bt` command.
 
+
+
+**Chapter Transition**
+> The kernel is stable, but an application is mysteriously dropping connections. It's time to pull out the packet analyzer.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 16 – Chapter Title](V4-C16-scientific-troubleshooting.md)
+[Chapter 16 — The Scientific Method of Troubleshooting](V4-C16-scientific-troubleshooting.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 18 – Chapter Title](V4-C18-packet-analysis.md)
+[Chapter 18 — Advanced Network Packet Analysis](V4-C18-packet-analysis.md)

@@ -14,7 +14,7 @@ estimated_time: 2.5 Hours
 reading_time: 50 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 14
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -142,15 +142,20 @@ SSH is your primary weapon as a Linux Support Engineer. Understanding how to gen
 - [ ] I know which configuration file controls the server daemon.
 - [ ] I remember to restart the `sshd` service after making configuration changes.
 
+
+
+**Chapter Transition**
+> We can connect remotely, but what about moving massive amounts of log data efficiently? We must compress and archive it.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 14 – Networking Fundamentals](V1-C14-networking-fundamentals.md)
+[Chapter 14 — Networking Fundamentals](V1-C14-networking-fundamentals.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 16 – Archiving and Compression](V1-C16-archiving-and-compression.md)
+[Chapter 16 — Archiving and Compression](V1-C16-archiving-and-compression.md)

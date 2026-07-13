@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Volume 1 Completion
+prerequisites: Volume 1
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -152,6 +152,12 @@ The `sudoers` file is the gateway to your server's security. Give people only th
 > You now have administrative access, but how do you verify who is logging in? It's time to explore Pluggable Authentication Modules.
 
 ---
+
+**Chapter Transition**
+> You now have administrative access, but how do you verify who is logging in? It's time to explore Pluggable Authentication Modules.
+
+---
+
 
 
 

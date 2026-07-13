@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 26
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -155,15 +155,20 @@ Web servers are essentially file-delivery mechanisms. If a site won't load, chec
 - [ ] I know why files must be owned by `www-data` (or `apache`/`nginx`).
 - [ ] I will always use `nginx -t` before restarting a web server.
 
+
+
+**Chapter Transition**
+> A single web server is fine for a small site, but how do we handle millions of users across multiple backend servers?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 26 – System Startup & Troubleshooting](V1-C26-system-startup-and-troubleshooting.md)
+[Chapter 26 — System Startup & Troubleshooting](V1-C26-system-startup-and-troubleshooting.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 28 – Reverse Proxies & Load Balancing](V1-C28-reverse-proxies-and-load-balancing.md)
+[Chapter 28 — Reverse Proxies & Load Balancing](V1-C28-reverse-proxies-and-load-balancing.md)

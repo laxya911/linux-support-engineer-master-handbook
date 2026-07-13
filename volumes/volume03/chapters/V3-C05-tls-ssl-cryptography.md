@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C04
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -121,6 +121,38 @@ They provide a tool called `certbot`. You run `certbot --nginx`, and it will aut
 > If the certificate authority was completely unreachable, Charlie would escalate to Network Engineering to check outbound routing.
 
 
+## Real-World Support Ticket
+
+> [!IMPORTANT] ServiceNow Ticket: INC-3026305
+> **Title:** Expired SSL Certificate
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie takes a P1 ticket: Users report their browsers are showing a terrifying 'Your connection is not private' red screen.
+> 
+> **2) Discovery & diagnosis**
+> Charlie runs `curl -vI https://example.com` and sees `SSL certificate problem: certificate has expired`. He checks the Let's Encrypt logs and sees the automated renewal cron job failed due to a firewall change.
+> 
+> **3) Immediate containment**
+> Charlie immediately opens port 80 on the firewall, which Let's Encrypt requires for the HTTP-01 challenge.
+> 
+> **4) Resolution planning & execution**
+> Charlie manually forces the renewal using `certbot renew --force-renewal`. He then reloads NGINX to apply the new certificate.
+> 
+> **5) Verification**
+> Charlie accesses the site in a fresh browser session and verifies the padlock is green and valid for another 90 days.
+> 
+> **6) Closure & documentation**
+> Charlie documents the firewall blockage and resolves the ticket.
+> 
+> **7) Post-resolution follow-up**
+> Charlie sets up an external monitoring alert to notify the team 14 days before a certificate expires.
+> 
+> **8) Escalation rules**
+> If the certificate authority was completely unreachable, Charlie would escalate to Network Engineering to check outbound routing.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -162,6 +194,12 @@ The internet is hostile. Every website, from a massive bank to a tiny personal b
 > With the web tier secured, we must now focus on where the actual data lives: the database.
 
 ---
+
+**Chapter Transition**
+> With the web tier secured, we must now focus on where the actual data lives: the database.
+
+---
+
 
 
 ## Navigation

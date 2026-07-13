@@ -84,15 +84,20 @@ The Error Budget acts as the ultimate mediator between the Development team (who
 ### Question 3: How does the Error Budget resolve the historical conflict between Developers and Operations (SRE)?
 * **Target Answer**: "Historically, Developers were incentivized to push code fast, and Operations were incentivized to block code to maintain stability. The Error Budget aligns both teams. If the budget is full, SRE encourages Developers to push features. If the budget is exhausted, Developers are contractually bound by the Error Budget Policy to stop pushing features and focus exclusively on reliability engineering until the budget recovers."
 
+
+
+**Chapter Transition**
+> We are measuring reliability, but when the SLO drops and the entire platform crashes, who is in charge of fixing it? The Incident Commander.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 14 – Distributed Consensus (Raft & Paxos)](V5-C14-distributed-consensus.md)
+[Chapter 14: Distributed Consensus (Raft & Paxos)](V5-C14-distributed-consensus.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 16 – Incident Command System (ICS)](V5-C16-incident-command.md)
+[Chapter 16: Incident Command System (ICS)](V5-C16-incident-command.md)

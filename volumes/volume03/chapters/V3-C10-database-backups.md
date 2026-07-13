@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C09
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -133,6 +133,12 @@ Data is the most valuable asset a company owns. The web servers can burn down, t
 > The data is safe, but how do users actually find our web application? They aren't going to type an IP address.
 
 ---
+
+**Chapter Transition**
+> The data is safe, but how do users actually find our web application? They aren't going to type an IP address.
+
+---
+
 
 
 ## Navigation

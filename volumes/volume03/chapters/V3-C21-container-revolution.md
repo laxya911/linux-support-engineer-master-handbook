@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: None
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -138,6 +138,12 @@ Containers have completely destroyed the traditional paradigm of server administ
 > We understand containers, but how do we actually build our own custom application images?
 
 ---
+
+**Chapter Transition**
+> We understand containers, but how do we actually build our own custom application images?
+
+---
+
 
 
 ## Navigation

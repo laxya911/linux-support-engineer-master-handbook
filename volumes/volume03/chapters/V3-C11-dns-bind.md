@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 30 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Volume 3, Part 2
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -151,6 +151,59 @@ However, chaos ensues. Half the company sees the new website. The other half see
 > 2. Avoid circular dependencies. Facebook employees couldn't access the data centers to fix the issue because their digital door badges relied on the servers they were trying to fix.
 
 
+## Real-World Support Ticket
+
+> [!IMPORTANT] ServiceNow Ticket: INC-3026311
+> **Title:** DNS NXDOMAIN for Primary API
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie receives a P1 alert: The mobile app cannot connect to `api.corp.com`.
+> 
+> **2) Discovery & diagnosis**
+> Charlie runs `dig api.corp.com` and receives an `NXDOMAIN` (Non-Existent Domain) response. He checks the primary BIND server and sees a syntax error in the zone file loaded 10 minutes ago.
+> 
+> **3) Immediate containment**
+> Charlie immediately rolls back the zone file to the previous version and runs `rndc reload` to restore service.
+> 
+> **4) Resolution planning & execution**
+> Charlie reviews the broken zone file and finds a missing trailing dot on a CNAME record, which corrupted the entire zone. He fixes the typo.
+> 
+> **5) Verification**
+> Charlie runs `named-checkzone` to verify the syntax, applies the change, and runs `dig` to confirm the IP resolves correctly.
+> 
+> **6) Closure & documentation**
+> Charlie documents the missing trailing dot and resolves the ticket.
+> 
+> **7) Post-resolution follow-up**
+> Charlie implements a git hook that automatically runs `named-checkzone` before allowing any engineer to commit changes to the DNS repository.
+> 
+> **8) Escalation rules**
+> If the issue was a global root server problem, Charlie would escalate to the ISP.
+
+
+## Industry Incident Spotlight: The 2021 Facebook BGP & DNS Outage
+
+> [!CAUTION] **When You Delete Yourself From the Internet**
+> In October 2021, Facebook, Instagram, and WhatsApp disappeared from the internet for over six hours.
+>
+> **The Timeline:**
+> - During routine maintenance, an engineer issued a command intended to assess global backbone capacity.
+> - A bug in an auditing tool allowed the command to execute incorrectly, cutting off all BGP routing between Facebook's data centers.
+> - Because the BGP routes were withdrawn, the global internet could no longer reach Facebook's DNS servers.
+>
+> **The Root Cause:**
+> Without DNS, nothing worked. Internal tools, employee door badges, and external routing all relied on the same unified network infrastructure, which had just effectively severed its own connections to the outside world.
+>
+> **The Business Impact:**
+> Over $60 million in lost ad revenue and massive disruptions to global communications.
+>
+> **The Lessons Learned:**
+> 1. **DNS is the Achilles Heel of the Internet.** If your DNS servers go down, it doesn't matter if your web servers are perfectly healthy.
+> 2. Avoid circular dependencies. Facebook employees couldn't access the data centers to fix the issue because their digital door badges relied on the servers they were trying to fix.
+
+
 ## Hands-on Lab
 
 > [!TIP]
@@ -192,6 +245,12 @@ However, chaos ensues. Half the company sees the new website. The other half see
 > DNS resolves the names, but how do our internal servers get their IP addresses in the first place?
 
 ---
+
+**Chapter Transition**
+> DNS resolves the names, but how do our internal servers get their IP addresses in the first place?
+
+---
+
 
 
 ## Navigation

@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 24
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -136,15 +136,20 @@ DNS issues are often disguised as application errors. Always remember the resolu
 - [ ] I know how to map a fake domain to an IP using `/etc/hosts`.
 - [ ] I can use the override trick to securely test server migrations.
 
+
+
+**Chapter Transition**
+> DNS is resolving names, but what happens when a critical service crashes on boot and the system won't start? Time to troubleshoot.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 24 – Introduction to Networking (Firewalls)](V1-C24-introduction-to-networking-firewalls.md)
+[Chapter 24 — Introduction to Networking (Firewalls)](V1-C24-introduction-to-networking-firewalls.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 26 – System Startup & Troubleshooting](V1-C26-system-startup-and-troubleshooting.md)
+[Chapter 26 — System Startup & Troubleshooting](V1-C26-system-startup-and-troubleshooting.md)

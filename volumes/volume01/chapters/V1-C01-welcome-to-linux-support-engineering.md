@@ -180,6 +180,11 @@ You have taken the first step toward becoming a Linux Support Engineer. You unde
 - [ ] I understand why a GUI is omitted in enterprise servers.
 - [ ] I have successfully set up a Linux virtual machine for future labs.
 
+
+
+**Chapter Transition**
+> You now understand the philosophy of support engineering, but to apply it, you must understand the environment. It is time to dissect the Linux architecture.
+
 ---
 
 ## Navigation
@@ -191,4 +196,4 @@ None
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 2 – Linux Architecture & Distributions](V1-C02-linux-architecture-and-distributions.md)
+[Chapter 2 — Linux Architecture & Distributions](V1-C02-linux-architecture-and-distributions.md)

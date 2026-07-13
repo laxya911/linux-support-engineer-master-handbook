@@ -19,15 +19,15 @@ Unlike traditional certification books that focus primarily on exam objectives, 
 
 ## Handbook Structure & Roadmap
 
-The handbook is divided into five sequential volumes. Currently, we are focused on completing **Volume 1 (Linux Fundamentals)**.
+The handbook is divided into five sequential volumes. We have fully drafted, reviewed, and published all five volumes!
 
 | Volume | Title | Difficulty | Target Chapters | Status |
 | :--- | :--- | :--- | :---: | :--- |
-| **Volume 1** | [Linux Fundamentals](volumes/volume01/README.md) | Beginner → Junior | 30 | ✅ Complete (30/30) |
-| **Volume 2** | [Linux System Administration](volumes/volume02/README.md) | Junior | 25 | 🚧 In Progress |
-| **Volume 3** | [Enterprise Linux Services](volumes/volume03/README.md) | Junior → Mid | 25 | ❌ Not Started |
-| **Volume 4** | [Enterprise Infrastructure & Troubleshooting](volumes/volume04/README.md) | Mid | 20 | ❌ Not Started |
-| **Volume 5** | [Automation, Cloud & Career Development](volumes/volume05/README.md) | Mid → Senior | 20 | ❌ Not Started |
+| **Volume 1** | [Linux Fundamentals](volumes/volume01/README.md) | Beginner → Junior | 30 | ✅ Published |
+| **Volume 2** | [Linux System Administration](volumes/volume02/README.md) | Junior | 25 | ✅ Published |
+| **Volume 3** | [Enterprise Linux Services](volumes/volume03/README.md) | Junior → Mid | 25 | ✅ Published |
+| **Volume 4** | [Enterprise Infrastructure & Troubleshooting](volumes/volume04/README.md) | Mid | 20 | ✅ Published |
+| **Volume 5** | [Automation, Cloud & Career Development](volumes/volume05/README.md) | Mid → Senior | 20 | ✅ Published |
 
 ---
 
@@ -52,13 +52,16 @@ linux-support-engineer-master-handbook/
 │   ├── CONTRIBUTING.md
 │   └── ROADMAP.md
 └── volumes/
-    └── volume-01-linux-fundamentals/
-        ├── README.md
-        ├── TOC.md
-        ├── COMMAND_INDEX.md
-        ├── chapters/
-        ├── practice-files/
-        └── assets/
+    ├── volume01/
+    │   ├── chapters/
+    │   ├── practice-files/
+    │   ├── scripts/
+    │   ├── diagrams/
+    │   └── assets/
+    ├── volume02/
+    ├── volume03/
+    ├── volume04/
+    └── volume05/
 ```
 
 For a detailed view of directories, see [repository_structure.md](repository_structure.md).

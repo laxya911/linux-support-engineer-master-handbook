@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 21
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -166,15 +166,20 @@ Cron is the invisible heartbeat of Linux automation. By mastering the 5-star syn
 - [ ] I know the difference between `crontab -e` and `crontab -l`.
 - [ ] I understand why cron scripts must use absolute paths.
 
+
+
+**Chapter Transition**
+> The system is automating its own tasks, but how do we know if it's running out of RAM or CPU while we sleep?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 21 – Environment Variables](V1-C21-environment-variables.md)
+[Chapter 21 — Environment Variables](V1-C21-environment-variables.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 23 – Basic System Monitoring](V1-C23-basic-system-monitoring.md)
+[Chapter 23 — Basic System Monitoring](V1-C23-basic-system-monitoring.md)

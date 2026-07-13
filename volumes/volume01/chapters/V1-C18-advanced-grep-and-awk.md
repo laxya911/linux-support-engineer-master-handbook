@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 17
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -133,15 +133,20 @@ Raw data is useless unless you can parse it. `grep` gives you the power to find 
 - [ ] I can use `grep -r` to search an entire directory tree.
 - [ ] I understand that `awk '{print $1}'` extracts the first word of every line.
 
+
+
+**Chapter Transition**
+> We can find the errors with grep, but how do we save those errors to a new file or chain commands together? Enter redirection and pipes.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 17 – Storage & Disk Management](V1-C17-storage-and-disk-management.md)
+[Chapter 17 — Storage & Disk Management](V1-C17-storage-and-disk-management.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 19 – Output Redirection (Piping)](V1-C19-output-redirection.md)
+[Chapter 19 — Output Redirection (Piping)](V1-C19-output-redirection.md)

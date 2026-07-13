@@ -14,7 +14,7 @@ estimated_time: 1.5 Hours
 reading_time: 35 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 15
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -133,15 +133,20 @@ Mastering `tar` is essential for backups and data transfers. Always remember tha
 - [ ] I know what `c`, `x`, `z`, `v`, and `f` stand for.
 - [ ] I can create and extract a `.tar.gz` file from memory.
 
+
+
+**Chapter Transition**
+> Data is compressed, but eventually, you will run out of physical disk space. How do we manage storage at a block level?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 15 – SSH Administration](V1-C15-ssh-administration.md)
+[Chapter 15 — SSH Administration](V1-C15-ssh-administration.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 17 – Storage & Disk Management](V1-C17-storage-and-disk-management.md)
+[Chapter 17 — Storage & Disk Management](V1-C17-storage-and-disk-management.md)

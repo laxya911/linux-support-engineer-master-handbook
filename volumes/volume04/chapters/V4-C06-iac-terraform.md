@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: None
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -132,15 +132,20 @@ Infrastructure as Code treats datacenters like software. By defining your networ
 - [ ] I can explain what a Terraform Provider is.
 - [ ] I understand the purpose and fragility of the `.tfstate` file.
 
+
+
+**Chapter Transition**
+> We can declare infrastructure in code, but how do we orchestrate deploying massive networks across public clouds?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 5 – Chapter Title](V4-C05-helm-package-manager.md)
+[Chapter 5 — Helm & Package Management](V4-C05-helm-package-manager.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 7 – Chapter Title](V4-C07-cloud-provisioning.md)
+[Chapter 7 — Provisioning Cloud Resources](V4-C07-cloud-provisioning.md)

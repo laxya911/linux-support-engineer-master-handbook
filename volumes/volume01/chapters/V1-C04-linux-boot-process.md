@@ -14,7 +14,7 @@ estimated_time: 3 Hours
 reading_time: 55 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 3
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -136,15 +136,20 @@ The boot process is highly logical. Firmware hands off to the Bootloader. The Bo
 - [ ] I understand why the `initramfs` is critical for mounting the root filesystem.
 - [ ] I know which configuration file controls GRUB2.
 
+
+
+**Chapter Transition**
+> The kernel is loaded and running, but where does it store all its configuration and data? Welcome to the Filesystem Hierarchy Standard.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 3 – Provisioning Linux](V1-C03-provisioning-linux.md)
+[Chapter 3 — Provisioning Linux](V1-C03-provisioning-linux.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 5 – Linux Filesystem](V1-C05-linux-filesystem.md)
+[Chapter 5 — Linux Filesystem](V1-C05-linux-filesystem.md)

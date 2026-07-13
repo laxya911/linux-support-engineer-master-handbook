@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V3-C11
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -143,6 +143,12 @@ IP Conflicts are one of the most frustrating Layer 2/Layer 3 networking issues t
 > The network is fully routed and resolved, but our applications need to send notifications to users.
 
 ---
+
+**Chapter Transition**
+> The network is fully routed and resolved, but our applications need to send notifications to users.
+
+---
+
 
 
 ## Navigation

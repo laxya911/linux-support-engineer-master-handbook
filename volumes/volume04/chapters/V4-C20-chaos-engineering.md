@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1 Hour
 reading_time: 20 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: None
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -143,12 +143,12 @@ You have reached the end of Volume 4. You now understand that being a Senior Sup
 - [ ] I understand the purpose of a Game Day.
 - [ ] I can explain the cultural importance of a Blameless Post-Mortem.
 
----
+
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 19 – Chapter Title](V4-C19-profiling-bottlenecks.md)
+[Chapter 19 — Profiling Application Bottlenecks](V4-C19-profiling-bottlenecks.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)

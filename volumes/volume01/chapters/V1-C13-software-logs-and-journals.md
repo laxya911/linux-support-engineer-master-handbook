@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 40 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 12
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -77,7 +77,14 @@ If an outage occurred at 3:00 PM yesterday, you don't want to scroll through las
 * `journalctl -u nginx --since "yesterday"`
 * `journalctl -u nginx --since "2026-07-08 15:00:00" --until "2026-07-08 16:00:00"`
 
-#### Navigation and Streaming
+##
+
+**Chapter Transition**
+> The local system is running perfectly, but a server is useless if it can't talk to the outside world. We must configure the network.
+
+---
+
+## Navigation and Streaming
 * `journalctl -u sshd -e`: Jumps immediately to the **End** of the log (the most recent entries).
 * `journalctl -u sshd -f`: **Follows** the log in real-time, exactly like `tail -f`.
 
@@ -159,10 +166,10 @@ Logging has evolved. While you must still know how to `tail -f /var/log/syslog` 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 12 – Services & systemd](V1-C12-services-and-systemd.md)
+[Chapter 12 — Services & systemd](V1-C12-services-and-systemd.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 14 – Networking Fundamentals](V1-C14-networking-fundamentals.md)
+[Chapter 14 — Networking Fundamentals](V1-C14-networking-fundamentals.md)

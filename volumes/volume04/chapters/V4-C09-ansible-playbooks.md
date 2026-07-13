@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C08
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -131,15 +131,20 @@ Playbooks are the heart of Ansible. They allow you to define the perfect server 
 - [ ] I understand how to use `notify` to trigger a Handler.
 - [ ] I understand the danger of Configuration Drift.
 
+
+
+**Chapter Transition**
+> Our infrastructure and configurations are automated, but engineers shouldn't run these from their laptops. We need Continuous Integration and Delivery.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 8 – Chapter Title](V4-C08-ansible-intro.md)
+[Chapter 8 — Configuration Management at Scale](V4-C08-ansible-intro.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 10 – Chapter Title](V4-C10-cicd-pipelines.md)
+[Chapter 10 — CI/CD Pipelines](V4-C10-cicd-pipelines.md)

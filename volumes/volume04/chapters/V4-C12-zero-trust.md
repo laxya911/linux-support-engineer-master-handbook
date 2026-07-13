@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: None
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -142,15 +142,20 @@ The days of building a giant firewall around a corporate office are over. In the
 - [ ] I understand the flow of a SAML/OAuth redirect.
 - [ ] I can explain how Device Posture provides contextual security.
 
+
+
+**Chapter Transition**
+> We assume breach, but where are we storing our database passwords and API tokens? Hardcoding them is a disaster waiting to happen.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 11 – Chapter Title](V4-C11-global-dns.md)
+[Chapter 11 — Enterprise DNS & Global Traffic Management](V4-C11-global-dns.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 13 – Chapter Title](V4-C13-secrets-management.md)
+[Chapter 13 — Secrets Management & PKI](V4-C13-secrets-management.md)

@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C02
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -138,15 +138,20 @@ Networking in Kubernetes is fundamentally different from traditional networking.
 - [ ] I can explain the difference between ClusterIP and LoadBalancer.
 - [ ] I understand how Labels link Services to Pods.
 
+
+
+**Chapter Transition**
+> Network traffic is flowing, but what happens when a database pod crashes and loses all its data? We must master Stateful workloads.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 2 – Chapter Title](V4-C02-deployments.md)
+[Chapter 2 — Pods, Deployments, & ReplicaSets](V4-C02-deployments.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 4 – Chapter Title](V4-C04-stateful-apps.md)
+[Chapter 4 — Stateful Applications in K8s](V4-C04-stateful-apps.md)

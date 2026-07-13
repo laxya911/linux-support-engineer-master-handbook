@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: None
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -131,15 +131,20 @@ Incident Response is a high-stress test of your engineering discipline. By stric
 - [ ] I know how `auditd` tracks kernel-level system calls.
 - [ ] I understand why local logs cannot be trusted after a root compromise.
 
+
+
+**Chapter Transition**
+> The fire is out and the incident is over, but guessing the root cause prevents learning. We must use Scientific Troubleshooting.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 14 – Chapter Title](V4-C14-microsegmentation.md)
+[Chapter 14 — Network Policies & Microsegmentation](V4-C14-microsegmentation.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 16 – Chapter Title](V4-C16-scientific-troubleshooting.md)
+[Chapter 16 — The Scientific Method of Troubleshooting](V4-C16-scientific-troubleshooting.md)

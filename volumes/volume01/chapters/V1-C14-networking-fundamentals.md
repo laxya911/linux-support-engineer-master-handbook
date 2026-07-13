@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 13
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -148,15 +148,20 @@ Networking is about knowing exactly where the packet died. By strictly following
 - [ ] I can execute the 3-step troubleshooting sequence from memory.
 - [ ] I know what `ss -tulpn` stands for and why it is useful.
 
+
+
+**Chapter Transition**
+> The server is on the network, but we can't physically walk to the data center every time we need to run a command. We need secure remote access.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 13 – Software Logs & Journals](V1-C13-software-logs-and-journals.md)
+[Chapter 13 — Software Logs & Journals](V1-C13-software-logs-and-journals.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 15 – SSH Administration](V1-C15-ssh-administration.md)
+[Chapter 15 — SSH Administration](V1-C15-ssh-administration.md)

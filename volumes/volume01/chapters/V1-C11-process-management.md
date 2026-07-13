@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 10
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -135,15 +135,20 @@ Managing processes is about maintaining control over the CPU and RAM. You use `p
 - [ ] I understand the danger of using `kill -9` as a first resort.
 - [ ] I can push a running foreground command into the background.
 
+
+
+**Chapter Transition**
+> Killing processes manually is tedious. How does Linux ensure critical services start automatically and stay running?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 10 – Package Management](V1-C10-package-management.md)
+[Chapter 10 — Package Management](V1-C10-package-management.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 12 – Services & systemd](V1-C12-services-and-systemd.md)
+[Chapter 12 — Services & systemd](V1-C12-services-and-systemd.md)

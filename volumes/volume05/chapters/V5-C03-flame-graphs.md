@@ -99,15 +99,20 @@ You can then open `cpu_profile.svg` in any web browser. It is fully interactive�
 ### Question 3: Why should you sample at 99 Hertz instead of 100 Hertz?
 * **Target Answer**: "To avoid lockstep sampling. If you sample exactly in sync with the system's clock ticks or timer-based interrupts, you might repeatedly sample the exact same background maintenance task, incorrectly concluding that the task is taking up 100% of the CPU. An odd frequency ensures random, statistically sound samples."
 
+
+
+**Chapter Transition**
+> We can visualize CPU time, but what happens when the application isn't using CPU, it's just hoarding memory and crashing the server?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 2 – Tracing with eBPF and BCC](V5-C02-ebpf-and-bcc.md)
+[Chapter 2: Tracing with eBPF and BCC](V5-C02-ebpf-and-bcc.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 4 – Memory Leaks and Analysis](V5-C04-memory-leaks.md)
+[Chapter 4: Memory Leaks and Analysis](V5-C04-memory-leaks.md)

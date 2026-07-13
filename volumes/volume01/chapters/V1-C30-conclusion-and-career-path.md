@@ -14,9 +14,9 @@ estimated_time: 30 Minutes
 reading_time: 15 Minutes
 labs: 1
 interview_questions: 0
-prerequisites: Chapter 29
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: Complete
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -70,12 +70,12 @@ Take a breath. Review your notes. When you are ready, turn the page to Volume 2.
 > **Practice Assignment Available**
 > Before moving to the next volume, complete the self-assessment in the [Chapter 30 Practice Guide](../practice-files/V1-C30-practice.md).
 
----
+
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 29 – Database Fundamentals](V1-C29-database-fundamentals.md)
+[Chapter 29 — Database Fundamentals](V1-C29-database-fundamentals.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)

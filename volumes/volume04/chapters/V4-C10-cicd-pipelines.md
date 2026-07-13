@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C09
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -136,15 +136,20 @@ CI/CD is the glue that binds modern DevOps together. By combining the declarativ
 - [ ] I understand why local execution causes bottlenecks.
 - [ ] I know how secrets are securely managed in CI/CD platforms.
 
+
+
+**Chapter Transition**
+> Code flows automatically to production, but how do we route users to the geographically closest data center? Global DNS.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 9 – Chapter Title](V4-C09-ansible-playbooks.md)
+[Chapter 9 — Writing Ansible Playbooks & Roles](V4-C09-ansible-playbooks.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 11 – Chapter Title](V4-C11-global-dns.md)
+[Chapter 11 — Enterprise DNS & Global Traffic Management](V4-C11-global-dns.md)

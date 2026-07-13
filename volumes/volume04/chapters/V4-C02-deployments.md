@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Intermediate
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V4-C01
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -137,15 +137,20 @@ Kubernetes shifts the burden of availability from the engineer to the software. 
 - [ ] I understand why multiple containers might share a Pod.
 - [ ] I can explain how a rolling update prevents downtime.
 
+
+
+**Chapter Transition**
+> Our application is running and scaling, but pods are ephemeral. How do users consistently access them? We need Kubernetes Networking.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 1 – Chapter Title](V4-C01-k8s-architecture.md)
+[Chapter 1 — Kubernetes Architecture & The Control Plane](V4-C01-k8s-architecture.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 3 – Chapter Title](V4-C03-k8s-networking.md)
+[Chapter 3 — Kubernetes Networking](V4-C03-k8s-networking.md)

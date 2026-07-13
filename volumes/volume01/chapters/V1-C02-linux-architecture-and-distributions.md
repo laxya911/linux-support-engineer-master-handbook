@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 2
-prerequisites: Chapter 1
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -265,15 +265,20 @@ When something fails, your first task is not to fix it. Your first task is to id
 - [ ] I know the difference between User Space and Kernel Space.
 - [ ] I completed Lab 2.1 and reviewed the `strace` output.
 
+
+
+**Chapter Transition**
+> We've explored the architecture conceptually, but theory only goes so far. How do you actually get Linux running in the real world?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 1 – Welcome to Linux Support Engineering](V1-C01-welcome-to-linux-support-engineering.md)
+[Chapter 1 — Welcome to Linux Support Engineering](V1-C01-welcome-to-linux-support-engineering.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 3 – Provisioning Linux](V1-C03-provisioning-linux.md)
+[Chapter 3 — Provisioning Linux](V1-C03-provisioning-linux.md)

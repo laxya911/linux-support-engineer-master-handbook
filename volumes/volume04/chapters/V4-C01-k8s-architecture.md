@@ -8,7 +8,7 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
@@ -16,7 +16,7 @@ labs: 1
 interview_questions: 3
 prerequisites: Volume 3
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -154,6 +154,11 @@ Kubernetes is not magic; it is simply a highly complex control loop. The API Ser
 - [ ] I know the roles of the API Server, Scheduler, and `etcd`.
 - [ ] I understand why we use `kubectl` instead of SSH.
 
+
+
+**Chapter Transition**
+> We understand the control plane and worker nodes, but how do we actually run an application on them? It's time to create Deployments.
+
 ---
 
 ## Navigation
@@ -165,4 +170,4 @@ None
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 2 – Chapter Title](V4-C02-deployments.md)
+[Chapter 2 — Pods, Deployments, & ReplicaSets](V4-C02-deployments.md)

@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 20
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -40,7 +40,7 @@ By the end of this chapter, you will be able to:
 When you type `ping`, Linux does not magically know where the `ping` application lives. It must search for it. The `$PATH` variable provides the exact list of directories the Kernel is allowed to search.
 
 ```mermaid
-flowchart TD
+flowchart LR
     A["User types: ping google.com"] --> B["Kernel reads $PATH variable"]
     
     B --> C{"Is 'ping' inside /usr/local/bin/?"}
@@ -145,15 +145,20 @@ The `$PATH` variable is the hidden engine behind every command you type. If you 
 - [ ] I understand the danger of overwriting `$PATH` instead of appending to it.
 - [ ] I know which configuration file to edit to make variables permanent.
 
+
+
+**Chapter Transition**
+> Our scripts are dynamic and powerful. Now, how do we force the system to run them automatically at 3 AM?
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 20 – Bash Scripting Basics](V1-C20-bash-scripting-basics.md)
+[Chapter 20 — Bash Scripting Basics](V1-C20-bash-scripting-basics.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 22 – User Automation (Cron)](V1-C22-user-automation-cron.md)
+[Chapter 22 — User Automation (Cron)](V1-C22-user-automation-cron.md)

@@ -91,15 +91,20 @@ If an engineer spends 4 hours clicking through the AWS console to provision a ne
 ### Question 3: Give an example of turning Toil into Self-Service.
 * **Target Answer**: "If developers constantly open IT tickets asking for read-only access to staging databases, and an administrator spends 5 hours a week manually running SQL `GRANT` commands, that is Toil. The solution is to build a self-service tool (like a Slack bot or an internal web portal) where developers can click a button to automatically provision their own temporary credentials, completely removing the human administrator from the loop."
 
+
+
+**Chapter Transition**
+> Automation has eliminated toil. But how do we train the junior engineers to handle the stress of a real outage? We run War Room Simulations.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 17 – The Blameless Post-Mortem](V5-C17-blameless-post-mortem.md)
+[Chapter 17: The Blameless Post-Mortem](V5-C17-blameless-post-mortem.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 19 – War Room Simulation: The Database Meltdown](V5-C19-war-room-simulation.md)
+[Chapter 19: War Room Simulation: The Database Meltdown](V5-C19-war-room-simulation.md)

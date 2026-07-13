@@ -101,15 +101,20 @@ If you are paged into a Sev1 War Room, you must follow these rules:
 ### Question 3: An engineer proposes running a database rollback script that will drop active connections. What is the correct protocol in an ICS structure?
 * **Target Answer**: "The engineer must not run the script immediately. They must clearly state their proposal and its impact to the Incident Commander. They must wait for the IC to explicitly authorize the action (e.g., 'Approved to run the rollback script'). This ensures that another engineer isn't simultaneously running a conflicting script that would corrupt the database."
 
+
+
+**Chapter Transition**
+> The fire is out and the incident is resolved. But if you punish the engineer who broke it, you will never learn why. We need Blameless Post-Mortems.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 15 – SLOs and Error Budgets](V5-C15-slos-error-budgets.md)
+[Chapter 15: SLOs and Error Budgets](V5-C15-slos-error-budgets.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 17 – The Blameless Post-Mortem](V5-C17-blameless-post-mortem.md)
+[Chapter 17: The Blameless Post-Mortem](V5-C17-blameless-post-mortem.md)

@@ -14,7 +14,7 @@ estimated_time: 2 Hours
 reading_time: 45 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: Chapter 22
+prerequisites: Previous Chapter
 last_updated: 2026-07
 status: Published
 learning_outcomes: To be updated
@@ -128,15 +128,20 @@ Monitoring is about proving theories. If the server is slow, don't guess. Run `u
 - [ ] I know why the `free` memory column is deceptive.
 - [ ] I can launch `top`, read it, and exit it by pressing `q`.
 
+
+
+**Chapter Transition**
+> We are monitoring the system, but what stops a malicious actor from exploiting our open ports? We need a basic firewall.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 22 – User Automation (Cron)](V1-C22-user-automation-cron.md)
+[Chapter 22 — User Automation (Cron)](V1-C22-user-automation-cron.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 24 – Introduction to Networking (Firewalls)](V1-C24-introduction-to-networking-firewalls.md)
+[Chapter 24 — Introduction to Networking (Firewalls)](V1-C24-introduction-to-networking-firewalls.md)

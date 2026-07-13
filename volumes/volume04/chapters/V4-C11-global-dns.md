@@ -8,15 +8,15 @@ author: Laxman Aryal
 edition: First Edition
 reviewed_by:
   - Technical Review Pending
-version: 0.1
+version: 1.0.0
 difficulty: Advanced
 estimated_time: 1.5 Hours
 reading_time: 25 Minutes
 labs: 1
 interview_questions: 3
-prerequisites: V2-C09
+prerequisites: Previous Chapter
 last_updated: 2026-07
-status: In Progress
+status: Published
 learning_outcomes: To be updated
 career_level: Associate to Professional
 enterprise_relevance: High
@@ -147,15 +147,20 @@ Enterprise DNS is no longer a static phonebook; it is a dynamic, intelligent tra
 - [ ] I can explain how DNS Health Checks enable failover.
 - [ ] I understand why TTL dictates failover speed.
 
+
+
+**Chapter Transition**
+> Traffic reaches the right data center, but how do we ensure internal services don't blindly trust each other? Zero Trust Architecture.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 10 – Chapter Title](V4-C10-cicd-pipelines.md)
+[Chapter 10 — CI/CD Pipelines](V4-C10-cicd-pipelines.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 12 – Chapter Title](V4-C12-zero-trust.md)
+[Chapter 12 — Zero Trust Architecture & Identity Providers](V4-C12-zero-trust.md)

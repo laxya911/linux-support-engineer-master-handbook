@@ -79,15 +79,20 @@ Because Cilium's eBPF probes already sit in the kernel analyzing every packet fo
 ### Question 3: What is the advantage of Layer 7 visibility in a Network Policy?
 * **Target Answer**: "Traditional firewalls (Layer 4) can only block traffic based on IP and Port. If you allow Port 80 for web traffic, you allow *everything* on Port 80. With Layer 7 visibility, an eBPF policy can inspect the actual application payload. This allows you to write fine-grained security rules, such as allowing a microservice to read from an API (HTTP GET) but blocking it from modifying data (HTTP POST or DELETE)."
 
+
+
+**Chapter Transition**
+> The network is secure, but the default Linux kernel limits are choking our high-throughput database. We must tune the sysctl parameters.
+
 ---
 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 8 – Advanced Filesystems (ZFS & Btrfs)](V5-C08-advanced-filesystems.md)
+[Chapter 8: Advanced Filesystems (ZFS & Btrfs)](V5-C08-advanced-filesystems.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 10 – Performance Tuning the Kernel Parameters (sysctl)](V5-C10-kernel-parameters-sysctl.md)
+[Chapter 10: Performance Tuning the Kernel Parameters (sysctl)](V5-C10-kernel-parameters-sysctl.md)
