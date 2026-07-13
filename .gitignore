@@ -1,6 +1,4 @@
-# Build and Output Directories
 build/
-diagrams/
 dist/
 out/
 reviews/
