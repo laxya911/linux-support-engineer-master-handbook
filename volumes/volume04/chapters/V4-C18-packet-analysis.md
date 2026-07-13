@@ -73,13 +73,22 @@ Reading raw hex dumps in the terminal is difficult. Engineers use `tcpdump` to c
 > **Incident Report: The Silent Drop**  
 > **Reporter:** Developer Team  
 > **SOP execution:**
+>
+>
 > 1. **13:00 PM — Incident Receipt:** A web application in AWS is getting a "Connection Timeout" when reaching an on-premise mainframe over a Corporate VPN.
+>
 > 2. **13:05 PM — Triage & Containment:** The Network Team claims the VPN firewall is completely open. The Dev Team claims their code is fine. The engineer steps in to mediate.
+>
 > 3. **13:10 PM — Investigation:** "Timeout" means the 3-Way Handshake is failing. The engineer runs `sudo tcpdump -i eth0 host 10.0.5.50` on the AWS server and watches the traffic.
+>
 > 4. **13:15 PM — Root Cause:** The `tcpdump` reveals **Asymmetrical Routing**. The AWS server sends a `SYN` through the VPN. The mainframe replies with a `SYN-ACK`, but due to an on-premise router misconfig, the `SYN-ACK` returns via the *public internet*. The AWS firewall drops the unsolicited public packet.
+>
 > 5. **13:20 PM — Resolution:** The engineer provides the PCAP file to the Network Team as irrefutable proof. The network team fixes the router's return-path metric.
+>
 > 6. **13:25 PM — Verification:** The developer triggers the connection again. A perfect `SYN, SYN-ACK, ACK` is captured. The app connects. Downtime: 3 hours of blocked development.
+>
 > 7. **Post-Mortem:** Discuss how subjective arguing delayed resolution, and how packet capture provided objective truth.
+>
 > 8. **Documentation:** Add a runbook for diagnosing asymmetrical routing across hybrid-cloud VPN tunnels.
 
 > [!CAUTION]  
@@ -126,10 +135,10 @@ Logs can lie. Applications can provide misleading error messages. The Network Te
 ## Navigation
 
 ⬅ Previous:
-[Chapter 17 – Kernel Panics & Crash Analysis](V4-C17-kernel-panics.md)
+[Chapter 17 – Chapter Title](V4-C17-kernel-panics.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 19 – Profiling Application Bottlenecks](V4-C19-profiling-bottlenecks.md)
+[Chapter 19 – Chapter Title](V4-C19-profiling-bottlenecks.md)

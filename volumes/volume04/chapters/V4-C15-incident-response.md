@@ -74,13 +74,22 @@ To prevent this, enterprises use a **SIEM** (like Splunk or ELK). A small daemon
 > **Incident Report: The Crypto Miner**  
 > **Reporter:** Datadog Anomaly Detection  
 > **SOP execution:**
+>
+>
 > 1. **16:00 PM — Incident Receipt:** An alert fires for `CPU Usage > 99% for 15 minutes` on a legacy internal file server.
+>
 > 2. **16:05 PM — Triage & Containment:** The engineer logs in, runs `top`, and sees a process disguised as `kthreadd` consuming 100% CPU. Instead of killing the process (which destroys evidence in RAM), they contain it by removing the `0.0.0.0/0` outbound security group rule, cutting the miner off from its pool.
+>
 > 3. **16:10 PM — Investigation:** The engineer queries the centralized SIEM for auth logs on this server. They discover a developer's SSH key was used to log in at 15:15 PM from an unknown foreign IP.
+>
 > 4. **16:15 PM — Root Cause:** A compromised developer SSH key allowed an attacker to bypass the perimeter and install a crypto-mining payload.
+>
 > 5. **16:20 PM — Resolution:** The engineer contacts the developer and globally revokes their compromised SSH key. 
+>
 > 6. **16:25 PM — Verification:** The infected server is treated as toxic waste. It is isolated for forensics, and a clean replacement is instantly spun up via Terraform. Traffic is routed to the clean node.
+>
 > 7. **Post-Mortem:** Conduct a full review of how the developer's private key was stolen (it was uploaded to a public pastebin). 
+>
 > 8. **Documentation:** Update access policies to require hardware-backed YubiKey SSH certificates instead of static PEM files.
 
 > [!IMPORTANT]  
@@ -127,10 +136,10 @@ Incident Response is a high-stress test of your engineering discipline. By stric
 ## Navigation
 
 ⬅ Previous:
-[Chapter 14 – Network Policies & Microsegmentation](V4-C14-microsegmentation.md)
+[Chapter 14 – Chapter Title](V4-C14-microsegmentation.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Volume 4, Part 4: The Art of Troubleshooting (Senior Diagnostics) *[Planned]*](#)
+[Chapter 16 – Chapter Title](V4-C16-scientific-troubleshooting.md)

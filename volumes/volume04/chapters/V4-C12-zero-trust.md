@@ -85,13 +85,22 @@ Zero Trust evaluates *context*. Even if you have the correct password and the co
 > **Incident Report: The Stolen Laptop**  
 > **Reporter:** Employee (via phone call to Helpdesk)  
 > **SOP execution:**
+>
+>
 > 1. **17:00 PM — Incident Receipt:** A Senior Developer reports their unlocked laptop was stolen at a coffee shop. It had an active VPN session.
+>
 > 2. **17:02 PM — Triage & Containment:** The Helpdesk agent immediately suspends the user's Okta account and triggers a remote wipe command via MDM.
+>
 > 3. **17:05 PM — Investigation:** In a traditional VPN architecture, the thief would already be inside the network downloading source code. However, the company uses a Zero Trust proxy (e.g., Zscaler/Cloudflare Access).
+>
 > 4. **17:06 PM — Root Cause:** Physical theft of an authenticated device.
+>
 > 5. **17:08 PM — Resolution:** The thief opens Jira at their home network. The Zero Trust proxy enforces a strict "Verify Every Request" policy. It detects a context change (IP/Location shift) and immediately intercepts the request, redirecting to Okta.
+>
 > 6. **17:10 PM — Verification:** Okta demands a biometric YubiKey tap to re-authenticate the session. The thief cannot provide it. Access is denied. The source code remains perfectly safe. Downtime: 0.
+>
 > 7. **Post-Mortem:** Review the MDM wipe logs to confirm the physical hard drive was successfully zeroed.
+>
 > 8. **Documentation:** Update physical security training emphasizing screen locks in public spaces.
 
 > [!IMPORTANT]  
@@ -138,10 +147,10 @@ The days of building a giant firewall around a corporate office are over. In the
 ## Navigation
 
 ⬅ Previous:
-[Chapter 11 – Enterprise DNS & Global Traffic Management](V4-C11-global-dns.md)
+[Chapter 11 – Chapter Title](V4-C11-global-dns.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 13 – Secrets Management & PKI](V4-C13-secrets-management.md)
+[Chapter 13 – Chapter Title](V4-C13-secrets-management.md)

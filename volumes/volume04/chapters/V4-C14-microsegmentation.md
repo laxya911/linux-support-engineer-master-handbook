@@ -85,13 +85,22 @@ Then, you surgically write "Allow" policies to punch microscopic holes in the fi
 > **Incident Report: The Lateral Movement**  
 > **Reporter:** Security Operations Center (SOC)  
 > **SOP execution:**
+>
+>
 > 1. **22:00 PM — Incident Receipt:** SOC detects anomalous `nmap` scanning originating from the `wordpress-deployment` pod inside the production Kubernetes cluster.
+>
 > 2. **22:05 PM — Triage & Containment:** The engineer cordons the node and isolates the WordPress pod, but realizes the hacker has already attempted to connect to the internal Payroll Postgres database.
+>
 > 3. **22:10 PM — Investigation:** In a flat network, the hacker would have brute-forced the DB. But the engineer previously implemented a strict default-deny `NetworkPolicy` across the cluster.
+>
 > 4. **22:15 PM — Root Cause:** An unpatched plugin on the WordPress blog allowed an RCE exploit, granting a root shell inside the container.
+>
 > 5. **22:20 PM — Resolution:** The Calico CNI intercepted the hacker's lateral traffic. Because the network policy strictly dictated `allow ingress from app: payroll-api`, traffic from the `app: wordpress` pod was silently dropped at the kernel level.
+>
 > 6. **22:25 PM — Verification:** The intrusion was entirely contained to the edge pod. The Payroll DB logs show zero connection attempts. The WordPress pod is killed and patched. Downtime: 0 for core services.
+>
 > 7. **Post-Mortem:** Accelerate the patch cycle for third-party CMS plugins.
+>
 > 8. **Documentation:** Add a SOC dashboard specifically tracking dropped packets from the default-deny policy to identify future compromised edge nodes.
 
 > [!CAUTION]  
@@ -138,10 +147,10 @@ Trusting an IP address just because it is "inside" your network is a recipe for 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 13 – Secrets Management & PKI](V4-C13-secrets-management.md)
+[Chapter 13 – Chapter Title](V4-C13-secrets-management.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 15 – Incident Response & Security Auditing](V4-C15-incident-response.md)
+[Chapter 15 – Chapter Title](V4-C15-incident-response.md)

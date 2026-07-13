@@ -74,13 +74,22 @@ As your infrastructure grows, your Playbook will become 2,000 lines long and imp
 > **Incident Report: The Configuration Drift**  
 > **Reporter:** Automated Monitoring  
 > **SOP execution:**
+>
+>
 > 1. **02:00 AM — Incident Receipt:** PagerDuty fires for "High SSL Handshake Failures" on Load Balancer #3, and "OOM Killer invoked" on Load Balancer #7.
+>
 > 2. **02:05 AM — Triage & Containment:** The engineer pulls LB3 and LB7 out of the active traffic pool to stabilize the platform.
+>
 > 3. **02:10 AM — Investigation:** The 10 load balancers are supposed to be identical. The engineer discovers a junior admin manually installed a rogue monitoring agent on LB7 causing the memory leak, and LB3 has a legacy SSL cipher suite configuration.
+>
 > 4. **02:15 AM — Root Cause:** Severe Configuration Drift caused by years of manual SSH interventions by different admins.
+>
 > 5. **02:20 AM — Resolution:** The engineer writes a definitive `nginx-baseline.yml` Ansible Playbook dictating the exact, correct state (packages, config, certificates). They run `ansible-playbook nginx-baseline.yml -i inventory.ini`.
+>
 > 6. **02:22 AM — Verification:** Because Ansible is Idempotent, it ignores the healthy servers, overwrites the SSL config on LB3 (triggering an NGINX restart handler), and uninstalls the rogue agent on LB7. Traffic is routed back. Downtime: 22 minutes for degraded capacity.
+>
 > 7. **Post-Mortem:** Implement a policy where all server configuration changes must be made via Ansible PRs.
+>
 > 8. **Documentation:** Schedule the `nginx-baseline.yml` Playbook to run via Cron every night to automatically remediate any future drift.
 
 > [!IMPORTANT]  
@@ -127,10 +136,10 @@ Playbooks are the heart of Ansible. They allow you to define the perfect server 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 8 – Configuration Management at Scale](V4-C08-ansible-intro.md)
+[Chapter 8 – Chapter Title](V4-C08-ansible-intro.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 10 – CI/CD Pipelines](V4-C10-cicd-pipelines.md)
+[Chapter 10 – Chapter Title](V4-C10-cicd-pipelines.md)

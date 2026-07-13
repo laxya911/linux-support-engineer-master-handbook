@@ -80,13 +80,22 @@ Helm keeps a history of everything you deploy (called a Release). If you upgrade
 > **Incident Report: The Tedious Deployment**  
 > **Reporter:** Infrastructure Team Lead  
 > **SOP execution:**
+>
+>
 > 1. **13:00 PM — Incident Receipt:** A junior engineer reports they have spent 3 days writing 1,500 lines of manual YAML (Deployments, Services, RBAC) to deploy Prometheus.
+>
 > 2. **13:05 PM — Triage & Containment:** The Lead halts the manual deployment, realizing that maintaining 15 custom YAML files across versions is an operational nightmare.
+>
 > 3. **13:10 PM — Investigation:** The Lead checks the official Prometheus repository and confirms a mature Helm Chart exists.
+>
 > 4. **13:12 PM — Root Cause:** Re-inventing the wheel instead of leveraging community package managers for 3rd party software.
+>
 > 5. **13:15 PM — Resolution:** The Lead deletes the custom YAML, adds the repo (`helm repo add prometheus-community https://prometheus-community.github.io/helm-charts`), and deploys: `helm install my-monitoring prometheus-community/kube-prometheus-stack`.
+>
 > 6. **13:17 PM — Verification:** Within 60 seconds, Helm dynamically renders and deploys all 15 resources perfectly configured. 
+>
 > 7. **Post-Mortem:** Define a policy: never write custom YAML for off-the-shelf software.
+>
 > 8. **Documentation:** Add a Helm repository catalog to the team wiki.
 
 > [!IMPORTANT]  
@@ -133,10 +142,10 @@ Helm bridges the gap between infrastructure engineers and software consumers. It
 ## Navigation
 
 ⬅ Previous:
-[Chapter 4 – Stateful Applications in K8s](V4-C04-stateful-apps.md)
+[Chapter 4 – Chapter Title](V4-C04-stateful-apps.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Volume 4, Part 2: Infrastructure as Code (Automation at Scale) *[Planned]*](#)
+[Chapter 6 – Chapter Title](V4-C06-iac-terraform.md)

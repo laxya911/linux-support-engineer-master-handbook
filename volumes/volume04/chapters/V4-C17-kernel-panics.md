@@ -84,13 +84,22 @@ You cannot read a `vmcore` file with `cat`. It is a massive binary blob of raw m
 > **Incident Report: The Midnight Reboot**  
 > **Reporter:** Infrastructure Monitoring  
 > **SOP execution:**
+>
+>
 > 1. **08:00 AM — Incident Receipt:** An alert shows a critical database server has randomly rebooted in the middle of the night for the third time this week.
+>
 > 2. **08:05 AM — Triage & Containment:** The server is back online, but the engineer shifts database traffic to the read-replica to prevent application crashes if it reboots again.
+>
 > 3. **08:15 AM — Investigation:** The engineer checks `/var/log/syslog`. There are no errors. The logs simply stop at 2:14 AM and resume at 2:18 AM. Because the kernel died instantly, it couldn't write the error to disk.
+>
 > 4. **08:30 AM — Root Cause:** Unknown hardware or driver fault causing a Kernel Panic. The engineer configures `kdump` to capture the memory state on the next crash.
+>
 > 5. **Three Days Later — Resolution:** The server crashes again. The engineer opens the resulting `vmcore` dump using the `crash` utility. The `bt` (backtrace) reveals a proprietary RAID controller driver (`megaraid_sas`) leaking memory and triggering a panic during heavy I/O. The engineer updates the driver to a patched version.
+>
 > 6. **09:00 AM — Verification:** The server runs for 14 days without a reboot. Traffic is shifted back. Downtime: 4 minutes (previous reboots).
+>
 > 7. **Post-Mortem:** Discuss why `kdump` is not enabled by default on high-tier database images.
+>
 > 8. **Documentation:** Add a Terraform provisioner to ensure `kexec-tools` and `kdump` are active on all bare-metal database instances.
 
 > [!CAUTION]  
@@ -137,10 +146,10 @@ Kernel Panics are intimidating because they provide zero feedback in standard lo
 ## Navigation
 
 ⬅ Previous:
-[Chapter 16 – The Scientific Method of Troubleshooting](V4-C16-scientific-troubleshooting.md)
+[Chapter 16 – Chapter Title](V4-C16-scientific-troubleshooting.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 18 – Advanced Network Packet Analysis](V4-C18-packet-analysis.md)
+[Chapter 18 – Chapter Title](V4-C18-packet-analysis.md)

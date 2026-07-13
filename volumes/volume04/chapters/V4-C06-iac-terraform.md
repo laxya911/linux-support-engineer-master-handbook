@@ -75,13 +75,22 @@ This file is the mapping between your local code and the real world. If you chan
 > **Incident Report: The Click-Ops Disaster**  
 > **Reporter:** Automated Monitoring  
 > **SOP execution:**
+>
+>
 > 1. **15:00 PM — Incident Receipt:** AWS GuardDuty and Datadog light up. The entire European Production VPC has disappeared.
+>
 > 2. **15:02 PM — Triage & Containment:** The engineer realizes a junior admin accidentally deleted the wrong VPC while doing "Click-Ops" in the AWS console. The company is losing $10,000 a minute.
+>
 > 3. **15:04 PM — Investigation:** The engineer confirms the deletion. Because the infrastructure is managed by Terraform, they do not need to manually guess how to rebuild 50 network components.
+>
 > 4. **15:05 PM — Root Cause:** Manual intervention via the AWS Console instead of strict IaC workflows.
+>
 > 5. **15:06 PM — Resolution:** The engineer navigates to the `eu-prod-network` directory and runs `terraform apply`.
+>
 > 6. **15:09 PM — Verification:** Terraform reads the `.tfstate`, sees the missing VPC, and flawlessly rebuilds 5 subnets, 3 route tables, and 12 security groups in the exact required dependency order. Downtime: 9 minutes.
+>
 > 7. **Post-Mortem:** Revoke console write-access for all engineers. All infrastructure changes must now go through Terraform PRs.
+>
 > 8. **Documentation:** Add a stern warning to the onboarding wiki about the dangers of Click-Ops.
 
 > [!IMPORTANT]  
@@ -128,10 +137,10 @@ Infrastructure as Code treats datacenters like software. By defining your networ
 ## Navigation
 
 ⬅ Previous:
-[Volume 4, Part 1: The Kubernetes Ecosystem](../README.md)
+[Chapter 5 – Chapter Title](V4-C05-helm-package-manager.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 7 – Provisioning Cloud Resources](V4-C07-cloud-provisioning.md)
+[Chapter 7 – Chapter Title](V4-C07-cloud-provisioning.md)

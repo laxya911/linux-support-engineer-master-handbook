@@ -86,13 +86,22 @@ A K8s Secret is exactly like a ConfigMap, but it is meant for sensitive data (AP
 > **Incident Report: The Hardcoded Secret**  
 > **Reporter:** Security Operations Center (SOC)  
 > **SOP execution:**
+>
+>
 > 1. **11:00 AM — Incident Receipt:** SOC flags a critical vulnerability: `DB_PASSWORD: "SuperSecretAdminPassword123"` was committed to the public `database-deployment.yaml` file in GitHub.
+>
 > 2. **11:05 AM — Triage & Containment:** The engineer immediately connects to the production database directly and manually rotates the password, breaking the application temporarily to secure the data.
+>
 > 3. **11:08 AM — Investigation:** The engineer confirms that anyone with repo access could read the plaintext password. The deployment must be updated to use a secure object.
+>
 > 4. **11:10 AM — Root Cause:** A junior developer hardcoded the password directly in the Kubernetes Deployment manifest instead of using a Kubernetes Secret.
+>
 > 5. **11:12 AM — Resolution:** The engineer creates a Kubernetes Secret directly in the cluster (`kubectl create secret generic db-passwords --from-literal=DB_PASSWORD='NewSecurePassword456'`). They then modify the deployment YAML to inject the password via `valueFrom: secretKeyRef` and apply it.
+>
 > 6. **11:15 AM — Verification:** The newly deployed Pod successfully connects to the database using the securely injected secret. Total application downtime: 10 minutes.
+>
 > 7. **Post-Mortem:** Discuss secrets management in Kubernetes and implement a Git hook to scan for plaintext passwords.
+>
 > 8. **Documentation:** Write a guide on creating and injecting Kubernetes Secrets for the engineering team.
 
 > [!CAUTION]  
@@ -139,10 +148,10 @@ The true power of Kubernetes is decoupling. By strictly separating Compute (Pods
 ## Navigation
 
 ⬅ Previous:
-[Chapter 3 – Kubernetes Networking](V4-C03-k8s-networking.md)
+[Chapter 3 – Chapter Title](V4-C03-k8s-networking.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 5 – Helm & Package Management](V4-C05-helm-package-manager.md)
+[Chapter 5 – Chapter Title](V4-C05-helm-package-manager.md)

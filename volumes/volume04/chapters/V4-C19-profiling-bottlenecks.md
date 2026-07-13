@@ -90,13 +90,22 @@ If you want to only see file opens, you filter it: `sudo strace -e trace=openat 
 > **Incident Report: The Infinite Loop**  
 > **Reporter:** End User / Helpdesk  
 > **SOP execution:**
+>
+>
 > 1. **14:00 PM — Incident Receipt:** A custom Java application is deployed. Immediately, developers complain it is "frozen," not returning data, and the logs are empty.
+>
 > 2. **14:05 PM — Triage & Containment:** A junior admin attempts a reboot. The issue immediately returns. A Senior Engineer steps in to debug the live process.
+>
 > 3. **14:10 PM — Investigation:** `top` shows 0% CPU. The engineer attaches to the frozen process: `sudo strace -p 4055`. The screen instantly floods with: `openat(AT_FDCWD, "/etc/app/license.key", O_RDONLY) = -1 EACCES (Permission denied)`.
+>
 > 4. **14:15 PM — Root Cause:** The developers wrote a bad `while` loop that continuously attempts to read a license file. The file has incorrect permissions. Instead of crashing gracefully, the code loops infinitely on the `EACCES` syscall.
+>
 > 5. **14:20 PM — Resolution:** Without looking at Java source code, the engineer fixes the file permissions: `sudo chmod 644 /etc/app/license.key`.
+>
 > 6. **14:21 PM — Verification:** The next `openat()` succeeds, breaking the infinite loop. The Java app instantly unfreezes and processes data. Downtime: 21 minutes.
+>
 > 7. **Post-Mortem:** Send the `strace` output to the Dev team to prove their error-handling logic is fatally flawed.
+>
 > 8. **Documentation:** Add a step to the deployment pipeline to automatically verify `/etc/app` permissions on boot.
 
 > [!CAUTION]  
@@ -144,10 +153,10 @@ When an application lies to you, or simply stops speaking, `strace` allows you t
 ## Navigation
 
 ⬅ Previous:
-[Chapter 18 – Advanced Network Packet Analysis](V4-C18-packet-analysis.md)
+[Chapter 18 – Chapter Title](V4-C18-packet-analysis.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 20 – Disaster Recovery & Chaos Engineering](V4-C20-chaos-engineering.md)
+[Chapter 20 – Chapter Title](V4-C20-chaos-engineering.md)

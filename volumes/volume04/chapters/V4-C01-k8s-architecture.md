@@ -97,13 +97,22 @@ You do not SSH into Kubernetes servers to start containers. Instead, you sit on 
 > **Incident Report: The Split Brain**  
 > **Reporter:** Automated Monitoring  
 > **SOP execution:**
+>
+>
 > 1. **10:00 AM — Incident Receipt:** PagerDuty alerts that Worker Node #3 has missed 5 consecutive heartbeats. 
+>
 > 2. **10:02 AM — Triage & Containment:** The engineer verifies that the applications on Node #3 are actually still serving traffic, but the Control Plane cannot see the node.
+>
 > 3. **10:05 AM — Investigation:** The engineer runs `kubectl get nodes` and sees Worker Node #3 marked as `NotReady`. Pinging the node's management IP from the Control Plane fails.
+>
 > 4. **10:10 AM — Root Cause:** A top-of-rack network switch port died, severing the management plane connection.
+>
 > 5. **10:12 AM — Resolution:** The Orchestration Magic! Because the Control Plane thinks the node is dead, it assumes all web containers on Node #3 are also dead. The Scheduler instantly spins up replacement containers on Worker Nodes #1 and #2. The engineer then resets the physical switch port.
+>
 > 6. **10:15 AM — Verification:** Worker Node #3 re-establishes communication. The API Server realizes it now has *too many* web containers, and gracefully deletes the extras. Total customer downtime: 0 seconds.
+>
 > 7. **Post-Mortem:** Investigate switch port failure and add redundant management uplinks.
+>
 > 8. **Documentation:** Update infrastructure wiki with the switch port mapping.
 
 > [!TIP]
@@ -150,10 +159,10 @@ Kubernetes is not magic; it is simply a highly complex control loop. The API Ser
 ## Navigation
 
 ⬅ Previous:
-[Volume 3: Enterprise Linux Services](../README.md)
+None
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 2 – Pods, Deployments, & ReplicaSets](V4-C02-deployments.md)
+[Chapter 2 – Chapter Title](V4-C02-deployments.md)

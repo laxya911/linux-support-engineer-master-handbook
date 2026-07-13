@@ -87,13 +87,22 @@ If you want to install Apache, you don't write `apt install apache2` (which woul
 > **Incident Report: The Mass Password Rotation**  
 > **Reporter:** Chief Information Security Officer (CISO)  
 > **SOP execution:**
+>
+>
 > 1. **16:00 PM — Incident Receipt:** A disgruntled system administrator was just terminated. The CISO demands the `root` password on all 500 company Linux servers be rotated immediately.
+>
 > 2. **16:02 PM — Triage & Containment:** Doing this manually via SSH (`passwd`) would take 16 hours, leaving a massive window of vulnerability.
+>
 > 3. **16:05 PM — Investigation:** The Senior Engineer confirms the dynamic `inventory.ini` has the latest IPs for all 500 servers.
+>
 > 4. **16:08 PM — Root Cause:** A compromised human threat vector requires an immediate, fleet-wide state change.
+>
 > 5. **16:10 PM — Resolution:** The engineer generates a secure hashed password. They run a single ad-hoc Ansible command: `ansible all -m user -a "name=root password='$6$HASHED_PASSWORD'" --become`.
+>
 > 6. **16:11 PM — Verification:** Ansible initiates 500 concurrent SSH connections and rotates all passwords. The entire fleet is secured in 12 seconds.
+>
 > 7. **Post-Mortem:** Discuss migrating away from shared `root` passwords entirely in favor of strict SSH Key + IAM-backed sudo authentication.
+>
 > 8. **Documentation:** Update offboarding procedures to trigger an automated Ansible password-rotation playbook.
 
 > [!CAUTION]  
@@ -140,10 +149,10 @@ If you find yourself SSH'ing into more than two servers a day to perform the exa
 ## Navigation
 
 ⬅ Previous:
-[Chapter 7 – Provisioning Cloud Resources](V4-C07-cloud-provisioning.md)
+[Chapter 7 – Chapter Title](V4-C07-cloud-provisioning.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 9 – Writing Ansible Playbooks & Roles](V4-C09-ansible-playbooks.md)
+[Chapter 9 – Chapter Title](V4-C09-ansible-playbooks.md)

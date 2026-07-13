@@ -81,13 +81,22 @@ What happens if Engineer A and Engineer B both run `terraform apply` on a Remote
 > **Incident Report: The State File Conflict**  
 > **Reporter:** CI/CD Pipeline  
 > **SOP execution:**
+>
+>
 > 1. **10:00 AM — Incident Receipt:** An automated Terraform deployment fails with `Error acquiring the state lock. Lock Info: ID: 4b29f... Who: admin@laptop`.
+>
 > 2. **10:02 AM — Triage & Containment:** The pipeline halts gracefully, ensuring no partial infrastructure changes occur.
+>
 > 3. **10:05 AM — Investigation:** The engineer sees the lock error. The DynamoDB lock table actively prevented the pipeline from corrupting the state file.
+>
 > 4. **10:07 AM — Root Cause:** A Lead Architect was concurrently running a manual `terraform apply` locally (`admin@laptop`), locking the remote state.
+>
 > 5. **10:10 AM — Resolution:** The engineer pings the architect to finish their apply. Once completed, the lock clears. The pipeline is restarted.
+>
 > 6. **10:15 AM — Verification:** The pipeline completes the deployment successfully. Downtime: 0 minutes (prevented).
+>
 > 7. **Post-Mortem:** Discuss why the architect ran a local apply instead of pushing code through the pipeline.
+>
 > 8. **Documentation:** Enforce a strict "No Local Apply" policy except for break-glass scenarios.
 
 > [!IMPORTANT]  
@@ -134,10 +143,10 @@ Terraform is incredibly powerful, but with great power comes the ability to comp
 ## Navigation
 
 ⬅ Previous:
-[Chapter 6 – Introduction to IaC & Terraform](V4-C06-iac-terraform.md)
+[Chapter 6 – Chapter Title](V4-C06-iac-terraform.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 8 – Configuration Management at Scale](V4-C08-ansible-intro.md)
+[Chapter 8 – Chapter Title](V4-C08-ansible-intro.md)

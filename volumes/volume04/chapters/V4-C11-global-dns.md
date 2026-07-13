@@ -79,13 +79,22 @@ Enterprise DNS doesn't just statically return IP addresses. It actively tests th
 > **Incident Report: The Regional Outage**  
 > **Reporter:** Automated Monitoring  
 > **SOP execution:**
+>
+>
 > 1. **03:00 AM — Incident Receipt:** A massive fiber-optic cable is severed in Virginia, dropping AWS `us-east-1` offline.
+>
 > 2. **03:00:10 AM — Triage & Containment:** Route53 health checks attempt to reach the primary load balancers and time out.
+>
 > 3. **03:00:30 AM — Investigation:** Route53 registers three consecutive failures. The Health Check status flips from `HEALTHY` to `UNHEALTHY`.
+>
 > 4. **03:00:31 AM — Root Cause:** A hard physical infrastructure failure at the datacenter level.
+>
 > 5. **03:00:32 AM — Resolution:** Route53 automatically triggers the **Active-Passive Failover** policy. It instantly stops returning the dead `us-east-1` IP address and begins returning the Disaster Recovery IP for `eu-west-1` (Ireland).
+>
 > 6. **03:01 AM — Verification:** Global DNS propagates (thanks to a 60-second TTL). Customers are routed to Ireland. The Support Engineer is never paged because the automated failover was flawless.
+>
 > 7. **Post-Mortem:** Confirm DR cluster autoscaled properly to handle the sudden global traffic spike.
+>
 > 8. **Documentation:** Log the automated failover event for compliance and SLA tracking.
 
 > [!CAUTION]  
@@ -132,10 +141,10 @@ Enterprise DNS is no longer a static phonebook; it is a dynamic, intelligent tra
 ## Navigation
 
 ⬅ Previous:
-[Volume 4, Part 2: Infrastructure as Code](../README.md)
+[Chapter 10 – Chapter Title](V4-C10-cicd-pipelines.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 12 – Zero Trust Architecture & Identity Providers](V4-C12-zero-trust.md)
+[Chapter 12 – Chapter Title](V4-C12-zero-trust.md)

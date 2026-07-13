@@ -86,13 +86,22 @@ If an engineer encounters a bizarre issue and immediately types `sudo reboot`, t
 > **Incident Report: The "Slow" Server**  
 > **Reporter:** Customer Service Team  
 > **SOP execution:**
+>
+>
 > 1. **11:00 AM — Incident Receipt:** A High Priority ticket arrives: "The CRM server is incredibly slow. Clicking any button takes 30 seconds."
+>
 > 2. **11:02 AM — Triage & Containment:** A junior admin attempts a reboot. The server works for 5 minutes, then grinds to a halt again. A Senior Engineer steps in to apply the scientific method (OODA loop).
+>
 > 3. **11:05 AM — Investigation:** **Observe:** The engineer runs `top`. CPU usage is 5%. RAM is 20%. The server has plenty of compute. However, `wa` (I/O Wait) is hovering at 95%. **Orient:** High I/O wait means the CPU is idle, waiting for disk. `df -h` shows an NFS share mounted at `/var/www/uploads`.
+>
 > 4. **11:10 AM — Root Cause:** **Decide:** Hypothesis: The network to the NFS server is dropping packets, freezing the CRM whenever a file is uploaded.
+>
 > 5. **11:15 AM — Resolution:** **Act:** The engineer uses `ping` to test the NFS server. 40% packet loss is returned. The network team is contacted and fixes a failing switch port connecting to the NFS server.
+>
 > 6. **11:30 AM — Verification:** The `wa` metric instantly drops to 0%, and the CRM server becomes lightning fast. Downtime: 30 minutes of degraded performance.
+>
 > 7. **Post-Mortem:** Discuss why the junior admin blindly rebooted the server instead of looking at system metrics.
+>
 > 8. **Documentation:** Add a dashboard specifically tracking I/O Wait times and NFS latency to catch this before users report it.
 
 ## Common Mistakes & Pro-Tips
@@ -135,10 +144,10 @@ Troubleshooting is not an innate magical talent; it is a rigid, scientific disci
 ## Navigation
 
 ⬅ Previous:
-[Volume 4, Part 3: Advanced Network & Security Architecture](../README.md)
+[Chapter 15 – Chapter Title](V4-C15-incident-response.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 17 – Kernel Panics & Crash Analysis](V4-C17-kernel-panics.md)
+[Chapter 17 – Chapter Title](V4-C17-kernel-panics.md)

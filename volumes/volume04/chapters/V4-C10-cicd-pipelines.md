@@ -79,13 +79,22 @@ A Runner is an ephemeral worker machine (usually a Docker container) managed by 
 > **Incident Report: The Laptop Bottleneck**  
 > **Reporter:** Product Marketing Team  
 > **SOP execution:**
+>
+>
 > 1. **09:00 AM — Incident Receipt:** Marketing demands an urgent, zero-day copy change to the production website.
+>
 > 2. **09:05 AM — Triage & Containment:** Junior engineers attempt to run the Ansible playbook, but it fails because the production SSH keys only exist on the Lead Engineer's physical laptop, and the Lead is on vacation in a cabin with no internet.
+>
 > 3. **09:15 AM — Investigation:** The team realizes that local execution has created a massive Single Point of Failure (the Lead's laptop). All deployments are hard-blocked.
+>
 > 4. **09:20 AM — Root Cause:** Infrastructure execution is tied to local machines instead of a centralized, automated pipeline.
+>
 > 5. **09:30 AM — Resolution:** A break-glass procedure is used to retrieve the SSH keys from the enterprise password vault. A Senior Engineer executes the deployment. 
+>
 > 6. **09:45 AM — Verification:** The website updates successfully. Downtime: 0 (but 45 minutes of blocked deployment).
+>
 > 7. **Post-Mortem:** The team mandates that all deployments must be triggered via GitHub Actions. SSH keys are migrated to GitHub Secrets.
+>
 > 8. **Documentation:** Write a `.github/workflows/deploy.yml` pipeline. From now on, anyone with PR approval can merge to `main`, and the pipeline handles the execution automatically.
 
 > [!CAUTION]  
@@ -132,10 +141,10 @@ CI/CD is the glue that binds modern DevOps together. By combining the declarativ
 ## Navigation
 
 ⬅ Previous:
-[Chapter 9 – Writing Ansible Playbooks & Roles](V4-C09-ansible-playbooks.md)
+[Chapter 9 – Chapter Title](V4-C09-ansible-playbooks.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Volume 4, Part 3: Advanced Network & Security Architecture *[Planned]*](#)
+[Chapter 11 – Chapter Title](V4-C11-global-dns.md)

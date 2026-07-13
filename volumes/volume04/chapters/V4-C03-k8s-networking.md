@@ -81,13 +81,22 @@ An **Ingress** operates at Layer 7 (HTTP). It allows you to buy exactly *one* Lo
 > **Incident Report: The IP Shuffle**  
 > **Reporter:** Automated Monitoring  
 > **SOP execution:**
+>
+>
 > 1. **16:00 PM — Incident Receipt:** Python Backend throws `Connection Refused` when reaching Redis.
+>
 > 2. **16:02 PM — Triage & Containment:** The engineer verifies the Redis Pod is running, but the backend is trying to reach a dead IP `192.168.1.45`.
+>
 > 3. **16:05 PM — Investigation:** A node was rebooted two hours ago. Kubernetes rescheduled the Redis Pod to a new node, assigning it a new ephemeral IP `192.168.2.100`. The junior developer had hardcoded the old Pod IP in the backend config.
+>
 > 4. **16:08 PM — Root Cause:** Hardcoded ephemeral Pod IPs instead of using a stable Kubernetes Service.
+>
 > 5. **16:10 PM — Resolution:** The engineer writes a `ClusterIP` Service named `redis-cache-svc`. The developer updates the Python code to use `redis://redis-cache-svc:6379`.
+>
 > 6. **16:12 PM — Verification:** CoreDNS resolves the name correctly. The application connects. Total downtime: 12 minutes.
+>
 > 7. **Post-Mortem:** Educate developers on Pod ephemerality and Service discovery.
+>
 > 8. **Documentation:** Update onboarding wiki to mandate Service names for all internal communication.
 
 > [!CAUTION]  
@@ -134,10 +143,10 @@ Networking in Kubernetes is fundamentally different from traditional networking.
 ## Navigation
 
 ⬅ Previous:
-[Chapter 2 – Pods, Deployments, & ReplicaSets](V4-C02-deployments.md)
+[Chapter 2 – Chapter Title](V4-C02-deployments.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 4 – Stateful Applications in K8s](V4-C04-stateful-apps.md)
+[Chapter 4 – Chapter Title](V4-C04-stateful-apps.md)

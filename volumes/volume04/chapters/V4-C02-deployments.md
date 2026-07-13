@@ -80,13 +80,22 @@ In Kubernetes, you do not type imperative commands like `kubectl run nginx --rep
 > **Incident Report: The Botched Update**  
 > **Reporter:** Automated Monitoring  
 > **SOP execution:**
+>
+>
 > 1. **14:00 PM — Incident Receipt:** Datadog alerts on a 500-error spike across the `checkout-cart` endpoints immediately following a CI/CD deployment.
+>
 > 2. **14:02 PM — Triage & Containment:** The engineer recognizes the new V2 code is crashing. They immediately run `kubectl rollout undo deployment python-app` to fallback to V1.
+>
 > 3. **14:03 PM — Investigation:** The engineer watches `kubectl get pods`. Kubernetes instantly spins the V1 ReplicaSet back up and gracefully terminates the broken V2 Pods.
+>
 > 4. **14:05 PM — Root Cause:** The V2 container image was missing a critical environment variable required for database authentication.
+>
 > 5. **14:06 PM — Resolution:** Traffic has already recovered on V1. The code is pulled from production routing.
+>
 > 6. **14:08 PM — Verification:** 500-errors drop to 0. Total customer downtime: 3 minutes.
+>
 > 7. **Post-Mortem:** Discuss why the missing environment variable was not caught in the staging environment.
+>
 > 8. **Documentation:** Add a pre-flight check in the CI/CD pipeline to validate environment variables before applying to production.
 
 > [!IMPORTANT]  
@@ -133,10 +142,10 @@ Kubernetes shifts the burden of availability from the engineer to the software. 
 ## Navigation
 
 ⬅ Previous:
-[Chapter 1 – Kubernetes Architecture & The Control Plane](V4-C01-k8s-architecture.md)
+[Chapter 1 – Chapter Title](V4-C01-k8s-architecture.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
 ➡ Next:
-[Chapter 3 – Kubernetes Networking](V4-C03-k8s-networking.md)
+[Chapter 3 – Chapter Title](V4-C03-k8s-networking.md)

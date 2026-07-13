@@ -79,13 +79,22 @@ You do not unleash Chaos Monkey on day one. You schedule a "Game Day." All the s
 > **Incident Report: The Black Hole Game Day**  
 > **Reporter:** SRE Team (Controlled Experiment)  
 > **SOP execution:**
+>
+>
 > 1. **14:00 PM — Incident Receipt:** The CTO demands proof that the new global AWS architecture can survive a region failure. A "Game Day" is scheduled to simulate the complete destruction of the `us-east-1` datacenter.
+>
 > 2. **14:02 PM — Triage & Containment:** The Lead Engineer executes a Chaos script that deletes all Network ACLs in the `us-east-1` VPC, creating a network "Black Hole."
+>
 > 3. **14:05 PM — Investigation:** Within 30 seconds, Route53 Health Checks fail. Global traffic redirects to `eu-west-1`. However, Datadog alerts that users cannot log in!
+>
 > 4. **14:08 PM — Root Cause:** The authentication microservice in Europe was hardcoded to query the master database in `us-east-1` (which is now offline). The team failed to set up an active-active global database.
+>
 > 5. **14:10 PM — Resolution:** The engineers abort the experiment and execute the automated rollback script, restoring the Network ACLs in `us-east-1`.
+>
 > 6. **14:15 PM — Verification:** The authentication service reconnects to the master database. Logins succeed. Downtime: 13 minutes (controlled).
+>
 > 7. **Post-Mortem:** A Blameless Post-Mortem is held. The architecture team realizes their cross-region database replication strategy was fundamentally flawed.
+>
 > 8. **Documentation:** Update the architecture to use Aurora Global Databases and schedule a follow-up Game Day to verify the fix.
 
 ## Common Mistakes & Pro-Tips
@@ -136,9 +145,10 @@ You have reached the end of Volume 4. You now understand that being a Senior Sup
 ## Navigation
 
 ⬅ Previous:
-[Chapter 19 – Profiling Application Bottlenecks](V4-C19-profiling-bottlenecks.md)
+[Chapter 19 – Chapter Title](V4-C19-profiling-bottlenecks.md)
 
 🏠 Volume Contents:
 [Table of Contents](../TOC.md)
 
-🎉 **Congratulations! You have completed Volume 4!**
+➡ Next:
+[Conclusion & End Matter](V4-Z-end-matter.md)
