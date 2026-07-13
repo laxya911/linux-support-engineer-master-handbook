@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Troubleshoot "Hidden Denials" where SELinux blocks access despite `chmod 777` permissions.
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-19190**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Mandatory Access Control (SELinux & AppArmor). Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: Mandatory Access Control (SELinux & AppArmor)**
+>
+> Mastering Mandatory Access Control (SELinux & AppArmor) is critical for stability and accountability. We will explore how to handle Mandatory Access Control (SELinux & AppArmor) to ensure continuous uptime.
 
 ## Visual Architecture: The Two Bouncers
 
@@ -81,26 +78,6 @@ SELinux has three modes of operation, viewed by typing `sestatus`:
 3. **Disabled:** Turned off entirely (not recommended).
 You can temporarily switch to Permissive mode by typing `setenforce 0`.
 
-## Scenario-Based Troubleshooting
-
-### Scenario A: The Hidden Deny (Why 777 fails)
-**The Incident:** A junior developer sets up a new web server on RHEL. They don't want to use the default `/var/www/html` directory. Instead, they create a folder at `/home/user/website` and point Nginx to it. 
-They load the website in their browser, but they get a `403 Forbidden` error. 
-Frustrated, the developer runs `chmod -R 777 /home/user/website`. They try again. They still get `403 Forbidden`! They submit a ticket to the Linux Engineering team claiming the server is broken.
-
-**The Investigation & Fix:**
-
-1. The Support Engineer logs in. They see the `777` permissions and immediately know standard DAC is not the problem.
-2. The engineer runs `sestatus` and confirms SELinux is `Enforcing`. 
-3. To prove SELinux is the culprit, the engineer temporarily disables it: `setenforce 0`. They reload the webpage. The website loads perfectly! They immediately turn SELinux back on: `setenforce 1`.
-4. The engineer checks the audit log: `grep nginx /var/log/audit/audit.log`. 
-5. The log reveals the problem: The folder `/home/user/website` has a Security Context of `user_home_t`. The Nginx process is only allowed to read files with a Security Context of `httpd_sys_content_t`.
-6. Even though the developer set `chmod 777`, SELinux blocked Nginx because Web Servers are not allowed to read Home Directories.
-7. The engineer uses the `chcon` (Change Context) command to update the labels on the developer's folder:
-   `chcon -Rt httpd_sys_content_t /home/user/website`
-8. The website loads perfectly, and the engineer removes the dangerous `777` permissions.
-
-
 ## Hands-on Lab
 
 > [!TIP]
@@ -118,6 +95,14 @@ Frustrated, the developer runs `chmod -R 777 /home/user/website`. They try again
 ### Question 3: What command do you use to view the SELinux security contexts (labels) attached to files in a directory?
 * **Target Answer**: "You append the uppercase `-Z` flag to standard commands. For example, `ls -lZ` will display the standard file permissions alongside the SELinux user, role, and type context labels."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Blindly running `setenforce 0` to 'fix' a permission issue instead of checking the audit logs.
+
+> [!CAUTION] Think Before You Type
+> `restorecon -R /var/www/` (Will this overwrite custom contexts you manually set?)
+
 ## Chapter Summary
 
 SELinux and AppArmor are incredibly powerful security tools that stop hackers from doing damage even if they manage to steal the `root` password. Never disable them permanently to "fix" a broken application. Use `setenforce 0` to test, read the audit logs, and fix the file contexts using `chcon` or `restorecon`.
@@ -129,6 +114,15 @@ SELinux and AppArmor are incredibly powerful security tools that stop hackers fr
 - [ ] I know how to check if SELinux is running (`sestatus`).
 
 ---
+
+---
+
+**Chapter Transition**
+> With SELinux enforcing policies, how do we track exactly what users and processes are doing? We must audit the system.
+
+---
+
+
 
 ## Navigation
 

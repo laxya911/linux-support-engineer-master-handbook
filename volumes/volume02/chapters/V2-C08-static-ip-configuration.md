@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Safely apply network changes using `netplan try` to prevent SSH lockouts.
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-28675**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Static IP Configuration. Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: Static IP Configuration**
+>
+> Mastering Static IP Configuration is critical for stability and accountability. We will explore how to handle Static IP Configuration to ensure continuous uptime.
 
 ## Visual Architecture: The Netplan Hierarchy
 
@@ -91,29 +88,6 @@ To set a static IP on RHEL:
 `nmcli con mod eth0 ipv4.method manual`
 `nmcli con up eth0`
 
-## Scenario-Based Troubleshooting
-
-### Scenario A: The Missing Gateway
-**The Incident:** A junior engineer is tasked with giving a new Ubuntu server a static IP. They edit the Netplan file, disable DHCP, and assign `10.0.0.50`. They run `netplan apply`. 
-They can successfully `ping 10.0.0.51` (the database server sitting right next to it), but when they try to `ping 8.8.8.8` (Google/The Internet), the server replies: `Network is unreachable`.
-
-**The Investigation & Fix:**
-
-1. The Support Engineer logs in and runs `ip route`. 
-2. The output shows the local subnet (`10.0.0.0/24`), but it is missing a `default` route. 
-3. The engineer realizes the mistake: The junior engineer assigned the IP address, but forgot to tell the server how to reach the router! Without a Default Gateway, the server cannot talk to anyone outside its own subnet.
-4. The engineer opens the Netplan file and adds the gateway block:
-   ```yaml
-      routes:
-        - to: default
-          via: 10.0.0.1
-   ```
-5. **The Safety Net:** The engineer does *not* run `netplan apply`. If they made a typo, they might permanently drop their own SSH connection! Instead, they run:
-   `netplan try`
-6. The system applies the change and starts a 120-second countdown: `Do you want to keep these settings?`. If the engineer's SSH session drops, the countdown will expire and Netplan will automatically revert the IP address back to its previous state.
-7. The SSH session remains stable. The engineer presses `ENTER` to permanently accept the change. The server can now reach the internet.
-
-
 ## Hands-on Lab
 
 > [!TIP]
@@ -131,6 +105,14 @@ They can successfully `ping 10.0.0.51` (the database server sitting right next t
 ### Question 3: How do you configure a static IP address in modern RHEL/CentOS systems? Do you use Netplan?
 * **Target Answer**: "No, Netplan is specific to Ubuntu and Debian systems. Modern RHEL systems use NetworkManager. To configure a static IP, you use the `nmcli` command-line utility to modify the connection profile (e.g., setting `ipv4.method manual`, defining the `ipv4.addresses`, and bringing the connection `up`)."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Forgetting to `netplan apply` after making changes, leaving the old config running in memory.
+
+> [!CAUTION] Think Before You Type
+> `systemctl restart NetworkManager` (Are you connected via SSH? You might lose connection!)
+
 ## Chapter Summary
 
 The days of editing `/etc/network/interfaces` are over. In the modern Linux landscape, you must be comfortable reading YAML for Ubuntu (`netplan`) and using the command line for RHEL (`nmcli`). And remember: whenever you are modifying networking on a remote server, `netplan try` is the only thing standing between you and a massive outage.
@@ -142,6 +124,15 @@ The days of editing `/etc/network/interfaces` are over. In the modern Linux land
 - [ ] I understand how `netplan try` prevents catastrophic remote lockouts.
 
 ---
+
+---
+
+**Chapter Transition**
+> A static IP gets you on the local network, but how do you reach the outside world? We need to understand routing.
+
+---
+
+
 
 ## Navigation
 

@@ -33,13 +33,10 @@ By the end of this chapter, you will be able to:
 * Troubleshoot "Permission Denied" errors caused by incorrect `.ssh` directory permissions.
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-46583**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to SSH Hardening. Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: SSH Hardening**
+>
+> Mastering SSH Hardening is critical for stability and accountability. We will explore how to handle SSH Hardening to ensure continuous uptime.
 
 ## Visual Architecture: The Cryptographic Padlock
 
@@ -76,23 +73,25 @@ Every time you provision a new server, you must edit this file to enforce the fo
 ### 3. The Paranoia of SSH
 SSH is designed to be deeply paranoid. If the `~/.ssh` directory or the `authorized_keys` file has loose permissions, SSH will assume a hacker has tampered with the padlocks. It will quietly refuse to read the keys and deny access.
 
-## Scenario-Based Troubleshooting
+## Industry Incident Spotlight: The Heartbleed Bug
 
-### Scenario A: The Permission Denial
-**The Incident:** A developer generates a new SSH keypair. They use `scp` to copy the Public Key to the production server and place it in the `/home/devuser/.ssh/authorized_keys` file. 
-However, when the developer tries to SSH in, the server completely ignores the key and prompts them for a password. 
-
-**The Investigation & Fix:**
-
-1. The Support Engineer logs in (using their own admin account) and checks the developer's home directory.
-2. The engineer runs `ls -la /home/devuser/` and checks the permissions of the `.ssh` folder.
-   `drwxrwxrwx 2 devuser devuser 4096 Jul 08 .ssh`
-3. The engineer immediately sees the problem. The developer set the permissions of the `.ssh` directory to `777` (world-writable). 
-4. The engineer understands SSH paranoia: Because the folder is world-writable, *any* user on the server could have walked into that folder and pasted their own padlock into the file. Because SSH cannot trust the integrity of the file, it refuses to read it.
-5. The engineer fixes the permissions to the industry standard:
-   * The directory must only be accessible by the owner: `chmod 700 /home/devuser/.ssh`
-   * The file must only be readable/writable by the owner: `chmod 600 /home/devuser/.ssh/authorized_keys`
-6. The developer tries again. The mathematical signature matches, and they are logged in without a password.
+> [!CAUTION] **The Vulnerability that Shook the Internet**
+> In 2014, the Heartbleed vulnerability (CVE-2014-0160) in OpenSSL was publicly disclosed, affecting an estimated 17% of all secure web servers on the internet.
+>
+> **The Timeline:**
+> - A bug was introduced in the OpenSSL codebase in 2012, affecting the TLS heartbeat extension.
+> - For two years, the vulnerability went unnoticed by the open-source community.
+> - Security researchers discovered that the bug allowed attackers to read up to 64 kilobytes of server memory per heartbeat request.
+>
+> **The Root Cause:**
+> A missing bounds check in the heartbeat implementation. When a client sent a heartbeat request, they could lie about the payload size, causing the server to respond with its own memory contents (which often included private SSL keys, passwords, and session cookies).
+>
+> **The Business Impact:**
+> Global panic. Companies worldwide had to revoke and reissue their SSL certificates, patch their servers, and advise millions of users to change their passwords.
+>
+> **The Lessons Learned:**
+> 1. **Open source does not automatically mean secure.** Even widely scrutinized code can harbor devastating bugs.
+> 2. Hardening a server means keeping packages updated and rotating cryptographic keys in response to massive vulnerabilities.
 
 
 ## Hands-on Lab
@@ -112,6 +111,14 @@ However, when the developer tries to SSH in, the server completely ignores the k
 ### Question 3: Should you ever share your Private SSH key with a co-worker so they can access a server?
 * **Target Answer**: "Absolutely never. A Private Key is tied to an individual's identity. If a co-worker needs access to a server, they should generate their own keypair, and I will append their Public Key to the server's `authorized_keys` file. Sharing a Private Key destroys non-repudiation and compromises the entire cryptographic trust model."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Disabling password authentication before verifying that your SSH keys actually work.
+
+> [!CAUTION] Think Before You Type
+> `systemctl restart sshd` (Did you test the config with `sshd -t` first?)
+
 ## Chapter Summary
 
 Securing SSH is the first and most important step when building a new server. Disable root logins, disable passwords, and enforce keys. And if SSH suddenly starts ignoring your keys, you don't need to generate new ones—you just need to fix your `chmod` permissions!
@@ -123,6 +130,15 @@ Securing SSH is the first and most important step when building a new server. Di
 - [ ] I know the correct permissions for the `authorized_keys` file (`600`).
 
 ---
+
+---
+
+**Chapter Transition**
+> SSH keys are secure, but what about brute force attacks on other services? We need automated intrusion prevention.
+
+---
+
+
 
 ## Navigation
 

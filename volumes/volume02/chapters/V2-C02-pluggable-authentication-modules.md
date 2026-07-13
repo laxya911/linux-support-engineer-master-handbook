@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Troubleshoot and reset user lockouts triggered by `pam_faillock` (or `pam_tally2`).
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-83394**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Pluggable Authentication Modules (PAM). Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: The Authentication Layer**
+>
+> Applications shouldn't have to know how to read fingerprints or send text messages. PAM creates an abstraction layer that handles authentication for every service on the system. When a user can't log in despite having the right password, a Support Engineer looks at PAM.
 
 ## Visual Architecture: The PAM Interceptor
 
@@ -83,23 +80,6 @@ PAM uses control flags to decide what happens if a module fails:
 * **`requisite`**: The module *must* succeed. If it fails, PAM instantly rejects the user and drops the connection.
 * **`sufficient`**: If this module succeeds, PAM instantly grants access and ignores the remaining modules.
 
-## Scenario-Based Troubleshooting
-
-### Scenario A: The Brute Force Lockout
-**The Incident:** A customer's employee, `jdoe`, went on vacation. They forgot their password. They tried to guess it 5 times over SSH and failed. Then they remembered their password, but the server now says `Permission Denied` even though the password is correct!
-
-**The Investigation & Fix:**
-
-1. The Support Engineer logs in (using their own admin account) and checks the authentication logs: `grep jdoe /var/log/auth.log` (or `/var/log/secure` on RHEL).
-2. The logs show: `pam_faillock(sshd:auth): Consecutive login failures for user jdoe account temporarily locked`.
-3. The engineer realizes the security hardening module `pam_faillock` (or the older `pam_tally2`) intercepted the login. Because the user failed 5 times, the `account` management group has locked the user out for 15 minutes to prevent Brute Force attacks.
-4. The engineer does not want to wait 15 minutes. They run the command to view the failure count:
-   `faillock --user jdoe`
-5. The output confirms 5 failures. The engineer resets the counter:
-   `faillock --user jdoe --reset`
-6. `jdoe` tries to log in again with their correct password. The PAM stack passes them, and they successfully log in.
-
-
 ## Hands-on Lab
 
 > [!TIP]
@@ -117,6 +97,14 @@ PAM uses control flags to decide what happens if a module fails:
 ### Question 3: A user is completely locked out of their account after typing the wrong password too many times. What PAM module is likely responsible, and how do you fix it?
 * **Target Answer**: "The module responsible is likely `pam_faillock` (on modern systems) or `pam_tally2` (on older systems). As an administrator, I would run `faillock --user <username> --reset` (or `pam_tally2 --user <username> --reset`) to clear the failure counter and instantly restore their access."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Locking out `root` without having a secondary administrative backdoor open.
+
+> [!CAUTION] Think Before You Type
+> `pam_tally2 --user admin` (Are you checking lockouts or resetting them? Know the flags!)
+
 ## Chapter Summary
 
 PAM is the hidden bouncer of the Linux operating system. It doesn't just check passwords; it checks if your account is locked, if your password meets complexity requirements, and if your home directory exists. When a user cannot log in despite having the correct password, PAM is usually the culprit.
@@ -128,6 +116,15 @@ PAM is the hidden bouncer of the Linux operating system. It doesn't just check p
 - [ ] I know the command to reset a locked user (`faillock --reset`).
 
 ---
+
+---
+
+**Chapter Transition**
+> Local authentication is fine for one server, but what happens when you have a thousand? You need a central authority.
+
+---
+
+
 
 ## Navigation
 

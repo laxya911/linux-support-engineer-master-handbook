@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Avoid the catastrophic "Self-Lockout" scenario when enabling a firewall remotely.
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-64162**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Advanced Firewalls (UFW & firewalld). Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: Advanced Firewalls (UFW & firewalld)**
+>
+> Mastering Advanced Firewalls (UFW & firewalld) is critical for stability and accountability. We will explore how to handle Advanced Firewalls (UFW & firewalld) to ensure continuous uptime.
 
 ## Visual Architecture: The Two Layers of Defense
 
@@ -83,26 +80,6 @@ To allow a port in the default zone permanently:
 `firewall-cmd --add-port=443/tcp --permanent`
 `firewall-cmd --reload`
 
-## Scenario-Based Troubleshooting
-
-### Scenario A: The Locked Out Admin
-**The Incident:** A junior administrator is tasked with securing a new Ubuntu web server hosted in an offshore data center. They log in via SSH (Port 22). They check the firewall status using `ufw status` and notice it is `inactive`.
-Being proactive, they run `ufw enable`. The system prints a warning: `Command may disrupt existing ssh connections. Proceed with operation (y|n)?`. The admin presses `y`. 
-Instantly, their SSH terminal freezes. They close the terminal and try to SSH back in. The connection times out. They are locked out.
-
-**The Investigation & Fix:**
-
-1. A Senior Engineer gets the frantic phone call. 
-2. The senior engineer explains the mistake: By default, UFW drops *all* incoming traffic. When the junior admin enabled it, UFW immediately dropped the active SSH connection because no rule existed to allow Port 22.
-3. Because SSH is blocked, the senior engineer cannot fix it over the network. They must log into the Cloud Provider's Web Console and use the "Virtual Serial Console" to physically simulate plugging a keyboard and monitor into the server.
-4. Once logged in via the virtual console, the senior engineer fixes the mistake:
-   `ufw allow 22/tcp`
-5. They verify the rule exists with `ufw status`. The junior admin can now SSH back in over the network.
-
-> [!CAUTION]  
-> **The Golden Rule of Firewalls:** Before you *ever* type `ufw enable`, you must **always** type `ufw allow ssh` first!
-
-
 ## Hands-on Lab
 
 > [!TIP]
@@ -120,6 +97,14 @@ Instantly, their SSH terminal freezes. They close the terminal and try to SSH ba
 ### Question 3: In RHEL's `firewalld`, what is the purpose of the `--permanent` flag?
 * **Target Answer**: "If you run `firewall-cmd --add-port=80/tcp` without the `--permanent` flag, the rule is applied immediately to the running configuration but will be lost as soon as the server reboots. The `--permanent` flag saves the rule to the configuration files on disk, ensuring it survives a reboot. However, you must run `firewall-cmd --reload` for a permanent rule to take effect immediately."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Enabling `ufw` without explicitly allowing port 22 first, instantly locking yourself out of SSH.
+
+> [!CAUTION] Think Before You Type
+> `ufw enable` (Are you absolutely sure SSH is allowed?)
+
 ## Chapter Summary
 
 Firewalls are essential for security, but they are also the number one cause of self-inflicted downtime. Whether you are using Ubuntu's UFW or RHEL's `firewalld`, the logic is the same: always secure your own administrative access (SSH) *before* you flip the switch. 
@@ -131,6 +116,15 @@ Firewalls are essential for security, but they are also the number one cause of 
 - [ ] I will never enable a firewall without allowing SSH first.
 
 ---
+
+---
+
+**Chapter Transition**
+> Firewalls block external ports, but attackers will try to break through the front door via SSH. We must harden it.
+
+---
+
+
 
 ## Navigation
 

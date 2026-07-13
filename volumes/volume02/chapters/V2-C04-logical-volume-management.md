@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Extend a live filesystem using `lvextend` and `resize2fs` (or `xfs_growfs`).
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-57671**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Logical Volume Management (LVM). Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: Abstracting Storage**
+>
+> In traditional setups, if a partition fills up, you are trapped. In an enterprise, storage must be fluid. LVM solves this by creating an abstract "pool" of storage. You throw hard drives into the pool, and then you scoop out flexible chunks of storage called Logical Volumes that can be resized on the fly.
 
 ## Visual Architecture: The Storage Pool
 
@@ -78,25 +75,36 @@ You can view the state of your LVM architecture at any time using three simple c
 * `vgs` (Volume Group Status)
 * `lvs` (Logical Volume Status)
 
-## Scenario-Based Troubleshooting
+## Real-World Support Ticket
 
-### Scenario A: The Full Disk Emergency
-**The Incident:** An automated monitoring alert fires: `CRITICAL: /var is 100% full`. The `/var` directory is where the production MySQL database lives. Because the disk is full, the database crashes. Customers cannot place orders. 
-
-**The Investigation & Fix:**
-
-1. The Support Engineer logs in and runs `df -h`. They confirm that `/dev/mapper/ubuntu--vg-var` is at 100% usage.
-2. The engineer runs `vgs` to check if there is any free space left in the storage pool. The output shows `VFree: 50g`. They have 50GB of unassigned storage sitting in the pool!
-3. The engineer uses LVM to instantly extend the partition:
-   `lvextend -L +50G /dev/mapper/ubuntu--vg-var`
-4. The LVM partition is now larger, but the filesystem sitting *inside* the partition doesn't know it yet. The engineer must expand the filesystem to fill the new space.
-   * If the filesystem is `ext4` (Ubuntu standard): `resize2fs /dev/mapper/ubuntu--vg-var`
-   * If the filesystem is `xfs` (RHEL standard): `xfs_growfs /var`
-5. The engineer runs `df -h` again. The `/var` partition now has 50GB of free space.
-6. The engineer runs `systemctl start mysql`. The database comes back online.
-
-> [!IMPORTANT]  
-> Notice that the engineer **never rebooted the server** and **never unmounted the drive**. LVM allows you to resize live filesystems while the server is running in production!
+> [!IMPORTANT] ServiceNow Ticket: INC-2026204
+> **Title:** Root Filesystem at 100% Capacity
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie receives a P2 alert: `/` is at 100%. Web applications are failing to write temporary files. SLA requires 30-minute response.
+> 
+> **2) Discovery & diagnosis**
+> Charlie runs `df -h` and confirms `/` is full. He runs `vgs` and sees 50GB of free space remaining in the Volume Group.
+> 
+> **3) Immediate containment**
+> Charlie clears out old `/var/log` archives to free up 500MB immediately, allowing the web apps to resume functioning while he executes the permanent fix.
+> 
+> **4) Resolution planning & execution**
+> Charlie uses `lvextend -L +10G /dev/vg0/root` to add 10GB from the VG to the LV, and then runs `resize2fs /dev/vg0/root` to expand the filesystem online.
+> 
+> **5) Verification**
+> Charlie runs `df -h` and confirms `/` now shows 10GB of free space. Monitoring alerts clear.
+> 
+> **6) Closure & documentation**
+> Charlie documents the LVM expansion and resolves the ticket.
+> 
+> **7) Post-resolution follow-up**
+> Charlie adjusts the monitoring thresholds to alert at 85% instead of 95% to allow more reaction time in the future.
+> 
+> **8) Escalation rules**
+> If the VG had 0 free space, Charlie would escalate to the Storage team to provision a new physical LUN.
 
 
 ## Hands-on Lab
@@ -116,6 +124,14 @@ You can view the state of your LVM architecture at any time using three simple c
 ### Question 3: Explain the relationship between a PV, a VG, and an LV.
 * **Target Answer**: "A Physical Volume (PV) is the raw hard drive. Multiple PVs are pooled together to create a Volume Group (VG), which acts as a giant bucket of unified storage. From that Volume Group, administrators carve out smaller, flexible virtual partitions called Logical Volumes (LV), which are then formatted and mounted to the operating system."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Expanding a filesystem without expanding the underlying Logical Volume first.
+
+> [!CAUTION] Think Before You Type
+> `lvremove /dev/vg0/data` (Are you sure the volume is unmounted and empty?)
+
 ## Chapter Summary
 
 Storage emergencies are the most stressful events in IT. LVM reduces that stress by giving you flexibility. Always leave 20% of your Volume Group unallocated (free). That way, when a partition fills up in the middle of the night, you can instantly `lvextend` and `resize2fs` your way out of the crisis.
@@ -127,6 +143,15 @@ Storage emergencies are the most stressful events in IT. LVM reduces that stress
 - [ ] I can list the commands to view LVM architecture (`pvs`, `vgs`, `lvs`).
 
 ---
+
+---
+
+**Chapter Transition**
+> Logical volumes give us flexibility, but what happens when the underlying physical disk dies? We need hardware redundancy.
+
+---
+
+
 
 ## Navigation
 

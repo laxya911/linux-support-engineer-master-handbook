@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Understand the `ext4` reserved block percentage.
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-63300**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Filesystem Tuning and Inodes. Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: Filesystem Tuning and Inodes**
+>
+> Mastering Filesystem Tuning and Inodes is critical for stability and accountability. We will explore how to handle Filesystem Tuning and Inodes to ensure continuous uptime.
 
 ## Visual Architecture: The Library Card Catalog
 
@@ -82,25 +79,36 @@ If a partition is given 10,000,000 Inodes, you can only ever create 10 million f
 ### 3. Reserved Blocks
 By default, `ext4` reserves 5% of all disk space exclusively for the `root` user. If a regular user fills the drive to 100%, `root` can still log in and use that hidden 5% to delete files and save the server.
 
-## Scenario-Based Troubleshooting
+## Real-World Support Ticket
 
-### Scenario A: The Inode Exhaustion
-**The Incident:** A customer's e-commerce website goes offline. The web browser shows a fatal PHP error: `Warning: session_write_close(): write failed: No space left on device (28)`. 
-The customer panics and buys a larger hard drive. They contact Support and say, "My server says it is out of space, but when I run `df -h`, it says my hard drive is only 40% full! Your servers are broken!"
-
-**The Investigation & Fix:**
-
-1. The Support Engineer logs in. They run `df -h`. The customer is correct; the drive has 60% free physical space.
-2. The engineer knows the secret. They run the Inode command:
-   `df -i`
-3. The output shows `IUse%: 100%`. 
-4. The engineer understands the problem: The physical hard drive has plenty of room, but the filesystem has run out of index cards. 
-5. What causes this? It is always caused by an application creating millions of tiny, 1-kilobyte files. The files don't consume much physical gigabyte space, but each file consumes exactly 1 Inode.
-6. The engineer hunts for the directory holding the most files using a specialized command:
-   `find / -xdev -type d -size +100k` *(or a similar script to count files per directory)*.
-7. They discover that `/var/lib/php/sessions/` contains 4.5 million old, abandoned session files. A cron job meant to delete old sessions had failed a year ago.
-8. The engineer deletes the millions of tiny files (`find /var/lib/php/sessions -type f -delete`).
-9. The engineer runs `df -i` again. Inode usage drops to 5%. The website instantly comes back online.
+> [!IMPORTANT] ServiceNow Ticket: INC-2026207
+> **Title:** No Space Left on Device (Inodes)
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie takes a P2 ticket: Users cannot upload profile pictures. Error: 'No space left on device'.
+> 
+> **2) Discovery & diagnosis**
+> Charlie runs `df -h` and sees the disk is only 40% full. He remembers to check inodes and runs `df -i`. The inode usage is at 100%.
+> 
+> **3) Immediate containment**
+> Charlie identifies a misconfigured PHP session directory containing 5 million tiny session files. He stops the web service briefly to prevent more files from being created.
+> 
+> **4) Resolution planning & execution**
+> Charlie uses `find /var/lib/php/sessions -type f -delete` (after confirming it's safe) to purge the millions of files, freeing up the inodes.
+> 
+> **5) Verification**
+> Charlie runs `df -i` and sees inode usage drop to 2%. He successfully uploads a test image.
+> 
+> **6) Closure & documentation**
+> Charlie logs the root cause (inode exhaustion) and the cleanup command.
+> 
+> **7) Post-resolution follow-up**
+> Charlie creates a Cron job to automatically prune PHP session files older than 24 hours.
+> 
+> **8) Escalation rules**
+> If the inodes were exhausted by legitimate files that could not be deleted, he would escalate to the OS team to format a new partition with a higher inode ratio.
 
 
 ## Hands-on Lab
@@ -120,6 +128,14 @@ The customer panics and buys a larger hard drive. They contact Support and say, 
 ### Question 3: By default, the `ext4` filesystem reserves 5% of the disk space. What is the purpose of this reserved space?
 * **Target Answer**: "The reserved space is held exclusively for the `root` user and critical system processes. If a runaway application or user fills the hard drive to 100%, the system will not crash. The `root` user can still log in, utilize the reserved 5% to execute commands, and delete files to resolve the emergency."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running out of inodes because of millions of tiny cache files, even when disk space shows 50% free.
+
+> [!CAUTION] Think Before You Type
+> `rm -rf /var/cache/*` (Will the application crash if the directory structure disappears?)
+
 ## Chapter Summary
 
 The `df -h` command only tells you half the story. The physical size of the files matters, but the *quantity* of the files matters just as much. If you ever see "No space left on device," run `df -h`, and then immediately run `df -i`. 
@@ -131,6 +147,15 @@ The `df -h` command only tells you half the story. The physical size of the file
 - [ ] I understand how millions of tiny files can crash a server.
 
 ---
+
+---
+
+**Chapter Transition**
+> To connect to external storage and users, the server must exist on a network. We must master IP configuration.
+
+---
+
+
 
 ## Navigation
 

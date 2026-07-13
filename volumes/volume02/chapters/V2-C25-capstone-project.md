@@ -1,8 +1,8 @@
 ---
 volume: 2
-chapter: 20
-part: 5
-id: V2-C20
+chapter: 25
+part: 6
+id: V2-C25
 title: Capstone Project
 author: Laxman Aryal
 edition: First Edition
@@ -22,7 +22,7 @@ career_level: Associate to Professional
 enterprise_relevance: High
 ---
 
-# Chapter 20 — Capstone Project
+# Chapter 25 — Capstone Project
 
 
 ## The Journey So Far
@@ -42,17 +42,58 @@ To prove you are ready to manage enterprise production servers, you must pass th
 In this Capstone, you will not be given step-by-step commands. You will be given a list of symptoms and business requirements. It is entirely up to you to apply the OODA loop, investigate the symptoms, and implement the permanent fixes.
 
 
+## Real-World Support Ticket
+
+> [!IMPORTANT] ServiceNow Ticket: INC-2026225
+> **Title:** The Cascading Failure (Capstone)
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie takes a P1 Critical ticket: 'Everything is down.' Users cannot reach the web app, and the database is unreachable.
+> 
+> **2) Discovery & diagnosis**
+> Charlie follows the OSI model. Layer 1/2/3: The network is up. Layer 4: Port 80 is open. Layer 7: Nginx returns a 502 Bad Gateway. He checks the backend app logs and sees 'Cannot connect to database.' He checks the database and sees 'No space left on device.'
+> 
+> **3) Immediate containment**
+> Charlie cleans up old database transaction logs to free up enough space for the database engine to start running again.
+> 
+> **4) Resolution planning & execution**
+> With the database running, Charlie restarts the backend application, which reconnects to the database. Nginx immediately begins serving traffic.
+> 
+> **5) Verification**
+> Charlie confirms 200 OK responses in the Nginx access logs and verifies the application UI.
+> 
+> **6) Closure & documentation**
+> Charlie documents the full chain: Disk full -> DB crash -> App crash -> 502 Gateway.
+> 
+> **7) Post-resolution follow-up**
+> Charlie implements strict monitoring on the database disk volume.
+> 
+> **8) Escalation rules**
+> If the database had corrupted its tables due to the crash, Charlie would have escalated to the DBA team for a repair.
+
+
 ## Hands-on Lab
 
 > [!CAUTION]  
 > **Warning: Extreme Difficulty**
-> Proceed to the [Chapter 20 Practice Guide](../practice-files/V2-C20-practice.md) to receive your final mission briefing. Good luck, Engineer.
+> Proceed to the [Chapter 25 Practice Guide](../practice-files/V2-C25-practice.md) to receive your final mission briefing. Good luck, Engineer.
 
 ---
 
+---
+
+**Chapter Transition**
+> Congratulations on completing Volume 2. Next up: Volume 3 - Automation & Infrastructure.
+
+---
+
+
+
 ## Navigation
 
-← Previous: [Chapter 19 — Incident Response Methodology](V2-C19-incident-response.md)
+← Previous: [Chapter 24 — Intermediate Troubleshooting](V2-C24-intermediate-troubleshooting.md)
 
 ↑ Volume Contents: [Table of Contents](TOC.md)
 

@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Use the `fail2ban-client` to unban an IP address after a false positive lockout.
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-65451**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Intrusion Prevention (fail2ban). Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: Intrusion Prevention (fail2ban)**
+>
+> Mastering Intrusion Prevention (fail2ban) is critical for stability and accountability. We will explore how to handle Intrusion Prevention (fail2ban) to ensure continuous uptime.
 
 ## Visual Architecture: The Dynamic Defense
 
@@ -78,25 +75,36 @@ Because `fail2ban` works by dynamically modifying the underlying `iptables` fire
 To see which IPs are currently banned from SSH:
 `fail2ban-client status sshd`
 
-## Scenario-Based Troubleshooting
+## Real-World Support Ticket
 
-### Scenario A: The Banned Admin
-**The Incident:** A security-conscious engineer installs `fail2ban` on their production server. They configure the SSH jail to be extremely strict: 3 failed attempts results in a 24-hour ban. 
-Later that afternoon, the engineer tries to log into the server. They have caps-lock turned on and mistype their password 3 times in a row. 
-On the 4th attempt, the connection simply drops. The terminal says `Connection refused`. They are completely locked out of the server.
-
-**The Investigation & Fix:**
-
-1. The engineer realizes exactly what happened. `fail2ban` did its job perfectly. It saw 3 failed attempts, assumed the engineer was a botnet, and commanded the firewall to drop their IP address. 
-2. The engineer cannot fix this from their laptop because their laptop's IP is blocked by the firewall. 
-3. The engineer connects to a VPN (or uses their cellphone hotspot) to get a different IP address. 
-4. The engineer successfully logs into the server using the new IP address. 
-5. The engineer asks `fail2ban` for the status of the SSH jail:
-   `fail2ban-client status sshd`
-6. The output shows their original laptop IP address in the "Banned IP list".
-7. The engineer uses the client to unban themselves:
-   `fail2ban-client set sshd unbanip <LAPTOP_IP_ADDRESS>`
-8. The engineer disconnects from the VPN, tests the connection from their laptop, and successfully logs in.
+> [!IMPORTANT] ServiceNow Ticket: INC-2026213
+> **Title:** Massive Brute Force Attack
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie gets a P1 Security Alert: Excessive failed SSH logins detected from multiple foreign IPs.
+> 
+> **2) Discovery & diagnosis**
+> Charlie checks `/var/log/auth.log` and sees thousands of `Failed password for root` entries. The server is wasting CPU cycles processing the attempts.
+> 
+> **3) Immediate containment**
+> Charlie immediately stops the SSH service on the public interface, restricting it to the internal management VPN.
+> 
+> **4) Resolution planning & execution**
+> Charlie installs and configures `fail2ban`. He configures the `sshd` jail to ban IPs after 3 failed attempts.
+> 
+> **5) Verification**
+> Charlie restarts SSH on the public interface and tails the fail2ban log. He watches fail2ban dynamically add iptables rules to drop the attacking IPs.
+> 
+> **6) Closure & documentation**
+> Charlie documents the implementation of fail2ban and the drop in CPU usage.
+> 
+> **7) Post-resolution follow-up**
+> Charlie schedules a project to disable password authentication entirely and switch to SSH Keys only.
+> 
+> **8) Escalation rules**
+> If the attack was a massive DDoS saturating the network pipe, Charlie would have escalated to the ISP or Cloud Provider for upstream mitigation.
 
 
 ## Hands-on Lab
@@ -116,6 +124,14 @@ On the 4th attempt, the connection simply drops. The terminal says `Connection r
 ### Question 3: How does `fail2ban` know that an attack is occurring?
 * **Target Answer**: "`fail2ban` relies on regular expressions (regex) to parse application log files in real-time. For example, it reads `/var/log/auth.log` (or `/var/log/secure` on RHEL) looking for specific text strings that indicate a failed password attempt. Once it counts enough matches from a single source IP, it triggers the ban."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Whitelisting `0.0.0.0/0` by accident or failing to whitelist the corporate office IP, resulting in mass lockouts.
+
+> [!CAUTION] Think Before You Type
+> `fail2ban-client set sshd banip ...` (Did you just ban the CEO?)
+
 ## Chapter Summary
 
 If a server is on the internet, it is being attacked. `fail2ban` gives your server the ability to fight back automatically, dropping malicious IPs before they can consume your server's resources. Just remember to be careful with your own passwords, or you might find yourself fighting your own security system!
@@ -127,6 +143,15 @@ If a server is on the internet, it is being attacked. `fail2ban` gives your serv
 - [ ] I know why I shouldn't manually edit the firewall to remove a `fail2ban` rule.
 
 ---
+
+---
+
+**Chapter Transition**
+> Even with the perimeter secured, what happens if an attacker compromises a web application? We need Mandatory Access Control.
+
+---
+
+
 
 ## Navigation
 

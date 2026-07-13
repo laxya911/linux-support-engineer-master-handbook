@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Use `visudo` to prevent locking yourself out of your own server.
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-74056**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to The Root of All Power. Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: The Sudo Command**
+>
+> In an enterprise, logging directly into the `root` account is forbidden because it destroys accountability. Instead, Support Engineers are granted specific privileges using `sudo`. This chapter will teach you how to manage those privileges without locking yourself out of the server.
 
 ## Visual Architecture: The Sudo Escalation
 
@@ -80,37 +77,36 @@ If you open the file, you will see a line like this:
 `%admin ALL=(ALL) ALL`
 * This means anyone in the `admin` group can run `ALL` commands as `ALL` users from `ALL` terminals.
 
-## Scenario-Based Troubleshooting
+## Real-World Support Ticket
 
-### Scenario A: The Lockout (The `visudo` Warning)
-
-> [!CAUTION]
-> **NEVER USE NANO OR VIM TO EDIT `/etc/sudoers`.**
-
-**The Incident:** A junior administrator needs to grant a developer `sudo` access. They type `sudo nano /etc/sudoers`. They add the line for the developer, but they make a syntax typo. They save the file and exit. 
-Ten minutes later, the admin tries to run a `sudo` command. The server responds:
-`>>> /etc/sudoers: syntax error near line 25 <<<`
-`sudo: parse error in /etc/sudoers near line 25`
-`sudo: no valid sudoers sources found, quitting`
-
-**The Disaster:** Because `/etc/sudoers` is broken, the `sudo` command is permanently disabled. Because the admin cannot use `sudo`, they cannot open the file to fix their typo! They are completely locked out of administrative access.
-
-**The Fix (And How to Prevent It):**
-To fix it, a senior engineer must physically reboot the server into a specialized "Rescue Mode" to bypass the operating system and fix the text file manually. 
-To *prevent* it, you must **always** use the `visudo` command. `visudo` opens the file safely. When you try to save, it checks your syntax. If you made a typo, it refuses to save the file, saving your career.
-
-### Scenario B: The Missing Command
-**The Incident:** An engineer wants to grant the `devteam` group the ability to restart the Nginx web server, and absolutely nothing else. They use `visudo` and add:
-`%devteam ALL=(ALL) NOPASSWD: systemctl restart nginx`
-The developer runs `sudo systemctl restart nginx` but receives a "Command not allowed" error.
-
-**The Investigation & Fix:**
-
-1. The engineer realizes that the `sudoers` file is extremely paranoid. It does not trust relative commands.
-2. The engineer runs `which systemctl` to find the absolute path of the executable. It returns `/bin/systemctl`.
-3. The engineer runs `sudo visudo` and updates the line to:
-   `%devteam ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx`
-4. The developer tries again, and the command succeeds.
+> [!IMPORTANT] ServiceNow Ticket: INC-2026201
+> **Title:** Syntax Error in /etc/sudoers
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie confirms P1 impact: No administrators can execute privileged commands. SLA requires 15-minute response.
+> 
+> **2) Discovery & diagnosis**
+> Charlie attempts `sudo -l` and immediately sees a parse error at line 25. He checks the audit log and sees Bob recently modified the file using nano instead of visudo.
+> 
+> **3) Immediate containment**
+> Since sudo is completely broken, standard operations are halted. Charlie announces a temporary freeze on administrative tasks while he restores access.
+> 
+> **4) Resolution planning & execution**
+> Charlie leverages an out-of-band management console to log in directly as root (which bypasses sudo). He uses `visudo` to correct the syntax error on line 25.
+> 
+> **5) Verification**
+> Charlie logs back in as a standard user and runs `sudo -l`. The command succeeds.
+> 
+> **6) Closure & documentation**
+> Charlie documents the fix: 'Corrected syntax in sudoers via root console'. Resolves the incident.
+> 
+> **7) Post-resolution follow-up**
+> Charlie updates the SOP to strictly require `visudo` for all future sudoers edits to prevent syntax lockouts.
+> 
+> **8) Escalation rules**
+> If the root password was lost and out-of-band management was unavailable, Charlie would have escalated to the Data Center team to boot into Single User Mode.
 
 
 ## Hands-on Lab
@@ -130,6 +126,14 @@ The developer runs `sudo systemctl restart nginx` but receives a "Command not al
 ### Question 3: How do you grant a user named 'appdev' the ability to restart the apache2 service without prompting them for a password?
 * **Target Answer**: "I would run `sudo visudo` and add the following line: `appdev ALL=(ALL) NOPASSWD: /bin/systemctl restart apache2`. Using the absolute path to the binary is required for security."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Editing `/etc/sudoers` with `nano` instead of `visudo`, breaking syntax and locking everyone out.
+
+> [!CAUTION] Think Before You Type
+> `chmod -R 777 /etc/` (What goes wrong? You destroy the strict permissions required by services like SSH and sudo, permanently breaking the system.)
+
 ## Chapter Summary
 
 The `sudoers` file is the gateway to your server's security. Give people only the exact permissions they need to do their jobs (The Principle of Least Privilege), always use absolute paths for executables, and **never** forget the `visudo` command.
@@ -141,6 +145,15 @@ The `sudoers` file is the gateway to your server's security. Give people only th
 - [ ] I know how to find the absolute path of a command using `which`.
 
 ---
+
+---
+
+**Chapter Transition**
+> You now have administrative access, but how do you verify who is logging in? It's time to explore Pluggable Authentication Modules.
+
+---
+
+
 
 ## Navigation
 

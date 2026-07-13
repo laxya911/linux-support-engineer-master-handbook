@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Write robust scripts that "fail fast" using `set -e`.
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-57146**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Advanced Bash Scripting. Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: Advanced Bash Scripting**
+>
+> Mastering Advanced Bash Scripting is critical for stability and accountability. We will explore how to handle Advanced Bash Scripting to ensure continuous uptime.
 
 ## Visual Architecture: The Script Logic
 
@@ -85,34 +82,36 @@ Every time a command finishes, it leaves behind an invisible numeric grade calle
 * **1 to 255** means "Failure" (the exact number depends on the error).
 You can view the grade of the very last command you ran by typing: `echo $?`
 
-## Scenario-Based Troubleshooting
+## Real-World Support Ticket
 
-### Scenario A: The Silent Failure
-**The Incident:** A junior administrator writes a script to back up the web server every night. The script is very simple:
-```bash
-#!/bin/bash
-cd /mnt/external_drive/backups
-tar -czf website.tar.gz /var/www/html
-echo "Backup Successful!" | mail -s "Backup Alert" admin@company.com
-```
-One night, the external drive becomes physically unmounted from the server. The next morning, the administrator receives the "Backup Successful!" email. But when they check the server, the backup file is missing!
-
-**The Investigation & Fix:**
-
-1. The Support Engineer investigates the script. They realize the script suffered from a **Silent Failure**.
-2. Because the drive was unmounted, the `cd` command failed.
-3. However, Bash scripts do not stop when a command fails. The script mindlessly proceeded to the next line. It ran the `tar` command in the wrong directory, failed again, and then mindlessly proceeded to send the "Success" email.
-4. The engineer teaches the junior admin two ways to fix this.
-5. **Fix 1 (The Quick Way):** Add `set -e` below the Shebang. This tells Bash to "fail fast." If any command fails, the script will instantly terminate and will not send the email.
-6. **Fix 2 (The Professional Way):** Use Exit Codes and `if` statements to handle the error gracefully:
-   ```bash
-   cd /mnt/external_drive/backups
-   if [ $? -ne 0 ]; then
-       echo "Failed to enter backup directory." | mail -s "Backup FAILED" admin@company.com
-       exit 1
-   fi
-   ```
-7. The script is updated, and silent failures are eliminated.
+> [!IMPORTANT] ServiceNow Ticket: INC-2026216
+> **Title:** Runaway Automation Script
+> **Assigned To:** Charlie (L2 Support Engineer)
+> **Status:** IN PROGRESS
+> 
+> **1) Ticket intake & triage**
+> Charlie takes a P2 ticket: The nightly backup script has consumed all CPU and memory, crashing the server.
+> 
+> **2) Discovery & diagnosis**
+> Charlie checks the script and finds a `while` loop that doesn't increment its counter. It's an infinite loop spawning child processes.
+> 
+> **3) Immediate containment**
+> Charlie runs `killall -9 backup.sh` to forcefully terminate the runaway processes and stabilize the server.
+> 
+> **4) Resolution planning & execution**
+> Charlie edits the Bash script, fixes the logic error in the loop, and adds `set -e` so the script exits immediately if any command fails.
+> 
+> **5) Verification**
+> Charlie manually triggers the script with a small test dataset and verifies it completes successfully and exits.
+> 
+> **6) Closure & documentation**
+> Charlie notes the logic error and the addition of `set -e` in the resolution summary.
+> 
+> **7) Post-resolution follow-up**
+> Charlie institutes a peer-review policy for all Bash scripts deployed to production.
+> 
+> **8) Escalation rules**
+> If the script had corrupted production data before crashing, Charlie would escalate to the Database team for a point-in-time restore.
 
 
 ## Hands-on Lab
@@ -132,6 +131,14 @@ One night, the external drive becomes physically unmounted from the server. The 
 ### Question 3: What does the `set -e` command do at the top of a Bash script?
 * **Target Answer**: "`set -e` instructs the Bash interpreter to exit immediately if any command returns a non-zero exit code. This prevents 'silent failures' where a script mindlessly continues executing subsequent commands even after a critical preceding command has failed."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Using variables without quotes (e.g., `rm -rf $DIR/`), which deletes the root directory if `$DIR` is empty!
+
+> [!CAUTION] Think Before You Type
+> `for i in $(ls); do` (What happens if a filename contains a space?)
+
 ## Chapter Summary
 
 Writing scripts is easy. Writing *robust* scripts is hard. Always assume your commands will fail. Check your directories before writing to them, check your exit codes, and when in doubt, use `set -e` to ensure your scripts fail loudly rather than silently.
@@ -143,6 +150,15 @@ Writing scripts is easy. Writing *robust* scripts is hard. Always assume your co
 - [ ] I know how `set -e` prevents silent failures.
 
 ---
+
+---
+
+**Chapter Transition**
+> Scripts are powerful, but they shouldn't require manual execution. We need the server to run them on a schedule.
+
+---
+
+
 
 ## Navigation
 

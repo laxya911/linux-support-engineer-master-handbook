@@ -34,13 +34,10 @@ By the end of this chapter, you will be able to:
 * Troubleshoot and recover a frozen "Stale NFS Mount."
 
 
-> [!IMPORTANT]
-> **ServiceNow Ticket: INC-76255**
-> **Priority:** High
-> **Reported By:** Enterprise Application Team
-> **Issue:** We are experiencing a critical failure related to Network Attached Storage (NFS & SMB). Please investigate immediately.
-> 
-> **Support Engineer Objective:** Use operational thinking to collect evidence, identify the root cause, and restore service without causing further disruption.
+> [!NOTE]
+> **The Enterprise Mindset: Network Attached Storage (NFS & SMB)**
+>
+> Mastering Network Attached Storage (NFS & SMB) is critical for stability and accountability. We will explore how to handle Network Attached Storage (NFS & SMB) to ensure continuous uptime.
 
 ## Visual Architecture: The Shared File Pool
 
@@ -73,26 +70,6 @@ In Volume 1, you learned how to use the `mount` command. However, if the server 
 Example of an NFS fstab entry:
 `10.0.0.50:/export/images  /mnt/shared_images  nfs  defaults  0  0`
 
-## Scenario-Based Troubleshooting
-
-### Scenario A: The Stale Mount Crash
-**The Incident:** A junior admin accidentally reboots the central Storage Server. Immediately, Web Server A completely freezes. An engineer SSHs into Web Server A and types `df -h` to check the disk space. The command hangs indefinitely. The terminal refuses to respond to `Ctrl+C`. The entire server feels dead.
-
-**The Investigation & Fix:**
-
-1. The Support Engineer opens a second SSH session to Web Server A. 
-2. They do not run `df -h`. They know that `df -h` queries every mounted drive on the system. If a network drive is unreachable, `df -h` will wait forever for a response.
-3. The engineer runs `cat /etc/mtab` to view the currently mounted drives without actually pinging them. They spot the NFS mount to `10.0.0.50`.
-4. The engineer knows that because the storage server rebooted, the connection was broken. The Linux kernel is trapped waiting for a network packet that will never arrive (a "Stale File Handle").
-5. The engineer attempts to unmount the frozen drive:
-   `umount /mnt/shared_images`
-6. The system replies: `device is busy`.
-7. The engineer uses the "Lazy Unmount" force command. This tells the kernel to immediately detach the filesystem from the directory tree, even if processes are still trying to use it:
-   `umount -l /mnt/shared_images`
-8. The command succeeds. Suddenly, the frozen `df -h` command in the first terminal finishes executing! The server is unfrozen. 
-9. The engineer runs `mount -a` to cleanly re-establish the connection to the storage server now that it has finished rebooting.
-
-
 ## Hands-on Lab
 
 > [!TIP]
@@ -110,6 +87,14 @@ Example of an NFS fstab entry:
 ### Question 3: How do you recover a server that is frozen due to an unreachable NFS mount when standard `umount` commands return 'device is busy'?
 * **Target Answer**: "I would use the lazy unmount command (`umount -l /mount/point`) or the force unmount command (`umount -f /mount/point`). The lazy unmount immediately detaches the filesystem from the directory hierarchy, allowing frozen commands like `df` to complete, and cleans up all references to the filesystem once it is no longer busy."
 
+## Common Mistakes & Pro-Tips
+
+> [!WARNING] Common Mistake
+> Running `df -h` on a server with a disconnected NFS mount. It will hang indefinitely!
+
+> [!CAUTION] Think Before You Type
+> `mount -a` (Are you sure your `/etc/fstab` syntax is correct?)
+
 ## Chapter Summary
 
 Network Attached Storage allows hundreds of servers to read the same files simultaneously. However, it introduces a massive single point of failure. If the storage server drops offline, every client server connected to it can freeze. When dealing with NFS, the `umount -l` (Lazy Unmount) command is your best friend.
@@ -121,6 +106,15 @@ Network Attached Storage allows hundreds of servers to read the same files simul
 - [ ] I know how to forcefully detach a frozen mount using `umount -l`.
 
 ---
+
+---
+
+**Chapter Transition**
+> We have storage connected over the network, but how do we optimize the filesystem itself to handle millions of tiny files?
+
+---
+
+
 
 ## Navigation
 
